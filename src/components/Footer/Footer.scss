@@ -1,0 +1,21 @@
+.footer {
+  @apply tablet:h-16 h-12 bottom-0 left-0 fixed flex bg-dark-400 w-full desktop:px-44 border-t border-dark-200 z-50;
+  &_text {
+    @apply text-primary-green-100 font-light text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 laptop:text-caption-2 laptop:leading-caption-2 opacity-50;
+  }
+}
+
+.footerVesting {
+  @apply tablet:h-16 h-12 bottom-0 right-0 fixed flex bg-dark-400 md:w-77p w-screen desktop:px-44  border-t border-dark-200;
+  &_text {
+    @apply text-primary-green-100 font-light text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 laptop:text-caption-2 laptop:leading-caption-2 opacity-50;
+  }
+}
+
+.centered {
+  @apply justify-center desktop:justify-center items-center;
+}
+
+.notcentered {
+  @apply justify-center desktop:justify-center items-center;
+}

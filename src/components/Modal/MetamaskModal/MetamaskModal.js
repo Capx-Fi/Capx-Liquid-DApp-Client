@@ -22,16 +22,18 @@ function MetamaskModal() {
     try {
       await activate(injected);
       if (unsupportedChainIdError) {
-        console.log(error);
-        enqueueSnackbar("Please connect to the Rinkeby / BSC Testnet / Mumbai MATIC Chain.", {
+        enqueueSnackbar("Please connect to the Ethereum Mainnet Chain.", {
           variant: "error",
         });
       }
     } catch (ex) {
       if (error instanceof UnsupportedChainIdError) {
-        enqueueSnackbar("Please connect to the Rinkeby / BSC Testnet / Mumbai MATIC Chain.", {
-          variant: "error",
-        });
+        enqueueSnackbar(
+          "Please connect to the Ethereum Mainnet Chain.",
+          {
+            variant: "error",
+          }
+        );
       }
       alert(ex);
     }

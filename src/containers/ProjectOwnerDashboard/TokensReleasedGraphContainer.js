@@ -117,7 +117,6 @@ function TokensReleasedGraphContainer({
       let currentProject = [];
       let currentProjectDetails = projectOverviewData[projectDisplayID];
       let currentWrappedProject = wrappedProjectData[projectDisplayID];
-      // console.log("Wrapped Vesting Data",Object.keys(currentWrappedProject).length);
       if (currentWrappedProject)
         if (Object.keys(currentWrappedProject).length > 0) {
           currentWrappedProject = [currentWrappedProject]
@@ -127,7 +126,6 @@ function TokensReleasedGraphContainer({
                   derivative.holders.map((holder, index) => {
                     const unixTime = derivative.unlockTime;
                     const date = new Date(unixTime * 1000);
-                    // console.log(unixTime, "unixTime wrapped");
                     let unlockDate = date.toLocaleDateString("en-US");
                     let unlockDay = date.toLocaleDateString("en-US", {
                       day: "numeric",
@@ -167,7 +165,6 @@ function TokensReleasedGraphContainer({
             .flat();
         }
       let currentVestedProject = vestedProjectData[projectDisplayID];
-      // console.log("Locked Vesting Data",Object.keys(currentVestedProject).length);
       if (currentVestedProject)
         if (Object.keys(currentVestedProject).length > 0) {
           currentVestedProject = [currentVestedProject]
@@ -177,7 +174,6 @@ function TokensReleasedGraphContainer({
                   derivative.holders.map((holder, index) => {
                     const unixTime = holder.unlockTime;
                     const date = new Date(unixTime * 1000);
-                    // console.log(unixTime, "unixTime vested");
                     let unlockDate = date.toLocaleDateString("en-US");
                     let unlockDay = date.toLocaleDateString("en-US", {
                       day: "numeric",
@@ -216,7 +212,6 @@ function TokensReleasedGraphContainer({
             )
             .flat();
         }
-      // console.log(Object.keys(currentVestedProject).length, Object.keys(currentWrappedProject).length);
       if (
         currentVestedProject &&
         Object.keys(currentVestedProject)?.length > 0 &&
@@ -240,7 +235,6 @@ function TokensReleasedGraphContainer({
         }
       }
       currentProject.sort((a, b) => new Date(a.date) - new Date(b.date));
-      console.log("Current Project", currentProject);
       let tre = 0;
       currentProject.map((project) => {
         if (currentDate > project.unixDate) {
@@ -261,20 +255,15 @@ function TokensReleasedGraphContainer({
           holder[d.displayGraphDate] = d.numOfTokens;
         }
       });
-      console.log("Holder", holder);
       var graphData = [];
 
       for (var prop in holder) {
-        console.log(prop, holder[prop]);
         graphData.push({ displayGraphDate: prop, numOfTokens: holder[prop] });
       }
-
-      console.log(graphData);
 
       graphData.forEach((element) => {
         charXAxis.push(element.displayGraphDate);
         charYAxis.push(
-          // parseInt(element.totalSupply) / 10 ** parseInt(element.decimal)
           element.numOfTokens
         );
       });

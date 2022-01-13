@@ -7,12 +7,8 @@ import BigNumber from "bignumber.js";
 import { useWeb3React } from "@web3-react/core";
 import { convertToInternationalCurrencySystem } from "../../utils/convertToInternationalCurrencySystem";
 import {
-  EXPLORER_RINKEBY,
-  EXPLORER_BSC_TESTNET,
-  EXPLORER_MATIC_MUMBAI_TESTNET,
+  EXPLORER_ETHEREUM,
 } from "../../constants/config";
-const currentDate = new Date();
-let datetime = currentDate.toLocaleString("en-US");
 function AllocationTableContainer({
   projectOverviewData,
   projectDisplayID,
@@ -21,14 +17,7 @@ function AllocationTableContainer({
 }) {
   const [allocationTableDetails, setAllocationTableDetails] = useState([]);
   const { active, account, chainId } = useWeb3React();
-  const explorer =
-    chainId === 4
-      ? EXPLORER_RINKEBY
-      : chainId === 97
-      ? EXPLORER_BSC_TESTNET
-      : chainId === 80001
-      ? EXPLORER_MATIC_MUMBAI_TESTNET
-      : null;
+  const explorer = EXPLORER_ETHEREUM;
   useEffect(() => {
     displayAllocationTableDetails();
   }, [

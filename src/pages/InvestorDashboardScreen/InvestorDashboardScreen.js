@@ -1,12 +1,7 @@
 import "./InvestorDashboardScreen.scss";
-
-import NextIcon from "../../assets/next.svg";
-import CapxCoinIllustration from "../../assets/CapxCoinIllustration.png";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-import { Link } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
-import OwnedProjectToken from "../../assets/OwnedProjectToken.svg";
 import Redirect from "../../assets/Redirect.svg";
 import Lottie from "lottie-react";
 import NextIconBlack from "../../assets/next-black.svg";
@@ -17,37 +12,23 @@ import { convertToInternationalCurrencySystem } from "../../utils/convertToInter
 
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
-import { fetchOwnedTokens } from "../../utils/fetchOwnedTokens";
 import WithdrawModal from "../../components/Modal/VestAndApproveModal/WithdrawModal";
 import { CONTRACT_ABI_ERC20 } from "../../contracts/SampleERC20";
 import { withdrawWrappedTokens } from "../../utils/withdrawWrappedTokens";
 import { CONTRACT_ABI_CAPX } from "../../contracts/CapxController";
 import Web3 from "web3";
 import {
-  CONTRACT_ADDRESS_CAPX_BSC,
-  CONTRACT_ADDRESS_CAPX_MATIC,
-  CONTRACT_ADDRESS_CAPX_RINKEBY,
-  CONTRACT_ADDRESS_CAPX_CONTROLLER_RINKEBY,
-  CONTRACT_ADDRESS_CAPX_CONTROLLER_BSC,
-  CONTRACT_ADDRESS_CAPX_CONTROLLER_MATIC,
+  CONTRACT_ADDRESS_CAPX_ETHEREUM,
+  CONTRACT_ADDRESS_CAPX_CONTROLLER_ETHEREUM,
 } from "../../constants/config";
 import {
-  GRAPHAPIURL,
-  GRAPHAPIURL_VESTING_RINKEBY,
-  GRAPHAPIURL_WRAPPED_RINKEBY,
-  GRAPHAPIURL_MASTER_RINKEBY,
-  GRAPHAPIURL_MASTER_BSC,
-  GRAPHAPIURL_VESTING_BSC,
-  GRAPHAPIURL_WRAPPED_BSC,
-  GRAPHAPIURL_MASTER_MATIC,
-  GRAPHAPIURL_VESTING_MATIC,
-  GRAPHAPIURL_WRAPPED_MATIC,
+  GRAPHAPIURL_VESTING_ETHEREUM,
+  GRAPHAPIURL_WRAPPED_ETHEREUM,
+  GRAPHAPIURL_MASTER_ETHEREUM,
 } from "../../constants/config";
 
 import {
-  EXPLORER_RINKEBY,
-  EXPLORER_BSC_TESTNET,
-  EXPLORER_MATIC_MUMBAI_TESTNET,
+  EXPLORER_ETHEREUM,
 } from "../../constants/config";
 
 import NothingHereInvestorDashboard from "../NothingHere/NothingHereInvestorDashboard";
@@ -75,37 +56,16 @@ function InvestorDashboardScreen() {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [withdrawModalStatus, setWithdrawModalStatus] = useState("");
-  const contractAddress =
-    chainId === 4
-      ? CONTRACT_ADDRESS_CAPX_RINKEBY
-      : chainId === 97
-      ? CONTRACT_ADDRESS_CAPX_BSC
-      : chainId === 80001
-      ? CONTRACT_ADDRESS_CAPX_MATIC
-      : null;
+  const contractAddress = CONTRACT_ADDRESS_CAPX_ETHEREUM;
 
-  const contractAddressController =
-    chainId === 4
-      ? CONTRACT_ADDRESS_CAPX_CONTROLLER_RINKEBY
-      : chainId === 97
-      ? CONTRACT_ADDRESS_CAPX_CONTROLLER_BSC
-      : chainId === 80001
-      ? CONTRACT_ADDRESS_CAPX_CONTROLLER_MATIC
-      : null;
+  const contractAddressController =CONTRACT_ADDRESS_CAPX_CONTROLLER_ETHEREUM;
   
   const capxContract = new web3.eth.Contract(
     CONTRACT_ABI_CAPX,
     contractAddress
   );
 
-  const explorer =
-    chainId === 4
-      ? EXPLORER_RINKEBY
-      : chainId === 97
-      ? EXPLORER_BSC_TESTNET
-      : chainId === 80001
-      ? EXPLORER_MATIC_MUMBAI_TESTNET
-      : null;
+  const explorer =EXPLORER_ETHEREUM;
 
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -125,32 +85,11 @@ function InvestorDashboardScreen() {
     },
   }))(Tooltip);
 
-  const vestingURL =
-    chainId === 4
-      ? GRAPHAPIURL_VESTING_RINKEBY
-      : chainId === 97
-      ? GRAPHAPIURL_VESTING_BSC
-      : chainId === 80001
-      ? GRAPHAPIURL_VESTING_MATIC
-      : null;
+  const vestingURL =GRAPHAPIURL_VESTING_ETHEREUM;
 
-  const wrappedURL =
-    chainId === 4
-      ? GRAPHAPIURL_WRAPPED_RINKEBY
-      : chainId === 97
-      ? GRAPHAPIURL_WRAPPED_BSC
-      : chainId === 80001
-      ? GRAPHAPIURL_WRAPPED_MATIC
-      : null;
+  const wrappedURL = GRAPHAPIURL_WRAPPED_ETHEREUM;
 
-  const masterURL =
-    chainId === 4
-      ? GRAPHAPIURL_MASTER_RINKEBY
-      : chainId === 97
-      ? GRAPHAPIURL_MASTER_BSC
-      : chainId === 80001
-      ? GRAPHAPIURL_MASTER_MATIC
-      : null;
+  const masterURL = GRAPHAPIURL_MASTER_ETHEREUM;
   const loadProjectData = async () => {
     setOwnedProjectsData(null);
     if (account) {
@@ -160,18 +99,15 @@ function InvestorDashboardScreen() {
       const showIDs = [...wInvestorIDs, ...vInvestorIDs]
         .filter(onlyUnique)
         .sort();
-      console.log(showIDs);
       const projectOwnerDetails = await fetchProjectDetails(showIDs, masterURL);
       const vestedProjectDetails = await fetchVestedProjectDetails(
         showIDs,
         vestingURL
       );
-      console.log("Vested Project Details", vestedProjectDetails);
       const wrappedProjectDetails = await fetchWrappedProjectDetails(
         showIDs,
         wrappedURL
       );
-      console.log("Wrapped Project Details", wrappedProjectDetails);
       if (projectOwnerDetails !== null) {
         setProjectOverviewData(projectOwnerDetails.data.projects);
         setWrappedProjectData(wrappedProjectDetails.data.projects);

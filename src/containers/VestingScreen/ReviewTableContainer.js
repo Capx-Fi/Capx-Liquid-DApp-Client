@@ -5,6 +5,8 @@ import useWindowSize from "../../utils/windowSize";
 import { useEffect, useState } from "react";
 import CheckIcon from "../../assets/check.svg";
 import { convertToInternationalCurrencySystem } from "../../utils/convertToInternationalCurrencySystem";
+import InfoIcon from "../../assets/info.svg";
+import { Tooltip, withStyles } from "@material-ui/core";
 
 function ReviewTableContainer({
   reviewData,
@@ -16,6 +18,16 @@ function ReviewTableContainer({
   useEffect(() => {
     setDisplayWidth(size.width);
   }, [size]);
+    const HtmlTooltip = withStyles((theme) => ({
+      tooltip: {
+        background: "#2A383C",
+        color: "#F1FAF2",
+        maxWidth: 800,
+        fontSize: theme.typography.pxToRem(12),
+        borderRadius: "4px",
+        zIndex: 100,
+      },
+    }))(Tooltip);
   const toggleSellable = (e, i, val) => {
     setVestingDataSellable(
       [...reviewData].map((object, index) => {
@@ -44,11 +56,12 @@ function ReviewTableContainer({
   };
   return (
     <section className="reviewtablecontainer">
-      {console.log(reviewData)}
       <Table
         data={reviewData}
         pagination={false}
-        scroll={{ y: displayWidth >1450? 280 : displayWidth > 1023 ? 240 : 190 }}
+        scroll={{
+          y: displayWidth > 1450 ? 280 : displayWidth > 1023 ? 240 : 190,
+        }}
         emptyText={() => <p className="text-center">No Allocatiion Data!</p>}
       >
         <Column
@@ -107,7 +120,24 @@ function ReviewTableContainer({
         />
         {false ? null : (
           <Column
-            title="Wrapped"
+            title={
+              <div className="flex justify-center items-center">
+                <p>Wrapped</p>
+                <HtmlTooltip
+                  arrow
+                  placement="top"
+                  title={
+                    <>
+                      <span className="flex justify-between items-center">
+                        {`Create tokenization of your project token.`}
+                      </span>
+                    </>
+                  }
+                >
+                  <img className="ml-1 w-3" src={InfoIcon} alt="info" />
+                </HtmlTooltip>
+              </div>
+            }
             dataIndex="isWrapped"
             key="isWrapped"
             width={
@@ -145,7 +175,24 @@ function ReviewTableContainer({
         )}
         {
           <Column
-            title="Sellable"
+            title={
+              <div className="flex justify-center items-center">
+                <p>Sellable</p>
+                <HtmlTooltip
+                  arrow
+                  placement="top"
+                  title={
+                    <>
+                      <span className="flex justify-between items-center">
+                        {`Create tradable WVTs`}
+                      </span>
+                    </>
+                  }
+                >
+                  <img className="ml-1 w-3" src={InfoIcon} alt="info" />
+                </HtmlTooltip>
+              </div>
+            }
             dataIndex="isSellable"
             key="isSellable"
             width={

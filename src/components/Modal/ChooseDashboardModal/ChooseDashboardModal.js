@@ -73,7 +73,7 @@ function ChooseDashboardModal({
                 alt="owner"
                 src={ownerIllustration}
               />
-              <div className={`card-title`}>Project Owner</div>
+              <div className={`card-title`}>Project Overview</div>
             </Link>
             <Link
               to={`/investor`}

@@ -57,9 +57,7 @@ function VestingScreen() {
   };
 
   const setProjectTitle = (name) => {
-    console.log("Hello");
     setContractDetails({ ...contractDetails, projectTitle: name });
-    console.log(contractDetails);
   };
 
   const setProjectDescription = (desc) => {

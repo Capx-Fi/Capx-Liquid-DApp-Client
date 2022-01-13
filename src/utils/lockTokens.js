@@ -70,10 +70,10 @@ export const lockTokens = async (
     }
   });
   lAmount.forEach((amt) => {
-    lTotalAmount = new BigNumber(lTotalAmount).plus(amt);
+        lTotalAmount = BigNumber.sum(lTotalAmount, BigNumber(amt));
   });
   vAmount.forEach((amt) => {
-    vTotalAmount = new BigNumber(vTotalAmount).plus(amt);
+        vTotalAmount = BigNumber.sum(vTotalAmount, BigNumber(amt));
   });
   setVestModalOpen(true);
   let buyResult = null;
@@ -89,7 +89,7 @@ export const lockTokens = async (
     });
   } catch (err) {
     console.log(err);
-    enqueueSnackbar(err.message, { variant: "error" });
+    enqueueSnackbar("Transaction failed! Please try again.", { variant: "error" });
     setButtonClicked(false);
     setVestModalStatus("failure");
       setTimeout(() => {
@@ -101,18 +101,6 @@ export const lockTokens = async (
   let allowedAmount = await vestingTokenContract.methods
     .allowance(metamaskAccount, contractDetails.contractAddress)
     .call();
-  console.log(allowedAmount, "allamt");
-  console.log(contractDetails.projectTitle, "title");
-  console.log(pinataHash.IpfsHash.toString(), "pinataHash");
-  console.log(contractDetails.contractAddress, "contractAddress");
-  console.log([lTotalAmount.toString(10), vTotalAmount.toString(10)], "total");
-  console.log(lAddress, "lAddress");
-  console.log(vAddress, "vAddress");
-  console.log(lDate, "lDate");
-  console.log(vDate, "vDate");
-  console.log(lAmount, "lAmount");
-  console.log(vAmount, "vAmount");
-  console.log(lSellable, "lSellable");
   try {
     buyResult = await capxContract.methods
       .createBulkDerivative(
@@ -137,12 +125,16 @@ export const lockTokens = async (
       }, 2500);
     } else {
       setVestModalStatus("failure");
-      enqueueSnackbar("Sorry transaction failed", { variant: "error" });
+      enqueueSnackbar("Transaction failed! Please try again.", {
+        variant: "error",
+      });
       setButtonClicked(false);
     }
   } catch (err) {
     setVestModalStatus("failure");
-    enqueueSnackbar(err.message, { variant: "error" });
+    enqueueSnackbar("Transaction failed! Please try again.", {
+      variant: "error",
+    });
     setButtonClicked(false);
   }
 

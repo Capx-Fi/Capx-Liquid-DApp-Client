@@ -1,5 +1,5 @@
 import "./Header.scss";
-import CapxLogo from "../../assets/CapxLogo.svg";
+import CapxLogo from "../../assets/capxliquid-logo.svg";
 import LogoutIcon from "../../assets/logout.svg";
 import { useSnackbar } from "notistack";
 import Web3 from "web3";
@@ -27,11 +27,10 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
     } catch (ex) {
       if (ex instanceof UnsupportedChainIdError) {
         enqueueSnackbar(
-          "Please connect to the Rinkeby / Polygon Testnet / BSC Testnet Chain.",
+          "Please connect to the Ethereum Mainnet Chain.",
           { variant: "error" }
         );
       }
-      console.log(ex);
     }
   }
 

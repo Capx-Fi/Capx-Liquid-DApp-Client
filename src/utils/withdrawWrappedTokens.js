@@ -74,7 +74,6 @@ export const withdrawWrappedTokens = async (
       }
     }
   }
-  console.log(wrappedTokenAddress, tokenAmount, account, "withdraw details");
   if (approveResult) {
     try {
       withdrawResult = await capxContract.methods

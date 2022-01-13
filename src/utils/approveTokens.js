@@ -28,7 +28,7 @@ export const approveToken = async (
       .call();
   } catch (err) {
     setApproveModalStatus("failure");
-    enqueueSnackbar(err.message, { variant: "error" });
+    enqueueSnackbar("Token Approval Failed!", { variant: "error" });
     console.log(err);
   }
   if (approvedAmount) {
@@ -40,7 +40,7 @@ export const approveToken = async (
           .send({ from: metamaskAccount });
       } catch (err) {
         setApproveModalStatus("failure");
-        enqueueSnackbar(err.message, { variant: "error" });
+        enqueueSnackbar("Token Approval Failed!", { variant: "error" });
         console.log(err);
       }
       if (approveResult) {
@@ -60,7 +60,7 @@ export const approveToken = async (
           ).send({ from: metamaskAccount });
       } catch (err) {
         setApproveModalStatus("failure");
-        enqueueSnackbar(err.message, { variant: "error" });
+        enqueueSnackbar("Token Approval Failed!", { variant: "error" });
         console.log(err);
       }
       if (approve0Result) {
@@ -70,7 +70,7 @@ export const approveToken = async (
             .send({ from: metamaskAccount });
         } catch (err) {
           setApproveModalStatus("failure");
-          enqueueSnackbar(err.message, { variant: "error" });
+          enqueueSnackbar("Token Approval Failed!", { variant: "error" });
           console.log(err);
         }
         if (approveResult) {

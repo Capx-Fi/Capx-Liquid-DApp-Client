@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Level3CTA from "../../components/CTA/Level3CTA";
 
 import LockIcon from "../../assets/lock.png";
@@ -12,7 +12,7 @@ import { CONTRACT_ABI_CAPX } from "../../contracts/CapxController";
 import {
   PinataAPIKey,
   PinataSecretKey,
-  CONTRACT_ADDRESS_CAPX_RINKEBY,
+  CONTRACT_ADDRESS_CAPX_ETHEREUM,
   CONTRACT_ADDRESS_CAPX_BSC,
   CONTRACT_ADDRESS_CAPX_MATIC,
 } from "../../constants/config";
@@ -24,6 +24,7 @@ import "../../translations/i18n";
 
 import "./VestingScreen.scss";
 import { useWeb3React } from "@web3-react/core";
+import BigNumber from "bignumber.js";
 
 function LockAndApprove({
   setStep,
@@ -40,21 +41,16 @@ function LockAndApprove({
 }) {
   const web3 = new Web3(Web3.givenProvider);
   const { chainId } = useWeb3React();
-  const contractAddress =
-    chainId === 4
-      ? CONTRACT_ADDRESS_CAPX_RINKEBY
-      : chainId === 97
-      ? CONTRACT_ADDRESS_CAPX_BSC
-      : chainId === 80001
-      ? CONTRACT_ADDRESS_CAPX_MATIC
-      : null;
+  const CONTRACT_ADDRESS_CAPX = CONTRACT_ADDRESS_CAPX_ETHEREUM;
   const { t } = useTranslation();
   const [buttonClicked, setButtonClicked] = useState(false);
   const [approveModalStatus, setApproveModalStatus] = useState("");
   const [tokenApproval, setTokenApproval] = useState(false);
+  const [checkTokenApproval, setCheckTokenApproval] = useState(false);
   // const [approveModalOpen, setApproveModalOpen] = useState(true);
   // const [vestModalOpen, setVestModalOpen] = useState(false);
   const [vestModalStatus, setVestModalStatus] = useState("");
+  const totalTokens = totalVested(vestingArray);
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const vestingTokenContract = new web3.eth.Contract(
@@ -63,11 +59,41 @@ function LockAndApprove({
   );
   const capxContract = new web3.eth.Contract(
     CONTRACT_ABI_CAPX,
-    contractAddress
+    CONTRACT_ADDRESS_CAPX
   );
+  useEffect(() => {
+    async function getApproval() {
+      let approvedAmount = null;
+      let totalAmount = new BigNumber(totalTokens).multipliedBy(
+        Math.pow(10, tokenDetails.decimal)
+      );
+      try {
+        approvedAmount = await vestingTokenContract.methods
+          .allowance(metamaskAccount, CONTRACT_ADDRESS_CAPX)
+          .call();
+        approvedAmount = new BigNumber(approvedAmount);
+        if (approvedAmount.isGreaterThanOrEqualTo(totalAmount)) {
+          setTokenApproval(true);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+      setCheckTokenApproval(true);
+    }
+    getApproval();
+  }, [metamaskAccount]);
+  function toPlainString(num) {
+    return ("" + +num).replace(
+      /(-?)(\d*)\.?(\d*)e([+-]\d+)/,
+      function (a, b, c, d, e) {
+        return e < 0
+          ? b + "0." + Array(1 - e - c.length).join(0) + c + d
+          : b + c + d + Array(e - d.length + 1).join(0);
+      }
+    );
+  }
   const TryApproveToken = async () => {
     setButtonClicked(true);
-    const totalTokens = totalVested(vestingArray);
     await approveToken(
       vestingArray,
       tokenDetails,
@@ -75,7 +101,7 @@ function LockAndApprove({
       totalTokens,
       vestingTokenContract,
       capxContract,
-      contractAddress,
+      CONTRACT_ADDRESS_CAPX,
       tokenApproval,
       setTokenApproval,
       approveModalStatus,
@@ -98,7 +124,7 @@ function LockAndApprove({
       vestingArray,
       vestingTokenContract,
       capxContract,
-      contractAddress,
+      CONTRACT_ADDRESS_CAPX,
       setButtonClicked,
       setVestModalOpen,
       setVestModalStatus,
@@ -138,12 +164,16 @@ function LockAndApprove({
         </div>
 
         <div className="hidden tablet:flex">
-          <Level3CTA
-            text={tokenApproval ? `${t("lock_token")}` : `${t("approve")}`}
-            icon={true}
-            disabled={buttonClicked}
-            onClick={() => (tokenApproval ? TryLockToken() : TryApproveToken())}
-          />
+          {checkTokenApproval && (
+            <Level3CTA
+              text={tokenApproval ? `${t("lock_token")}` : `${t("approve")}`}
+              icon={true}
+              disabled={buttonClicked}
+              onClick={() =>
+                tokenApproval ? TryLockToken() : TryApproveToken()
+              }
+            />
+          )}
         </div>
       </div>
 
@@ -168,8 +198,8 @@ function LockAndApprove({
             />
           </div>
           <p className="whitespace-normal desktop:text-paragraph-2 tablet:text-caption-1 text-caption-2">
-            You’re locking {totalVested(vestingArray)} tokens with{" "}
-            {vestingArray.length}{" "}
+            You’re locking {toPlainString(totalVested(vestingArray))} tokens
+            with {vestingArray.length}{" "}
             {vestingArray.length > 1 ? "addresses" : "address"}
           </p>
         </div>

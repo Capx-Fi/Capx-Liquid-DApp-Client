@@ -1,9 +1,7 @@
 import { ApolloClient, InMemoryCache, gql, cache } from "@apollo/client";
 
 import {
-  GRAPHAPIURL_MASTER_RINKEBY,
-  GRAPHAPIURL_MASTER_BSC,
-  GRAPHAPIURL_MASTER_MATIC,
+  GRAPHAPIURL_MASTER_ETHEREUM,
 } from "../constants/config";
 
 export const checkExistingProject = async (address, chainId, metamaskAccount) => {
@@ -14,14 +12,7 @@ export const checkExistingProject = async (address, chainId, metamaskAccount) =>
     description: null,
     exists: false,
   };
-  const masterURL =
-    chainId === 4
-      ? GRAPHAPIURL_MASTER_RINKEBY
-      : chainId === 97
-      ? GRAPHAPIURL_MASTER_BSC
-      : chainId === 80001
-      ? GRAPHAPIURL_MASTER_MATIC
-      : null;
+  const masterURL = GRAPHAPIURL_MASTER_ETHEREUM;
   const client = new ApolloClient({
     uri: masterURL,
     cache: new InMemoryCache(),

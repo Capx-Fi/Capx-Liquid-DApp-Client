@@ -76,7 +76,6 @@ function ApproveModal({
       <Fade in={open}>
         <div className={classes.paper}>
           <div className="flex flex-col laptop:flex-row justify-center mx-auto items-center laptop:h-72 pb-8 mt-8">
-            {console.log(approveModalStatus)}
             <Lottie
               className="w-24 tablet:w-32 laptop:w-56 "
               animationData={

@@ -62,7 +62,6 @@ export const verifyVestingData = (data, defaultWeb3) => {
 
       try {
         var numberOfTokens = BigNumber(table["Amount of Tokens"] * 10 ** DECIMALS);
-        console.log(numberOfTokens, "numberOfTokens");
         if (table["Amount of Tokens"] === undefined)
           spreadsheetErrors.push(
             `<b>MISSING AMOUNT OF TOKENS</b> : At Row ${x}`
@@ -93,7 +92,6 @@ export const verifyVestingData = (data, defaultWeb3) => {
 
           kp = a.join("-");
         } else kp = table["Date(DD-MM-YYYY)"].toString().split("-").join("-");
-        console.log("KP",kp);
         var timestamp = new Date (
           Date.UTC(
             kp.split("-")[2],
@@ -101,27 +99,16 @@ export const verifyVestingData = (data, defaultWeb3) => {
             kp.split("-")[0]
           )
         ).getTime() / 1000;
-        // var timestamp =
-        //   new Date(kp.toString().split("-").reverse().join("-")).getTime() /
-        //   1000;
-        console.log(table["Date(DD-MM-YYYY)"], "received", kp, timestamp);
         if (!validateDate(kp)) {
-          console.log("Wrong Date at " + x);
           spreadsheetErrors.push(
             `<b>INVALID DATE</b> : At Row ${x} - ${table[
               "Date(DD-MM-YYYY)"
             ].toString()}`
           );
         } else {
-          var date = new Date();
-          console.log(date);
           var checkPoint =
             Math.trunc(Math.floor(Date.now() / 1000) / DAY) * DAY + DAY;
-          console.log("Checkpoint", checkPoint);
-          console.log("Checkpoint without a day's addition", checkPoint - DAY);
-          console.log("Timestamp", timestamp)
           if (timestamp < checkPoint) {
-            console.log("Wrong Date at " + x);
             spreadsheetErrors.push(
               `<b>INVALID DATE</b> : At Row ${x} - ${table[
                 "Date(DD-MM-YYYY)"
@@ -140,6 +127,5 @@ export const verifyVestingData = (data, defaultWeb3) => {
 
       x += 1;
     });
-  console.log("errorData", spreadsheetErrors);
   return spreadsheetErrors;
 };

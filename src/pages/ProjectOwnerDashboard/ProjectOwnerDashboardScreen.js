@@ -16,16 +16,9 @@ import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
 import { ApolloClient, InMemoryCache, gql, cache } from "@apollo/client";
 
 import {
-  GRAPHAPIURL,
-  GRAPHAPIURL_VESTING_RINKEBY,
-  GRAPHAPIURL_WRAPPED_RINKEBY,
-  GRAPHAPIURL_MASTER_RINKEBY,
-  GRAPHAPIURL_MASTER_BSC,
-  GRAPHAPIURL_VESTING_BSC,
-  GRAPHAPIURL_WRAPPED_BSC,
-  GRAPHAPIURL_MASTER_MATIC,
-  GRAPHAPIURL_VESTING_MATIC,
-  GRAPHAPIURL_WRAPPED_MATIC,
+  GRAPHAPIURL_VESTING_ETHEREUM,
+  GRAPHAPIURL_WRAPPED_ETHEREUM,
+  GRAPHAPIURL_MASTER_ETHEREUM,
 } from "../../constants/config";
 import BigNumber from "bignumber.js";
 import { useEffect, useState } from "react";
@@ -64,10 +57,6 @@ function ProjectOwnerDashboardScreen() {
       const vInvestorIDs = await fetchVestedInvestorID(account, vestingURL);
 
       const wInvestorIDs = await fetchWrappedInvestorID(account, wrappedURL);
-
-      console.log("ownerIDs", ownerIDs);
-      console.log("vInvestorIDs", vInvestorIDs);
-      console.log("wInvestorIDs", wInvestorIDs);
       const showIDs = [...ownerIDs, ...wInvestorIDs, ...vInvestorIDs]
         .filter(onlyUnique)
         .sort();
@@ -77,12 +66,10 @@ function ProjectOwnerDashboardScreen() {
         showIDs,
         vestingURL
       );
-      console.log("Project Owner Vested Details", vestedProjectDetails);
       const wrappedProjectDetails = await fetchWrappedProjectDetails(
         showIDs,
         wrappedURL
       );
-      console.log("Project Owner Wrapped Details", wrappedProjectDetails);
       if (projectOwnerData !== null) {
         setProjectOverviewData(projectOwnerData.data.projects);
         setWrappedProjectData(wrappedProjectDetails.data.projects);
@@ -91,32 +78,11 @@ function ProjectOwnerDashboardScreen() {
     }
   };
 
-  const vestingURL =
-    chainId === 4
-      ? GRAPHAPIURL_VESTING_RINKEBY
-      : chainId === 97
-      ? GRAPHAPIURL_VESTING_BSC
-      : chainId === 80001
-      ? GRAPHAPIURL_VESTING_MATIC
-      : null;
+  const vestingURL = GRAPHAPIURL_VESTING_ETHEREUM;
 
-  const wrappedURL =
-    chainId === 4
-      ? GRAPHAPIURL_WRAPPED_RINKEBY
-      : chainId === 97
-      ? GRAPHAPIURL_WRAPPED_BSC
-      : chainId === 80001
-      ? GRAPHAPIURL_WRAPPED_MATIC
-      : null;
+  const wrappedURL = GRAPHAPIURL_WRAPPED_ETHEREUM;
 
-  const masterURL =
-    chainId === 4
-      ? GRAPHAPIURL_MASTER_RINKEBY
-      : chainId === 97
-      ? GRAPHAPIURL_MASTER_BSC
-      : chainId === 80001
-      ? GRAPHAPIURL_MASTER_MATIC
-      : null;
+  const masterURL = GRAPHAPIURL_MASTER_ETHEREUM;
   return (
     <>
       {!active ? (
@@ -131,7 +97,7 @@ function ProjectOwnerDashboardScreen() {
           <section className="projectownerdashboardscreen_maincontainer">
             <div className="projectownerdashboardscreen_maincontainer_titlecontainer">
               <div className="projectownerdashboardscreen_maincontainer_titlecontainer_title">
-                PROJECT OWNER DASHBOARD
+                PROJECT OVERVIEW DASHBOARD
               </div>
               <select
                 className="projectownerdashboardscreen_maincontainer_titlecontainer_projectsdropdown"

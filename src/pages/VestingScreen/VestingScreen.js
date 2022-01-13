@@ -3,7 +3,7 @@ import ContractAddress from "../../containers/VestingScreen/ContractAddress";
 import ProjectDetails from "../../containers/VestingScreen/ProjectDetails";
 import "./VestingScreen.scss";
 
-import CapxLogo from "../../assets/CapxLogo.svg";
+import CapxLogo from "../../assets/capxliquid-logo.svg";
 
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";

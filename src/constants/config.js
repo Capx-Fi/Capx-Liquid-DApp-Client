@@ -1,0 +1,19 @@
+export const PinataAPIKey = process.env.REACT_APP_PINATA_API_KEY;
+export const PinataSecretKey = process.env.REACT_APP_PINATA_API_SECRET;
+
+export const CONTRACT_ADDRESS_CAPX_ETHEREUM =
+  process.env.REACT_APP_CONTRACT_ADDRESS_CAPX_MATIC;
+export const CONTRACT_ADDRESS_CAPX_CONTROLLER_ETHEREUM =
+  process.env.REACT_APP_CONTRACT_ADDRESS_CAPX_CONTROLLER_MATIC;
+
+export const GRAPHAPIURL =
+  process.env.REACT_APP_GRAPHAPIURL || "https://api.thegraph.com/subgraphs/shreyas3336/vesting";
+export const GRAPHAPIURL_WRAPPED_MATIC =
+  process.env.REACT_APP_GRAPHAPIURL_WRAPPED_MATIC;
+export const GRAPHAPIURL_VESTING_MATIC =
+  process.env.REACT_APP_GRAPHAPIURL_VESTING_MATIC;
+export const GRAPHAPIURL_MASTER_MATIC =
+  process.env.REACT_APP_GRAPHAPIURL_MASTER_MATIC;
+
+
+export const EXPLORER_MATIC = process.env.REACT_APP_EXPLORER_MATIC;

@@ -1,0 +1,55 @@
+import { ApolloClient, InMemoryCache, gql, cache } from "@apollo/client";
+
+import {
+  GRAPHAPIURL_MASTER_MATIC,
+} from "../constants/config";
+
+export const checkExistingProject = async (address, chainId, metamaskAccount) => {
+  let description = "";
+  let projectExistingData = [];
+  let data = {
+    name: "",
+    description: null,
+    exists: false,
+  };
+  const masterURL = GRAPHAPIURL_MASTER_MATIC;
+  const client = new ApolloClient({
+    uri: masterURL,
+    cache: new InMemoryCache(),
+  });
+  let projectID = `${metamaskAccount}-LOCK-${address}`;
+  const projectExistQuery = `query{
+    projects
+    
+    (where:{projectTokenAddress_contains : "${address}"})
+    {
+      projectOwnerAddress
+      projectName
+      projectTokenAddress
+      projectTokenTicker
+      projectDocHash
+    }
+  }`;
+  try {
+    projectExistingData = await client.query({
+      query: gql(projectExistQuery),
+      fetchPolicy: "network-only",
+    });
+    projectExistingData = projectExistingData?.data;
+
+    if (projectExistingData?.projects) {
+      const res = await fetch(
+        `https://milliondollarhomepage.mypinata.cloud/ipfs/${projectExistingData.projects[0].projectDocHash}`
+      );
+      const desc = await res.json();
+      description = desc.description;
+      data = { name: projectExistingData.projects[0].projectName, description, exists:true };
+      return data;
+    }
+    else{
+        return data;
+    }
+  } catch (error) {
+    return data;
+  }
+};

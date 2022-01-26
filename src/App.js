@@ -21,12 +21,12 @@ function App() {
       ) : (
         <Router>
           <Switch>
-            <Route exact path="/" component={HomeScreen} />
+            <Route exact path="/" component={VestingScreen} />
             <Route exact path="/vesting" component={VestingScreen} />
             <Route exact path="/investor" component={InvestorDashboardScreen} />
             <Route
               exact
-              path="/projectowner"
+              path="/projectoverview"
               component={ProjectOwnerDashboardScreen}
             />
             <Route path="*" component={PageNotFound} />

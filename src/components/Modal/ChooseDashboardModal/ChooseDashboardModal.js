@@ -63,7 +63,7 @@ function ChooseDashboardModal({
         <div className="dmodal-maincontainer">
           <div className="choose-container">
             <Link
-              to={`/projectowner`}
+              to={`/projectoverview`}
               id="owner"
               className={`owner-card choose-card`}
             >

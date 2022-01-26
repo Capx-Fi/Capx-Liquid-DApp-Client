@@ -9,8 +9,7 @@
         @apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1  ml-4  text-primary-green-200 opacity-75 font-semibold;
       }
       &_projectsdropdown {
-        @apply bg-dark-300 rounded-lg p-2.5 text-caption-3 leading-caption-3 text-primary-green-100 outline-none mr-5 tablet:mr-9;
-      }
+        @apply bg-dark-300 rounded-lg p-2.5 text-caption-3 leading-caption-3 text-primary-green-100 outline-none mr-5 tablet:mr-9;      }
     }
     &_topcontainer {
       @apply flex flex-col xl:flex-row justify-between;

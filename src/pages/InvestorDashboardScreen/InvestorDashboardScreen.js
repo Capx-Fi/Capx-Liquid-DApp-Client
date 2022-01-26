@@ -1,7 +1,12 @@
 import "./InvestorDashboardScreen.scss";
+
+import NextIcon from "../../assets/next.svg";
+import CapxCoinIllustration from "../../assets/CapxCoinIllustration.png";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
+import { Link } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
+import OwnedProjectToken from "../../assets/OwnedProjectToken.svg";
 import Redirect from "../../assets/Redirect.svg";
 import Lottie from "lottie-react";
 import NextIconBlack from "../../assets/next-black.svg";
@@ -12,23 +17,32 @@ import { convertToInternationalCurrencySystem } from "../../utils/convertToInter
 
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
+import { fetchOwnedTokens } from "../../utils/fetchOwnedTokens";
 import WithdrawModal from "../../components/Modal/VestAndApproveModal/WithdrawModal";
 import { CONTRACT_ABI_ERC20 } from "../../contracts/SampleERC20";
 import { withdrawWrappedTokens } from "../../utils/withdrawWrappedTokens";
 import { CONTRACT_ABI_CAPX } from "../../contracts/CapxController";
 import Web3 from "web3";
 import {
-  CONTRACT_ADDRESS_CAPX_ETHEREUM,
-  CONTRACT_ADDRESS_CAPX_CONTROLLER_ETHEREUM,
+  CONTRACT_ADDRESS_CAPX_BSC,
+  CONTRACT_ADDRESS_CAPX_MATIC,
+  CONTRACT_ADDRESS_CAPX_CONTROLLER_BSC,
+  CONTRACT_ADDRESS_CAPX_CONTROLLER_MATIC,
+  MATIC_CHAIN_ID,
+  BSC_CHAIN_ID,
 } from "../../constants/config";
 import {
-  GRAPHAPIURL_VESTING_ETHEREUM,
-  GRAPHAPIURL_WRAPPED_ETHEREUM,
-  GRAPHAPIURL_MASTER_ETHEREUM,
+  GRAPHAPIURL_MASTER_BSC,
+  GRAPHAPIURL_VESTING_BSC,
+  GRAPHAPIURL_WRAPPED_BSC,
+  GRAPHAPIURL_MASTER_MATIC,
+  GRAPHAPIURL_VESTING_MATIC,
+  GRAPHAPIURL_WRAPPED_MATIC,
 } from "../../constants/config";
 
 import {
-  EXPLORER_ETHEREUM,
+  EXPLORER_BSC,
+  EXPLORER_MATIC,
 } from "../../constants/config";
 
 import NothingHereInvestorDashboard from "../NothingHere/NothingHereInvestorDashboard";
@@ -56,16 +70,35 @@ function InvestorDashboardScreen() {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [withdrawModalStatus, setWithdrawModalStatus] = useState("");
-  const contractAddress = CONTRACT_ADDRESS_CAPX_ETHEREUM;
-
-  const contractAddressController =CONTRACT_ADDRESS_CAPX_CONTROLLER_ETHEREUM;
+  console.log(active)
+  const contractAddress =
+    chainId?.toString() === BSC_CHAIN_ID
+      ? CONTRACT_ADDRESS_CAPX_BSC
+      : chainId?.toString() === MATIC_CHAIN_ID
+      ? CONTRACT_ADDRESS_CAPX_MATIC
+      : null;
+  console.log(contractAddress,"ca");
+  console.log(chainId,"chainId");
+  console.log("bsc", BSC_CHAIN_ID);
+  console.log("matic", MATIC_CHAIN_ID);
+  const contractAddressController =
+    chainId?.toString() === BSC_CHAIN_ID.toString()
+      ? CONTRACT_ADDRESS_CAPX_CONTROLLER_BSC
+      : chainId?.toString() ===   MATIC_CHAIN_ID.toString()
+      ? CONTRACT_ADDRESS_CAPX_CONTROLLER_MATIC
+      : null;
   
   const capxContract = new web3.eth.Contract(
     CONTRACT_ABI_CAPX,
     contractAddress
   );
 
-  const explorer =EXPLORER_ETHEREUM;
+  const explorer =
+    chainId?.toString() === BSC_CHAIN_ID.toString()
+      ? EXPLORER_BSC
+      : chainId?.toString() === MATIC_CHAIN_ID.toString()
+      ? EXPLORER_MATIC
+      : null;
 
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -85,11 +118,26 @@ function InvestorDashboardScreen() {
     },
   }))(Tooltip);
 
-  const vestingURL =GRAPHAPIURL_VESTING_ETHEREUM;
+  const vestingURL =
+    chainId?.toString() === BSC_CHAIN_ID.toString()
+      ? GRAPHAPIURL_VESTING_BSC
+      : chainId?.toString() === MATIC_CHAIN_ID.toString()
+      ? GRAPHAPIURL_VESTING_MATIC
+      : null;
 
-  const wrappedURL = GRAPHAPIURL_WRAPPED_ETHEREUM;
+  const wrappedURL =
+    chainId?.toString() === BSC_CHAIN_ID.toString()
+      ? GRAPHAPIURL_WRAPPED_BSC
+      : chainId?.toString() === MATIC_CHAIN_ID.toString()
+      ? GRAPHAPIURL_WRAPPED_MATIC
+      : null;
 
-  const masterURL = GRAPHAPIURL_MASTER_ETHEREUM;
+  const masterURL =
+    chainId?.toString() === BSC_CHAIN_ID.toString()
+      ? GRAPHAPIURL_MASTER_BSC
+      : chainId?.toString() === MATIC_CHAIN_ID.toString()
+      ? GRAPHAPIURL_MASTER_MATIC
+      : null;
   const loadProjectData = async () => {
     setOwnedProjectsData(null);
     if (account) {
@@ -163,7 +211,7 @@ function InvestorDashboardScreen() {
   };
   return (
     <>
-      {!active ? (
+      { ! active ? (
         <MetamaskModal />
       ) : !ownedProjectsData ? (
         <article className="investordashboardscreen">

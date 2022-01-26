@@ -12,9 +12,10 @@ import { CONTRACT_ABI_CAPX } from "../../contracts/CapxController";
 import {
   PinataAPIKey,
   PinataSecretKey,
-  CONTRACT_ADDRESS_CAPX_ETHEREUM,
   CONTRACT_ADDRESS_CAPX_BSC,
   CONTRACT_ADDRESS_CAPX_MATIC,
+  MATIC_CHAIN_ID,
+  BSC_CHAIN_ID,
 } from "../../constants/config";
 import { useSnackbar } from "notistack";
 import ApproveModal from "../../components/Modal/VestAndApproveModal/ApproveModal";
@@ -41,7 +42,8 @@ function LockAndApprove({
 }) {
   const web3 = new Web3(Web3.givenProvider);
   const { chainId } = useWeb3React();
-  const CONTRACT_ADDRESS_CAPX = CONTRACT_ADDRESS_CAPX_ETHEREUM;
+  const CONTRACT_ADDRESS_CAPX =
+    chainId.toString() === MATIC_CHAIN_ID.toString() ? CONTRACT_ADDRESS_CAPX_MATIC : CONTRACT_ADDRESS_CAPX_BSC;
   const { t } = useTranslation();
   const [buttonClicked, setButtonClicked] = useState(false);
   const [approveModalStatus, setApproveModalStatus] = useState("");

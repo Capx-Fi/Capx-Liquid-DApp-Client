@@ -7,8 +7,13 @@ import BigNumber from "bignumber.js";
 import { useWeb3React } from "@web3-react/core";
 import { convertToInternationalCurrencySystem } from "../../utils/convertToInternationalCurrencySystem";
 import {
-  EXPLORER_ETHEREUM,
+  EXPLORER_BSC,
+  EXPLORER_MATIC,
+  MATIC_CHAIN_ID,
+  BSC_CHAIN_ID,
 } from "../../constants/config";
+const currentDate = new Date();
+let datetime = currentDate.toLocaleString("en-US");
 function AllocationTableContainer({
   projectOverviewData,
   projectDisplayID,
@@ -17,7 +22,7 @@ function AllocationTableContainer({
 }) {
   const [allocationTableDetails, setAllocationTableDetails] = useState([]);
   const { active, account, chainId } = useWeb3React();
-  const explorer = EXPLORER_ETHEREUM;
+  const explorer = chainId === BSC_CHAIN_ID.toString() ? EXPLORER_BSC : EXPLORER_MATIC;
   useEffect(() => {
     displayAllocationTableDetails();
   }, [
@@ -32,7 +37,6 @@ function AllocationTableContainer({
       let currentProject = [];
       let currentWrappedProject = wrappedProjectData[projectDisplayID];
       let currentVestedProject = vestedProjectData[projectDisplayID];
-
 
       // alert(convertToInternationalCurrencySystem(6800000)); // this outputs 6.8M
 
@@ -77,7 +81,9 @@ function AllocationTableContainer({
                         address: holder.address,
                         displayDate: displayDate,
                         displayNumericDate: displayNumericDate,
-                        amount: convertToInternationalCurrencySystem(numOfTokens)
+                        amount: convertToInternationalCurrencySystem(
+                          numOfTokens
+                        )
                           .toString()
                           .concat(" ")
                           .concat(currentProjectDetails.projectTokenTicker),
@@ -134,7 +140,9 @@ function AllocationTableContainer({
                         address: holder.address,
                         displayDate: displayDate,
                         displayNumericDate: displayNumericDate,
-                        amount: convertToInternationalCurrencySystem(numOfTokens)
+                        amount: convertToInternationalCurrencySystem(
+                          numOfTokens
+                        )
                           .toString()
                           .concat(" ")
                           .concat(currentProjectDetails.projectTokenTicker),

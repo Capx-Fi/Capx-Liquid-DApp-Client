@@ -16,9 +16,15 @@ import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
 import { ApolloClient, InMemoryCache, gql, cache } from "@apollo/client";
 
 import {
-  GRAPHAPIURL_VESTING_ETHEREUM,
-  GRAPHAPIURL_WRAPPED_ETHEREUM,
-  GRAPHAPIURL_MASTER_ETHEREUM,
+  GRAPHAPIURL,
+  GRAPHAPIURL_MASTER_BSC,
+  GRAPHAPIURL_VESTING_BSC,
+  GRAPHAPIURL_WRAPPED_BSC,
+  GRAPHAPIURL_MASTER_MATIC,
+  GRAPHAPIURL_VESTING_MATIC,
+  GRAPHAPIURL_WRAPPED_MATIC,
+  MATIC_CHAIN_ID,
+  BSC_CHAIN_ID,
 } from "../../constants/config";
 import BigNumber from "bignumber.js";
 import { useEffect, useState } from "react";
@@ -78,11 +84,26 @@ function ProjectOwnerDashboardScreen() {
     }
   };
 
-  const vestingURL = GRAPHAPIURL_VESTING_ETHEREUM;
+  const vestingURL =
+    chainId?.toString() === BSC_CHAIN_ID.toString()
+      ? GRAPHAPIURL_VESTING_BSC
+      : chainId?.toString() === MATIC_CHAIN_ID.toString()
+      ? GRAPHAPIURL_VESTING_MATIC
+      : null;
 
-  const wrappedURL = GRAPHAPIURL_WRAPPED_ETHEREUM;
+  const wrappedURL =
+    chainId?.toString() === BSC_CHAIN_ID.toString()
+      ? GRAPHAPIURL_WRAPPED_BSC
+      : chainId?.toString() === MATIC_CHAIN_ID.toString()
+      ? GRAPHAPIURL_WRAPPED_MATIC
+      : null;
 
-  const masterURL = GRAPHAPIURL_MASTER_ETHEREUM;
+  const masterURL =
+    chainId?.toString() === BSC_CHAIN_ID.toString()
+      ? GRAPHAPIURL_MASTER_BSC
+      : chainId?.toString() === MATIC_CHAIN_ID.toString()
+      ? GRAPHAPIURL_MASTER_MATIC
+      : null;
   return (
     <>
       {!active ? (

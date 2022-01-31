@@ -27,7 +27,7 @@ function SuccessModal() {
           <Level1CTA
             text="Go to My Dashboard"
             icon={true}
-            onClick={() => history.push("/projectowner")}
+            onClick={() => history.push("/projectoverview")}
           />
 
           <img

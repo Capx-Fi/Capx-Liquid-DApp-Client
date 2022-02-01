@@ -23,7 +23,7 @@ function MetamaskModal() {
       await activate(injected);
       if (unsupportedChainIdError) {
         enqueueSnackbar(
-          "Please connect to the BSC Mainnet / MATIC Mumbai Mainnet Chain.",
+          "Please connect to the Matic / BSC Mainnet Chain.",
           {
             variant: "error",
           }
@@ -31,12 +31,9 @@ function MetamaskModal() {
       }
     } catch (ex) {
       if (error instanceof UnsupportedChainIdError) {
-        enqueueSnackbar(
-          "Please connect to the BSC Mainnet / MATIC Mumbai Mainnet Chain.",
-          {
-            variant: "error",
-          }
-        );
+        enqueueSnackbar("Please connect to the Matic / BSC Mainnet Chain.", {
+          variant: "error",
+        });
       }
       alert(ex);
     }

@@ -14,11 +14,11 @@ function ProjectDetailsContainer({ projectOverviewData, projectDisplayID }) {
   const [project, setProject] = useState(null);
   const displayProjectDetails = async () => {
     if (projectOverviewData.length > 0) {
-      let description = "To the moon!";
+      let description = "N/A";
       let currentProject = projectOverviewData[projectDisplayID];
       try {
         const res = await fetch(
-          `https://milliondollarhomepage.mypinata.cloud/ipfs/${currentProject.projectDocHash}`
+          `https://capx-liquid.mypinata.cloud/ipfs/${currentProject.projectDocHash}`
         );
         const desc = await res.json();
         description = desc.description;

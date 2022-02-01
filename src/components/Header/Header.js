@@ -26,10 +26,9 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
       await activate(injected);
     } catch (ex) {
       if (ex instanceof UnsupportedChainIdError) {
-        enqueueSnackbar(
-          "Please connect to the BSC Mainnet / MATIC Mumbai Mainnet Chain.",
-          { variant: "error" }
-        );
+        enqueueSnackbar("Please connect to the Matic / BSC Mainnet Chain.", {
+          variant: "error",
+        });
       }
     }
   }

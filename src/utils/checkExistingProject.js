@@ -16,9 +16,9 @@ export const checkExistingProject = async (address, chainId, metamaskAccount) =>
     exists: false,
   };
   const masterURL =
-    chainId.toString() === BSC_CHAIN_ID.toString()
+    chainId?.toString() === BSC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_BSC
-      : chainId.toString() === MATIC_CHAIN_ID.toString()
+      : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_MATIC
       : null;
   const client = new ApolloClient({
@@ -52,7 +52,7 @@ export const checkExistingProject = async (address, chainId, metamaskAccount) =>
 
     if (projectExistingData?.projects) {
       const res = await fetch(
-        `https://milliondollarhomepage.mypinata.cloud/ipfs/${projectExistingData.projects[0].projectDocHash}`
+        `https://capx-liquid.mypinata.cloud/ipfs/${projectExistingData.projects[0].projectDocHash}`
       );
       const desc = await res.json();
       description = desc.description;

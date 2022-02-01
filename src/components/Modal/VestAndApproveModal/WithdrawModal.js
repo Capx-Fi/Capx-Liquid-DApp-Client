@@ -72,7 +72,7 @@ function WithdrawModal({ open, setOpen, withdrawModalStatus }) {
             />
             <div className="text-white text-center laptop:text-left text-paragraph-2 leading-paragraph-2 tablet:text-heading-1 tablet:leading-heading-1 font-semibold w-8/12 laptop:w-6/12">
               {withdrawModalStatus === "success"
-                ? "Withdraw Successful. To the moon"
+                ? "Withdrawal Successful!"
                 : withdrawModalStatus === "failure"
                 ? "Oops! We have encountered an error. Please try again!"
                 : "Almost there...Withdrawing your tokens!"}

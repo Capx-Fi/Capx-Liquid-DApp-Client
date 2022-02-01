@@ -338,7 +338,7 @@ function InvestorDashboardScreen() {
                             >
                               <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_button">
                                 <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_button_text">
-                                  {project.wrappedTokenTicker.split(".")[1]}
+                                  {project.wrappedTokenTicker.split(".")[0]}{project.wrappedTokenTicker.split(".")[1]?.split("-")[1]?`-${project.wrappedTokenTicker.split(".")[1]?.split("-")[1]}`:""}
                                 </div>
 
                                 <img

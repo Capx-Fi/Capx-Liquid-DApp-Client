@@ -77,6 +77,7 @@ function ApproveModal({
         <div className={classes.paper}>
           <div className="flex flex-col laptop:flex-row justify-center mx-auto items-center laptop:h-72 pb-8 mt-8">
             <Lottie
+              loop={true}
               className="w-24 tablet:w-32 laptop:w-56 "
               animationData={
                 approveModalStatus === "success"

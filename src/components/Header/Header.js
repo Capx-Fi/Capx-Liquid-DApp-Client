@@ -27,7 +27,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
     } catch (ex) {
       if (ex instanceof UnsupportedChainIdError) {
         enqueueSnackbar(
-          "Please connect to the BSC Testnet / MATIC Mumbai Testnet Chain.",
+          "Please connect to the Ethereum / BSC / MATIC Mainnet Chain.",
           { variant: "error" }
         );
       }

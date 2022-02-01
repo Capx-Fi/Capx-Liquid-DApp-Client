@@ -14,7 +14,6 @@ import SandTimer from "../../assets/SandTimer.json";
 import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
 import { convertToInternationalCurrencySystem } from "../../utils/convertToInternationalCurrencySystem";
 
-
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
 import { fetchOwnedTokens } from "../../utils/fetchOwnedTokens";
@@ -28,8 +27,11 @@ import {
   CONTRACT_ADDRESS_CAPX_MATIC,
   CONTRACT_ADDRESS_CAPX_CONTROLLER_BSC,
   CONTRACT_ADDRESS_CAPX_CONTROLLER_MATIC,
+  CONTRACT_ADDRESS_CAPX_CONTROLLER_ETHEREUM,
+  CONTRACT_ADDRESS_CAPX_ETHEREUM,
   MATIC_CHAIN_ID,
   BSC_CHAIN_ID,
+  ETHEREUM_CHAIN_ID,
 } from "../../constants/config";
 import {
   GRAPHAPIURL_MASTER_BSC,
@@ -38,11 +40,15 @@ import {
   GRAPHAPIURL_MASTER_MATIC,
   GRAPHAPIURL_VESTING_MATIC,
   GRAPHAPIURL_WRAPPED_MATIC,
+  GRAPHAPIURL_MASTER_ETHEREUM,
+  GRAPHAPIURL_VESTING_ETHEREUM,
+  GRAPHAPIURL_WRAPPED_ETHEREUM,
 } from "../../constants/config";
 
 import {
   EXPLORER_BSC,
   EXPLORER_MATIC,
+  EXPLORER_ETHEREUM,
 } from "../../constants/config";
 
 import NothingHereInvestorDashboard from "../NothingHere/NothingHereInvestorDashboard";
@@ -70,35 +76,35 @@ function InvestorDashboardScreen() {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [withdrawModalStatus, setWithdrawModalStatus] = useState("");
-  console.log(active)
+  console.log(active);
   const contractAddress =
-    chainId?.toString() === BSC_CHAIN_ID
-      ? CONTRACT_ADDRESS_CAPX_BSC
-      : chainId?.toString() === MATIC_CHAIN_ID
+    chainId?.toString() === ETHEREUM_CHAIN_ID.toString()
+      ? CONTRACT_ADDRESS_CAPX_ETHEREUM
+      : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? CONTRACT_ADDRESS_CAPX_MATIC
-      : null;
-  console.log(contractAddress,"ca");
-  console.log(chainId,"chainId");
+      : CONTRACT_ADDRESS_CAPX_BSC;
+  console.log(contractAddress, "ca");
+  console.log(chainId, "chainId");
   console.log("bsc", BSC_CHAIN_ID);
   console.log("matic", MATIC_CHAIN_ID);
   const contractAddressController =
     chainId?.toString() === BSC_CHAIN_ID.toString()
       ? CONTRACT_ADDRESS_CAPX_CONTROLLER_BSC
-      : chainId?.toString() ===   MATIC_CHAIN_ID.toString()
+      : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? CONTRACT_ADDRESS_CAPX_CONTROLLER_MATIC
-      : null;
-  
+      : CONTRACT_ADDRESS_CAPX_CONTROLLER_ETHEREUM;
+
   const capxContract = new web3.eth.Contract(
     CONTRACT_ABI_CAPX,
     contractAddress
   );
 
   const explorer =
-    chainId?.toString() === BSC_CHAIN_ID.toString()
-      ? EXPLORER_BSC
+    chainId?.toString() === ETHEREUM_CHAIN_ID.toString()
+      ? EXPLORER_ETHEREUM
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? EXPLORER_MATIC
-      : null;
+      : EXPLORER_BSC;
 
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -123,21 +129,21 @@ function InvestorDashboardScreen() {
       ? GRAPHAPIURL_VESTING_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_VESTING_MATIC
-      : null;
+      : GRAPHAPIURL_VESTING_ETHEREUM;
 
   const wrappedURL =
     chainId?.toString() === BSC_CHAIN_ID.toString()
       ? GRAPHAPIURL_WRAPPED_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_WRAPPED_MATIC
-      : null;
+      : GRAPHAPIURL_WRAPPED_ETHEREUM;
 
   const masterURL =
     chainId?.toString() === BSC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_MATIC
-      : null;
+      : GRAPHAPIURL_MASTER_ETHEREUM;
   const loadProjectData = async () => {
     setOwnedProjectsData(null);
     if (account) {
@@ -211,7 +217,7 @@ function InvestorDashboardScreen() {
   };
   return (
     <>
-      { ! active ? (
+      {!active ? (
         <MetamaskModal />
       ) : !ownedProjectsData ? (
         <article className="investordashboardscreen">

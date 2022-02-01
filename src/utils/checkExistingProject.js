@@ -3,6 +3,7 @@ import { ApolloClient, InMemoryCache, gql, cache } from "@apollo/client";
 import {
   GRAPHAPIURL_MASTER_BSC,
   GRAPHAPIURL_MASTER_MATIC,
+  GRAPHAPIURL_MASTER_ETHEREUM,
     MATIC_CHAIN_ID,
   BSC_CHAIN_ID,
 } from "../constants/config";
@@ -16,11 +17,11 @@ export const checkExistingProject = async (address, chainId, metamaskAccount) =>
     exists: false,
   };
   const masterURL =
-    chainId.toString() === BSC_CHAIN_ID.toString()
+    chainId?.toString() === BSC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_BSC
-      : chainId.toString() === MATIC_CHAIN_ID.toString()
+      : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_MATIC
-      : null;
+      : GRAPHAPIURL_MASTER_ETHEREUM;
   const client = new ApolloClient({
     uri: masterURL,
     cache: new InMemoryCache(),
@@ -52,7 +53,7 @@ export const checkExistingProject = async (address, chainId, metamaskAccount) =>
 
     if (projectExistingData?.projects) {
       const res = await fetch(
-        `https://milliondollarhomepage.mypinata.cloud/ipfs/${projectExistingData.projects[0].projectDocHash}`
+        `https://capx-liquid.mypinata.cloud/ipfs/${projectExistingData.projects[0].projectDocHash}`
       );
       const desc = await res.json();
       description = desc.description;

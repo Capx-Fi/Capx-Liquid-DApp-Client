@@ -14,8 +14,11 @@ import {
   PinataSecretKey,
   CONTRACT_ADDRESS_CAPX_BSC,
   CONTRACT_ADDRESS_CAPX_MATIC,
+  CONTRACT_ADDRESS_CAPX_ETHEREUM,
   MATIC_CHAIN_ID,
   BSC_CHAIN_ID,
+  ETHEREUM_CHAIN_ID,
+
 } from "../../constants/config";
 import { useSnackbar } from "notistack";
 import ApproveModal from "../../components/Modal/VestAndApproveModal/ApproveModal";
@@ -42,8 +45,9 @@ function LockAndApprove({
 }) {
   const web3 = new Web3(Web3.givenProvider);
   const { chainId } = useWeb3React();
-  const CONTRACT_ADDRESS_CAPX =
-    chainId.toString() === MATIC_CHAIN_ID.toString() ? CONTRACT_ADDRESS_CAPX_MATIC : CONTRACT_ADDRESS_CAPX_BSC;
+
+
+  const CONTRACT_ADDRESS_CAPX = chainId?.toString() === ETHEREUM_CHAIN_ID.toString() ? CONTRACT_ADDRESS_CAPX_ETHEREUM : chainId?.toString() === MATIC_CHAIN_ID.toString() ? CONTRACT_ADDRESS_CAPX_MATIC : CONTRACT_ADDRESS_CAPX_BSC;
   const { t } = useTranslation();
   const [buttonClicked, setButtonClicked] = useState(false);
   const [approveModalStatus, setApproveModalStatus] = useState("");

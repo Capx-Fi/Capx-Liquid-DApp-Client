@@ -23,8 +23,12 @@ import {
   GRAPHAPIURL_MASTER_MATIC,
   GRAPHAPIURL_VESTING_MATIC,
   GRAPHAPIURL_WRAPPED_MATIC,
+  GRAPHAPIURL_MASTER_ETHEREUM,
+  GRAPHAPIURL_VESTING_ETHEREUM,
+  GRAPHAPIURL_WRAPPED_ETHEREUM,
   MATIC_CHAIN_ID,
   BSC_CHAIN_ID,
+  ETHEREUM_CHAIN_ID,
 } from "../../constants/config";
 import BigNumber from "bignumber.js";
 import { useEffect, useState } from "react";
@@ -89,21 +93,21 @@ function ProjectOwnerDashboardScreen() {
       ? GRAPHAPIURL_VESTING_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_VESTING_MATIC
-      : null;
+      : GRAPHAPIURL_VESTING_ETHEREUM;
 
   const wrappedURL =
     chainId?.toString() === BSC_CHAIN_ID.toString()
       ? GRAPHAPIURL_WRAPPED_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_WRAPPED_MATIC
-      : null;
+      : GRAPHAPIURL_WRAPPED_ETHEREUM;
 
   const masterURL =
     chainId?.toString() === BSC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_MATIC
-      : null;
+      : GRAPHAPIURL_MASTER_ETHEREUM;
   return (
     <>
       {!active ? (

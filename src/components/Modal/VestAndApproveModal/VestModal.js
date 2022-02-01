@@ -62,6 +62,7 @@ function VestModal({ open, setOpen, vestModalStatus }) {
             {console.log(vestModalStatus)}
             <Lottie
               className="w-32 laptop:w-64"
+              loop={true}
               animationData={
                 vestModalStatus === "success"
                   ? LockingSuccess

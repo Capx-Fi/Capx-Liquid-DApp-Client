@@ -1,0 +1,80 @@
+.reviewtablecontainer {
+  @apply rounded-lg bg-dark-300;
+  &_title {
+    @apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-primary-green-300 opacity-50 border-b-2 border-dark-200;
+  }
+  &_innercontainer {
+    @apply px-5 py-2.5;
+  }
+}
+
+.vesting_pages_title {
+  // @apply desktop:text-50px text-paragraph-1 tracking-tighter laptop:text-display-2 tablet:text-heading-1 text-heading-2 font-semibold mb-5 leading-lh-54;
+  @apply text-subheading leading-subheading laptop:text-display-2 laptop:leading-display-2 tablet:text-heading-1 tablet:leading-heading-1 font-semibold mb-5 desktop:text-display-1 desktop:leading-display-1 ;
+}
+.error_page_title {
+@apply text-paragraph-1 leading-paragraph-1 laptop:text-display-2 laptop:leading-display-2 tablet:text-subheading tablet:leading-subheading font-semibold desktop:text-display-1 desktop:leading-display-1 ;
+}
+@media (max-width:1215px) and (min-width:1024px) {
+  .error_page_title {
+    @apply text-heading-1 leading-heading-1;
+  }
+}
+
+.rc-table {
+  @apply bg-none pb-3 rounded-b-lg;
+  ::-webkit-scrollbar:vertical {
+    @apply w-1.5 bg-dark-200;
+  }
+  ::-webkit-scrollbar:horizontal {
+    @apply h-1.5 bg-dark-200;
+  }
+  ::-webkit-scrollbar-thumb:vertical {
+    background: linear-gradient(0deg, #0a4d20 -33.65%, #288f4a 100%);
+    @apply rounded-md h-16 bg-opacity-50;
+  }
+  ::-webkit-scrollbar-thumb:horizontal {
+    background: linear-gradient(0deg, #0b421e -33.65%, #87dfa5 100%);
+    @apply rounded-md w-16 bg-opacity-50;
+  }
+  ::-webkit-scrollbar-track {
+    @apply rounded-md;
+  }
+  .rc-table-cell {
+    @apply text-primary-green-100 text-caption-4 tablet:text-sm xl:text-base font-light tablet:font-medium xl:font-semibold;
+  }
+  .rc-table-thead {
+    th {
+      @apply text-primary-green-100 opacity-50 bg-transparent border-b border-dark-200;
+      padding: 6px;
+      font-weight: normal;
+      &.text-green {
+      }
+    }
+  }
+  .rc-table-tbody {
+    tr {
+      td {
+        @apply text-primary-green-100 bg-transparent border-b border-dark-200;
+        padding: 10px 6px;
+        &.text-green {
+          @apply text-primary-green-300;
+        }
+      }
+      &:hover {
+        td {
+          background: rgba(#000000, 0.1);
+        }
+      }
+      // &:last-child {
+      //   td {
+      //     @apply border-b-0;
+      //   }
+      // }
+    }
+  }
+}
+table {
+  width: 100%;
+  margin-bottom: 0;
+}

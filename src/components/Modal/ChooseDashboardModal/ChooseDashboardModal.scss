@@ -1,0 +1,36 @@
+.error-text-container {
+  @apply flex py-3 px-6 items-center;
+  color: #f55252;
+}
+.dmodal-maincontainer {
+  @apply flex flex-col items-center;
+}
+
+.dmodal-title {
+  @apply font-semibold text-center text-xl text-white;
+}
+.choose-card {
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: radial-gradient(143.33% 143.33% at 82.41% -4.96%, rgba(132, 214, 164, 0.3) 0%, rgba(18, 28, 32, 0.3) 100%);
+  @apply mx-3 px-6 py-4 cursor-pointer;
+}
+.active-card {
+  @apply bg-dark-400 border border-primary-green-300 box-border;
+}
+
+.choose-container {
+  @apply flex justify-center py-4;
+}
+.card-title {
+  @apply text-center pt-2 font-semibold text-white text-caption-3 leading-caption-4 tablet:text-caption-2 tablet:leading-caption-2 laptop:text-caption-1 laptop:leading-caption-1;
+}
+
+.card-img{
+  @apply h-24 laptop:h-32;
+}
+@media screen and (max-width: 365px) {
+  .choose-card {
+    @apply mx-2 px-4 py-2;
+  }
+}

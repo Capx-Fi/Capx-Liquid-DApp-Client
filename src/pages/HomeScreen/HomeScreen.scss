@@ -1,0 +1,74 @@
+.homescreen {
+  @apply h-screen bg-dark-400 flex;
+
+  &_maincontainer {
+    @apply flex flex-col justify-center items-start m-auto;
+    &_herocontainer {
+      @apply px-8 py-8 tablet:pl-16 tablet:pr-12 tablet:-ml-12 laptop:ml-0 tablet:py-16 desktop:py-8 rounded-lg tablet:rounded-2xl desktop:rounded-4xl text-white relative w-80v tablet:w-70v laptop:w-70v flex flex-col items-center tablet:items-start;
+      background: linear-gradient(
+        270.08deg,
+        rgba(132, 214, 164, 0.3) 0.02%,
+        rgba(18, 28, 32, 0.3) 117.26%
+      );
+      border-radius: 16px;
+      max-width: 960px;
+      &_cname {
+        @apply flex rounded-lg object-contain w-fit-content px-3 mb-4 py-2.5 text-caption-4 tablet:text-caption-2 leading-caption-4 tablet:leading-caption-2;
+        background: linear-gradient(
+          270.08deg,
+          rgba(132, 214, 164, 0.3) 0.02%,
+          rgba(18, 28, 32, 0.3) 117.26%
+        );
+      }
+      &_title {
+        @apply text-heading-2 tracking-tighter leading-heading-2 tablet:text-display-1 tablet:leading-display-1 font-bold laptop:text-display-2 laptop:leading-display-2 desktop:text-display-1 desktop:leading-display-1 desktop:font-semibold w-10/12 tablet:w-11/12 text-center tablet:text-left;
+      }
+      &_subtitle {
+        @apply py-6 desktop:pt-4 tracking-tight desktop:pb-8 text-caption-2 leading-caption-2 tablet:text-subheading tablet:leading-subheading laptop:text-paragraph-1 laptop:leading-paragraph-1 desktop:text-heading-2 desktop:leading-heading-2 text-center tablet:text-left;
+      }
+      &_button {
+        @apply rounded-xl flex px-3 py-2 tablet:px-5 tablet:py-3 tablet:mb-16 laptop:mb-0 laptop:px-6 laptop:py-4 items-center justify-center text-center w-fit-content cursor-pointer;
+        background: linear-gradient(180deg, #97d10a -8.65%, #206300 100%);
+        &_text {
+          @apply mr-3 text-caption-3 leading-caption-3 tablet:text-caption-1 tablet:leading-caption-1 desktop:text-subheading desktop:tracking-tight desktop:leading-subheading font-medium;
+        }
+        &_icon {
+          @apply w-3 tablet:w-5 ml-2;
+        }
+      }
+      &_capxillustration {
+        @apply hidden tablet:flex tablet:-bottom-40 tablet:-right-36 tablet:w-72 z-10 w-56 desktop:w-72 laptop:w-80 absolute desktop:-bottom-28 desktop:-right-24 laptop:-bottom-36 laptop:-right-20;
+      }
+    }
+    &_dashboardcontainer {
+      background: linear-gradient(
+        270.08deg,
+        rgba(132, 214, 164, 0.3) 0.02%,
+        rgba(18, 28, 32, 0.3) 117.26%
+      );
+      border-radius: 16px;
+      @apply mt-8 px-4 py-4 tablet:pl-16 tablet:pr-12 tablet:-ml-12 laptop:ml-0 tablet:py-3 desktop:py-3 rounded-lg tablet:rounded-xl desktop:rounded-2xl text-white relative w-80v tablet:w-60v laptop:w-45v desktop:w-40v flex items-center justify-between;
+      &_text {
+        @apply text-caption-3 py-4 leading-caption-3 tablet:text-caption-1 tablet:leading-caption-1 laptop:text-paragraph-2 laptop:leading-paragraph-2 desktop:text-paragraph-1 font-medium desktop:leading-paragraph-2 text-center tablet:text-left;
+        @media screen and (max-width: 320px){
+          @apply text-caption-4;
+        }
+      }
+      &_button {
+        @apply ml-1 rounded-lg flex px-4 py-1 desktop:px-6 desktop:py-2 items-center justify-center text-center w-fit-content cursor-pointer;
+        background: linear-gradient(356.23deg, #96cf03 -65.8%, #f1fff6 89%);
+        &_text {
+          @apply mr-3  text-caption-4 leading-caption-4 tablet:text-caption-2 tablet:leading-caption-2 laptop:text-caption-2 laptop:leading-caption-2 font-bold text-dark-400;
+        }
+        &_icon {
+          @apply w-2 tablet:w-3 text-dark-400;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 320px) {
+.cta_main_level1_button_text {
+  font-size: 14px !important;
+}
+}

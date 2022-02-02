@@ -3,6 +3,7 @@ import { ApolloClient, InMemoryCache, gql, cache } from "@apollo/client";
 import {
   GRAPHAPIURL_MASTER_BSC,
   GRAPHAPIURL_MASTER_MATIC,
+  GRAPHAPIURL_MASTER_ETHEREUM,
     MATIC_CHAIN_ID,
   BSC_CHAIN_ID,
 } from "../constants/config";
@@ -20,7 +21,7 @@ export const checkExistingProject = async (address, chainId, metamaskAccount) =>
       ? GRAPHAPIURL_MASTER_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_MATIC
-      : null;
+      : GRAPHAPIURL_MASTER_ETHEREUM;
   const client = new ApolloClient({
     uri: masterURL,
     cache: new InMemoryCache(),

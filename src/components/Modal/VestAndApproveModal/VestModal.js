@@ -61,8 +61,8 @@ function VestModal({ open, setOpen, vestModalStatus }) {
           <div className="flex flex-col laptop:flex-row justify-center mx-auto items-center laptop:h-72 pb-8">
             {console.log(vestModalStatus)}
             <Lottie
-              loop={true}
               className="w-32 laptop:w-64"
+              loop={true}
               animationData={
                 vestModalStatus === "success"
                   ? LockingSuccess

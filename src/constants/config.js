@@ -47,3 +47,4 @@ export const EXPLORER_MATIC = process.env.REACT_APP_EXPLORER_MATIC;
 
 export const MATIC_CHAIN_ID = process.env.REACT_APP_MATIC_CHAIN_ID;
 export const BSC_CHAIN_ID = process.env.REACT_APP_BSC_CHAIN_ID;
+export const ETHEREUM_CHAIN_ID = process.env.REACT_APP_ETHEREUM_CHAIN_ID;

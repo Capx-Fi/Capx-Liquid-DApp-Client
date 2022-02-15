@@ -33,6 +33,7 @@ export const approveToken = async (
   }
   if (approvedAmount) {
     approvedAmount = new BigNumber(approvedAmount);
+    //TODO token decimal hardcoded
     if (approvedAmount.dividedBy(Math.pow(10, 6)).toString(10) === "0") {
       try {
         approveResult = await vestingTokenContract.methods
@@ -56,6 +57,7 @@ export const approveToken = async (
       try {
         approve0Result = await vestingTokenContract.methods.approve(
             CONTRACT_ADDRESS_CAPX,
+            //TODO token decimal hardcoded.
             new BigNumber(0).multipliedBy(Math.pow(10, 6)).toString(10)
           ).send({ from: metamaskAccount });
       } catch (err) {

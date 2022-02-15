@@ -1,6 +1,7 @@
 import BigNumber from "bignumber.js";
 import { validateDate } from "./validateDate";
 
+//TODO decimal hardcoded
 const DECIMALS = 18;
 const DAY = 86400;
 

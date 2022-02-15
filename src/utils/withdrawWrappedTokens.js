@@ -27,6 +27,7 @@ export const withdrawWrappedTokens = async (
   }
   if (approvedAmount) {
     approvedAmount = new BigNumber(approvedAmount);
+    //TODO hardcoded decimal value
     if (approvedAmount.dividedBy(Math.pow(10, 6)).toString(10) === "0") {
       try {
         approveResult = await wrappedTokenContract.methods
@@ -47,6 +48,7 @@ export const withdrawWrappedTokens = async (
         approve0Result = await wrappedTokenContract.methods
           .approve(
             CONTRACT_ADDRESS_CAPX_CONTROLLER,
+            //TODO hardcoded decimal value
             new BigNumber(0).multipliedBy(Math.pow(10, 6)).toString(10)
           )
           .send({ from: account });

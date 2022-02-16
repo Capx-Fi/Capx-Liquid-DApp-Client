@@ -33,8 +33,11 @@ export const approveToken = async (
   }
   if (approvedAmount) {
     approvedAmount = new BigNumber(approvedAmount);
-    //TODO token decimal hardcoded
-    if (approvedAmount.dividedBy(Math.pow(10, 6)).toString(10) === "0") {
+    if (
+      approvedAmount
+        .dividedBy(Math.pow(10, tokenDetails.decimal))
+        .toString(10) === "0"
+    ) {
       try {
         approveResult = await vestingTokenContract.methods
           .approve(CONTRACT_ADDRESS_CAPX, sendAmount)
@@ -55,11 +58,14 @@ export const approveToken = async (
     } else {
       let approve0Result = null;
       try {
-        approve0Result = await vestingTokenContract.methods.approve(
+        approve0Result = await vestingTokenContract.methods
+          .approve(
             CONTRACT_ADDRESS_CAPX,
-            //TODO token decimal hardcoded.
-            new BigNumber(0).multipliedBy(Math.pow(10, 6)).toString(10)
-          ).send({ from: metamaskAccount });
+            new BigNumber(0)
+              .multipliedBy(Math.pow(10, tokenDetails.decimal))
+              .toString(10)
+          )
+          .send({ from: metamaskAccount });
       } catch (err) {
         setApproveModalStatus("failure");
         enqueueSnackbar("Token Approval Failed!", { variant: "error" });

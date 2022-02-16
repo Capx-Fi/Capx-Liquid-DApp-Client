@@ -1,11 +1,10 @@
 import BigNumber from "bignumber.js";
 import { validateDate } from "./validateDate";
 
-//TODO decimal hardcoded
-const DECIMALS = 18;
+// const DECIMALS = 18;
 const DAY = 86400;
 
-export const verifyVestingData = (data, defaultWeb3) => {
+export const verifyVestingData = (data, defaultWeb3, DECIMALS) => {
   let x = 1;
   let spreadsheetErrors = [];
   if (data.length === 0) {
@@ -62,15 +61,14 @@ export const verifyVestingData = (data, defaultWeb3) => {
       }
 
       try {
-        var numberOfTokens = BigNumber(table["Amount of Tokens"] * 10 ** DECIMALS);
+        var numberOfTokens = BigNumber(
+          table["Amount of Tokens"] * 10 ** DECIMALS
+        );
         if (table["Amount of Tokens"] === undefined)
           spreadsheetErrors.push(
             `<b>MISSING AMOUNT OF TOKENS</b> : At Row ${x}`
           );
-        else if (
-          isNaN(numberOfTokens) ||
-          !(numberOfTokens > 0)
-        ) {
+        else if (isNaN(numberOfTokens) || !(numberOfTokens > 0)) {
           spreadsheetErrors.push(
             `<b>INVALID AMOUNT OF TOKENS</b> : At Row ${x} - ${table["Amount of Tokens"]}`
           );
@@ -93,13 +91,10 @@ export const verifyVestingData = (data, defaultWeb3) => {
 
           kp = a.join("-");
         } else kp = table["Date(DD-MM-YYYY)"].toString().split("-").join("-");
-        var timestamp = new Date (
-          Date.UTC(
-            kp.split("-")[2],
-            kp.split("-")[1] - 1,
-            kp.split("-")[0]
-          )
-        ).getTime() / 1000;
+        var timestamp =
+          new Date(
+            Date.UTC(kp.split("-")[2], kp.split("-")[1] - 1, kp.split("-")[0])
+          ).getTime() / 1000;
         if (!validateDate(kp)) {
           spreadsheetErrors.push(
             `<b>INVALID DATE</b> : At Row ${x} - ${table[

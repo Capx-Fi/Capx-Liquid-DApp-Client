@@ -19,6 +19,7 @@ function UploadTemplate({
   setVestingData,
   setUploadErrors,
   uploadedFile,
+  tokenDetails,
 }) {
   const SheetJSFT = ["xlsx", "xlsb", "xlsm", "xls", "xml", "csv", "txt"]
     .map((x) => `.${x}`)
@@ -41,7 +42,11 @@ function UploadTemplate({
         // let data = XLSX.utils.sheet_to_json(ws, { header: false });
         parseSheetObj(ws).then((res) => {
           console.log(res, "parseResponse");
-          let errors = verifyVestingData(res, defaultWeb3);
+          let errors = verifyVestingData(
+            res,
+            defaultWeb3,
+            tokenDetails.decimal
+          );
 
           if (errors.length === 0) {
             res = res.map((v) => ({ ...v, isSellable: true, isWrapped: true }));

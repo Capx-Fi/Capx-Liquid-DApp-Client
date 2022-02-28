@@ -4,6 +4,11 @@ import { validateDate } from "./validateDate";
 // const DECIMALS = 18;
 const DAY = 86400;
 
+function SafeHTML(address) {
+  let convertData = address.replace(/</gi, '&lt')
+  return convertData
+}
+
 export const verifyVestingData = (data, defaultWeb3, DECIMALS) => {
   let x = 1;
   let spreadsheetErrors = [];
@@ -31,7 +36,7 @@ export const verifyVestingData = (data, defaultWeb3, DECIMALS) => {
           spreadsheetErrors.push(`<b>MISSING SR. NO.</b> : At Row ${x}`);
         else if (parseInt(table["Sr. No."]) !== x) {
           spreadsheetErrors.push(
-            `<b>INVALID SR. NO.</b> : At Row ${x} - ${table["Sr. No."]}`
+            `<b>INVALID SR. NO.</b> : At Row ${x} -` + SafeHTML(table["Sr. No."])
           );
         }
       } catch (err) {
@@ -39,7 +44,7 @@ export const verifyVestingData = (data, defaultWeb3, DECIMALS) => {
           spreadsheetErrors.push(`<b>MISSING SR. NO.</b> : At Row ${x}`);
         else
           spreadsheetErrors.push(
-            `<b>INVALID SR. NO.</b> : At Row ${x} - ${table["Sr. No."]}`
+            `<b>INVALID SR. NO.</b> : At Row ${x} -` + SafeHTML(table["Sr. No."])
           );
       }
 
@@ -48,7 +53,7 @@ export const verifyVestingData = (data, defaultWeb3, DECIMALS) => {
           spreadsheetErrors.push(`<b>MISSING ADDRESS</b> : At Row ${x}`);
         else if (!defaultWeb3.utils.isAddress(table["Address"])) {
           spreadsheetErrors.push(
-            `<b>INVALID ADDRESS</b> : At Row ${x} - ${table["Address"]}`
+            `<b>INVALID ADDRESS</b> : At Row test ${x} - ` + SafeHTML(table["Address"])
           );
         }
       } catch (err) {
@@ -56,7 +61,7 @@ export const verifyVestingData = (data, defaultWeb3, DECIMALS) => {
           spreadsheetErrors.push(`<b>MISSING ADDRESS</b> : At Row ${x}`);
         else
           spreadsheetErrors.push(
-            `<b>INVALID ADDRESS</b> : At Row ${x} - ${table["Address"]}`
+            `<b>INVALID ADDRESS</b> : At Row ${x} - ` + SafeHTML(table["Address"])
           );
       }
 
@@ -70,7 +75,7 @@ export const verifyVestingData = (data, defaultWeb3, DECIMALS) => {
           );
         else if (isNaN(numberOfTokens) || !(numberOfTokens > 0)) {
           spreadsheetErrors.push(
-            `<b>INVALID AMOUNT OF TOKENS</b> : At Row ${x} - ${table["Amount of Tokens"]}`
+            `<b>INVALID AMOUNT OF TOKENS</b> : At Row ${x} -` + SafeHTML(table["Amount of Tokens"])
           );
         }
       } catch (err) {
@@ -80,7 +85,7 @@ export const verifyVestingData = (data, defaultWeb3, DECIMALS) => {
           );
         else
           spreadsheetErrors.push(
-            `<b>INVALID AMOUNT OF TOKENS</b> : At Row ${x} - ${table["Amount of Tokens"]}`
+            `<b>INVALID AMOUNT OF TOKENS</b> : At Row ${x} -` + SafeHTML(table["Amount of Tokens"])
           );
       }
 
@@ -117,7 +122,7 @@ export const verifyVestingData = (data, defaultWeb3, DECIMALS) => {
           spreadsheetErrors.push(`<b>MISSING DATE</b> : At Row ${x}`);
         else
           spreadsheetErrors.push(
-            `<b>INVALID DATE</b> : At Row ${x}  - ${table["Date(DD-MM-YYYY)"]}`
+            `<b>INVALID DATE</b> : At Row ${x}  -` + SafeHTML(table["Date(DD-MM-YYYY)"])
           );
       }
 

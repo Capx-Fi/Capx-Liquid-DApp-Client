@@ -1,6 +1,5 @@
 import BigNumber from "bignumber.js";
 
-
 export const withdrawWrappedTokens = async (
   wrappedTokenAddress,
   tokenAmount,
@@ -12,7 +11,8 @@ export const withdrawWrappedTokens = async (
   enqueueSnackbar,
   wrappedTokenContract,
   CONTRACT_ADDRESS_CAPX,
-  CONTRACT_ADDRESS_CAPX_CONTROLLER
+  CONTRACT_ADDRESS_CAPX_CONTROLLER,
+  tokenDecimal
 ) => {
   setWithdrawModalOpen(true);
   let withdrawResult = null;
@@ -27,7 +27,9 @@ export const withdrawWrappedTokens = async (
   }
   if (approvedAmount) {
     approvedAmount = new BigNumber(approvedAmount);
-    if (approvedAmount.dividedBy(Math.pow(10, 6)).toString(10) === "0") {
+    if (
+      approvedAmount.dividedBy(Math.pow(10, tokenDecimal)).toString(10) === "0"
+    ) {
       try {
         approveResult = await wrappedTokenContract.methods
           .approve(CONTRACT_ADDRESS_CAPX_CONTROLLER, tokenAmount)
@@ -47,7 +49,9 @@ export const withdrawWrappedTokens = async (
         approve0Result = await wrappedTokenContract.methods
           .approve(
             CONTRACT_ADDRESS_CAPX_CONTROLLER,
-            new BigNumber(0).multipliedBy(Math.pow(10, 6)).toString(10)
+            new BigNumber(0)
+              .multipliedBy(Math.pow(10, tokenDecimal))
+              .toString(10)
           )
           .send({ from: account });
       } catch (err) {

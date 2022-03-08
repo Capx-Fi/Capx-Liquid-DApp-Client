@@ -98,7 +98,6 @@ function InvestorDashboardScreen() {
     CONTRACT_ABI_CAPX,
     contractAddress
   );
-
   const explorer =
     chainId?.toString() === ETHEREUM_CHAIN_ID.toString()
       ? EXPLORER_ETHEREUM
@@ -176,7 +175,12 @@ function InvestorDashboardScreen() {
       }
     }
   };
-  const tryWithdraw = async (wrappedTokenAddress, tokenAmount, vestID) => {
+  const tryWithdraw = async (
+    wrappedTokenAddress,
+    tokenAmount,
+    vestID,
+    tokenDecimal
+  ) => {
     setButtonDisabled(true);
     if (vestID) {
       await withdrawVestedTokens(
@@ -207,7 +211,8 @@ function InvestorDashboardScreen() {
         enqueueSnackbar,
         wrappedTokenContract,
         contractAddress,
-        contractAddressController
+        contractAddressController,
+        tokenDecimal
       );
     }
     setButtonDisabled(false);
@@ -344,7 +349,16 @@ function InvestorDashboardScreen() {
                             >
                               <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_button">
                                 <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_button_text">
-                                {project.wrappedTokenTicker.split(".")[0]}{project.wrappedTokenTicker.split(".")[1]?.split("-")[1]?`-${project.wrappedTokenTicker.split(".")[1]?.split("-")[1]}`:""}
+                                  {project.wrappedTokenTicker.split(".")[0]}
+                                  {project.wrappedTokenTicker
+                                    .split(".")[1]
+                                    ?.split("-")[1]
+                                    ? `-${
+                                        project.wrappedTokenTicker
+                                          .split(".")[1]
+                                          ?.split("-")[1]
+                                      }`
+                                    : ""}
                                 </div>
 
                                 <img
@@ -362,7 +376,8 @@ function InvestorDashboardScreen() {
                             tryWithdraw(
                               project.derivativeID,
                               project.tokenAmount,
-                              project.vestID
+                              project.vestID,
+                              project.projectTokenDecimal
                             );
                           }}
                           className={`investordashboardscreen_maincontainer_innercontainer_projectcontainer_withdrawbutton 

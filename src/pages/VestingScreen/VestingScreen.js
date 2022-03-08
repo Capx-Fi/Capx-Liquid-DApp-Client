@@ -52,8 +52,12 @@ function VestingScreen() {
   });
 
   const setContractAddress = (addr) => {
-    setContractDetails({ ...contractDetails, contractAddress: addr, projectTitle: "", projectDescription: "" });
-  
+    setContractDetails({
+      ...contractDetails,
+      contractAddress: addr,
+      projectTitle: "",
+      projectDescription: "",
+    });
   };
 
   const setProjectTitle = (name) => {
@@ -196,6 +200,7 @@ function VestingScreen() {
                   setVestingData={setVestingData}
                   setUploadErrors={setUploadErrors}
                   setUploadedFile={setUploadedFile}
+                  tokenDetails={tokenDetails}
                 />
               )}
               {step === 5 && contractDetails.vestingArray.length > 0 && (

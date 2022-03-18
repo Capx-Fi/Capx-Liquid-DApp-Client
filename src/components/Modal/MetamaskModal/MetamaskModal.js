@@ -23,7 +23,7 @@ function MetamaskModal() {
       await activate(injected);
       if (unsupportedChainIdError) {
         enqueueSnackbar(
-          "Please connect to the Ethereum / BSC / MATIC Mainnet Chain.",
+          "Please connect to the Ethereum / BSC / MATIC / AVALANCHE Mainnet Chain.",
           {
             variant: "error",
           }
@@ -32,7 +32,7 @@ function MetamaskModal() {
     } catch (ex) {
       if (error instanceof UnsupportedChainIdError) {
         enqueueSnackbar(
-          "Please connect to the Ethereum / BSC / MATIC Mainnet Chain.",
+          "Please connect to the Ethereum / BSC / MATIC / AVALANCHE Mainnet Chain.",
           {
             variant: "error",
           }

@@ -27,7 +27,7 @@ export const checkExistingProject = async (
       ? GRAPHAPIURL_MASTER_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_MATIC
-      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_AVALANCHE
       : GRAPHAPIURL_MASTER_ETHEREUM;
   const client = new ApolloClient({

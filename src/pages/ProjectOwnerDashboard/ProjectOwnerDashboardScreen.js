@@ -97,7 +97,7 @@ function ProjectOwnerDashboardScreen() {
       ? GRAPHAPIURL_VESTING_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_VESTING_MATIC
-      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
       ? GRAPHAPIURL_VESTING_AVALANCHE
       : GRAPHAPIURL_VESTING_ETHEREUM;
 
@@ -106,7 +106,7 @@ function ProjectOwnerDashboardScreen() {
       ? GRAPHAPIURL_WRAPPED_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_WRAPPED_MATIC
-      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
       ? GRAPHAPIURL_WRAPPED_AVALANCHE
       : GRAPHAPIURL_WRAPPED_ETHEREUM;
 
@@ -115,7 +115,7 @@ function ProjectOwnerDashboardScreen() {
       ? GRAPHAPIURL_MASTER_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_MATIC
-      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_AVALANCHE
       : GRAPHAPIURL_MASTER_ETHEREUM;
   return (

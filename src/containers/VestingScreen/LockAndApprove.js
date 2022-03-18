@@ -52,7 +52,7 @@ function LockAndApprove({
       ? CONTRACT_ADDRESS_CAPX_ETHEREUM
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? CONTRACT_ADDRESS_CAPX_MATIC
-      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
       ? CONTRACT_ADDRESS_CAPX_AVALANCHE
       : CONTRACT_ADDRESS_CAPX_BSC;
 

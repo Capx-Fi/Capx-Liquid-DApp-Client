@@ -83,13 +83,13 @@ function InvestorDashboardScreen() {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [withdrawModalStatus, setWithdrawModalStatus] = useState("");
-  console.log(active);
+
   const contractAddress =
     chainId?.toString() === ETHEREUM_CHAIN_ID.toString()
       ? CONTRACT_ADDRESS_CAPX_ETHEREUM
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? CONTRACT_ADDRESS_CAPX_MATIC
-      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
       ? CONTRACT_ADDRESS_CAPX_AVALANCHE
       : CONTRACT_ADDRESS_CAPX_BSC;
 
@@ -102,7 +102,7 @@ function InvestorDashboardScreen() {
       ? CONTRACT_ADDRESS_CAPX_CONTROLLER_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? CONTRACT_ADDRESS_CAPX_CONTROLLER_MATIC
-      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
       ? CONTRACT_ADDRESS_CAPX_CONTROLLER_AVALANCHE
       : CONTRACT_ADDRESS_CAPX_CONTROLLER_ETHEREUM;
 
@@ -115,7 +115,7 @@ function InvestorDashboardScreen() {
       ? EXPLORER_ETHEREUM
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? EXPLORER_MATIC
-      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
       ? EXPLORER_AVALANCHE
       : EXPLORER_BSC;
 
@@ -142,7 +142,7 @@ function InvestorDashboardScreen() {
       ? GRAPHAPIURL_VESTING_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_VESTING_MATIC
-      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
       ? GRAPHAPIURL_VESTING_AVALANCHE
       : GRAPHAPIURL_VESTING_ETHEREUM;
 
@@ -151,7 +151,7 @@ function InvestorDashboardScreen() {
       ? GRAPHAPIURL_WRAPPED_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_WRAPPED_MATIC
-      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
       ? GRAPHAPIURL_WRAPPED_AVALANCHE
       : GRAPHAPIURL_WRAPPED_ETHEREUM;
 
@@ -160,7 +160,7 @@ function InvestorDashboardScreen() {
       ? GRAPHAPIURL_MASTER_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_MATIC
-      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_AVALANCHE
       : GRAPHAPIURL_MASTER_ETHEREUM;
   const loadProjectData = async () => {

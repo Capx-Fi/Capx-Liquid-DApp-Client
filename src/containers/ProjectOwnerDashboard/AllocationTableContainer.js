@@ -31,11 +31,11 @@ function AllocationTableContainer({
       ? EXPLORER_ETHEREUM
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? EXPLORER_MATIC
-      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
       ? EXPLORER_AVALANCHE
       : EXPLORER_BSC;
 
-  // const explorer = chainId.to === BSC_CHAIN_ID.toString() ? EXPLORER_BSC : EXPLORER_MATIC;
+  // const explorer = chainId?.to === BSC_CHAIN_ID.toString() ? EXPLORER_BSC : EXPLORER_MATIC;
   useEffect(() => {
     displayAllocationTableDetails();
   }, [

@@ -4,11 +4,17 @@ import {
   GRAPHAPIURL_MASTER_BSC,
   GRAPHAPIURL_MASTER_MATIC,
   GRAPHAPIURL_MASTER_ETHEREUM,
-    MATIC_CHAIN_ID,
+  MATIC_CHAIN_ID,
   BSC_CHAIN_ID,
+  GRAPHAPIURL_MASTER_AVALANCHE,
+  AVALANCHE_CHAIN_ID,
 } from "../constants/config";
 
-export const checkExistingProject = async (address, chainId, metamaskAccount) => {
+export const checkExistingProject = async (
+  address,
+  chainId,
+  metamaskAccount
+) => {
   let description = "";
   let projectExistingData = [];
   let data = {
@@ -21,6 +27,8 @@ export const checkExistingProject = async (address, chainId, metamaskAccount) =>
       ? GRAPHAPIURL_MASTER_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_MATIC
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
+      ? GRAPHAPIURL_MASTER_AVALANCHE
       : GRAPHAPIURL_MASTER_ETHEREUM;
   const client = new ApolloClient({
     uri: masterURL,
@@ -58,11 +66,14 @@ export const checkExistingProject = async (address, chainId, metamaskAccount) =>
       const desc = await res.json();
       description = desc.description;
       console.log("description", description);
-      data = { name: projectExistingData.projects[0].projectName, description, exists:true };
+      data = {
+        name: projectExistingData.projects[0].projectName,
+        description,
+        exists: true,
+      };
       return data;
-    }
-    else{
-        return data;
+    } else {
+      return data;
     }
   } catch (error) {
     console.log(error);

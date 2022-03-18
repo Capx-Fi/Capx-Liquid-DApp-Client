@@ -29,6 +29,10 @@ import {
   MATIC_CHAIN_ID,
   BSC_CHAIN_ID,
   ETHEREUM_CHAIN_ID,
+  GRAPHAPIURL_MASTER_AVALANCHE,
+  AVALANCHE_CHAIN_ID,
+  GRAPHAPIURL_WRAPPED_AVALANCHE,
+  GRAPHAPIURL_VESTING_AVALANCHE,
 } from "../../constants/config";
 import BigNumber from "bignumber.js";
 import { useEffect, useState } from "react";
@@ -93,6 +97,8 @@ function ProjectOwnerDashboardScreen() {
       ? GRAPHAPIURL_VESTING_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_VESTING_MATIC
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
+      ? GRAPHAPIURL_VESTING_AVALANCHE
       : GRAPHAPIURL_VESTING_ETHEREUM;
 
   const wrappedURL =
@@ -100,6 +106,8 @@ function ProjectOwnerDashboardScreen() {
       ? GRAPHAPIURL_WRAPPED_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_WRAPPED_MATIC
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
+      ? GRAPHAPIURL_WRAPPED_AVALANCHE
       : GRAPHAPIURL_WRAPPED_ETHEREUM;
 
   const masterURL =
@@ -107,6 +115,8 @@ function ProjectOwnerDashboardScreen() {
       ? GRAPHAPIURL_MASTER_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_MATIC
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
+      ? GRAPHAPIURL_MASTER_AVALANCHE
       : GRAPHAPIURL_MASTER_ETHEREUM;
   return (
     <>

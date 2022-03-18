@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef } from "react";
 import { MetaStateContext } from "./store";
 
 const chains = (chainId) => {
-  if (Number(chainId) && chainId.length > 9) {
+  if (Number(chainId) && chainId?.length > 9) {
     return "local";
   }
   switch (chainId) {

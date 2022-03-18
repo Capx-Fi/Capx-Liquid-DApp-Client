@@ -32,6 +32,13 @@ import {
   MATIC_CHAIN_ID,
   BSC_CHAIN_ID,
   ETHEREUM_CHAIN_ID,
+  AVALANCHE_CHAIN_ID,
+  CONTRACT_ADDRESS_CAPX_AVALANCHE,
+  CONTRACT_ADDRESS_CAPX_CONTROLLER_AVALANCHE,
+  EXPLORER_AVALANCHE,
+  GRAPHAPIURL_VESTING_AVALANCHE,
+  GRAPHAPIURL_WRAPPED_AVALANCHE,
+  GRAPHAPIURL_MASTER_AVALANCHE,
 } from "../../constants/config";
 import {
   GRAPHAPIURL_MASTER_BSC,
@@ -82,7 +89,10 @@ function InvestorDashboardScreen() {
       ? CONTRACT_ADDRESS_CAPX_ETHEREUM
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? CONTRACT_ADDRESS_CAPX_MATIC
+      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      ? CONTRACT_ADDRESS_CAPX_AVALANCHE
       : CONTRACT_ADDRESS_CAPX_BSC;
+
   console.log(contractAddress, "ca");
   console.log(chainId, "chainId");
   console.log("bsc", BSC_CHAIN_ID);
@@ -92,6 +102,8 @@ function InvestorDashboardScreen() {
       ? CONTRACT_ADDRESS_CAPX_CONTROLLER_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? CONTRACT_ADDRESS_CAPX_CONTROLLER_MATIC
+      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      ? CONTRACT_ADDRESS_CAPX_CONTROLLER_AVALANCHE
       : CONTRACT_ADDRESS_CAPX_CONTROLLER_ETHEREUM;
 
   const capxContract = new web3.eth.Contract(
@@ -103,6 +115,8 @@ function InvestorDashboardScreen() {
       ? EXPLORER_ETHEREUM
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? EXPLORER_MATIC
+      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      ? EXPLORER_AVALANCHE
       : EXPLORER_BSC;
 
   function onlyUnique(value, index, self) {
@@ -128,6 +142,8 @@ function InvestorDashboardScreen() {
       ? GRAPHAPIURL_VESTING_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_VESTING_MATIC
+      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      ? GRAPHAPIURL_VESTING_AVALANCHE
       : GRAPHAPIURL_VESTING_ETHEREUM;
 
   const wrappedURL =
@@ -135,6 +151,8 @@ function InvestorDashboardScreen() {
       ? GRAPHAPIURL_WRAPPED_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_WRAPPED_MATIC
+      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      ? GRAPHAPIURL_WRAPPED_AVALANCHE
       : GRAPHAPIURL_WRAPPED_ETHEREUM;
 
   const masterURL =
@@ -142,6 +160,8 @@ function InvestorDashboardScreen() {
       ? GRAPHAPIURL_MASTER_BSC
       : chainId?.toString() === MATIC_CHAIN_ID.toString()
       ? GRAPHAPIURL_MASTER_MATIC
+      : chainId.toString() === AVALANCHE_CHAIN_ID.toString()
+      ? GRAPHAPIURL_MASTER_AVALANCHE
       : GRAPHAPIURL_MASTER_ETHEREUM;
   const loadProjectData = async () => {
     setOwnedProjectsData(null);

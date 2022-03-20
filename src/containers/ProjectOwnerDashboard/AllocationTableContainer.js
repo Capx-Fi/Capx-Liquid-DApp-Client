@@ -6,16 +6,8 @@ import { useEffect, useState } from "react";
 import BigNumber from "bignumber.js";
 import { useWeb3React } from "@web3-react/core";
 import { convertToInternationalCurrencySystem } from "../../utils/convertToInternationalCurrencySystem";
-import {
-  EXPLORER_BSC,
-  EXPLORER_MATIC,
-  EXPLORER_ETHEREUM,
-  MATIC_CHAIN_ID,
-  BSC_CHAIN_ID,
-  ETHEREUM_CHAIN_ID,
-  AVALANCHE_CHAIN_ID,
-  EXPLORER_AVALANCHE,
-} from "../../constants/config";
+
+import { getExplorer } from "../../constants/getChainConfig";
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
 function AllocationTableContainer({
@@ -26,16 +18,7 @@ function AllocationTableContainer({
 }) {
   const [allocationTableDetails, setAllocationTableDetails] = useState([]);
   const { active, account, chainId } = useWeb3React();
-  const explorer =
-    chainId?.toString() === ETHEREUM_CHAIN_ID.toString()
-      ? EXPLORER_ETHEREUM
-      : chainId?.toString() === MATIC_CHAIN_ID.toString()
-      ? EXPLORER_MATIC
-      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
-      ? EXPLORER_AVALANCHE
-      : EXPLORER_BSC;
-
-  // const explorer = chainId?.to === BSC_CHAIN_ID.toString() ? EXPLORER_BSC : EXPLORER_MATIC;
+  const explorer = chainId && getExplorer(chainId);
   useEffect(() => {
     displayAllocationTableDetails();
   }, [

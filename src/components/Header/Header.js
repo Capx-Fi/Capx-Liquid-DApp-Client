@@ -9,6 +9,7 @@ import { injected } from "../../utils/connector";
 import ChooseDashboardModal from "../Modal/ChooseDashboardModal/ChooseDashboardModal";
 
 import { useEffect, useState } from "react";
+import { CHAIN_NAMES } from "../../constants/config";
 
 function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -26,10 +27,9 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
       await activate(injected);
     } catch (ex) {
       if (ex instanceof UnsupportedChainIdError) {
-        enqueueSnackbar(
-          "Please connect to the Ethereum / BSC / MATIC / AVALANCHE Mainnet Chain.",
-          { variant: "error" }
-        );
+        enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
+          variant: "error",
+        });
       }
     }
   }

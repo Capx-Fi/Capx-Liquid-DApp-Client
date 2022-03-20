@@ -22,41 +22,6 @@ import { CONTRACT_ABI_ERC20 } from "../../contracts/SampleERC20";
 import { withdrawWrappedTokens } from "../../utils/withdrawWrappedTokens";
 import { CONTRACT_ABI_CAPX } from "../../contracts/CapxController";
 import Web3 from "web3";
-import {
-  CONTRACT_ADDRESS_CAPX_BSC,
-  CONTRACT_ADDRESS_CAPX_MATIC,
-  CONTRACT_ADDRESS_CAPX_CONTROLLER_BSC,
-  CONTRACT_ADDRESS_CAPX_CONTROLLER_MATIC,
-  CONTRACT_ADDRESS_CAPX_CONTROLLER_ETHEREUM,
-  CONTRACT_ADDRESS_CAPX_ETHEREUM,
-  MATIC_CHAIN_ID,
-  BSC_CHAIN_ID,
-  ETHEREUM_CHAIN_ID,
-  AVALANCHE_CHAIN_ID,
-  CONTRACT_ADDRESS_CAPX_AVALANCHE,
-  CONTRACT_ADDRESS_CAPX_CONTROLLER_AVALANCHE,
-  EXPLORER_AVALANCHE,
-  GRAPHAPIURL_VESTING_AVALANCHE,
-  GRAPHAPIURL_WRAPPED_AVALANCHE,
-  GRAPHAPIURL_MASTER_AVALANCHE,
-} from "../../constants/config";
-import {
-  GRAPHAPIURL_MASTER_BSC,
-  GRAPHAPIURL_VESTING_BSC,
-  GRAPHAPIURL_WRAPPED_BSC,
-  GRAPHAPIURL_MASTER_MATIC,
-  GRAPHAPIURL_VESTING_MATIC,
-  GRAPHAPIURL_WRAPPED_MATIC,
-  GRAPHAPIURL_MASTER_ETHEREUM,
-  GRAPHAPIURL_VESTING_ETHEREUM,
-  GRAPHAPIURL_WRAPPED_ETHEREUM,
-} from "../../constants/config";
-
-import {
-  EXPLORER_BSC,
-  EXPLORER_MATIC,
-  EXPLORER_ETHEREUM,
-} from "../../constants/config";
 
 import NothingHereInvestorDashboard from "../NothingHere/NothingHereInvestorDashboard";
 import LoadingScreen from "../../containers/LoadingScreen";
@@ -69,6 +34,14 @@ import { transformInvestorData } from "../../utils/transformInvestorData";
 import { withdrawVestedTokens } from "../../utils/withdrawVestedTokens";
 import InvestorLoading from "./InvestorLoading";
 import { Tooltip, withStyles } from "@material-ui/core";
+import {
+  getContractAddress,
+  getContractAddressController,
+  getExplorer,
+  getMasterURL,
+  getVestingURL,
+  getWrappedURL,
+} from "../../constants/getChainConfig";
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
 
@@ -84,40 +57,16 @@ function InvestorDashboardScreen() {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [withdrawModalStatus, setWithdrawModalStatus] = useState("");
 
-  const contractAddress =
-    chainId?.toString() === ETHEREUM_CHAIN_ID.toString()
-      ? CONTRACT_ADDRESS_CAPX_ETHEREUM
-      : chainId?.toString() === MATIC_CHAIN_ID.toString()
-      ? CONTRACT_ADDRESS_CAPX_MATIC
-      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
-      ? CONTRACT_ADDRESS_CAPX_AVALANCHE
-      : CONTRACT_ADDRESS_CAPX_BSC;
+  const contractAddress = chainId && getContractAddress(chainId);
 
-  console.log(contractAddress, "ca");
-  console.log(chainId, "chainId");
-  console.log("bsc", BSC_CHAIN_ID);
-  console.log("matic", MATIC_CHAIN_ID);
   const contractAddressController =
-    chainId?.toString() === BSC_CHAIN_ID.toString()
-      ? CONTRACT_ADDRESS_CAPX_CONTROLLER_BSC
-      : chainId?.toString() === MATIC_CHAIN_ID.toString()
-      ? CONTRACT_ADDRESS_CAPX_CONTROLLER_MATIC
-      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
-      ? CONTRACT_ADDRESS_CAPX_CONTROLLER_AVALANCHE
-      : CONTRACT_ADDRESS_CAPX_CONTROLLER_ETHEREUM;
+    chainId && getContractAddressController(chainId);
 
   const capxContract = new web3.eth.Contract(
     CONTRACT_ABI_CAPX,
     contractAddress
   );
-  const explorer =
-    chainId?.toString() === ETHEREUM_CHAIN_ID.toString()
-      ? EXPLORER_ETHEREUM
-      : chainId?.toString() === MATIC_CHAIN_ID.toString()
-      ? EXPLORER_MATIC
-      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
-      ? EXPLORER_AVALANCHE
-      : EXPLORER_BSC;
+  const explorer = chainId && getExplorer(chainId);
 
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -137,32 +86,11 @@ function InvestorDashboardScreen() {
     },
   }))(Tooltip);
 
-  const vestingURL =
-    chainId?.toString() === BSC_CHAIN_ID.toString()
-      ? GRAPHAPIURL_VESTING_BSC
-      : chainId?.toString() === MATIC_CHAIN_ID.toString()
-      ? GRAPHAPIURL_VESTING_MATIC
-      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
-      ? GRAPHAPIURL_VESTING_AVALANCHE
-      : GRAPHAPIURL_VESTING_ETHEREUM;
+  const vestingURL = chainId && getVestingURL(chainId);
 
-  const wrappedURL =
-    chainId?.toString() === BSC_CHAIN_ID.toString()
-      ? GRAPHAPIURL_WRAPPED_BSC
-      : chainId?.toString() === MATIC_CHAIN_ID.toString()
-      ? GRAPHAPIURL_WRAPPED_MATIC
-      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
-      ? GRAPHAPIURL_WRAPPED_AVALANCHE
-      : GRAPHAPIURL_WRAPPED_ETHEREUM;
+  const wrappedURL = chainId && getWrappedURL(chainId);
 
-  const masterURL =
-    chainId?.toString() === BSC_CHAIN_ID.toString()
-      ? GRAPHAPIURL_MASTER_BSC
-      : chainId?.toString() === MATIC_CHAIN_ID.toString()
-      ? GRAPHAPIURL_MASTER_MATIC
-      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
-      ? GRAPHAPIURL_MASTER_AVALANCHE
-      : GRAPHAPIURL_MASTER_ETHEREUM;
+  const masterURL = chainId && getMasterURL(chainId);
   const loadProjectData = async () => {
     setOwnedProjectsData(null);
     if (account) {

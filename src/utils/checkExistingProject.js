@@ -1,14 +1,6 @@
 import { ApolloClient, InMemoryCache, gql, cache } from "@apollo/client";
 
-import {
-  GRAPHAPIURL_MASTER_BSC,
-  GRAPHAPIURL_MASTER_MATIC,
-  GRAPHAPIURL_MASTER_ETHEREUM,
-  MATIC_CHAIN_ID,
-  BSC_CHAIN_ID,
-  GRAPHAPIURL_MASTER_AVALANCHE,
-  AVALANCHE_CHAIN_ID,
-} from "../constants/config";
+import { getMasterURL } from "../constants/getChainConfig";
 
 export const checkExistingProject = async (
   address,
@@ -22,14 +14,7 @@ export const checkExistingProject = async (
     description: null,
     exists: false,
   };
-  const masterURL =
-    chainId?.toString() === BSC_CHAIN_ID.toString()
-      ? GRAPHAPIURL_MASTER_BSC
-      : chainId?.toString() === MATIC_CHAIN_ID.toString()
-      ? GRAPHAPIURL_MASTER_MATIC
-      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
-      ? GRAPHAPIURL_MASTER_AVALANCHE
-      : GRAPHAPIURL_MASTER_ETHEREUM;
+  const masterURL = getMasterURL(chainId);
   const client = new ApolloClient({
     uri: masterURL,
     cache: new InMemoryCache(),

@@ -15,26 +15,6 @@ import AllocationTableContainer from "../../containers/ProjectOwnerDashboard/All
 import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
 import { ApolloClient, InMemoryCache, gql, cache } from "@apollo/client";
 
-import {
-  GRAPHAPIURL,
-  GRAPHAPIURL_MASTER_BSC,
-  GRAPHAPIURL_VESTING_BSC,
-  GRAPHAPIURL_WRAPPED_BSC,
-  GRAPHAPIURL_MASTER_MATIC,
-  GRAPHAPIURL_VESTING_MATIC,
-  GRAPHAPIURL_WRAPPED_MATIC,
-  GRAPHAPIURL_MASTER_ETHEREUM,
-  GRAPHAPIURL_VESTING_ETHEREUM,
-  GRAPHAPIURL_WRAPPED_ETHEREUM,
-  MATIC_CHAIN_ID,
-  BSC_CHAIN_ID,
-  ETHEREUM_CHAIN_ID,
-  GRAPHAPIURL_MASTER_AVALANCHE,
-  AVALANCHE_CHAIN_ID,
-  GRAPHAPIURL_WRAPPED_AVALANCHE,
-  GRAPHAPIURL_VESTING_AVALANCHE,
-} from "../../constants/config";
-import BigNumber from "bignumber.js";
 import { useEffect, useState } from "react";
 import { fetchProjectDetails } from "../../utils/fetchProjectDetails";
 import { fetchOwnerID } from "../../utils/fetchOwnerID";
@@ -48,6 +28,11 @@ import LoadingScreen from "../../containers/LoadingScreen";
 import NothingHereProjectOwner from "../NothingHere/NothingHereProjectOwner";
 import { fetchVestedProjectDetails } from "../../utils/fetchVestedProjectDetails";
 import { fetchWrappedProjectDetails } from "../../utils/fetchWrappedProjectDetails";
+import {
+  getMasterURL,
+  getVestingURL,
+  getWrappedURL,
+} from "../../constants/getChainConfig";
 
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
@@ -92,32 +77,11 @@ function ProjectOwnerDashboardScreen() {
     }
   };
 
-  const vestingURL =
-    chainId?.toString() === BSC_CHAIN_ID.toString()
-      ? GRAPHAPIURL_VESTING_BSC
-      : chainId?.toString() === MATIC_CHAIN_ID.toString()
-      ? GRAPHAPIURL_VESTING_MATIC
-      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
-      ? GRAPHAPIURL_VESTING_AVALANCHE
-      : GRAPHAPIURL_VESTING_ETHEREUM;
+  const vestingURL = chainId && getVestingURL(chainId);
 
-  const wrappedURL =
-    chainId?.toString() === BSC_CHAIN_ID.toString()
-      ? GRAPHAPIURL_WRAPPED_BSC
-      : chainId?.toString() === MATIC_CHAIN_ID.toString()
-      ? GRAPHAPIURL_WRAPPED_MATIC
-      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
-      ? GRAPHAPIURL_WRAPPED_AVALANCHE
-      : GRAPHAPIURL_WRAPPED_ETHEREUM;
+  const wrappedURL = chainId && getWrappedURL(chainId);
 
-  const masterURL =
-    chainId?.toString() === BSC_CHAIN_ID.toString()
-      ? GRAPHAPIURL_MASTER_BSC
-      : chainId?.toString() === MATIC_CHAIN_ID.toString()
-      ? GRAPHAPIURL_MASTER_MATIC
-      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
-      ? GRAPHAPIURL_MASTER_AVALANCHE
-      : GRAPHAPIURL_MASTER_ETHEREUM;
+  const masterURL = chainId && getMasterURL(chainId);
   return (
     <>
       {!active ? (

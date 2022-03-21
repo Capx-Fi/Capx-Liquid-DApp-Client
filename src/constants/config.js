@@ -73,7 +73,7 @@ export const EXPLORER_FANTOM = process.env.REACT_APP_EXPLORER_FANTOM;
 export const MATIC_CHAIN_ID = process.env.REACT_APP_MATIC_CHAIN_ID;
 export const BSC_CHAIN_ID = process.env.REACT_APP_BSC_CHAIN_ID;
 export const ETHEREUM_CHAIN_ID = process.env.REACT_APP_ETHEREUM_CHAIN_ID;
-export const AVALANCHE_CHAIN_ID = process.env.REACT_APP_AVALANCHE_FANTOM;
+export const AVALANCHE_CHAIN_ID = process.env.REACT_APP_AVALANCHE_CHAIN_ID;
 export const FANTOM_CHAIN_ID = process.env.REACT_APP_FANTOM_CHAIN_ID;
 
 export const CHAIN_NAMES = process.env.REACT_APP_CHAIN_NAMES;

@@ -7,6 +7,8 @@ import ProjectOwnerDashboardScreen from "./pages/ProjectOwnerDashboard/ProjectOw
 import { useEffect, useState } from "react";
 import LoadingScreen from "./containers/LoadingScreen";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import newLanding from "./components/newLanding/newLanding";
+import newVestingSteps from "./components/newVestingSteps/newVestingSteps";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -29,6 +31,8 @@ function App() {
               path="/projectoverview"
               component={ProjectOwnerDashboardScreen}
             />
+            <Route exact path="/new" component={newLanding} />
+            <Route exact path="/newVest" component={newVestingSteps} />
             <Route path="*" component={PageNotFound} />
           </Switch>
         </Router>

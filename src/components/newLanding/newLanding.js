@@ -12,7 +12,7 @@ const newLanding = () => {
       <Header hiddenNav />
       <div className="maincontainer flex flex-col justify-center m-auto mt-auto">
         <div className="herocontainer px-12 py-12 rounded-3xl bg-opacity-70 text-white relative w-50v flex flex-col items-start">
-          <div className="upperbutton px-4 py-2.5 rounded-lg text-caption-2 leading-caption-2 font-semi-bold">
+          <div className="upperbutton px-4 py-2.5 rounded-lg text-caption-2 leading-caption-2 font-semibold">
             {"CAPX LIQUID"}
           </div>
           <div className="title text-title-1 tracking-tight leading-title-1 font-bold laptop:mt-4 w-10/12 text-left">

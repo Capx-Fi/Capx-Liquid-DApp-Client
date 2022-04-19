@@ -10,6 +10,8 @@ import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import newLanding from "./components/newLanding/newLanding";
 import newVestingSteps from "./components/newVestingSteps/newVestingSteps";
 import newProjectDetails from "./components/newProjectDetails/newProjectDetails";
+import newUploadVesting from "./components/newUploadVesting/newUploadVesting";
+import newSuccess from "./components/newSuccess/newSuccess";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -35,6 +37,8 @@ function App() {
             <Route exact path="/1" component={newLanding} />
             <Route exact path="/2" component={newVestingSteps} />
             <Route path="/3" component={newProjectDetails} />
+            <Route path="/4" component={newUploadVesting} />
+            <Route path="/5" component={newSuccess} />
             <Route path="*" component={PageNotFound} />
           </Switch>
         </Router>

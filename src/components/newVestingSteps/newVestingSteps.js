@@ -29,7 +29,7 @@ const newLanding = () => {
 
         <div className="side-container bg-opacity-70 text-white relative w-30v flex flex-col justify-between">
           <div className="download-template py-10 justify-self-start flex flex-col rounded-3xl items-center">
-            <div className="xldiv rounded-2xl py-6 text-center font-semi-bold text-caption-2 leading-caption-2">
+            <div className="xldiv rounded-2xl py-6 text-center font-semibold text-caption-2 leading-caption-2">
               <img src={DownloadIcon} alt="Download Icon" className='inline-block mx-auto'/>
               <div className='w-3/4 mx-auto mt-2'>Capx Vesting Sheet Template.xlsx</div>
             </div>

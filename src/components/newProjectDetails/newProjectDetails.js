@@ -50,8 +50,8 @@ function ProjectDetails () {
               label={`${"project description".toUpperCase()}`}
               multiline={true}
             />
-            <hr className="border-dark-200 mt-4 h-2" />
-            <div className="flex flex-row-reverse mt-6">
+            <hr className="border-dark-200 mt-20 h-2" />
+            <div className="flex flex-row-reverse mt-8">
               <Level3CTA text="Next" icon={true} />
             </div>
           </div>

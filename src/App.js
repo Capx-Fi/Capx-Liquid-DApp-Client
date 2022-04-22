@@ -39,10 +39,12 @@ function App() {
               component={ProjectOwnerDashboardScreen}
             />
             <Route exact path="/dashboard" component={ChooseDashboard} />  
-              
+
+            {/* Temporary Access   */}
             <Route path="/1" render={() => <VestingForm InnerForm={<ProjectDetails/>} />} />
             <Route path="/2" render={() => <VestingForm InnerForm={<UploadSheet />} />} />
             <Route path="/3" component={SuccessScreen} />
+              
             <Route path="*" component={PageNotFound} />
           </Switch>
         </Router>

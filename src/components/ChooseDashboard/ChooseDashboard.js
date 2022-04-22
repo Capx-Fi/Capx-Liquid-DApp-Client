@@ -1,15 +1,14 @@
 import React from 'react'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
-import NextIcon from '../../assets/next.svg'
 import investorIllustration from '../../assets/investor.png'
 import ownerIllustration from '../../assets/owner.png'
 import './ChooseDashboard.scss'
 import { Link } from 'react-router-dom'
 
-const newChoose = () => {
+const ChooseDashboard = () => {
   return (
-    <div className="newChoose h-screen flex bg-dark-400">
+    <div className="choose_dashboard h-screen flex bg-dark-400">
       <Header />
       <div className="maincontainer flex flex-col justify-center m-auto mt-auto">
         <div className="herocontainer overflow-hidden rounded-3xl bg-opacity-70 text-white relative w-50v flex flex-col items-start">
@@ -50,4 +49,4 @@ const newChoose = () => {
   )
 }
 
-export default newChoose
+export default ChooseDashboard

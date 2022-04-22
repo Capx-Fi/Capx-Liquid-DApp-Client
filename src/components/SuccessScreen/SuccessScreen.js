@@ -7,7 +7,7 @@ import "./SuccessScreen.scss";
 
 const newSuccess = () => {
   return (
-    <div className="newSuccess h-screen flex bg-dark-400">
+    <div className="success_screen h-screen flex bg-dark-400">
       <Header hiddenNav />
       <div className="maincontainer flex flex-col justify-center m-auto mt-auto">
         <div className="herocontainer overflow-hidden px-12 pt-14 pb-16 rounded-3xl bg-opacity-70 text-white relative w-50v flex flex-col items-start">

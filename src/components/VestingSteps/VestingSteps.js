@@ -5,9 +5,9 @@ import DownloadIcon from '../../assets/download.png'
 import NextIcon from '../../assets/next-black.svg'
 import './VestingSteps.scss'
 
-const newLanding = () => {
+const VestingSteps = () => {
   return (
-    <div className="newVestingScreen h-screen flex bg-dark-400">
+    <div className="vesting_steps h-screen flex bg-dark-400">
       <Header hiddenNav />
       <div className="maincontainer flex gap-x-14 justify-center items-strech m-auto mt-auto">
         <div className="herocontainer px-9 py-12 rounded-3xl bg-opacity-70 text-white relative w-30v flex flex-col items-start">
@@ -56,4 +56,4 @@ const newLanding = () => {
   );
 }
 
-export default newLanding
+export default VestingSteps

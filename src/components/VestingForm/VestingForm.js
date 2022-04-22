@@ -2,9 +2,9 @@ import React from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import "../../translations/i18n";
-import "./VestingForm.scss";
 import CapxLogo from "../../assets/capxliquid-logo.svg";
 import BackIcon from "../../assets/previous-cyan.png";
+import "./VestingForm.scss";
 
 function VestingForm({InnerForm}) {
   return (

@@ -1,9 +1,9 @@
 import React from "react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import NextIcon from "../../assets/next.svg";
 import CapxLiquidDiamond from "../../assets/CapxLiquidDiamond.png";
-import "./newSuccess.scss";
+import "./SuccessScreen.scss";
 
 const newSuccess = () => {
   return (

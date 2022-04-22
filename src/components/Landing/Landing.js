@@ -1,10 +1,11 @@
 import React from 'react'
-import Header from '../../components/Header/Header'
-import Footer from '../../components/Footer/Footer'
+import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 import NextIcon from "../../assets/next.svg";
 import NextIconBlack from "../../assets/next-black.svg";
 import CapxCoinIllustration from "../../assets/CapxCoinIllustration.png";
-import "./newLanding.scss"
+import { Link } from 'react-router-dom'
+import "./Landing.scss"
 
 const newLanding = () => {
   return (
@@ -22,14 +23,16 @@ const newLanding = () => {
             {"Start vesting tokens today"}
           </div>
           <div className="herocontainer_button rounded-xl mt-8 justify-center items-center flex px-5 py-4 z-10 cursor-pointer">
-            <div className="button_text text-white text-subheading leading-subheading font-medium">
-              {"Get Started"}
-              <img
-                src={NextIcon}
-                alt="Next Icon"
-                className="inline-block w-5 ml-3 mr-2"
-              ></img>
-            </div>
+            <Link to="/vesting">
+              <div className="button_text text-white text-subheading leading-subheading font-medium">
+                {"Get Started"}
+                <img
+                  src={NextIcon}
+                  alt="Next Icon"
+                  className="inline-block w-5 ml-3 mr-2"
+                ></img>
+              </div>
+            </Link>
           </div>
           <img
             src={CapxCoinIllustration}
@@ -39,17 +42,21 @@ const newLanding = () => {
         </div>
         <div className="lowercontainer mt-10 px-12 py-1 rounded-2xl bg-opacity-70 text-white relative w-40v flex">
           <div className="flex flex-row justify-between items-center text-paragraph-1 leading-paragraph-1 w-full font-medium">
-            <div className='flex items-center'><div>{"Already Vested? Check out Dashboard"}</div></div>
+            <div className="flex items-center">
+              <div>{"Already Vested? Check out Dashboard"}</div>
+            </div>
             <div>
               <div className="lowercontainer_button rounded-md justify-center items-center flex my-3 px-1 py-1 w-40 cursor-pointer">
-                <div className="button_text flex text-black text-caption-3 leading-text-caption-3 font-bold">
-                  <div className="flex items-center">{"DASHBOARD"}</div>
-                  <img
-                    src={NextIconBlack}
-                    alt="Next Icon"
-                    className="inline-block w-5 ml-3 mr-2"
-                  ></img>
-                </div>
+                <Link to="/dashboard">
+                  <div className="button_text flex text-black text-caption-3 leading-text-caption-3 font-bold">
+                    <div className="flex items-center">{"DASHBOARD"}</div>
+                    <img
+                      src={NextIconBlack}
+                      alt="Next Icon"
+                      className="inline-block w-5 ml-3 mr-2"
+                    ></img>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>

@@ -1,9 +1,9 @@
 import React from 'react'
-import Header from '../../components/Header/Header'
-import Footer from '../../components/Footer/Footer'
+import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 import DownloadIcon from '../../assets/download.png'
 import NextIcon from '../../assets/next-black.svg'
-import './newVestingSteps.scss'
+import './VestingSteps.scss'
 
 const newLanding = () => {
   return (

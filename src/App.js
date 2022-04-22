@@ -7,11 +7,15 @@ import ProjectOwnerDashboardScreen from "./pages/ProjectOwnerDashboard/ProjectOw
 import { useEffect, useState } from "react";
 import LoadingScreen from "./containers/LoadingScreen";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
-import newLanding from "./components/newLanding/newLanding";
-import newVestingSteps from "./components/newVestingSteps/newVestingSteps";
-import newProjectDetails from "./components/newProjectDetails/newProjectDetails";
-import newUploadVesting from "./components/newUploadVesting/newUploadVesting";
-import newSuccess from "./components/newSuccess/newSuccess";
+
+import Landing from "./components/Landing/Landing";
+import ChooseDashboard from "./components/ChooseDashboard/ChooseDashboard";
+
+import SuccessScreen from "./components/SuccessScreen/SuccessScreen";
+import VestingForm from "./components/VestingForm/VestingForm";
+import ProjectDetails from "./components/VestingForm/ProjectDetails/ProjectDetails";
+import UploadSheet from "./components/VestingForm/UploadSheet/UploadSheet";
+
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -26,7 +30,7 @@ function App() {
       ) : (
         <Router>
           <Switch>
-            <Route exact path="/" component={VestingScreen} />
+            <Route exact path="/" component={Landing} />
             <Route exact path="/vesting" component={VestingScreen} />
             <Route exact path="/investor" component={InvestorDashboardScreen} />
             <Route
@@ -34,11 +38,11 @@ function App() {
               path="/projectoverview"
               component={ProjectOwnerDashboardScreen}
             />
-            <Route exact path="/1" component={newLanding} />
-            <Route exact path="/2" component={newVestingSteps} />
-            <Route path="/3" component={newProjectDetails} />
-            <Route path="/4" component={newUploadVesting} />
-            <Route path="/5" component={newSuccess} />
+            <Route exact path="/dashboard" component={ChooseDashboard} />  
+              
+            <Route path="/1" render={() => <VestingForm InnerForm={<ProjectDetails/>} />} />
+            <Route path="/2" render={() => <VestingForm InnerForm={<UploadSheet />} />} />
+            <Route path="/3" component={SuccessScreen} />
             <Route path="*" component={PageNotFound} />
           </Switch>
         </Router>

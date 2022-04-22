@@ -15,10 +15,14 @@ import Review from "../../containers/VestingScreen/Review";
 import Errors from "../../containers/VestingScreen/Errors";
 import LockAndApprove from "../../containers/VestingScreen/LockAndApprove";
 import VestingOverview from "../../components/Modal/VestingOverview/VestingOverview";
+
+
 import SuccessModal from "../../components/Modal/SuccessModal/SuccessModal";
 import { useWeb3React } from "@web3-react/core";
 import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
 import { useHistory } from "react-router";
+
+import VestingSteps from "../../components/VestingSteps/VestingSteps";
 
 function VestingScreen() {
   const { active, account, chainId } = useWeb3React();
@@ -114,7 +118,7 @@ function VestingScreen() {
       {!active ? (
         <MetamaskModal />
       ) : showSteps ? (
-        <VestingOverview setShowSteps={setShowSteps} />
+        <VestingSteps/>
       ) : step === 7 ? (
         <SuccessModal />
       ) : (

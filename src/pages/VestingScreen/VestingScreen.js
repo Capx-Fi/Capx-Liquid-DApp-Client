@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ContractAddress from "../../containers/VestingScreen/ContractAddress";
-import ProjectDetails from "../../containers/VestingScreen/ProjectDetails";
+
 import "./VestingScreen.scss";
 
 import CapxLogo from "../../assets/capxliquid-logo.svg";
@@ -9,7 +8,6 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 
 import BackIcon from "../../assets/previous-cyan.png";
-import DownloadTemplate from "../../containers/VestingScreen/DownloadTemplate";
 import UploadTemplate from "../../containers/VestingScreen/UploadTemplate";
 import Review from "../../containers/VestingScreen/Review";
 import Errors from "../../containers/VestingScreen/Errors";
@@ -18,7 +16,13 @@ import VestingOverview from "../../components/Modal/VestingOverview/VestingOverv
 import SuccessModal from "../../components/Modal/SuccessModal/SuccessModal";
 import { useWeb3React } from "@web3-react/core";
 import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
+
+import VestingSteps from "../../components/VestingSteps/VestingSteps";
+import ProjectDetails2 from "../../components/VestingForm/ProjectDetails/ProjectDetails";
+import UploadSheet from "../../components/VestingForm/UploadSheet/UploadSheet";
+
 import { useHistory } from "react-router";
+
 
 function VestingScreen() {
   const { active, account, chainId } = useWeb3React();
@@ -114,8 +118,8 @@ function VestingScreen() {
       {!active ? (
         <MetamaskModal />
       ) : showSteps ? (
-        <VestingOverview setShowSteps={setShowSteps} />
-      ) : step === 7 ? (
+        <VestingSteps setShowSteps={setShowSteps} />
+      ) : step === 4 ? (
         <SuccessModal />
       ) : (
         <div
@@ -136,11 +140,12 @@ function VestingScreen() {
               />
             </div>
           </div>
+
           <div className="left_div_psuedo"></div>
           <div className="md:w-77p w-screen bg-dark-400">
             <div
               className={` ${
-                step === 5 ? "vesting_container_table" : "vesting_container"
+                step === 3 ? "vesting_container_table" : "vesting_container"
               } `}
             >
               <div className="flex justify-between pt-4 text-blizzard items-baseline text-caption-3 leading-caption-3 laptop:text-paragraph-2 laptop:leading-paragraph-2">
@@ -160,13 +165,13 @@ function VestingScreen() {
                   <div>Back</div>
                 </div>
                 <div
-                  className={` ${(step === -1 || step === 7) && "invisible"}`}
+                  className={` ${(step === -1 || step === 4) && "invisible"}`}
                 >
-                  {step}/6
+                  {step}/3
                 </div>
               </div>
               {step === 1 && (
-                <ContractAddress
+                <ProjectDetails2
                   contractAddress={contractDetails.contractAddress}
                   setContractAddress={setContractAddress}
                   setStep={setStep}
@@ -175,23 +180,14 @@ function VestingScreen() {
                   projectExists={projectExists}
                   setProjectExists={setProjectExists}
                   metamaskAccount={account}
-                  setProjectName={setProjectTitle}
-                  setProjectDescription={setProjectDescription}
-                />
-              )}
-              {step === 2 && (
-                <ProjectDetails
                   projectName={contractDetails.projectTitle}
                   projectDescription={contractDetails.projectDescription}
                   setProjectName={setProjectTitle}
                   setProjectDescription={setProjectDescription}
-                  projectExists={projectExists}
-                  setStep={setStep}
                   setContractDetails={setContractDetails}
                 />
               )}
-              {step === 3 && <DownloadTemplate setStep={setStep} />}
-              {step === 4 && (
+              {step === 2 && (
                 <UploadTemplate
                   vestingArray={contractDetails.vestingArray}
                   error={contractDetails.error}
@@ -203,20 +199,14 @@ function VestingScreen() {
                   tokenDetails={tokenDetails}
                 />
               )}
-              {step === 5 && contractDetails.vestingArray.length > 0 && (
+              {step === 3 && contractDetails.vestingArray.length > 0 && (
                 <Review
+                  setStep={setStep}
                   vestingArray={contractDetails.vestingArray}
                   setVestingDataSellable={setVestingDataSellable}
                   setVestingDataWrapped={setVestingDataWrapped}
-                  setStep={setStep}
                   tokenTicker={tokenDetails.ticker}
-                />
-              )}
-              {step === 6 && (
-                <LockAndApprove
-                  setStep={setStep}
                   uploadedFile={contractDetails.uploadedFile}
-                  vestingArray={contractDetails.vestingArray}
                   tokenDetails={tokenDetails}
                   contractDetails={contractDetails}
                   metamaskAccount={account}

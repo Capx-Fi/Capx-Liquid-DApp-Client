@@ -89,10 +89,10 @@ function ApproveModal({
             />
             <div className="text-white text-center font-bold tablet:font-semibold laptop:text-left text-paragraph-2 leading-paragraph-2 tablet:text-heading-2 tablet:leading-heading-2 laptop:text-heading-1 laptop:leading-heading-1 w-8/12 laptop:w-6/12">
               {approveModalStatus === "success"
-                ? "Approval successful! You can now vest your tokens."
+                ? "Your tokens are now successfully approved"
                 : approveModalStatus === "failure"
-                ? "Oops! We have encountered an error. Please try again!"
-                : "The tokens are being approved!"}
+                ? "Oops! We have couldn't approve your tokens"
+                : "Your tokens are being approved"}
             </div>
           </div>
           <hr className="border-dark-200 mt-2 h-2"></hr>

@@ -73,10 +73,10 @@ function VestModal({ open, setOpen, vestModalStatus }) {
             />
             <div className="text-white text-center laptop:text-left text-paragraph-2 leading-paragraph-2 tablet:text-heading-1 tablet:leading-heading-1 font-semibold w-8/12 laptop:w-6/12">
               {vestModalStatus === "success"
-                ? "Tokens successfully vested!"
+                ? "Your tokens are now successfully vested"
                 : vestModalStatus === "failure"
-                ? "Oops! We have encountered an error. Please try again!"
-                : "Almost there...Vesting your tokens!"}
+                ? "Oops! We couldn't vest your tokens"
+                : "Your tokens are being vested"}
             </div>
           </div>
           <hr className="border-dark-200 mt-2 mb-4 h-2"></hr>

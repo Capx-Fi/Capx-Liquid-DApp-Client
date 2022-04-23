@@ -36,6 +36,10 @@ function VestingScreen() {
   const [vestModalOpen, setVestModalOpen] = useState(false);
   const history = useHistory();
 
+  if (step === 0) {
+    history.push("/");
+  }
+
   const [contractDetails, setContractDetails] = useState({
     contractAddress: null,
     projectTitle: "",
@@ -148,10 +152,10 @@ function VestingScreen() {
                 step === 3 ? "vesting_container_table" : "vesting_container"
               } `}
             >
-              <div className="flex justify-between pt-4 text-blizzard items-baseline text-caption-3 leading-caption-3 laptop:text-paragraph-2 laptop:leading-paragraph-2">
+              <div className="border-b-2 border-greyborder pb-4 flex justify-between pt-4 text-blizzard items-baseline text-caption-3 leading-caption-3 laptop:text-paragraph-2 laptop:leading-paragraph-2">
                 <div
                   className={`flex flex-row cursor-pointer items-baseline ${
-                    (step === 1 || step === -1) && "invisible"
+                    (step === -1) && "invisible"
                   }`}
                   onClick={() => setStep(step - 1)}
                 >
@@ -225,8 +229,8 @@ function VestingScreen() {
                 />
               )}
             </div>
-            <Footer vesting={true} />
           </div>
+          <Footer vesting={true} />
         </div>
       )}
     </>

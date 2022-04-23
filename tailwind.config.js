@@ -14,6 +14,7 @@ module.exports = {
         fuscia: "#DD51C6",
         cyan: "#19EBD2",
         azure: "#365CF0",
+        greyborder: "#2a383c",
         "error-color": {
           100: "#FBDAE1",
           200: "#F27D95",

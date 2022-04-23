@@ -121,7 +121,7 @@ export const lockTokens = async (
       setVestModalStatus("success");
       enqueueSnackbar("Transaction Successful", { variant: "success" });
       setTimeout(() => {
-        setStep(7);
+        setStep(4);
       }, 2500);
     } else {
       setVestModalStatus("failure");

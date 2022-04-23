@@ -8,14 +8,24 @@ import ReviewTableContainer from "./ReviewTableContainer";
 import { useTranslation } from "react-i18next";
 import "../../translations/i18n";
 import "./VestingScreen.scss";
+import "./LockAndApprove";
+import LockAndApprove from "./LockAndApprove";
 
 function Review({
   setStep,
   vestingArray,
-  tokenTicker,
   setVestingDataSellable,
   setVestingDataWrapped,
-
+  tokenTicker,
+  uploadedFile,
+  tokenDetails,
+  contractDetails,
+  metamaskAccount,
+  projectExists,
+  approveModalOpen,
+  setApproveModalOpen,
+  vestModalOpen,
+  setVestModalOpen
 }) {
   const { t } = useTranslation();
   return (
@@ -38,9 +48,19 @@ function Review({
         />
       </div>
       <hr className="border-dark-200 mt-10 h-2"></hr>
-      <div className="flex flex-row-reverse mt-8">
-        <Level3CTA text="Next" icon={true} onClick={() => setStep(6)} />
-      </div>
+      <LockAndApprove 
+        setStep={setStep}
+        uploadedFile={uploadedFile}
+        vestingArray={vestingArray}
+        tokenDetails={tokenDetails}
+        contractDetails={contractDetails}
+        metamaskAccount={metamaskAccount}
+        projectExists={projectExists}
+        approveModalOpen={approveModalOpen}
+        setApproveModalOpen={setApproveModalOpen}
+        vestModalOpen={vestModalOpen}
+        setVestModalOpen={setVestModalOpen}
+      />
     </div>
   );
 }

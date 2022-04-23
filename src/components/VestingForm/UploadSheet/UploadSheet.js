@@ -1,26 +1,24 @@
 import React from "react";
-import Level3CTA from "../../components/CTA/Level3CTA";
-import UploadTemplateBox from "../../components/UploadTemplateBox";
+import UploadIcon from "../../../assets/upload.png";
+import Level3CTA from "../../CTA/Level3CTA";
 
 import Web3 from "web3";
-
 import { useDropzone } from "react-dropzone";
-import "./VestingScreen.scss";
-
 import XLSX from "xlsx";
-import { parseSheetObj } from "../../utils/parseSheetObject";
-import { verifyVestingData } from "../../utils/verifyVestingData";
-import { useTranslation } from "react-i18next";
-import "../../translations/i18n";
-function UploadTemplate({
+import { parseSheetObj } from "../../../utils/parseSheetObject";
+import { verifyVestingData } from "../../../utils/verifyVestingData";
+
+import "./UploadSheet.scss"
+
+const UploadSheet = (
   vestingArray,
   error,
   setStep,
   setVestingData,
   setUploadErrors,
   uploadedFile,
-  tokenDetails,
-}) {
+  tokenDetails
+) => {
   const SheetJSFT = ["xlsx", "xlsb", "xlsm", "xls", "xml", "csv", "txt"]
     .map((x) => `.${x}`)
     .join(",");
@@ -29,7 +27,6 @@ function UploadTemplate({
     "https://rinkeby.infura.io/v3/6351bb49adde41ec86bd60b451b9f1c5"
   );
 
-  const { t } = useTranslation();
   const onDrop = async (acceptedFiles) => {
     acceptedFiles.forEach((file) => {
       const reader = new FileReader();
@@ -68,27 +65,28 @@ function UploadTemplate({
   });
 
   return (
-    <div className="pt-10 laptop:pt-14">
-      <p className="vesting_pages_title">{t("upload_vesting_sheet")}</p>
-      <UploadTemplateBox
-        getInputProps={getInputProps}
-        getRootProps={getRootProps}
-        acceptedFiles={acceptedFiles}
-        uploadedFile={uploadedFile}
-        vestingArray={vestingArray}
-        error={error}
-      />
-      <hr className="border-dark-200 mt-10 h-2"></hr>
+    <div className="upload_sheet_form pt-10">
+      <p className="font-bold mb-12 leading-heading-1 text-54px">
+        {"Upload Vesting Sheet"}
+      </p>
+      <div className="upload-message rounded-2xl pl-6 pr-8 py-4 flex justify-between">
+        <div className="p-4 flex flex-col justify-center">
+          <img
+            src={UploadIcon}
+            className="my-auto inline-block"
+            alt="Upload Icon"
+          ></img>
+        </div>
+        <div className="p-4 text-paragraph-2 leading-paragraph-2">
+          Drag & Drop your vesting sheet or Browse. Supported file type - .xlsx
+        </div>
+      </div>
+      <hr className="border-dark-200 mt-20 h-2" />
       <div className="flex flex-row-reverse mt-8">
-        <Level3CTA
-          text={error ? "View Errors" : "Next"}
-          icon={true}
-          disabled={!uploadedFile}
-          onClick={() => setStep(error ? -1 : 3)}
-        />
+        <Level3CTA text="Next" icon={true} />
       </div>
     </div>
   );
-}
+};
 
-export default UploadTemplate;
+export default UploadSheet;

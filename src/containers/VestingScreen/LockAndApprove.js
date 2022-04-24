@@ -33,6 +33,8 @@ function LockAndApprove({
   setApproveModalOpen,
   vestModalOpen,
   setVestModalOpen,
+  totalAddresses,
+  uniqueAddresses
 }) {
   const web3 = new Web3(Web3.givenProvider);
   const { chainId } = useWeb3React();
@@ -131,7 +133,7 @@ function LockAndApprove({
     setButtonClicked(false);
   };
   return (
-    <div className="pt-10">
+    <div className="">
       <ApproveModal
         open={approveModalOpen}
         setOpen={setApproveModalOpen}
@@ -145,10 +147,10 @@ function LockAndApprove({
         setVestModalStatus={setVestModalStatus}
       />
 
-      <div className="flex flex-row justify-between mt-8">
+      <div className="flex flex-row justify-between mt-8 text-greylabel2">
         <div className="flex flex-col">
-          <div>Number of unique addresses: 10</div>
-          <div>Total addresses: 22</div>
+          <div>Number of unique addresses: {uniqueAddresses}</div>
+          <div>Total addresses: {totalAddresses}</div>
         </div>
         <div className="flex flex-row gap-x-6">
           <Level3CTA

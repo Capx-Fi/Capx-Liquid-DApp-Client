@@ -11,15 +11,13 @@ import BackIcon from "../../assets/previous-cyan.png";
 import UploadTemplate from "../../containers/VestingScreen/UploadTemplate";
 import Review from "../../containers/VestingScreen/Review";
 import Errors from "../../containers/VestingScreen/Errors";
-import LockAndApprove from "../../containers/VestingScreen/LockAndApprove";
-import VestingOverview from "../../components/Modal/VestingOverview/VestingOverview";
+
 import SuccessModal from "../../components/Modal/SuccessModal/SuccessModal";
 import { useWeb3React } from "@web3-react/core";
 import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
 
 import VestingSteps from "../../components/VestingSteps/VestingSteps";
 import ProjectDetails2 from "../../components/VestingForm/ProjectDetails/ProjectDetails";
-import UploadSheet from "../../components/VestingForm/UploadSheet/UploadSheet";
 
 import { useHistory } from "react-router";
 
@@ -149,7 +147,7 @@ function VestingScreen() {
           <div className="md:w-77p w-screen bg-dark-400">
             <div
               className={` ${
-                step === 3 ? "vesting_container_table" : "vesting_container"
+                step === 3 ? "vesting_container_table" : (step === 2 ? "upload_container" : "vesting_container")
               } `}
             >
               <div className="border-b-2 border-greyborder pb-4 flex justify-between pt-4 text-blizzard items-baseline text-caption-3 leading-caption-3 laptop:text-paragraph-2 laptop:leading-paragraph-2">

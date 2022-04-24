@@ -31,7 +31,7 @@ export const TRANSLATIONS_EN = {
   total_amount: "Total Amount",
   lock_vesting_sheet: "Lock Vesting Sheet",
   approve: "Approve",
-  lock_token: "Lock Token",
+  lock_token: "Lock ETT",
   page_not_found: "Sorry, this page isn't available.",
   nothing_here: "Sorry, there is nothing here.",
 };

@@ -28,6 +28,8 @@ function Review({
   setVestModalOpen
 }) {
   const { t } = useTranslation();
+  console.log(vestingArray, 'VESTING ARRAY!!')
+
   return (
     <div className="pt-10 reviewDiv">
       <div className="flex flex-row justify-between items-center">
@@ -39,7 +41,7 @@ function Review({
           </div>
         </div>
       </div>
-
+      <div className="mb-8">Please approve your tokens before locking them</div>
       <div className="bg-dark-300  h-fit-content rounded-xl flex-grow overflow-auto w-full">
         <ReviewTableContainer
           reviewData={vestingArray}

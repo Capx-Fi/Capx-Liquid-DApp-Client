@@ -144,61 +144,25 @@ function LockAndApprove({
         vestModalStatus={vestModalStatus}
         setVestModalStatus={setVestModalStatus}
       />
-      <p className="vesting_pages_title">{t("lock_vesting_sheet")}</p>
 
-      <div
-        className={`tablet:w-max  tablet:px-8 tablet:py-6 px-4 py-5 rounded-lg tablet:rounded-xl flex flex-row ring-1 bg-dark-300 ring-success-color-300`}
-      >
-        <div>
-          <img
-            alt="upload vesting sheet"
-            src={LockIcon}
-            className="w-6 tablet:w-6 desktop:w-8 mr-6 tablet: pt-1 "
+      <div className="flex flex-row justify-between mt-8">
+        <div className="flex flex-col">
+          <div>Number of unique addresses: 10</div>
+          <div>Total addresses: 22</div>
+        </div>
+        <div className="flex flex-row gap-x-6">
+          <Level3CTA
+            text={`${t("approve")}`}
+            icon={true}
+            disabled={tokenApproval || buttonClicked}
+            onClick={() => TryApproveToken()}
           />
-        </div>
-        <div className="whitespace-normal desktop:text-paragraph-2 tablet:text-caption-1 text-caption-2 flex flex-col mr-5 mt-1">
-          {uploadedFile.name}
-        </div>
-
-        <div className="hidden tablet:flex">
-          {checkTokenApproval && (
-            <Level3CTA
-              text={tokenApproval ? `${t("lock_token")}` : `${t("approve")}`}
-              icon={true}
-              disabled={buttonClicked}
-              onClick={() =>
-                tokenApproval ? TryLockToken() : TryApproveToken()
-              }
-            />
-          )}
-        </div>
-      </div>
-
-      <hr className="border-dark-200 mt-10 h-2"></hr>
-      <div className="flex tablet:hidden mt-3">
-        <Level3CTA
-          text={tokenApproval ? `${t("lock_token")}` : `${t("approve")}`}
-          icon={true}
-          disabled={buttonClicked}
-          onClick={() => (tokenApproval ? TryLockToken() : TryApproveToken())}
-        />
-      </div>
-      <div className="flex flex-row mt-8">
-        <div
-          className={`tablet:w-max cursor-pointer tablet:px-8 tablet:py-6 px-4 py-1 text-success-color-300 rounded-xl flex flex-row bg-success-color-200 bg-opacity-10  `}
-        >
-          <div>
-            <img
-              alt="upload vesting sheet"
-              src={InfoIcon}
-              className="w-5 tablet:w-5 desktop:w-6 mr-6 tablet: pt-1 "
-            />
-          </div>
-          <p className="whitespace-normal desktop:text-paragraph-2 tablet:text-caption-1 text-caption-2">
-            You’re locking {toPlainString(totalVested(vestingArray))} tokens
-            with {vestingArray.length}{" "}
-            {vestingArray.length > 1 ? "addresses" : "address"}
-          </p>
+          <Level3CTA
+            text={`${t("lock_token")}`}
+            icon={true}
+            disabled={!tokenApproval || buttonClicked}
+            onClick={() => (TryLockToken())}
+          />
         </div>
       </div>
     </div>

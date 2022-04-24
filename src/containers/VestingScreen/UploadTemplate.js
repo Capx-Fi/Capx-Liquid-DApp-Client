@@ -68,8 +68,8 @@ function UploadTemplate({
   });
 
   return (
-    <div className="pt-10 laptop:pt-14">
-      <p className="vesting_pages_title">{t("upload_vesting_sheet")}</p>
+    <div className="pt-14">
+      <p className="font-bold mb-12 leading-heading-1 text-54px px-4">{t("upload_vesting_sheet")}</p>
       <UploadTemplateBox
         getInputProps={getInputProps}
         getRootProps={getRootProps}
@@ -78,7 +78,7 @@ function UploadTemplate({
         vestingArray={vestingArray}
         error={error}
       />
-      <hr className="border-dark-200 mt-10 h-2"></hr>
+      <hr className="border-dark-200 mt-16 h-2"></hr>
       <div className="flex flex-row-reverse mt-8">
         <Level3CTA
           text={error ? "View Errors" : "Next"}

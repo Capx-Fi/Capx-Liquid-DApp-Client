@@ -7,6 +7,7 @@ import ProjectOwnerDashboardScreen from "./pages/ProjectOwnerDashboard/ProjectOw
 import { useEffect, useState } from "react";
 import LoadingScreen from "./containers/LoadingScreen";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import Landing from "./components/Landing/Landing";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -21,7 +22,7 @@ function App() {
       ) : (
         <Router>
           <Switch>
-            <Route exact path="/" component={HomeScreen} />
+            <Route exact path="/" component={Landing} />
             <Route exact path="/vesting" component={VestingScreen} />
             <Route exact path="/investor" component={InvestorDashboardScreen} />
             <Route

@@ -1,0 +1,20 @@
+.landing_screen{
+    .herocontainer{
+        background: radial-gradient(143.33% 143.33% at 82.41% -4.96%, rgba(132, 214, 164, 0.3) 0%, rgba(18, 28, 32, 0.3) 100%);
+        .herocontainer_button{
+            background: linear-gradient(180deg, #97D10A -8.65%, #206300 100%);;
+        }
+
+        .upperbutton{
+            background: radial-gradient(143.33% 143.33% at 82.41% -4.96%, rgba(132, 214, 164, 0.3) 0%, rgba(18, 28, 32, 0.3) 100%);        
+        }
+    }
+
+    .lowercontainer{
+        background: linear-gradient(270.08deg, rgba(132, 214, 164, 0.3) 0.02%, rgba(18, 28, 32, 0.3) 117.26%);
+
+        .lowercontainer_button{
+            background: linear-gradient(356.23deg, #96CF03 -65.8%, #F1FFF6 89%);
+        }
+    }
+}

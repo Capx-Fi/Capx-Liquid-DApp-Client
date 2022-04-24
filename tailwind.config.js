@@ -46,6 +46,8 @@ module.exports = {
       textColor: {
         blizzard: "#19EBD2",
         greenlabel: "#6348CA",
+        greylabel: "#A6A6A6",
+        greylabel2 : "#B3B3B3",
       },
       backgroundImage: {
         vesting: "url('assets/vesting-bg.png')",

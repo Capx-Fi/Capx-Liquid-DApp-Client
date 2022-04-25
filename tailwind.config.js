@@ -69,11 +69,13 @@ module.exports = {
         "58px": "58px",
         "50px": "50px",
         "60px": "60px",
+        "40px": "40px"
       },
       lineHeight: {
         "title-1": "90px",
         "display-1": "82px",
         "display-2": "72px",
+        "lh-64": "64px",
         "lh-54": "54px",
         "heading-1": "46px",
         "heading-2": "34px",
@@ -109,6 +111,7 @@ module.exports = {
         "40v": "40vw",
         "42v": "42vw",
         "45v": "45vw",
+        '47v': '47vw',
         "70v": "70vw",
         "62v": "62vw",
         "80v": "80vw",
@@ -166,7 +169,8 @@ module.exports = {
       screens: {
         tablet: "768px",
         laptop: "1024px",
-        desktop: "1445px",
+        desktop: "1440px",
+        twok: "1920px",
       },
     },
   },

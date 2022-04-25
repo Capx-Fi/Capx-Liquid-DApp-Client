@@ -12,7 +12,7 @@ const VestingSteps = ({setShowSteps}) => {
     <div className="vesting_steps h-screen flex bg-dark-400">
       <Header hiddenNav />
       <div className="maincontainer flex gap-x-14 justify-center items-strech m-auto mt-auto">
-        <div className="herocontainer px-9 py-12 rounded-3xl bg-opacity-70 text-white relative w-30v flex flex-col items-start">
+        <div className="herocontainer px-9 py-12 rounded-3xl bg-opacity-70 text-white relative desktop:w-47v twok:w-30v flex flex-col items-start">
           <div className="title text-5xl font-bold leading-lh-54 tracking-tight mt-2 w-10/12 text-left">
             {"Vest Tokens in 3 simple steps"}
           </div>
@@ -29,7 +29,7 @@ const VestingSteps = ({setShowSteps}) => {
           </div>
         </div>
 
-        <div className="side-container bg-opacity-70 text-white relative w-30v flex flex-col justify-between">
+        <div className="side-container bg-opacity-70 text-white relative desktop:w-40v twok:w-30v flex flex-col justify-between">
           <div className="download-template py-10 justify-self-start flex flex-col rounded-3xl items-center">
             <a download href="https://capx-resources.s3.amazonaws.com/vesting-sheet-template.xlsx">
               <div className="xldiv rounded-2xl py-6 text-center font-semibold text-caption-2 leading-caption-2">

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Level3CTA from "../../components/CTA/Level3CTA";
 
-import LockIcon from "../../assets/lock.png";
-import InfoIcon from "../../assets/Info.png";
+import LockIcon from "../../assets/lock-current.svg";
+import CheckIcon from "../../assets/check-current.svg";
 import { totalVested } from "../../utils/totalVested";
 import { approveToken } from "../../utils/approveTokens";
 import { lockTokens } from "../../utils/lockTokens";
@@ -34,7 +34,7 @@ function LockAndApprove({
   vestModalOpen,
   setVestModalOpen,
   totalAddresses,
-  uniqueAddresses
+  uniqueAddresses,
 }) {
   const web3 = new Web3(Web3.givenProvider);
   const { chainId } = useWeb3React();
@@ -133,7 +133,7 @@ function LockAndApprove({
     setButtonClicked(false);
   };
   return (
-    <div className="">
+    <div className="lock_approve">
       <ApproveModal
         open={approveModalOpen}
         setOpen={setApproveModalOpen}
@@ -153,18 +153,47 @@ function LockAndApprove({
           <div>Total addresses: {totalAddresses}</div>
         </div>
         <div className="flex flex-row gap-x-6">
-          <Level3CTA
-            text={`${t("approve")}`}
-            icon={true}
-            disabled={tokenApproval || buttonClicked}
-            onClick={() => TryApproveToken()}
-          />
-          <Level3CTA
-            text={`${t("lock_token")}`}
-            icon={true}
-            disabled={!tokenApproval || buttonClicked}
-            onClick={() => (TryLockToken())}
-          />
+          <div
+            className={`lowercontainer_button rounded-lg justify-center items-center flex my-3 px-2 py-2 w-40 cursor-pointer ${
+              (tokenApproval || buttonClicked) &&
+              "opacity-50 pointer-events-none z-10"
+            }`}
+          >
+            <div
+              className="button_text flex text-black text-paragraph-2 leading-text-paragraph-2 font-bold"
+              onClick={() => {
+                TryApproveToken();
+              }}
+            >
+              <div className="flex items-center">{"Approve"}</div>
+              <img
+                src={CheckIcon}
+                alt="Check Icon"
+                className="svg_black inline-block w-5 ml-3 mr-2"
+              ></img>
+            </div>
+          </div>
+
+          <div
+            className={`lowercontainer_button rounded-lg justify-center items-center flex my-3 px-2 py-2 w-40 cursor-pointer ${
+              (!tokenApproval || buttonClicked) &&
+              "opacity-50 pointer-events-none z-10"
+            }`}
+          >
+            <div
+              className="button_text flex text-black text-paragraph-2 leading-text-paragraph-2 font-bold"
+              onClick={() => {
+                TryLockToken();
+              }}
+            >
+              <div className="flex items-center">{"Lock ETT"}</div>
+              <img
+                src={LockIcon}
+                alt="Lock Icon"
+                className="svg_black inline-block w-5 ml-3 mr-2"
+              ></img>
+            </div>
+          </div>
         </div>
       </div>
     </div>

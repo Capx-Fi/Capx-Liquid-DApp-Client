@@ -30,7 +30,11 @@ const ProjectDetails = ({
   const { active, account, chainId } = useWeb3React();
 
   const [detailsFetched, setDetailsFetched] = useState(false);
+
+  const [checkingContract, setCheckingContract] = useState(false);
+
   const validContractAddress = async (address) => {
+    setCheckingContract(true);
     if (projectExists.exists === true) {
       setProjectExists({
         name: "",
@@ -57,6 +61,7 @@ const ProjectDetails = ({
           ...existingDetails,
         }));
       }
+      setCheckingContract(false);
       return validateResponse.valid;
     } else return false;
   };
@@ -102,6 +107,7 @@ const ProjectDetails = ({
         value={contractAddress}
         setValue={setContractAddress}
         maxLength={42}
+        disabled={checkingContract}
         className={"mb-4 tablet:mb-6"}
       />
       <InputField
@@ -110,7 +116,7 @@ const ProjectDetails = ({
         valid={isValidProjectName || projectExists.exists}
         value={projectName}
         setValue={setProjectName}
-        disabled={projectExists.exists}
+        disabled={ !(tokenDetails.valid) || checkingContract || projectExists.exists}
         className={"mb-4 tablet:mb-6"}
       />
       <InputField
@@ -120,7 +126,7 @@ const ProjectDetails = ({
         value={projectDescription}
         setValue={setProjectDescription}
         multiline={true}
-        disabled={projectExists.exists}
+        disabled={ !(isValidProjectName) || checkingContract || projectExists.exists}
       />
       <hr className="border-dark-200 mt-12 h-2" />
       <div className="flex flex-row-reverse mt-8">

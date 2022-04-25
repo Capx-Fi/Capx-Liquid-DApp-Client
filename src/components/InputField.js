@@ -26,6 +26,7 @@ function InputField({
       <div className="relative">
         {multiline ? (
           <DebounceInput
+            disabled={disabled}
             className={`${
               value && valid && "shadow-input-validated"
             } appearance-none  text-caption-3 desktop:text-caption-2   ${

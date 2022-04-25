@@ -10,6 +10,7 @@ import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
 import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
 import "../../../translations/i18n";
+import { CHAIN_NAMES } from "../../../constants/config";
 function MetamaskModal() {
   const { active, account, library, connector, activate } = useWeb3React();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -22,21 +23,15 @@ function MetamaskModal() {
     try {
       await activate(injected);
       if (unsupportedChainIdError) {
-        enqueueSnackbar(
-          "Please connect to the Ethereum / BSC / MATIC / AVALANCHE Mainnet Chain.",
-          {
-            variant: "error",
-          }
-        );
+        enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
+          variant: "error",
+        });
       }
     } catch (ex) {
       if (error instanceof UnsupportedChainIdError) {
-        enqueueSnackbar(
-          "Please connect to the Ethereum / BSC / MATIC / AVALANCHE Mainnet Chain.",
-          {
-            variant: "error",
-          }
-        );
+        enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
+          variant: "error",
+        });
       }
       alert(ex);
     }

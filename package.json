@@ -30,7 +30,7 @@
     "lottie-react": "^2.2.1",
     "material-table": "^1.69.3",
     "material-ui-dropzone": "^3.5.0",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.0",
     "notistack": "^1.0.10",
     "prettier": "^2.4.1",
     "rc-upload": "^4.3.1",

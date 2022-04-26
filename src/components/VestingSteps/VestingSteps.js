@@ -13,17 +13,17 @@ const VestingSteps = ({setShowSteps}) => {
       <Header hiddenNav />
       <div className="maincontainer flex gap-x-14 justify-center items-strech m-auto mt-auto">
         <div className="herocontainer px-9 py-12 rounded-3xl bg-opacity-70 text-white relative desktop:w-47v twok:w-30v flex flex-col items-start">
-          <div className="title text-5xl font-bold leading-lh-54 tracking-tight mt-2 w-10/12 text-left">
+          <div className="title desktop:text-40px desktop:leading-lh-64 twok:text-5xl twok:leading-lh-54 font-bold tracking-tight mt-2 desktop:w-full twok:w-10/12 text-left">
             {"Vest Tokens in 3 simple steps"}
           </div>
-          <div className="steps-container mt-2 w-full tracking-tight">
-            <div className="text-container px-6 my-6 py-1 text-paragraph-1 leading-paragraph-1 rounded-lg">
+          <div className="steps-container mt-2 w-full tracking-tight desktop:text-paragraph-2 twok:text-paragraph-1 desktop:leading-paragraph-1">
+            <div className="text-container px-6 my-6 py-1 rounded-lg">
               {"1. Enter your Project Details & Contract Address"}
             </div>
-            <div className="text-container px-6 my-6 py-1 text-paragraph-1 leading-paragraph-1 rounded-lg">
+            <div className="text-container px-6 my-6 py-1 rounded-lg">
               {"2. Upload your Vesting Sheet"}
             </div>
-            <div className="text-container px-6 my-6 py-1 text-paragraph-1 leading-paragraph-1 rounded-lg">
+            <div className="text-container px-6 my-6 py-1 rounded-lg">
               {"3. Lock & Review your Vesting Sheet"}
             </div>
           </div>
@@ -57,7 +57,7 @@ const VestingSteps = ({setShowSteps}) => {
             className="side-button justify-self-end rounded-2xl justify-center items-center flex px-1 py-3 w-full cursor-pointer"
             onClick={() => setShowSteps(false)}
           >
-            <div className="button_text text-black text-subheading leading-text-subheading font-bold">
+            <div className="button_text text-black desktop:text-caption-1 desktop:leading-caption-1 twok:text-subheading twok:leading-text-subheading font-bold">
               {"Begin Vesting"}
               <img
                 src={NextIcon}

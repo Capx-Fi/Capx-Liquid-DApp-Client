@@ -97,8 +97,9 @@ const ProjectDetails = ({
       : setIsValidProjectDescription(false);
   };
 
+
   return (
-    <div className="pt-10 project_details_form">
+    <div className="pt-10 project_details_form desktop:w-11/12 twok:w-full">
       <p className="vesting_pages_title">{"Enter Project Details"}</p>
       <InputField
         placeholder={"Contract Address"}
@@ -108,26 +109,37 @@ const ProjectDetails = ({
         setValue={setContractAddress}
         maxLength={42}
         disabled={checkingContract}
-        className={"mb-4 tablet:mb-6"}
+        className={"mb-4 tablet:mb-6 desktop:mt-8 twok:mt-12"}
+        loading={checkingContract}
       />
-      <InputField
-        placeholder={"Project Name"}
-        label={`${"project name".toUpperCase()}`}
-        valid={isValidProjectName || projectExists.exists}
-        value={projectName}
-        setValue={setProjectName}
-        disabled={ !(tokenDetails.valid) || checkingContract || projectExists.exists}
-        className={"mb-4 tablet:mb-6"}
-      />
-      <InputField
-        placeholder={`${"Project Description"}`}
-        label={`${"project description".toUpperCase()}`}
-        valid={isValidProjectDescription || projectExists.exists}
-        value={projectDescription}
-        setValue={setProjectDescription}
-        multiline={true}
-        disabled={ !(isValidProjectName) || checkingContract || projectExists.exists}
-      />
+      
+        <div>
+          <InputField
+            placeholder={"Project Name"}
+            label={`${"project name".toUpperCase()}`}
+            valid={isValidProjectName || projectExists.exists}
+            value={projectName}
+            setValue={setProjectName}
+            disabled={
+              !tokenDetails.valid || checkingContract || projectExists.exists
+            }
+          className={"mb-4 tablet:mb-6"}
+          loading={checkingContract}
+          />
+          <InputField
+            placeholder={`${"Project Description"}`}
+            label={`${"project description".toUpperCase()}`}
+            valid={isValidProjectDescription || projectExists.exists}
+            value={projectDescription}
+            setValue={setProjectDescription}
+            multiline={true}
+            disabled={
+              !isValidProjectName || checkingContract || projectExists.exists
+            }
+          loading={checkingContract}
+          />
+        </div>
+      
       <hr className="border-dark-200 mt-12 h-2" />
       <div className="flex flex-row-reverse mt-8">
         <Level3CTA
@@ -135,7 +147,9 @@ const ProjectDetails = ({
           icon={true}
           onClick={() => setStep(2)}
           disabled={
-            !tokenDetails.valid || !detailsFetched || (projectExists.exists
+            !tokenDetails.valid ||
+            !detailsFetched ||
+            (projectExists.exists
               ? false
               : !isValidProjectName || !isValidProjectDescription)
           }

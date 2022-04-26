@@ -155,7 +155,7 @@ const ProjectDetails = ({
         <Level3CTA
           text="Next"
           icon={true}
-          onClick={() => setStep(4)}
+          onClick={() => setStep(2)}
           disabled={
             !tokenDetails.valid ||
             !detailsFetched ||

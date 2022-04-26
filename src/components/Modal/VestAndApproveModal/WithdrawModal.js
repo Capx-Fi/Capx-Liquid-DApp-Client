@@ -61,7 +61,7 @@ function WithdrawModal({ open, setOpen, withdrawModalStatus }) {
           <div className="flex flex-col laptop:flex-row justify-center mx-auto items-center laptop:h-72 pb-8">
             {console.log(withdrawModalStatus)}
             <Lottie
-              className="w-24 tablet:w-32 laptop:w-64"
+              className="w-24 tablet:w-32 laptop:w-48"
               loop={true}
               animationData={
                 withdrawModalStatus === "success"

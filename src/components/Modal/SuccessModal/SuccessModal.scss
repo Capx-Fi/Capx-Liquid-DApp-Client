@@ -20,7 +20,7 @@
         );
       }
       &_title {
-        @apply text-subheading leading-subheading tablet:text-heading-2 tablet:leading-heading-2 font-bold laptop:text-heading-1 laptop:leading-heading-1 desktop:text-heading-1 desktop:leading-heading-1 desktop:font-semibold w-10/12 text-center tablet:text-left;
+        @apply text-subheading leading-subheading tablet:text-heading-2 tablet:leading-heading-2 font-bold laptop:text-heading-1 laptop:leading-heading-1 desktop:text-40px twok:text-heading-1 desktop:leading-lh-64 twok:leading-heading-1 desktop:font-bold twok:font-semibold desktop:w-11/12 twok:w-10/12 text-center tablet:text-left;
       }
       &_button {
         @apply rounded-xl flex my-4 tablet:my-10 mb-28 tablet:mb-24 laptop:mb-8 laptop:my-10 w-40 tablet:w-72 desktop:w-56 cursor-pointer;

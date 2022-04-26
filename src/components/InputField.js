@@ -14,11 +14,12 @@ function InputField({
   multiline,
   maxLength,
   disabled,
+  loading
 }) {
   return (
-    <div className={className}>
+    <div className={`${loading ? "animate-pulse" : "" } ${className}`}>
       <label
-        className="block text-green-400 text-caption-3 desktop:text-caption-2 font-bold mb-2"
+        className="block text-green-400 desktop:text-caption-3 twok:text-caption-2 desktop:font-semibold twok:font-bold mb-2"
         for={label}
       >
         {label} *
@@ -30,7 +31,9 @@ function InputField({
             className={`${
               value && valid && "shadow-input-validated"
             } appearance-none  text-caption-3 desktop:text-caption-2   ${
-              value && valid
+              loading
+                ? "ring-2 ring-success-color-400"
+                : value && valid
                 ? "ring-2 ring-success-color-400"
                 : "ring-2 ring-warning-color-400"
             } ${
@@ -50,9 +53,11 @@ function InputField({
             className={`${
               value && valid && "shadow-input-validated"
             } appearance-none text-caption-3 desktop:text-caption-2  ${
-              value && valid
+              loading
                 ? "ring-2 ring-success-color-400"
-                : "ring-2 ring-warning-color-400"
+                : (value && valid
+                ? "ring-2 ring-success-color-400"
+                : "ring-2 ring-warning-color-400")
             } ${
               !disabled
                 ? ""
@@ -66,7 +71,7 @@ function InputField({
             maxLength={`${maxLength ? 42 : ""}`}
           />
         )}
-        {value && (
+        {value  && !loading && (
           <img
             alt="status"
             src={valid ? ValidIcon : WarningIcon}

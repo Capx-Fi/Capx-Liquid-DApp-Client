@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import InputField from "../../InputField";
-import Level3CTA from "../../CTA/Level3CTA";
-import { validateContractAddress } from "../../../utils/validateContractAddress";
-import { checkExistingProject } from "../../../utils/checkExistingProject";
-import { validateProjectName } from "../../../utils/validateProjectName";
-import { validateProjectDescription } from "../../../utils/validateProjectDescription";
-import { useWeb3React } from "@web3-react/core";
-import "./ProjectDetails.scss";
+import React, { useEffect, useState } from 'react'
+import InputField from '../../InputField'
+import Level3CTA from '../../CTA/Level3CTA'
+import { validateContractAddress } from '../../../utils/validateContractAddress'
+import { checkExistingProject } from '../../../utils/checkExistingProject'
+import { validateProjectName } from '../../../utils/validateProjectName'
+import { validateProjectDescription } from '../../../utils/validateProjectDescription'
+import { useWeb3React } from '@web3-react/core'
+import './ProjectDetails.scss'
 
 const ProjectDetails = ({
   contractAddress,
@@ -23,123 +23,133 @@ const ProjectDetails = ({
   setProjectDescription,
   setContractDetails
 }) => {
-  useEffect(() => {
-    validContractAddress(contractAddress);
-  }, [contractAddress]);
+  useEffect(
+    () => {
+      validContractAddress(contractAddress)
+    },
+    [contractAddress]
+  )
 
-  const { active, account, chainId } = useWeb3React();
+  const { active, account, chainId } = useWeb3React()
 
-  const [detailsFetched, setDetailsFetched] = useState(false);
+  const [detailsFetched, setDetailsFetched] = useState(false)
 
-  const [checkingContract, setCheckingContract] = useState(false);
+  const [checkingContract, setCheckingContract] = useState(false)
 
-  const validContractAddress = async (address) => {
-    setCheckingContract(true);
+  const validContractAddress = async address => {
+    setCheckingContract(true)
     if (projectExists.exists === true) {
       setProjectExists({
-        name: "",
+        name: '',
         description: null,
-        exists: false,
-      });
+        exists: false
+      })
     }
-    let validateResponse = await validateContractAddress(address);
-    console.log(validateResponse);
+    let validateResponse = await validateContractAddress(address)
+    console.log(validateResponse)
     if (validateResponse) {
-      setTokenDetails((prevState) => ({
+      setTokenDetails(prevState => ({
         ...prevState,
-        ...validateResponse,
-      }));
+        ...validateResponse
+      }))
       if (validateResponse.valid) {
         let existingDetails = await checkExistingProject(
           address,
           chainId,
           metamaskAccount
-        );
-        setDetailsFetched(true);
-        setProjectExists((prevState) => ({
+        )
+        setDetailsFetched(true)
+        setProjectExists(prevState => ({
           ...prevState,
-          ...existingDetails,
-        }));
+          ...existingDetails
+        }))
       }
-      setCheckingContract(false);
-      return validateResponse.valid;
-    } else return false;
-  };
+      setCheckingContract(false)
+      return validateResponse.valid
+    } else return false
+  }
 
+  useEffect(
+    () => {
+      verifyDescription(projectDescription)
+    },
+    [projectDescription]
+  )
+  useEffect(
+    () => {
+      verifyName(projectName)
+    },
+    [projectName]
+  )
+  useEffect(
+    () => {
+      if (projectExists.exists) {
+        setContractDetails(prevState => ({
+          ...prevState,
+          projectTitle: projectExists.name,
+          projectDescription: projectExists.description
+        }))
+      }
+    },
+    [projectExists]
+  )
 
-  useEffect(() => {
-    verifyDescription(projectDescription);
-  }, [projectDescription]);
-  useEffect(() => {
-    verifyName(projectName);
-  }, [projectName]);
-  useEffect(() => {
-    if (projectExists.exists)
-      setContractDetails((prevState) => ({
-        ...prevState,
-        projectTitle: projectExists.name,
-        projectDescription: projectExists.description,
-      }));
-  }, [projectExists]);
+  const [isValidProjectName, setIsValidProjectName] = useState(false)
+  const [isValidProjectDescription, setIsValidProjectDescription] = useState(
+    false
+  )
 
-  const [isValidProjectName, setIsValidProjectName] = useState(false);
-  const [isValidProjectDescription, setIsValidProjectDescription] =
-    useState(false);
-  
-  const verifyName = (name) => {
+  const verifyName = name => {
     validateProjectName(name)
       ? setIsValidProjectName(true)
-      : setIsValidProjectName(false);
-  };
-  const verifyDescription = (description) => {
+      : setIsValidProjectName(false)
+  }
+  const verifyDescription = description => {
     validateProjectDescription(description)
       ? setIsValidProjectDescription(true)
-      : setIsValidProjectDescription(false);
-  };
-
+      : setIsValidProjectDescription(false)
+  }
 
   return (
     <div className="pt-10 project_details_form desktop:w-11/12 twok:w-full">
-      <p className="vesting_pages_title">{"Enter Project Details"}</p>
+      <p className="vesting_pages_title">{'Enter Project Details'}</p>
       <InputField
-        placeholder={"Contract Address"}
-        label={`${"Contract Address".toUpperCase()}`}
+        placeholder={'Contract Address'}
+        label={`${'Contract Address'.toUpperCase()}`}
         valid={tokenDetails.valid}
         value={contractAddress}
         setValue={setContractAddress}
         maxLength={42}
         disabled={checkingContract}
-        className={"mb-4 tablet:mb-6 desktop:mt-8 twok:mt-12"}
+        className={'mb-4 tablet:mb-6 desktop:mt-8 twok:mt-12'}
         loading={checkingContract}
       />
-      
-        <div>
-          <InputField
-            placeholder={"Project Name"}
-            label={`${"project name".toUpperCase()}`}
-            valid={isValidProjectName || projectExists.exists}
-            value={projectName}
-            setValue={setProjectName}
-            disabled={
-              !tokenDetails.valid || checkingContract || projectExists.exists
-            }
-          className={"mb-4 tablet:mb-6"}
-          loading={checkingContract}
-          />
-          <InputField
-            placeholder={`${"Project Description"}`}
-            label={`${"project description".toUpperCase()}`}
-            valid={isValidProjectDescription || projectExists.exists}
-            value={projectDescription}
-            setValue={setProjectDescription}
-            multiline={true}
-            disabled={
-              !isValidProjectName || checkingContract || projectExists.exists
-            }
-          loading={checkingContract}
-          />
-        </div>
-      
+
+      <InputField
+        placeholder={'Project Name'}
+        label={`${'project name'.toUpperCase()}`}
+        valid={isValidProjectName || projectExists.exists}
+        value={projectName}
+        setValue={setProjectName}
+        disabled={
+          !tokenDetails.valid || checkingContract || projectExists.exists
+        }
+        className={'mb-4 tablet:mb-6'}
+        loading={checkingContract}
+      />
+      <InputField
+        placeholder={`${'Project Description'}`}
+        label={`${'project description'.toUpperCase()}`}
+        valid={isValidProjectDescription || projectExists.exists}
+        value={projectDescription}
+        setValue={setProjectDescription}
+        multiline={true}
+        disabled={
+          !isValidProjectName || checkingContract || projectExists.exists
+        }
+        loading={checkingContract}
+      />
+
       <hr className="border-dark-200 mt-12 h-2" />
       <div className="flex flex-row-reverse mt-8">
         <Level3CTA
@@ -156,7 +166,7 @@ const ProjectDetails = ({
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProjectDetails;
+export default ProjectDetails

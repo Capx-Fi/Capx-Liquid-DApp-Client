@@ -43,7 +43,7 @@ function InputField({
             } focus:border-transparent rounded-md tablet:rounded-lg h-28 tablet:h-36  w-full py-2 px-3 pr-6 text-white bg-dark-300 focus:outline-none focus:shadow-outline text-caption-4 leading-caption-4 tablet:text-paragraph-2 tablet:leading-paragraph-2 laptop:text-paragraph-2 laptop:leading-paragraph-2 desktop:text-paragraph-1 desktop:leading-paragraph-1 resize-none`}
             id={label}
             type="text"
-            value={value}
+            value={placeholder==="Contract Address" ? value : (loading ? "" : value)}
             onChange={(e) => setValue(e.target.value)}
             placeholder={placeholder}
             element="textarea"
@@ -65,7 +65,7 @@ function InputField({
             } focus:border-transparent rounded-lg w-full py-2 px-3 text-white bg-dark-300 h-8 tablet:h-10 laptop:h-14 focus:outline-none focus:shadow-outline text-caption-4 leading-caption-4 tablet:text-paragraph-2 tablet:leading-paragraph-2 laptop:text-paragraph-2 laptop:leading-paragraph-2 desktop:text-paragraph-1 desktop:leading-paragraph-1`}
             id={label}
             type="text"
-            value={value}
+            value={placeholder==="Contract Address" ? value : (loading ? "" : value)}
             onChange={(e) => setValue(e.target.value)}
             placeholder={placeholder}
             maxLength={`${maxLength ? 42 : ""}`}

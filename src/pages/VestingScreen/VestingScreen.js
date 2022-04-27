@@ -19,6 +19,7 @@ import ChooseWalletModal from "../../components/Modal/ChooseWalletModal/ChooseWa
 
 import VestingSteps from "../../components/VestingSteps/VestingSteps";
 import ProjectDetails2 from "../../components/VestingForm/ProjectDetails/ProjectDetails";
+import WalletModal from "../../components/Modal/WalletModal/WalletModal"
 
 import { useHistory } from "react-router";
 
@@ -26,6 +27,7 @@ import { useHistory } from "react-router";
 function VestingScreen() {
   const { active, account, chainId } = useWeb3React();
   const [step, setStep] = useState(1);
+  const [modalMode, setModalMode] = useState(0);
   const [showSteps, setShowSteps] = useState(true);
   useEffect(() => {
     setShowSteps(true);
@@ -119,7 +121,7 @@ function VestingScreen() {
   return (
     <>
       {!active ? (
-        <MetamaskModal />
+        <WalletModal modalMode={modalMode} setModalMode={setModalMode}/>
       ) : showSteps ? (
         <VestingSteps setShowSteps={setShowSteps} />
       ) : step === 4 ? (

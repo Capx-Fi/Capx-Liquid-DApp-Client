@@ -157,3 +157,21 @@ export const getMasterURL = (chainId) => {
       : GRAPHAPIURL_MASTER_ETHEREUM;
   return masterURL;
 };
+
+export const getSortBy = (chainId) => {
+  const sortBy =
+    chainId?.toString() === BSC_CHAIN_ID.toString()
+      ? "BSC"
+      : chainId?.toString() === MATIC_CHAIN_ID.toString()
+      ? "Matic"
+      : chainId?.toString() === AVALANCHE_CHAIN_ID.toString()
+      ? "Avalanche"
+      : chainId?.toString() === FANTOM_CHAIN_ID.toString()
+      ? "Fantom"
+      : chainId?.toString() === MOONBEAM_CHAIN_ID.toString()
+      ? "Moonbeam"
+      : chainId?.toString() === ARBITRUM_CHAIN_ID.toString()
+      ? "Arbitrum"
+      : "Ethereum";
+  return sortBy;
+};

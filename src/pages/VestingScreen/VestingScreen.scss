@@ -6,7 +6,7 @@
 }
 
 .vesting_container {
-  @apply container desktop:w-9/12 twok:w-1/2 desktop:ml-32 twok:ml-60 laptop:ml-28 tablet:ml-20 mx-auto text-white mt-20 tablet:mt-24 laptop:mt-32 desktop:mt-32 mb-20;
+  @apply container desktop:w-9/12 twok:w-1/2 desktop:ml-32 twok:ml-60 laptop:ml-28 tablet:ml-20 mx-auto text-white mt-20 tablet:mt-24 laptop:mt-32 desktop:mt-20 twok:mt-32 mb-20;
 
   .nav-pane {
     border-bottom: 1.6px solid #2a383c;
@@ -14,11 +14,11 @@
 }
 
 .vesting_container_table {
-  @apply container desktop:w-9/12 twok:w-2/3 desktop:ml-32 twok:ml-60 laptop:ml-28 tablet:ml-20 mx-auto text-white mt-20 tablet:mt-24 laptop:mt-28 desktop:mt-32 mb-20;
+  @apply container desktop:w-9/12 twok:w-2/3 desktop:ml-32 twok:ml-60 laptop:ml-28 tablet:ml-20 mx-auto text-white mt-20 tablet:mt-24 laptop:mt-28 desktop:mt-20 twok:mt-32 mb-20;
 }
 
 .upload_container{
-  @apply container desktop:w-9/12 twok:w-5/12 desktop:ml-32 twok:ml-60 laptop:ml-28 tablet:ml-20 mx-auto text-white mt-20 tablet:mt-24 laptop:mt-32 desktop:mt-32 mb-20;
+  @apply container desktop:w-9/12 twok:w-5/12 desktop:ml-32 twok:ml-60 laptop:ml-28 tablet:ml-20 mx-auto text-white mt-20 tablet:mt-24 laptop:mt-32 desktop:mt-20 twok:mt-32 mb-20;
   
   .nav-pane {
     border-bottom: 1.6px solid #2a383c;

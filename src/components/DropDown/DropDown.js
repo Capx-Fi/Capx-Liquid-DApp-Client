@@ -69,6 +69,36 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
           >
             Avalanche
           </p>
+          <p
+            className="option"
+            onClick={() => {
+              chainChange("Fantom");
+              setOpen(false);
+              setShowMenu && setShowMenu(false);
+            }}
+          >
+            Fantom
+          </p>
+          <p
+            className="option"
+            onClick={() => {
+              chainChange("Moonbeam");
+              setOpen(false);
+              setShowMenu && setShowMenu(false);
+            }}
+          >
+            Moonbeam
+          </p>
+          <p
+            className="option"
+            onClick={() => {
+              chainChange("Arbitrum");
+              setOpen(false);
+              setShowMenu && setShowMenu(false);
+            }}
+          >
+            Arbitrum
+          </p>
         </div>
       )}
     </div>

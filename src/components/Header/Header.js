@@ -7,10 +7,12 @@ import { useMetamask } from "../../metamaskReactHook/index";
 import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
 import { injected } from "../../utils/connector";
 import ChooseDashboardModal from "../Modal/ChooseDashboardModal/ChooseDashboardModal";
-
+import DropDown from '../DropDown/DropDown';
 
 import { useEffect, useState } from "react";
 import { CHAIN_NAMES } from "../../constants/config";
+
+import { getSortBy } from "../../constants/getChainConfig";
 
 function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -20,9 +22,16 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
   const desiredChainId = "4";
   const currentChainId = metaState.chain.id?.toString();
   const [dashboardModal, setDashboardModal] = useState(false);
+  const [sortBy, setSortBy] = useState("Ethereum");
+  const web3 = new Web3(Web3.givenProvider);
   const handleCloseSelectDashboard = () => {
     setDashboardModal(false);
   };
+
+  useEffect(() => {
+    setSortBy(chainId && getSortBy(chainId));
+  }, [chainId]);
+
   async function connect() {
     try {
       await activate(injected);
@@ -31,6 +40,143 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
         enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
           variant: "error",
         });
+      }
+    }
+  }
+
+  const chainChange = async (chainName) => {
+    if (chainName === "Ethereum") {
+      try {
+        await web3.currentProvider.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0x4" }],
+        });
+      } catch (error) {}
+    } else if (chainName === "Matic") {
+      try {
+        await web3.currentProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0x13881",
+              chainName: "Polygon Testnet",
+              nativeCurrency: {
+                name: "MATIC",
+                symbol: "MATIC",
+                decimals: 18,
+              },
+              rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
+              blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (chainName === "BSC") {
+      try {
+        await web3.currentProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0x61",
+              chainName: "Binance Smart Chain Test",
+              nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18,
+              },
+              rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
+              blockExplorerUrls: ["https://testnet.bscscan.com/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (chainName === "Avalanche") {
+      try {
+        await web3.currentProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0xA869",
+              chainName: "Avalanche Fuji",
+              nativeCurrency: {
+                name: "AVAX",
+                symbol: "AVAX",
+                decimals: 18,
+              },
+              rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+              blockExplorerUrls: ["https://testnet.snowtrace.io/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (chainName === "Fantom") {
+      try {
+        await web3.currentProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0x13881",
+              chainName: "Polygon Testnet",
+              nativeCurrency: {
+                name: "MATIC",
+                symbol: "MATIC",
+                decimals: 18,
+              },
+              rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
+              blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (chainName === "Moonbeam") {
+      try {
+        await web3.currentProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0x13881",
+              chainName: "Polygon Testnet",
+              nativeCurrency: {
+                name: "MATIC",
+                symbol: "MATIC",
+                decimals: 18,
+              },
+              rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
+              blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (chainName === "Arbitrum") {
+      try {
+        await web3.currentProvider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0x13881",
+              chainName: "Polygon Testnet",
+              nativeCurrency: {
+                name: "MATIC",
+                symbol: "MATIC",
+                decimals: 18,
+              },
+              rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
+              blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.error(error);
       }
     }
   }
@@ -87,18 +233,23 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
               </>
             )}
             {active ? (
-              <div className="header_navbar_logoutbutton">
-                <div className="header_navbar_logoutbutton_text">
-                  {" "}
-                  {`${account.substr(0, 6)}...${account.substr(-4)}`}
+              <>
+                <div className="mr-4">
+                  <DropDown sortBy={sortBy} chainChange={chainChange} />
                 </div>
-                <img
-                  className="header_navbar_logoutbutton_icon"
-                  onClick={disconnect}
-                  src={LogoutIcon}
-                  alt="logout icon"
-                />
-              </div>
+                <div className="header_navbar_logoutbutton">
+                  <div className="header_navbar_logoutbutton_text">
+                    {" "}
+                    {`${account.substr(0, 6)}...${account.substr(-4)}`}
+                  </div>
+                  <img
+                    className="header_navbar_logoutbutton_icon"
+                    onClick={disconnect}
+                    src={LogoutIcon}
+                    alt="logout icon"
+                  />
+                </div>
+              </>
             ) : (
               <div className="header_navbar_button">
                 <div onClick={connect} className="header_navbar_button_text">

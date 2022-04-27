@@ -147,8 +147,8 @@ function LockAndApprove({
         setVestModalStatus={setVestModalStatus}
       />
 
-      <div className="flex flex-row justify-between mt-8 text-greylabel2">
-        <div className="flex flex-col">
+      <div className="flex flex-row justify-between mt-8 text-greylabel2 desktop:text-caption-1 ">
+        <div className="flex flex-col justify-center">
           <div>Number of unique addresses: {uniqueAddresses}</div>
           <div>Total addresses: {totalAddresses}</div>
         </div>
@@ -160,7 +160,7 @@ function LockAndApprove({
             }`}
           >
             <div
-              className="button_text flex text-black text-paragraph-2 leading-text-paragraph-2 font-bold"
+              className="button_text flex text-black desktop:text-caption-1 twok:text-paragraph-2 leading-paragraph-2 font-bold"
               onClick={() => {
                 TryApproveToken();
               }}
@@ -181,7 +181,7 @@ function LockAndApprove({
             }`}
           >
             <div
-              className="button_text flex text-black text-paragraph-2 leading-text-paragraph-2 font-bold"
+              className="button_text flex text-black desktop:text-caption-1 twok:text-paragraph-2 leading-paragraph-2 font-bold"
               onClick={() => {
                 TryLockToken();
               }}

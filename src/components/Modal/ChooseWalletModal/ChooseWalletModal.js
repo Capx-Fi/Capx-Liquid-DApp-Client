@@ -7,22 +7,17 @@ import { Link } from 'react-router-dom'
 import './ChooseWalletModal.scss'
 
 const Landing = () => {
-  const [dashboardModal, setDashboardModal] = useState(false)
-  const handleCloseSelectDashboard = () => {
-    setDashboardModal(false)
-  }
 
   return (
-    <div className="choose_screen h-screen flex bg-dark-400">
+    <article className="h-screen bg-dark-400 flex choose_screen">
       <Header hiddenNav />
-
-      <div className="maincontainer flex flex-col justify-center m-auto mt-auto">
+      <div className="justify-center laptop:items-center m-auto mt-32 tablet:mt-48  laptop:mt-auto">
         <div className="herocontainer px-20 py-14 rounded-3xl bg-opacity-70 text-white relative desktop:w-60v flex flex-col items-start">
           <div className="title desktop:text-40px desktop:leading-lh-64 twok:text-50px twok:leading-lh-54 leading-title-1 font-semibold w-10/12 text-left">
-            {'Connect your wallet'}
+            {"Connect your wallet"}
           </div>
           <div className="mt-2 desktop:text-paragraph-1 desktop:leading-subheading twok:text-subheading twok:leading-subheading text-greylabel">
-            {'Connect with one of our available wallet providers'}
+            {"Connect with one of our available wallet providers"}
           </div>
           <div className="herobuttons flex flex-col gap-y-2 my-14 w-full">
             <div className="herocontainer_button flex flex-start rounded-xl items-center flex px-5 py-4 z-10 cursor-pointer">
@@ -34,7 +29,7 @@ const Landing = () => {
                 />
               </div>
               <div className="button_text text-white desktop:text-captions-1 twok:text-subheading desktop-captions-1 twok:leading-subheading desktop:font-semibold">
-                {'Metamask'}
+                {"Metamask"}
               </div>
             </div>
             <div className="herocontainer_button flex flex-start rounded-xl items-center flex px-5 py-4 z-10 cursor-pointer">
@@ -46,15 +41,15 @@ const Landing = () => {
                 />
               </div>
               <div className="button_text text-white desktop:text-captions-1 twok:text-subheading desktop-captions-1 twok:leading-subheading desktop:font-semibold">
-                {'WalletConnect'}
+                {"WalletConnect"}
               </div>
             </div>
           </div>
         </div>
       </div>
       <Footer />
-    </div>
-  )
+    </article>
+  );
 }
 
 export default Landing

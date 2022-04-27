@@ -30,7 +30,7 @@ const Landing = () => {
                 <img
                   src={MetamaskIcon}
                   alt="Next Icon"
-                  className="inline-block w-8 ml-3 mr-12"
+                  className="inline-block w-12 ml-3 mr-12"
                 />
               </div>
               <div className="button_text text-white desktop:text-captions-1 twok:text-subheading desktop-captions-1 twok:leading-subheading desktop:font-semibold">
@@ -42,7 +42,7 @@ const Landing = () => {
                 <img
                   src={WalletConnectIcon}
                   alt="Next Icon"
-                  className="inline-block w-8 ml-3 mr-12"
+                  className="inline-block w-12 ml-3 mr-12"
                 />
               </div>
               <div className="button_text text-white desktop:text-captions-1 twok:text-subheading desktop-captions-1 twok:leading-subheading desktop:font-semibold">

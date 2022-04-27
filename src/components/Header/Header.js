@@ -121,11 +121,11 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
           method: "wallet_addEthereumChain",
           params: [
             {
-              chainId: "0x13881",
-              chainName: "Polygon Testnet",
+              chainId: "0xFA",
+              chainName: "Fantom",
               nativeCurrency: {
-                name: "MATIC",
-                symbol: "MATIC",
+                name: "FTM",
+                symbol: "FTM",
                 decimals: 18,
               },
               rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
@@ -142,11 +142,11 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
           method: "wallet_addEthereumChain",
           params: [
             {
-              chainId: "0x13881",
-              chainName: "Polygon Testnet",
+              chainId: "0x504",
+              chainName: "Moonbeam",
               nativeCurrency: {
-                name: "MATIC",
-                symbol: "MATIC",
+                name: "GLMR",
+                symbol: "GLMR",
                 decimals: 18,
               },
               rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],

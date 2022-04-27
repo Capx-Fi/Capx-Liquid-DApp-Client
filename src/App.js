@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import LoadingScreen from "./containers/LoadingScreen";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Landing from "./components/Landing/Landing";
+import ChooseWalletModal from "./components/Modal/ChooseWalletModal/ChooseWalletModal";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -30,6 +31,7 @@ function App() {
               path="/projectoverview"
               component={ProjectOwnerDashboardScreen}
             />
+            <Route exact path="/1" component={ChooseWalletModal} />
             <Route path="*" component={PageNotFound} />
           </Switch>
         </Router>

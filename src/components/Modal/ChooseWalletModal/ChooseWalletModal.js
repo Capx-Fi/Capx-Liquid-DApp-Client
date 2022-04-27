@@ -21,7 +21,7 @@ const Landing = () => {
           <div className="title desktop:text-40px desktop:leading-lh-64 twok:text-50px twok:leading-lh-54 leading-title-1 font-semibold w-10/12 text-left">
             {'Connect your wallet'}
           </div>
-          <div className="mt-4 desktop:text-paragraph-1 desktop:leading-subheading twok:text-subheading twok:leading-subheading text-greylabel">
+          <div className="mt-2 desktop:text-paragraph-1 desktop:leading-subheading twok:text-subheading twok:leading-subheading text-greylabel">
             {'Connect with one of our available wallet providers'}
           </div>
           <div className="herobuttons flex flex-col gap-y-2 my-14 w-full">

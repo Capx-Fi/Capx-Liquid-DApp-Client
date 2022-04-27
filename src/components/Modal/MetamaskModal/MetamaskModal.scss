@@ -24,9 +24,10 @@
         @apply text-paragraph-2 leading-paragraph-2 tablet:text-heading-1 tablet:leading-heading-1 font-bold laptop:mt-4 laptop:text-heading-1 laptop:leading-lh-54 desktop:text-heading-1 desktop:leading-lh-54 desktop:font-semibold w-11/12 text-left;
       }
       &_button {
-        @apply rounded-xl justify-center items-center flex px-3 py-2 laptop:px-5 laptop:py-3 bg-primary-green-100 my-4 z-10 tablet:my-10 mb-28 tablet:mb-24 laptop:mb-24 laptop:my-10 w-48 tablet:w-72 desktop:w-72 cursor-pointer;
+        @apply rounded-xl justify-center items-center flex px-3 py-2 laptop:px-5 laptop:py-3 z-10 tablet:mb-24 laptop:mb-16 desktop:mt-12 w-48 tablet:w-72 desktop:w-72 cursor-pointer;
+            background: linear-gradient(356.23deg, #96CF03 -65.8%, #F1FFF6 89%);
         &_icon {
-          @apply w-5 tablet:w-9 laptop:w-12 mr-2;
+          @apply w-5 mr-2 inline-block mx-3;
         }
         &_text {
           @apply text-dark-400 font-bold desktop:text-paragraph-2 tablet:text-caption-1 text-caption-2;

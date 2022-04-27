@@ -40,7 +40,7 @@ const Landing = () => {
                 <img
                   src={NextIcon}
                   alt="Next Icon"
-                  className="inline-block w-5 ml-3 mr-2"
+                  className="inline-block w-5 mx-3 mr-2"
                 ></img>
               </div>
             </Link>

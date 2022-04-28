@@ -35,15 +35,15 @@ function Review({
   return (
     <div className="pt-10 reviewDiv">
       <div className="flex flex-row justify-between items-center">
-        <p className="desktop:text-40px twok:text-54px leading-heading-1 desktop:font-semibold twok:font-bold mb-2">{t("review")}</p>
-        <div className="desktop:text-paragraph-2 flex flex-col tablet:flex-row justify-center items-center laptop:text-caption-1 tablet:text-caption-3 text-caption-4 font-normal mb-3">
+        <p className="screen:text-heading-2 screen:leading-hedaing-2 desktop:text-40px twok:text-54px desktop:leading-heading-1 screen:font-semibold twok:font-bold mb-2">{t("review")}</p>
+        <div className="desktop:text-paragraph-2 flex flex-col tablet:flex-row justify-center items-center screen:text-caption-2 screen:leading-caption-2 tablet:text-caption-3 text-caption-4 font-normal mb-3">
           <p className="w-full text-right tablet:mr-4 tablet:text-center tablet:w-fit-content">{t("total_amount")}</p>
           <div className="tablet:ring-1 ml-3 h-fit-content rounded-lg laptop:rounded-xl desktop:text-paragraph-2 flex flex-row laptop:text-caption-1 tablet:text-caption-3 text-caption-4 text-primary-green-300 font-semibold  tablet:ring-primary-green-300 tablet:px-4 py-2">
             {convertToInternationalCurrencySystem(totalVested(vestingArray))} {tokenTicker}
           </div>
         </div>
       </div>
-      <div className="mb-12 text-greylabel">Please approve your tokens before locking them</div>
+      <div className="screen:mb-8 desktop:mb-12 text-greylabel text-caption-2 leading-caption-2">Please approve your tokens before locking them</div>
       <div className="bg-dark-300  h-fit-content rounded-xl flex-grow overflow-auto w-full">
         <ReviewTableContainer
           reviewData={vestingArray}

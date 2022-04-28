@@ -147,20 +147,20 @@ function LockAndApprove({
         setVestModalStatus={setVestModalStatus}
       />
 
-      <div className="flex flex-row justify-between mt-8 text-greylabel2 desktop:text-caption-1 ">
+      <div className="flex flex-row justify-between mt-8 text-greylabel2 screen:text-caption-3 screen:leading-caption-2 desktop:text-caption-1 desktop:leading-caption-1">
         <div className="flex flex-col justify-center">
           <div>Number of unique addresses: {uniqueAddresses}</div>
           <div>Total addresses: {totalAddresses}</div>
         </div>
         <div className="flex flex-row gap-x-6">
           <div
-            className={`lowercontainer_button rounded-lg justify-center items-center flex my-3 px-2 py-2 w-40 cursor-pointer ${
+            className={`lowercontainer_button rounded-lg justify-center items-center flex my-3 screen:px-2 desktop:px-2 py-2 screen:w-36 desktop:w-40 cursor-pointer ${
               (tokenApproval || buttonClicked) &&
               "opacity-50 pointer-events-none z-10"
             }`}
           >
             <div
-              className="button_text flex text-black desktop:text-caption-1 twok:text-paragraph-2 leading-paragraph-2 font-bold"
+              className="button_text flex text-black screen:text-caption-1 twok:text-paragraph-2 leading-paragraph-2 font-bold"
               onClick={() => {
                 TryApproveToken();
               }}
@@ -169,19 +169,19 @@ function LockAndApprove({
               <img
                 src={CheckIcon}
                 alt="Check Icon"
-                className="svg_black inline-block w-5 ml-3 mr-2"
+                className="svg_black inline-block screen:w-4 desktop:w-5 ml-3 mr-2"
               ></img>
             </div>
           </div>
 
           <div
-            className={`lowercontainer_button rounded-lg justify-center items-center flex my-3 px-2 py-2 w-40 cursor-pointer ${
+            className={`lowercontainer_button rounded-lg justify-center items-center flex my-3 screen:px-2 desktop:px-2 py-2 screen:w-36 desktop:w-40 cursor-pointer ${
               (!tokenApproval || buttonClicked) &&
               "opacity-50 pointer-events-none z-10"
             }`}
           >
             <div
-              className="button_text flex text-black desktop:text-caption-1 twok:text-paragraph-2 leading-paragraph-2 font-bold"
+              className="button_text flex text-black screen:text-caption-1 twok:text-paragraph-2 leading-paragraph-2 font-bold"
               onClick={() => {
                 TryLockToken();
               }}
@@ -190,7 +190,7 @@ function LockAndApprove({
               <img
                 src={LockIcon}
                 alt="Lock Icon"
-                className="svg_black inline-block w-5 ml-3 mr-2"
+                className="svg_black inline-block screen:w-4 desktop:w-5 ml-3 mr-2"
               ></img>
             </div>
           </div>

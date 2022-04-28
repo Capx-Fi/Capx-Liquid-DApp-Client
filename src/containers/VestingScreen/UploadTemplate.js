@@ -68,8 +68,8 @@ function UploadTemplate({
   });
 
   return (
-    <div className="pt-14">
-      <p className="font-bold mb-12 desktop:text-heading-1 desktop:leading-heading-1 twok:leading-heading-1 twok:text-54px px-4">{t("upload_vesting_sheet")}</p>
+    <div className="pt-14 screen:w-10/12 desktop:w-11/12 twok:w-full">
+      <p className="font-bold mb-12 screen:text-heading-2 screen:leading-heading-2 desktop:text-heading-1 desktop:leading-heading-1 twok:leading-heading-1 twok:text-54px px-4">{t("upload_vesting_sheet")}</p>
       <UploadTemplateBox
         getInputProps={getInputProps}
         getRootProps={getRootProps}

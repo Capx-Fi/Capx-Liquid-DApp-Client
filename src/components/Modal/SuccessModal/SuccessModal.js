@@ -20,7 +20,7 @@ function SuccessModal() {
           <div className="successmodalscreen_maincontainer_herocontainer_title">
             Congratulations! Your tokens have been successfully vested!
           </div>
-          <p className="desktop:text-paragraph-1 tablet:text-captions-1 text-caption-2 mt-5 mb-8 text-center tablet:text-left tablet:w-8/12 laptop:w-10/12 desktop:w-full success_subtitle">
+          <p className="border-div pb-6 desktop:text-paragraph-1 screen:text-captions-1 text-caption-2 mt-5 mb-8 text-center tablet:text-left tablet:w-8/12 laptop:w-10/12 desktop:w-full success_subtitle">
             You can view your vested projects in Project Owner Dashboard
           </p>
 
@@ -31,7 +31,7 @@ function SuccessModal() {
           />
 
           <img
-            className="hidden tablet:flex w-64 tablet:w-80 desktop:w-96 absolute -bottom-4 tablet:-bottom-10 right-0"
+            className="hidden tablet:flex w-64 screen:w-72 desktop:w-96 absolute -bottom-4 tablet:-bottom-10 right-0"
             src={ETHDropIllustration}
             alt="ETH Illustration"
           />

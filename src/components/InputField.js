@@ -19,7 +19,7 @@ function InputField({
   return (
     <div className={`${loading ? "animate-pulse" : "" } ${className}`}>
       <label
-        className="block text-green-400 desktop:text-caption-3 twok:text-caption-2 desktop:font-semibold twok:font-bold mb-2"
+        className="block text-green-400 screen:text-caption-3 screen:leading-caption-2 desktop:text-caption-3 twok:text-caption-2 desktop:font-semibold twok:font-bold mb-2"
         for={label}
       >
         {label} *
@@ -30,7 +30,7 @@ function InputField({
             disabled={disabled}
             className={`${
               value && valid && "shadow-input-validated"
-            } appearance-none  text-caption-3 desktop:text-caption-2   ${
+            } appearance-none text-caption-4 desktop:text-caption-2   ${
               loading
                 ? "ring-2 ring-success-color-400"
                 : value && valid
@@ -40,7 +40,7 @@ function InputField({
               !disabled
                 ? ""
                 : "pointer-events-none opacity-50 z-10 cursor-not-allowed"
-            } focus:border-transparent rounded-md tablet:rounded-lg h-28 tablet:h-36  w-full py-2 px-3 pr-6 text-white bg-dark-300 focus:outline-none focus:shadow-outline text-caption-4 leading-caption-4 tablet:text-paragraph-2 tablet:leading-paragraph-2 laptop:text-paragraph-2 laptop:leading-paragraph-2 desktop:text-paragraph-1 desktop:leading-paragraph-1 resize-none`}
+            } focus:border-transparent rounded-md tablet:rounded-lg screen:h-24 desktop:h-36 w-full py-4 px-3 pr-6 text-white bg-dark-300 focus:outline-none focus:shadow-outline text-caption-4 leading-caption-4 screen:text-caption-2 screen:leading-caption-2 desktop:text-paragraph-1 desktop:leading-paragraph-1 resize-none`}
             id={label}
             type="text"
             value={placeholder==="Contract Address" ? value : (loading ? "" : value)}
@@ -62,7 +62,7 @@ function InputField({
               !disabled
                 ? ""
                 : "pointer-events-none opacity-50 z-10 cursor-not-allowed"
-            } focus:border-transparent rounded-lg w-full py-2 px-3 text-white bg-dark-300 h-8 tablet:h-10 laptop:h-14 focus:outline-none focus:shadow-outline text-caption-4 leading-caption-4 tablet:text-paragraph-2 tablet:leading-paragraph-2 laptop:text-paragraph-2 laptop:leading-paragraph-2 desktop:text-paragraph-1 desktop:leading-paragraph-1`}
+            } focus:border-transparent rounded-lg w-full py-2 px-3 text-white bg-dark-300 screen:h-12 desktop:h-14 focus:outline-none focus:shadow-outline text-caption-4 leading-caption-4 screen:text-caption-2 screen:leading-caption-2 desktop:text-paragraph-1 desktop:leading-paragraph-1`}
             id={label}
             type="text"
             value={placeholder==="Contract Address" ? value : (loading ? "" : value)}

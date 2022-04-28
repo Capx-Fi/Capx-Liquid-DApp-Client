@@ -12,11 +12,11 @@ const VestingSteps = ({setShowSteps}) => {
     <div className="vesting_steps h-screen flex bg-dark-400">
       <Header hiddenNav />
       <div className="maincontainer flex gap-x-14 justify-center items-strech m-auto mt-auto">
-        <div className="herocontainer px-9 py-12 rounded-3xl bg-opacity-70 text-white relative screen:w-30v desktop:w-47v twok:w-30v flex flex-col items-start">
-          <div className="title desktop:text-40px desktop:leading-lh-64 twok:text-5xl twok:leading-lh-54 font-bold tracking-tight mt-2 desktop:w-full twok:w-10/12 text-left">
+        <div className="herocontainer px-9 py-10 rounded-3xl bg-opacity-70 text-white relative screen:w-40v desktop:w-47v twok:w-30v flex flex-col items-start">
+          <div className="title screen:text-heading-2 screen:leading-heading-2 desktop:text-40px desktop:leading-lh-64 twok:text-5xl twok:leading-lh-54 font-bold tracking-tight mt-2 desktop:w-full twok:w-10/12 text-left">
             {"Vest Tokens in 3 simple steps"}
           </div>
-          <div className="steps-container mt-2 w-full tracking-tight desktop:text-paragraph-2 twok:text-paragraph-1 desktop:leading-paragraph-1">
+          <div className="steps-container mt-2 w-full tracking-tight screen:text-caption-3 screen:leading-paragraph-1 desktop:text-paragraph-2 twok:text-paragraph-1 desktop:leading-paragraph-1">
             <div className="text-container px-6 my-6 py-1 rounded-lg">
               {"1. Enter your Project Details & Contract Address"}
             </div>
@@ -29,10 +29,10 @@ const VestingSteps = ({setShowSteps}) => {
           </div>
         </div>
 
-        <div className="side-container bg-opacity-70 text-white relative desktop:w-40v screen:w-30v twok:w-30v flex flex-col justify-between">
-          <div className="download-template py-10 justify-self-start flex flex-col rounded-3xl items-center">
+        <div className="side-container bg-opacity-70 text-white relative desktop:w-40v screen:w-40v twok:w-30v flex flex-col justify-between">
+          <div className="download-template py-8 justify-self-start flex flex-col rounded-3xl items-center">
             <a download href="https://capx-resources.s3.amazonaws.com/vesting-sheet-template.xlsx">
-              <div className="xldiv rounded-2xl py-6 text-center font-semibold text-caption-2 leading-caption-2">
+              <div className="xldiv rounded-2xl py-4 text-center font-semibold screen:text-caption-3 screen:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2">
                 <img
                   src={DownloadIcon}
                   alt="Download Icon"
@@ -44,11 +44,11 @@ const VestingSteps = ({setShowSteps}) => {
               </div>
             </a>
 
-            <div className="text-subheading leading-subheading mt-6 text-center font-bold">
+            <div className="screen:text-paragraph-1 screen:leading-paragraph-1 desktop:text-subheading desktop:leading-subheading mt-6 text-center font-bold">
               Download Vesting Sheet Template
             </div>
 
-            <div className="text-caption-2 leading-caption-2 mt-2 text-center w-4/5">
+            <div className="screen:text-caption-3 screen:leading-caption-3 text-caption-2 leading-caption-2 mt-2 text-center w-4/5">
               To proceed further with an error-free vesting experience we
               recommend adding the token details in the following template.
             </div>
@@ -57,7 +57,7 @@ const VestingSteps = ({setShowSteps}) => {
             className="side-button justify-self-end rounded-2xl justify-center items-center flex px-1 py-3 w-full cursor-pointer"
             onClick={() => setShowSteps(false)}
           >
-            <div className="button_text text-black desktop:text-caption-1 desktop:leading-caption-1 twok:text-subheading twok:leading-text-subheading font-bold">
+            <div className="button_text text-black screen:text-caption-1 screen:leading-caption-1 twok:text-subheading twok:leading-text-subheading font-bold">
               {"Begin Vesting"}
               <img
                 src={NextIcon}

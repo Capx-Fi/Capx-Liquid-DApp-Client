@@ -25,6 +25,8 @@ import ProjectDetailsLoading from "../../containers/ProjectOwnerDashboard/Projec
 import TokensReleasedGraphLoading from "../../containers/ProjectOwnerDashboard/TokenReleaseGraphLoading";
 
 import LoadingScreen from "../../containers/LoadingScreen";
+import WalletModal from "../../components/Modal/WalletModal/WalletModal";
+
 import NothingHereProjectOwner from "../NothingHere/NothingHereProjectOwner";
 import { fetchVestedProjectDetails } from "../../utils/fetchVestedProjectDetails";
 import { fetchWrappedProjectDetails } from "../../utils/fetchWrappedProjectDetails";
@@ -40,7 +42,7 @@ function onlyUnique(value, index, self) {
 
 function ProjectOwnerDashboardScreen() {
   const { active, account, chainId } = useWeb3React();
-
+  const [modalMode, setModalMode] = useState(0);
   const [projectDisplayID, setProjectDisplayID] = useState(0);
   const [projectOverviewData, setProjectOverviewData] = useState(null);
   const [wrappedProjectData, setWrappedProjectData] = useState([]);
@@ -85,7 +87,7 @@ function ProjectOwnerDashboardScreen() {
   return (
     <>
       {!active ? (
-        <MetamaskModal />
+        <WalletModal modalMode={modalMode} setModalMode={setModalMode} />
       ) : /*  !projectOverviewData ? (
         <LoadingScreen />
       ) : */ projectOverviewData?.length === 0 ? (

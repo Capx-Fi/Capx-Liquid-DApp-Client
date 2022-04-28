@@ -118,6 +118,7 @@ module.exports = {
         "72v": "72vw",
         "73v": "73vw",
         "50v": "50vw",
+        "52v": "52vw",
         "55v": "55vw",
         "60v": "60vw",
         "65v": "65vw",
@@ -169,6 +170,7 @@ module.exports = {
       screens: {
         tablet: "768px",
         laptop: "1024px",
+        screen: "1280px",
         desktop: "1440px",
         twok: "1920px",
       },

@@ -128,8 +128,8 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
                 symbol: "FTM",
                 decimals: 18,
               },
-              rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
-              blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+              rpcUrls: ["https://rpc3.fantom.network	"],
+              blockExplorerUrls: ["https://testnet.ftmscan.com/"],
             },
           ],
         });
@@ -149,8 +149,8 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
                 symbol: "GLMR",
                 decimals: 18,
               },
-              rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
-              blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+              rpcUrls: ["https://rpc.api.moonbeam.network"],
+              blockExplorerUrls: ["https://moonscan.io/"],
             },
           ],
         });
@@ -163,15 +163,15 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
           method: "wallet_addEthereumChain",
           params: [
             {
-              chainId: "0x13881",
-              chainName: "Polygon Testnet",
+              chainId: "0xA4B1",
+              chainName: "Arbitrum",
               nativeCurrency: {
-                name: "MATIC",
-                symbol: "MATIC",
+                name: "ETH",
+                symbol: "ETH",
                 decimals: 18,
               },
-              rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
-              blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+              rpcUrls: ["https://rpc.ankr.com/arbitrum"],
+              blockExplorerUrls: ["https://testnet.arbiscan.io/"],
             },
           ],
         });

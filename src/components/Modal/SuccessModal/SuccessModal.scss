@@ -4,7 +4,11 @@
   &_maincontainer {
     @apply flex justify-center laptop:items-center m-auto mt-32 tablet:mt-48 laptop:mt-auto;
     &_herocontainer {
-      @apply px-5 py-8 tablet:pl-16 tablet:pr-12 tablet:py-16 desktop:py-16 desktop:pb-20 rounded-lg tablet:rounded-2xl desktop:rounded-4xl text-white relative w-80v tablet:w-75v desktop:w-62v laptop:w-75v flex flex-col items-center tablet:items-start;
+      .border-div {
+        border-bottom: 2.98px solid #2A383C
+      }
+
+      @apply px-5 py-8 tablet:pl-16 tablet:pr-12 screen:py-12 desktop:py-16 desktop:pb-20 rounded-lg tablet:rounded-2xl desktop:rounded-4xl text-white relative w-80v tablet:w-75v screen:w-62v desktop:w-62v laptop:w-75v flex flex-col items-center tablet:items-start;
       background: radial-gradient(
         143.33% 143.33% at 82.41% -4.96%,
         rgba(132, 214, 164, 0.3) 0%,
@@ -20,13 +24,13 @@
         );
       }
       &_title {
-        @apply text-subheading leading-subheading tablet:text-heading-2 tablet:leading-heading-2 font-bold laptop:text-heading-1 laptop:leading-heading-1 desktop:text-40px twok:text-heading-1 desktop:leading-lh-64 twok:leading-heading-1 desktop:font-bold twok:font-semibold desktop:w-11/12 twok:w-10/12 text-center tablet:text-left;
+        @apply text-subheading leading-subheading screen:text-heading-2 screen:leading-heading-1 screen:font-semibold desktop:font-bold desktop:text-40px twok:text-heading-1 desktop:leading-lh-64 twok:leading-heading-1 desktop:font-bold twok:font-semibold screen:w-3/4 desktop:w-11/12 twok:w-10/12 text-center tablet:text-left;
       }
       &_button {
         @apply rounded-xl flex my-4 tablet:my-10 mb-28 tablet:mb-24 laptop:mb-8 laptop:my-10 w-40 tablet:w-72 desktop:w-56 cursor-pointer;
       }
       &_ethdropillustration {
-        @apply hidden tablet:flex w-56 tablet:w-64 desktop:w-80 absolute -bottom-2 laptop:-bottom-4 right-0;      }
+        @apply hidden tablet:flex w-56 screen:w-64 desktop:w-80 absolute -bottom-2 laptop:-bottom-4 right-0;      }
     }
   }
 }

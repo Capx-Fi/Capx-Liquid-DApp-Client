@@ -111,7 +111,7 @@ const ProjectDetails = ({
   }
 
   return (
-    <div className="pt-10 project_details_form desktop:w-11/12 twok:w-full">
+    <div className="pt-10 project_details_form screen:w-10/12 desktop:w-11/12 twok:w-full">
       <p className="vesting_pages_title">{'Enter Project Details'}</p>
       <InputField
         placeholder={'Contract Address'}
@@ -121,7 +121,7 @@ const ProjectDetails = ({
         setValue={setContractAddress}
         maxLength={42}
         disabled={checkingContract}
-        className={'mb-4 tablet:mb-6 desktop:mt-8 twok:mt-12'}
+        className={'screen:mb-4 desktop:mb-6 screen:mt-4 desktop:mt-8 twok:mt-12'}
         loading={checkingContract}
       />
 
@@ -134,7 +134,7 @@ const ProjectDetails = ({
         disabled={
           !tokenDetails.valid || checkingContract || projectExists.exists
         }
-        className={'mb-4 tablet:mb-6'}
+        className={'screen:mb-4 desktop:mb-6'}
         loading={checkingContract}
       />
       <InputField
@@ -150,8 +150,8 @@ const ProjectDetails = ({
         loading={checkingContract}
       />
 
-      <hr className="border-dark-200 mt-12 h-2" />
-      <div className="flex flex-row-reverse mt-8">
+      <hr className="border-dark-200 screen:mt-6 desktop:mt-12 h-2" />
+      <div className="flex flex-row-reverse screen:mt-4 desktop:mt-8">
         <Level3CTA
           text="Next"
           icon={true}

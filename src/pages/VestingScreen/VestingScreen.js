@@ -152,7 +152,7 @@ function VestingScreen() {
                 step === 3 ? "vesting_container_table" : (step === 2 ? "upload_container" : "vesting_container")
               } `}
             >
-              <div className="border-b-2 border-greyborder pb-4 flex justify-between pt-4 text-blizzard items-baseline text-caption-3 leading-caption-3 laptop:text-paragraph-2 laptop:leading-paragraph-2">
+              <div className="border-b-2 border-greyborder screen:pb-2 desktop:pb-4 flex justify-between screen:pt-2 desktop:pt-4 text-blizzard items-baseline screen:text-caption-2 screen:leading-caption-2 desktop:text-paragraph-2 desktop:leading-paragraph-2">
                 <div
                   className={`flex flex-row cursor-pointer items-baseline ${
                     (step === -1) && "invisible"

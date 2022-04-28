@@ -13,31 +13,8 @@ import { CHAIN_NAMES } from "../../../constants/config";
 import React, {useState} from "react";
 
 function MetamaskModal({setModalMode}) {
-	const { active, account, library, connector, activate } = useWeb3React();
-	const [showChooseWalletModal, setShowChooseWalletModal] = useState(false);
-	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const { t } = useTranslation();
-	const { error } = useWeb3React();
-	const isMetamask = window.ethereum && window.ethereum.isMetaMask;
-	const unsupportedChainIdError =
-		error && error instanceof UnsupportedChainIdError;
-	async function connect() {
-		try {
-			await activate(injected);
-			if (unsupportedChainIdError) {
-				enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-					variant: "error",
-				});
-			}
-		} catch (ex) {
-			if (error instanceof UnsupportedChainIdError) {
-				enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-					variant: "error",
-				});
-			}
-			alert(ex);
-		}
-	}
+	
 	return (
     <article className="metamaskmodalscreen">
       <Header hiddenNav />

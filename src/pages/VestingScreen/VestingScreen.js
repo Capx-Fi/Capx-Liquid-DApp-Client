@@ -14,8 +14,7 @@ import Errors from "../../containers/VestingScreen/Errors";
 
 import SuccessModal from "../../components/Modal/SuccessModal/SuccessModal";
 import { useWeb3React } from "@web3-react/core";
-import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
-import ChooseWalletModal from "../../components/Modal/ChooseWalletModal/ChooseWalletModal";
+
 
 import VestingSteps from "../../components/VestingSteps/VestingSteps";
 import ProjectDetails2 from "../../components/VestingForm/ProjectDetails/ProjectDetails";

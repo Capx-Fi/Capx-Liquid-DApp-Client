@@ -257,7 +257,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 											title={
 												<>
 													<span className="flex justify-between items-center">
-														{`Please Change chain on MetaMask on your Mobile`}
+														{`Please change the chain on MetaMask Mobile`}
 													</span>
 												</>
 											}

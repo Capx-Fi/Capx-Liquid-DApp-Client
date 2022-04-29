@@ -15,7 +15,13 @@ import { CHAIN_NAMES } from "../../constants/config";
 
 import { getSortBy } from "../../constants/getChainConfig";
 
-function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
+function Header({
+	vesting,
+	hiddenNav,
+	showSteps,
+	hiddenSwitch,
+	isWalletConnect,
+}) {
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const { active, account, library, connector, activate, deactivate, chainId } =
 		useWeb3React();
@@ -190,7 +196,6 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 		}
 	}
 
-	console.log(chainId);
 	const HtmlTooltip = withStyles((theme) => ({
 		tooltip: {
 			background: "#2A383C",
@@ -248,7 +253,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 						{active ? (
 							<>
 								<div className="mr-4">
-									{connector === "WalletConnectConnector" ? (
+									{connector?.constructor?.name === "InjectedConnector" ? (
 										<DropDown sortBy={sortBy} chainChange={chainChange} />
 									) : (
 										<HtmlTooltip
@@ -257,12 +262,12 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 											title={
 												<>
 													<span className="flex justify-between items-center">
-														{`Please change the chain on MetaMask Mobile`}
+														{`Please switch chain on Wallet Provider`}
 													</span>
 												</>
 											}
 										>
-											<div className="bg-dark-200 w-30 rounded-md p-2 cursor-pointer">
+											<div className="bg-dark-200 w-32 p-2 flex justify-center items-center rounded-md cursor-pointer desktop:text-caption-1 twok:text-paragraph-2 screen:text-caption-3">
 												{sortBy === "matic" ? "Matic" : sortBy}
 											</div>
 										</HtmlTooltip>

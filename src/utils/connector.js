@@ -12,4 +12,10 @@ export const injected = new InjectedConnector({
 
 export const walletconnect = new WalletConnectConnector({
 	qrcode: true,
+	supportedChainIds: process.env.REACT_APP_SUPPORTED_CHAIN_IDS.replace(
+		/['"]+/g,
+		""
+	)
+		.split(", ")
+		.map(Number),
 });

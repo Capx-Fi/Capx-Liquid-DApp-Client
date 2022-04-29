@@ -4,7 +4,7 @@
   &_maincontainer {
     @apply flex justify-center laptop:items-center m-auto mt-32 tablet:mt-48  laptop:mt-auto;
     &_herocontainer {
-      @apply px-5 py-8 tablet:pl-16 tablet:pr-12 tablet:py-16 desktop:py-8 rounded-lg bg-opacity-70 tablet:rounded-2xl desktop:rounded-4xl text-white relative w-70v tablet:w-75v desktop:w-60v twok:w-60v flex flex-col items-start;
+      @apply px-12 py-6 twok:px-20 twok:py-16 desktop:py-8 rounded-lg bg-opacity-70 tablet:rounded-2xl desktop:rounded-4xl text-white relative w-70v screen:w-60v desktop:w-60v twok:w-60v flex flex-col items-start;
       background: linear-gradient(
         270.08deg,
         rgba(132, 214, 164, 0.3) 0.02%,

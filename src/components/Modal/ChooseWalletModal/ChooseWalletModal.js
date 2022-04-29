@@ -87,7 +87,7 @@ const Landing = () => {
 								{"Metamask"}
 							</div>
 						</div>
-						<div
+						{/* <div
 							onClick={walletConnect}
 							className="herocontainer_button flex flex-start rounded-xl items-center flex px-5 py-4 z-10 cursor-pointer"
 						>
@@ -101,7 +101,7 @@ const Landing = () => {
 							<div className="button_text text-white desktop:text-captions-1 twok:text-subheading desktop-captions-1 twok:leading-subheading desktop:font-semibold">
 								{"WalletConnect"}
 							</div>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</div>

@@ -137,7 +137,7 @@ function VestingScreen() {
           <div className="left_div bg-vesting ">
             <div className="mx-auto z-50" onClick={() => history.push("/")}>
               <img
-                className="cursor-pointer hidden mx-auto mt-5 tablet:flex h-8 laptop:h-10"
+                className="cursor-pointer hidden mx-auto mt-5 tablet:flex h-8 twok:h-12"
                 onClick={() => history.push("/")}
                 src={CapxLogo}
                 alt="capx logo"

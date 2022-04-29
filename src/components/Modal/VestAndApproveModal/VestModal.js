@@ -71,7 +71,7 @@ function VestModal({ open, setOpen, vestModalStatus }) {
                   : LockToChain
               }
             />
-            <div className="text-white text-center leading-paragraph-2 tablet:text-caption-1 tablet:leading-heading-1 desktop:text-subheading font-semibold w-8/12 laptop:w-6/12 desktop:w-8/12">
+            <div className="text-white text-center screen:text-subheading screen:leading-subheading leading-paragraph-2 tablet:text-caption-1 tablet:leading-heading-1 desktop:text-subheading font-semibold w-8/12 laptop:w-6/12 desktop:w-8/12">
               {vestModalStatus === "success"
                 ? "Your tokens are now successfully vested"
                 : vestModalStatus === "failure"

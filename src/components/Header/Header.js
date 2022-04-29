@@ -8,6 +8,7 @@ import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
 import { injected } from "../../utils/connector";
 import ChooseDashboardModal from "../Modal/ChooseDashboardModal/ChooseDashboardModal";
 import DropDown from "../DropDown/DropDown";
+import { Tooltip, withStyles } from "@material-ui/core";
 
 import { useEffect, useState } from "react";
 import { CHAIN_NAMES } from "../../constants/config";
@@ -190,6 +191,16 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 	}
 
 	console.log(chainId);
+	const HtmlTooltip = withStyles((theme) => ({
+		tooltip: {
+			background: "#2A383C",
+			color: "#F1FAF2",
+			maxWidth: 800,
+			fontSize: theme.typography.pxToRem(12),
+			borderRadius: "4px",
+			zIndex: 100,
+		},
+	}))(Tooltip);
 	return (
 		<>
 			<ChooseDashboardModal
@@ -240,9 +251,21 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 									{connector === "WalletConnectConnector" ? (
 										<DropDown sortBy={sortBy} chainChange={chainChange} />
 									) : (
-										<div className="bg-dark-200 w-30 rounded-md p-2">
-											{sortBy === "matic" ? "Matic" : sortBy}
-										</div>
+										<HtmlTooltip
+											arrow
+											placement="bottom"
+											title={
+												<>
+													<span className="flex justify-between items-center">
+														{`Please Change chain on MetaMask on your Mobile`}
+													</span>
+												</>
+											}
+										>
+											<div className="bg-dark-200 w-30 rounded-md p-2 cursor-pointer">
+												{sortBy === "matic" ? "Matic" : sortBy}
+											</div>
+										</HtmlTooltip>
 									)}
 								</div>
 								<div className="header_navbar_logoutbutton">

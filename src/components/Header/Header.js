@@ -128,14 +128,14 @@ function Header({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0xFA",
+							chainId: "0xFA2",
 							chainName: "Fantom",
 							nativeCurrency: {
 								name: "FTM",
 								symbol: "FTM",
 								decimals: 18,
 							},
-							rpcUrls: ["https://rpc3.fantom.network	"],
+							rpcUrls: ["https://rpc3.fantom.network"],
 							blockExplorerUrls: ["https://testnet.ftmscan.com/"],
 						},
 					],

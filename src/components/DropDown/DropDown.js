@@ -30,7 +30,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
       </button>
       {open && (
         <div className="absolute right-0 bg-dark-300 py-2 mt-2 bg-whitedivide-y divide-gray-600 rounded-md shadow-xl w-40">
-          {/* <p
+          <p
             className="option"
             onClick={() => {
               chainChange("Ethereum");
@@ -38,7 +38,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
             }}
           >
             Ethereum
-          </p> */}
+          </p>
           <p
             className="option"
             onClick={() => {
@@ -69,36 +69,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
           >
             Avalanche
           </p>
-          <p
-            className="option"
-            onClick={() => {
-              chainChange("Fantom");
-              setOpen(false);
-              setShowMenu && setShowMenu(false);
-            }}
-          >
-            Fantom
-          </p>
-          <p
-            className="option"
-            onClick={() => {
-              chainChange("Moonbeam");
-              setOpen(false);
-              setShowMenu && setShowMenu(false);
-            }}
-          >
-            Moonbeam
-          </p>
-          <p
-            className="option"
-            onClick={() => {
-              chainChange("Arbitrum");
-              setOpen(false);
-              setShowMenu && setShowMenu(false);
-            }}
-          >
-            Arbitrum
-          </p>
+          
         </div>
       )}
     </div>

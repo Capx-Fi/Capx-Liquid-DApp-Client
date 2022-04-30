@@ -7,7 +7,7 @@ export const TRANSLATIONS_EN = {
 	already_vested: "Already Vested? Explore.",
 	dashboard: "Dashboard",
 	please_connect_metamask: "Please Connect your",
-	please_connect_metamask_2: "Wallet to proceed",
+	please_connect_metamask_2: "Metamask Wallet to proceed",
 	connect_metamask: "Connect Metamask",
 	install_metamask: "Install Metamask",
 	vest_token_steps: "Vest Tokens in 6 simple steps",

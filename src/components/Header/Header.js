@@ -128,7 +128,7 @@ function Header({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0xFA2",
+							chainId: "0xFA",
 							chainName: "Fantom",
 							nativeCurrency: {
 								name: "FTM",

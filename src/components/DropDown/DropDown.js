@@ -69,7 +69,16 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
           >
             Avalanche
           </p>
-          
+          <p
+            className="option"
+            onClick={() => {
+              chainChange("Fantom");
+              setOpen(false);
+              setShowMenu && setShowMenu(false);
+            }}
+          >
+            Fantom
+          </p>
         </div>
       )}
     </div>

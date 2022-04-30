@@ -59,7 +59,7 @@ const Landing = () => {
             <div>
               <div className="lowercontainer_button rounded-md justify-center items-center flex my-3 px-1 py-1 w-40 cursor-pointer">
     
-                <div className="button_text flex text-black screen:py-1 desktop:py-0 screen:text-caption-3 screen:leading-caption-3 desktop:text-caption-3 desktop:leading-text-caption-3 font-bold"
+                <div className="button_text flex text-black screen:py-1 twok:py-0 desktop:py-1 screen:text-caption-3 screen:leading-caption-3 desktop:text-caption-3 desktop:leading-text-caption-3 font-bold"
                   onClick={() => { setDashboardModal(true) }}>
                     <div className="flex items-center">{"DASHBOARD"}</div>
                     <img

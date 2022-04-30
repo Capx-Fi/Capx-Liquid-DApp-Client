@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Level3CTA from "../../components/CTA/Level3CTA";
 
-import LockIcon from "../../assets/lock.png";
-import InfoIcon from "../../assets/Info.png";
+import LockIcon from "../../assets/lock-current.svg";
+import CheckIcon from "../../assets/check-current.svg";
 import { totalVested } from "../../utils/totalVested";
 import { approveToken } from "../../utils/approveTokens";
 import { lockTokens } from "../../utils/lockTokens";
@@ -33,6 +33,8 @@ function LockAndApprove({
   setApproveModalOpen,
   vestModalOpen,
   setVestModalOpen,
+  totalAddresses,
+  uniqueAddresses,
 }) {
   const web3 = new Web3(Web3.givenProvider);
   const { chainId } = useWeb3React();
@@ -131,7 +133,7 @@ function LockAndApprove({
     setButtonClicked(false);
   };
   return (
-    <div className="pt-10">
+    <div className="lock_approve">
       <ApproveModal
         open={approveModalOpen}
         setOpen={setApproveModalOpen}
@@ -144,61 +146,54 @@ function LockAndApprove({
         vestModalStatus={vestModalStatus}
         setVestModalStatus={setVestModalStatus}
       />
-      <p className="vesting_pages_title">{t("lock_vesting_sheet")}</p>
 
-      <div
-        className={`tablet:w-max  tablet:px-8 tablet:py-6 px-4 py-5 rounded-lg tablet:rounded-xl flex flex-row ring-1 bg-dark-300 ring-success-color-300`}
-      >
-        <div>
-          <img
-            alt="upload vesting sheet"
-            src={LockIcon}
-            className="w-6 tablet:w-6 desktop:w-8 mr-6 tablet: pt-1 "
-          />
+      <div className="flex flex-row justify-between mt-8 text-greylabel2 screen:text-caption-3 screen:leading-caption-2 desktop:text-caption-1 desktop:leading-caption-1">
+        <div className="flex flex-col justify-center">
+          <div>Number of unique addresses: {uniqueAddresses}</div>
+          <div>Total addresses: {totalAddresses}</div>
         </div>
-        <div className="whitespace-normal desktop:text-paragraph-2 tablet:text-caption-1 text-caption-2 flex flex-col mr-5 mt-1">
-          {uploadedFile.name}
-        </div>
-
-        <div className="hidden tablet:flex">
-          {checkTokenApproval && (
-            <Level3CTA
-              text={tokenApproval ? `${t("lock_token")}` : `${t("approve")}`}
-              icon={true}
-              disabled={buttonClicked}
-              onClick={() =>
-                tokenApproval ? TryLockToken() : TryApproveToken()
-              }
-            />
-          )}
-        </div>
-      </div>
-
-      <hr className="border-dark-200 mt-10 h-2"></hr>
-      <div className="flex tablet:hidden mt-3">
-        <Level3CTA
-          text={tokenApproval ? `${t("lock_token")}` : `${t("approve")}`}
-          icon={true}
-          disabled={buttonClicked}
-          onClick={() => (tokenApproval ? TryLockToken() : TryApproveToken())}
-        />
-      </div>
-      <div className="flex flex-row mt-8">
-        <div
-          className={`tablet:w-max cursor-pointer tablet:px-8 tablet:py-6 px-4 py-1 text-success-color-300 rounded-xl flex flex-row bg-success-color-200 bg-opacity-10  `}
-        >
-          <div>
-            <img
-              alt="upload vesting sheet"
-              src={InfoIcon}
-              className="w-5 tablet:w-5 desktop:w-6 mr-6 tablet: pt-1 "
-            />
+        <div className="flex flex-row gap-x-6">
+          <div
+            className={`lowercontainer_button rounded-lg justify-center items-center flex my-3 screen:px-2 desktop:px-2 py-2 screen:w-36 desktop:w-40 cursor-pointer ${
+              (tokenApproval || buttonClicked) &&
+              "opacity-50 pointer-events-none z-10"
+            }`}
+          >
+            <div
+              className="button_text flex text-black screen:text-caption-1 twok:text-paragraph-2 leading-paragraph-2 font-bold"
+              onClick={() => {
+                TryApproveToken();
+              }}
+            >
+              <div className="flex items-center">{"Approve"}</div>
+              <img
+                src={CheckIcon}
+                alt="Check Icon"
+                className="svg_black inline-block screen:w-4 desktop:w-5 ml-3 mr-2"
+              ></img>
+            </div>
           </div>
-          <p className="whitespace-normal desktop:text-paragraph-2 tablet:text-caption-1 text-caption-2">
-            You’re locking {toPlainString(totalVested(vestingArray))} tokens
-            with {vestingArray.length}{" "}
-            {vestingArray.length > 1 ? "addresses" : "address"}
-          </p>
+
+          <div
+            className={`lowercontainer_button rounded-lg justify-center items-center flex my-3 screen:px-2 desktop:px-2 py-2 screen:w-36 desktop:w-40 cursor-pointer ${
+              (!tokenApproval || buttonClicked) &&
+              "opacity-50 pointer-events-none z-10"
+            }`}
+          >
+            <div
+              className="button_text flex text-black screen:text-caption-1 twok:text-paragraph-2 leading-paragraph-2 font-bold"
+              onClick={() => {
+                TryLockToken();
+              }}
+            >
+              <div className="flex items-center">{"Lock ETT"}</div>
+              <img
+                src={LockIcon}
+                alt="Lock Icon"
+                className="svg_black inline-block screen:w-4 desktop:w-5 ml-3 mr-2"
+              ></img>
+            </div>
+          </div>
         </div>
       </div>
     </div>

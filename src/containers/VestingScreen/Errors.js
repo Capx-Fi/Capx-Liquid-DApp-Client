@@ -16,7 +16,7 @@ function Errors({ setStep, error, resetUploadData }) {
         </p>
         <div
           onClick={() => {
-            setStep(4);
+            setStep(2);
           }}
           className="desktop:text-paragraph-2 item-center cursor-pointer laptop:text-caption-1 flex flex-row tablet:text-caption-3 text-caption-4 ring-1 ml-8 h-fit-content rounded-lg laptop:rounded-xl  text-error-color-400 font-semibold  ring-error-color-400 px-1.5 py-1.5 tablet:px-2 tablet:py-2 "
         >
@@ -59,7 +59,7 @@ function Errors({ setStep, error, resetUploadData }) {
           text="Reupload Vesting Sheet"
           onClick={() => {
             resetUploadData();
-            setStep(4);
+            setStep(2);
           }}
         />
       </div>

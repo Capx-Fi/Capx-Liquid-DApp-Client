@@ -8,7 +8,7 @@
         @apply rounded-md tablet:rounded-lg flex px-3 py-1 desktop:px-6 desktop:py-2 items-center justify-center text-center w-fit-content cursor-pointer;
         background: linear-gradient(356.23deg, #96cf03 -65.8%, #f1fff6 89%);
         &_text {
-          @apply mr-3 text-caption-1 laptop:text-paragraph-2  font-medium text-black;
+          @apply mr-3 text-caption-1 screen:text-caption-1 screen:leading-caption-1 screen:p-1 screen:px-2 desktop:p-0 screen:font-bold laptop:text-paragraph-2 desktop:font-medium text-black;
         }
         &_icon {
           @apply w-3 text-black;
@@ -20,7 +20,7 @@
     }
     &_level1 {
       &_button {
-        @apply rounded-md tablet:rounded-lg flex px-4 py-1 desktop:px-6 desktop:py-3 items-center justify-center text-center w-fit-content cursor-pointer;
+        @apply rounded-md screen:py-2 tablet:rounded-lg flex px-4 py-1 desktop:px-6 desktop:py-3 items-center justify-center text-center w-fit-content cursor-pointer;
         background: linear-gradient(180deg, #97D10A -8.65%, #206300 100%);        &_text {
           @apply mr-3 desktop:text-paragraph-2 tablet:text-caption-1 text-caption-1 font-medium text-white;
         }

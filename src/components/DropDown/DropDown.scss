@@ -1,0 +1,7 @@
+.header-dropdown-button {
+  @apply flex flex-row w-40 justify-between items-center rounded-lg px-2 py-2.5 bg-dark-200  border text-greylabel text-caption-1 font-semibold border-dark-200 desktop:text-caption-2 desktop:w-32 tablet:w-20 tablet:text-caption-3;
+}
+
+.option {
+  @apply block px-4 text-left cursor-pointer py-2 w-11/12 text-caption-2 text-greylabel hover:bg-dark-300 hover:text-white;
+}

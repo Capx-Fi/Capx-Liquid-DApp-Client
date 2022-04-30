@@ -253,25 +253,7 @@ function Header({
 						{active ? (
 							<>
 								<div className="mr-4">
-									{connector?.constructor?.name === "InjectedConnector" ? (
-										<DropDown sortBy={sortBy} chainChange={chainChange} />
-									) : (
-										<HtmlTooltip
-											arrow
-											placement="bottom"
-											title={
-												<>
-													<span className="flex justify-between items-center">
-														{`Please switch chain on Wallet Provider`}
-													</span>
-												</>
-											}
-										>
-											<div className="bg-dark-200 w-32 p-2 flex justify-center items-center rounded-md cursor-pointer desktop:text-caption-1 twok:text-paragraph-2 screen:text-caption-3">
-												{sortBy === "matic" ? "Matic" : sortBy}
-											</div>
-										</HtmlTooltip>
-									)}
+									<DropDown sortBy={sortBy} chainChange={chainChange} />
 								</div>
 								<div className="header_navbar_logoutbutton">
 									<div className="header_navbar_logoutbutton_text">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
 import MetamaskIcon from "../../../assets/metamask.svg";
@@ -14,17 +14,16 @@ import { useTranslation } from "react-i18next";
 const Landing = () => {
 	const { active, account, library, connector, activate } = useWeb3React();
 	const [showChooseWalletModal, setShowChooseWalletModal] = useState(false);
+
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const { t } = useTranslation();
 	const { error } = useWeb3React();
 	const isMetamask = window.ethereum && window.ethereum.isMetaMask;
-	const [isWalletConnect, setIsWalletConnect] = useState(false);
 	const unsupportedChainIdError =
 		error && error instanceof UnsupportedChainIdError;
 
 	async function connect() {
 		try {
-			setIsWalletConnect(false);
 			await activate(injected);
 			if (unsupportedChainIdError) {
 				enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
@@ -43,7 +42,6 @@ const Landing = () => {
 
 	async function walletConnect() {
 		try {
-			setIsWalletConnect(true);
 			await activate(walletconnect);
 			if (unsupportedChainIdError) {
 				enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
@@ -62,7 +60,7 @@ const Landing = () => {
 
 	return (
 		<article className="h-screen bg-dark-400 flex choose_screen">
-			<Header hiddenNav isWalletConnect={isWalletConnect} />
+			<Header hiddenNav />
 			<div className="justify-center laptop:items-center m-auto mt-32 tablet:mt-48 laptop:mt-auto">
 				<div className="herocontainer screen:px-16 screen:py-10 desktop:px-20 desktop:py-14 rounded-3xl bg-opacity-70 text-white relative screen:w-65v desktop:w-60v flex flex-col items-start">
 					<div className="title screen:text-heading-2 screen:leading-lh-64 desktop:text-40px desktop:leading-lh-64 twok:text-50px twok:leading-lh-54 leading-title-1 font-semibold w-10/12 text-left">

@@ -9,19 +9,14 @@ import { injected } from "../../utils/connector";
 import ChooseDashboardModal from "../Modal/ChooseDashboardModal/ChooseDashboardModal";
 import DropDown from "../DropDown/DropDown";
 import { Tooltip, withStyles } from "@material-ui/core";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import { useEffect, useState } from "react";
 import { CHAIN_NAMES } from "../../constants/config";
 
 import { getSortBy } from "../../constants/getChainConfig";
 
-function Header({
-	vesting,
-	hiddenNav,
-	showSteps,
-	hiddenSwitch,
-	isWalletConnect,
-}) {
+function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const { active, account, library, connector, activate, deactivate, chainId } =
 		useWeb3React();
@@ -30,10 +25,27 @@ function Header({
 	const currentChainId = metaState.chain.id?.toString();
 	const [dashboardModal, setDashboardModal] = useState(false);
 	const [sortBy, setSortBy] = useState("Ethereum");
-	const web3 = new Web3(Web3.givenProvider);
 	const handleCloseSelectDashboard = () => {
 		setDashboardModal(false);
 	};
+
+	let provider = null;
+
+	if (connector?.constructor?.name === "InjectedConnector") {
+		provider = window.ethereum;
+	} else {
+		provider = new WalletConnectProvider({
+			rpc: {
+				80001: "https://matic-mumbai.chainstacklabs.com",
+				97: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+				4: "https://rinkeby.infura.io/web3/",
+				43113: "https://api.avax-test.network/ext/bc/C/rpc",
+				4002: "https://rpc3.fantom.network",
+			},
+		});
+	}
+	const web3 = new Web3(provider);
+	console.log(web3);
 
 	useEffect(() => {
 		setSortBy(chainId && getSortBy(chainId));

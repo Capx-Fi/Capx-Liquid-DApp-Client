@@ -1,116 +1,138 @@
+import { useWeb3React } from "@web3-react/core";
 import { useContext, useEffect, useRef } from "react";
 import { MetaStateContext } from "./store";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 const chains = (chainId) => {
-  if (Number(chainId) && chainId?.length > 9) {
-    return "local";
-  }
-  switch (chainId) {
-    case "1":
-      return "mainnet";
-    case "3":
-      return "ropsten";
-    case "4":
-      return "rinkeby";
-    case "5":
-      return "goerli";
-    case "42":
-      return "kovan";
-    default:
-      return `unknown`;
-  }
+	if (Number(chainId) && chainId?.length > 9) {
+		return "local";
+	}
+	switch (chainId) {
+		case "1":
+			return "mainnet";
+		case "3":
+			return "ropsten";
+		case "4":
+			return "rinkeby";
+		case "5":
+			return "goerli";
+		case "42":
+			return "kovan";
+		default:
+			return `unknown`;
+	}
 };
 
 const useMetamask = () => {
-  const { state, dispatch } = useContext(MetaStateContext);
-  const _isMounted = useRef(true);
-  const _isConnectCalled = useRef(false);
-  const provider = window.ethereum;
-  useEffect(() => {
-    return () => {
-      _isMounted.current = false;
-    };
-  }, []);
+	const { connector } = useWeb3React();
+	const { state, dispatch } = useContext(MetaStateContext);
+	const _isMounted = useRef(true);
+	const _isConnectCalled = useRef(false);
+	let provider = null;
 
-  const connect = async (Web3Interface, settings = {}) => {
-    if (!provider) throw Error("Metamask is not available.");
-    if (!Web3Interface)
-      throw Error(
-        "Web3 Provider is required. You can use either ethers.js or web3.js."
-      );
-    console.log(provider, typeof _isMounted.current);
-    if (!_isMounted.current) throw Error("Component is not mounted.");
-    if (_isConnectCalled.current) throw Error("Connect method already called.");
-    _isConnectCalled.current = true;
+	console.log(connector?.constructor?.name);
 
-    const _web3 = new Web3Interface(
-      ...(Object.keys(settings).length ? [provider, settings] : [provider])
-    );
+	if (connector?.constructor?.name === "InjectedConnector") {
+		provider = window.ethereum;
+	} else {
+		provider = new WalletConnectProvider({
+			rpc: {
+				80001: "https://matic-mumbai.chainstacklabs.com",
+				97: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+				4: "https://rinkeby.infura.io/web3/",
+				43113: "https://api.avax-test.network/ext/bc/C/rpc",
+				4002: "https://rpc3.fantom.network",
+			},
+		});
+	}
+	console.log(provider);
+	useEffect(() => {
+		return () => {
+			_isMounted.current = false;
+		};
+	}, []);
 
-    const account = await getAccounts({ requestPermission: true });
-    const chainDet = await getChain();
+	const connect = async (Web3Interface, settings = {}) => {
+		if (!provider) throw Error("Metamask is not available.");
+		console.log(_isMounted);
+		if (!Web3Interface)
+			throw Error(
+				"Web3 Provider is required. You can use either ethers.js or web3.js."
+			);
+		console.log(provider, typeof _isMounted.current);
+		if (!_isMounted.current) throw Error("Component is not mounted.");
+		if (_isConnectCalled.current) throw Error("Connect method already called.");
+		_isConnectCalled.current = true;
 
-    dispatch({
-      type: "SET_INITALCONNECT",
-      payload: { _web3, account, chainDet },
-    });
+		const _web3 = new Web3Interface(
+			...(Object.keys(settings).length ? [provider, settings] : [provider])
+		);
 
-    provider.on("accountsChanged", (accounts) => {
-      if (!accounts.length) dispatch({ type: "SET_CONNECTED", payload: false });
-      dispatch({ type: "SET_ACCOUNT", payload: accounts });
-    });
+		const account = await getAccounts({ requestPermission: true });
+		console.log(account);
+		const chainDet = await getChain();
 
-    provider.on("chainChanged", (chainId) => {
-      const _chainId = parseInt(chainId, 16).toString();
-      const _chainInfo = { id: _chainId, name: chains(_chainId) };
-      dispatch({ type: "SET_CHAIN", payload: _chainInfo });
-    });
+		dispatch({
+			type: "SET_INITALCONNECT",
+			payload: { _web3, account, chainDet },
+		});
 
-    _isConnectCalled.current = false;
-  };
+		provider.on("accountsChanged", (accounts) => {
+			if (!accounts.length) dispatch({ type: "SET_CONNECTED", payload: false });
+			dispatch({ type: "SET_ACCOUNT", payload: accounts });
+		});
 
-  const getAccounts = async (
-    { requestPermission } = { requestPermission: false }
-  ) => {
-    if (!provider) {
-      console.warn("Metamask is not available.");
-      return;
-    }
-    try {
-      const accounts = await provider.request({
-        method: requestPermission ? "eth_requestAccounts" : "eth_accounts",
-        params: [],
-      });
-      return accounts;
-    } catch (error) {
-      throw Error(error);
-    }
-  };
+		provider.on("chainChanged", (chainId) => {
+			const _chainId = parseInt(chainId, 16).toString();
+			const _chainInfo = { id: _chainId, name: chains(_chainId) };
+			dispatch({ type: "SET_CHAIN", payload: _chainInfo });
+		});
 
-  const getChain = async () => {
-    if (!provider) {
-      console.warn("Metamask is not available.");
-      return;
-    }
-    try {
-      const chainId = await provider.request({
-        method: "eth_chainId",
-        params: [],
-      });
-      const chainIdInString = parseInt(chainId, 16).toString();
-      const _chainInfo = { id: chainIdInString, name: chains(chainIdInString) };
-      return _chainInfo;
-    } catch (error) {
-      throw Error(error);
-    }
-  };
+		_isConnectCalled.current = false;
+	};
 
-  return {
-    connect,
-    getAccounts,
-    getChain,
-    metaState: { ...state, isAvailable: !!provider },
-  };
+	const getAccounts = async (
+		{ requestPermission } = { requestPermission: false }
+	) => {
+		if (!provider) {
+			console.warn("Metamask is not available.");
+			return;
+		}
+		try {
+			const accounts = await provider.request({
+				method: requestPermission ? "eth_requestAccounts" : "eth_accounts",
+				params: [],
+			});
+			return accounts;
+		} catch (error) {
+			throw Error(error);
+		}
+	};
+
+	const getChain = async () => {
+		if (!provider) {
+			console.warn("Metamask is not available.");
+			return;
+		}
+		try {
+			const chainId = await provider.request({
+				method: "eth_chainId",
+				params: [],
+			});
+			const chainIdInString = parseInt(chainId, 16).toString();
+			const _chainInfo = { id: chainIdInString, name: chains(chainIdInString) };
+			return _chainInfo;
+		} catch (error) {
+			throw Error(error);
+		}
+	};
+
+	return {
+		connect,
+		getAccounts,
+		getChain,
+		metaState: { ...state, isAvailable: !!provider },
+	};
 };
 
 export default useMetamask;

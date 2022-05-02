@@ -43,9 +43,9 @@ export const fetchVestedProjectDetails = async (showIDs, GRAPHAPIURL) => {
     for(let i=0; i < projectDataGQL.data.projects.length; i++){
       _projectIDs.push(projectDataGQL.data.projects[i].id);
     }
-    console.log("ProjectIDs",_projectIDs);
+    // console.log("ProjectIDs",_projectIDs);
     for(let i=0; i < showIDs.length; i++){
-      console.log(i, _projectIDs.indexOf(showIDs[i]));
+      // console.log(i, _projectIDs.indexOf(showIDs[i]));
       if(_projectIDs.indexOf(showIDs[i]) == -1){
         projectDetailsData.data.projects[i] = {};
       }else{

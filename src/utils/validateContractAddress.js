@@ -8,12 +8,12 @@ export async function validateContractAddress(address) {
   let contractDetails = { ticker: "", decimal: 10, valid: false };
   let flag = address?.length === 42;
   if (flag) {
-    console.log("hey");
+    // console.log("hey");
     try {
       const tokenInst = new web3.eth.Contract(CONTRACT_ABI_ERC20, address);
       const tokenSymbol = await tokenInst.methods.symbol().call();
       const tokenDecimal = await tokenInst.methods.decimals().call();
-      console.log(tokenSymbol);
+      // console.log(tokenSymbol);
       if (tokenSymbol && tokenDecimal) {
         contractDetails.ticker = tokenSymbol;
         contractDetails.decimal = tokenDecimal;

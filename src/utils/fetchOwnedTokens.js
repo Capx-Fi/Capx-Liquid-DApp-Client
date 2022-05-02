@@ -7,7 +7,7 @@ export const fetchOwnedTokens = async ( account, setOwnedProjectsData, GRAPHAPIU
       cache: new InMemoryCache(),
     });
   let userProjects = [];
-  console.log(account,"maccou");
+  // console.log(account,"maccou");
   const userDataQuery = `query{
   projects {
         projectOwnerAddress
@@ -81,7 +81,7 @@ export const fetchOwnedTokens = async ( account, setOwnedProjectsData, GRAPHAPIU
       userProjects.sort((a, b) => new Date(a.date) - new Date(b.date));
     setOwnedProjectsData([...userProjects]);
 
-    console.log(userProjects);
+    // console.log(userProjects);
   } catch (e) {
     console.log(e);
   }

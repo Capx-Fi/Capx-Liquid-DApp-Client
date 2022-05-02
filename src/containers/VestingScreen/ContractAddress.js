@@ -34,7 +34,7 @@ function ContractAddress({
       });
     }
     let validateResponse = await validateContractAddress(address);
-    console.log(validateResponse);
+    // console.log(validateResponse);
     if (validateResponse) {
       setTokenDetails((prevState) => ({
         ...prevState,

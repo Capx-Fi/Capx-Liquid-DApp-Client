@@ -59,7 +59,7 @@ function VestModal({ open, setOpen, vestModalStatus }) {
       <Fade in={open}>
         <div className={classes.paper}>
           <div className="flex flex-col justify-center mx-auto items-center laptop:h-72 pb-8">
-            {console.log(vestModalStatus)}
+            {/* {console.log(vestModalStatus)} */}
             <Lottie
               className="w-32 laptop:w-48"
               loop={true}

@@ -38,7 +38,7 @@ const UploadSheet = (
         const ws = wb.Sheets[wsname];
         // let data = XLSX.utils.sheet_to_json(ws, { header: false });
         parseSheetObj(ws).then((res) => {
-          console.log(res, "parseResponse");
+          // console.log(res, "parseResponse");
           let errors = verifyVestingData(
             res,
             defaultWeb3,

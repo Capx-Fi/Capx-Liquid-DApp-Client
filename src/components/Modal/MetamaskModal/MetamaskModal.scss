@@ -4,7 +4,7 @@
   &_maincontainer {
     @apply flex justify-center laptop:items-center m-auto mt-32 tablet:mt-48  laptop:mt-auto;
     &_herocontainer {
-      @apply px-5 py-8 tablet:pl-16 tablet:pr-12 tablet:py-16 desktop:py-8 rounded-lg bg-opacity-70 tablet:rounded-2xl desktop:rounded-4xl text-white relative w-70v tablet:w-75v desktop:w-45v laptop:w-65v flex flex-col items-start;
+      @apply px-12 py-6 desktop:px-16 twok:px-20 twok:py-16 desktop:py-8 rounded-lg bg-opacity-70 tablet:rounded-2xl desktop:rounded-4xl text-white relative w-70v screen:w-60v desktop:w-60v twok:w-60v flex flex-col items-start;
       background: linear-gradient(
         270.08deg,
         rgba(132, 214, 164, 0.3) 0.02%,
@@ -21,15 +21,16 @@
         border-radius: 16px;
       }
       &_title {
-        @apply text-paragraph-2 leading-paragraph-2 tablet:text-heading-1 tablet:leading-heading-1 font-bold laptop:mt-4 laptop:text-heading-1 laptop:leading-lh-54 desktop:text-heading-1 desktop:leading-lh-54 desktop:font-semibold w-11/12 text-left;
+        @apply text-paragraph-2 leading-paragraph-2 tablet:text-heading-1 tablet:leading-heading-1 font-bold laptop:mt-4 screen:text-heading-2 screen:leading-heading-1 desktop:text-40px desktop:leading-lh-54 desktop:font-semibold twok:text-display-2 twok:leading-display-2 screen:w-full desktop:w-11/12 twok:w-full;
       }
       &_button {
-        @apply rounded-xl justify-center items-center flex px-3 py-2 laptop:px-5 laptop:py-3 bg-primary-green-100 my-4 z-10 tablet:my-10 mb-28 tablet:mb-24 laptop:mb-24 laptop:my-10 w-48 tablet:w-72 desktop:w-72 cursor-pointer;
+        @apply rounded-xl justify-center items-center flex twok:py-5 twok:w-96 px-3 py-4 desktop:px-5 desktop:py-3 z-10 desktop:mb-20 screen:mb-12 screen:mt-12 desktop:mt-20 w-48 screen:w-64 twok:my-24 desktop:w-72 cursor-pointer;
+            background: linear-gradient(356.23deg, #96CF03 -65.8%, #F1FFF6 89%);
         &_icon {
-          @apply w-5 tablet:w-9 laptop:w-12 mr-2;
+          @apply w-5 mr-2 inline-block mx-3;
         }
         &_text {
-          @apply text-dark-400 font-bold desktop:text-paragraph-2 tablet:text-caption-1 text-caption-2;
+          @apply text-dark-400 font-bold twok:text-subheading twok:leading-subheading desktop:text-paragraph-2 tablet:text-caption-1 text-caption-2;
         }
       }
       &_firefoxillustration {

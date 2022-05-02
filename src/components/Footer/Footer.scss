@@ -1,14 +1,14 @@
 .footer {
-  @apply tablet:h-16 h-12 bottom-0 left-0 fixed flex bg-dark-400 w-full desktop:px-44 border-t border-dark-200 z-50;
+  @apply screen:h-14 desktop:h-16 bottom-0 left-0 fixed flex bg-dark-400 w-full desktop:px-44 border-t border-dark-200 z-50;
   &_text {
-    @apply text-primary-green-100 font-light text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 laptop:text-caption-2 laptop:leading-caption-2 opacity-50;
+    @apply text-white font-light text-caption-4 leading-caption-4 screen:text-caption-3 screen:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2;
   }
 }
 
 .footerVesting {
-  @apply tablet:h-16 h-12 bottom-0 right-0 fixed flex bg-dark-400 md:w-77p w-screen desktop:px-44  border-t border-dark-200;
+  @apply screen:h-14 desktop:h-16 bottom-0 right-0 fixed flex bg-transparent w-screen desktop:px-44  border-t border-dark-200;
   &_text {
-    @apply text-primary-green-100 font-light text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 laptop:text-caption-2 laptop:leading-caption-2 opacity-50;
+    @apply text-white font-light text-caption-4 leading-caption-4 screen:text-caption-3 screen:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 opacity-50;
   }
 }
 

@@ -6,6 +6,8 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import { Link } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
+import WalletModal from "../../components/Modal/WalletModal/WalletModal";
+
 import OwnedProjectToken from "../../assets/OwnedProjectToken.svg";
 import Redirect from "../../assets/Redirect.svg";
 import Lottie from "lottie-react";
@@ -46,6 +48,7 @@ const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
 
 function InvestorDashboardScreen() {
+  const [modalMode, setModalMode] = useState(0);
   const [ownedProjectsData, setOwnedProjectsData] = useState(null);
   const [projectOverviewData, setProjectOverviewData] = useState(null);
   const [wrappedProjectData, setWrappedProjectData] = useState([]);
@@ -171,7 +174,7 @@ function InvestorDashboardScreen() {
   return (
     <>
       {!active ? (
-        <MetamaskModal />
+        <WalletModal modalMode={modalMode} setModalMode={setModalMode} />
       ) : !ownedProjectsData ? (
         <article className="investordashboardscreen">
           <Header hiddenSwitch={true} />

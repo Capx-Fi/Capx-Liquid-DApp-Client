@@ -1,6 +1,6 @@
 export const parseSheetObj = async (ws) => {
   // required condition
-  console.log(ws);
+  // console.log(ws);
 
   if (Object.keys(ws).length === 1) return [];
 
@@ -38,7 +38,7 @@ export const parseSheetObj = async (ws) => {
       if (ws["D1"] !== undefined) objc[ws["D1"]["w"]] = undefined;
     }
     listOfObjs.push(objc);
-    console.log(ws, "sheetdata");
+    // console.log(ws, "sheetdata");
     // const element = array[index];
   }
   return listOfObjs;

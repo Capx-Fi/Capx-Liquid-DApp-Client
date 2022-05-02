@@ -14,6 +14,7 @@ module.exports = {
         fuscia: "#DD51C6",
         cyan: "#19EBD2",
         azure: "#365CF0",
+        greyborder: "#2a383c",
         "error-color": {
           100: "#FBDAE1",
           200: "#F27D95",
@@ -45,6 +46,8 @@ module.exports = {
       textColor: {
         blizzard: "#19EBD2",
         greenlabel: "#6348CA",
+        greylabel: "#A6A6A6",
+        greylabel2 : "#B3B3B3",
       },
       backgroundImage: {
         vesting: "url('assets/vesting-bg.png')",
@@ -66,11 +69,13 @@ module.exports = {
         "58px": "58px",
         "50px": "50px",
         "60px": "60px",
+        "40px": "40px"
       },
       lineHeight: {
         "title-1": "90px",
         "display-1": "82px",
         "display-2": "72px",
+        "lh-64": "64px",
         "lh-54": "54px",
         "heading-1": "46px",
         "heading-2": "34px",
@@ -106,12 +111,14 @@ module.exports = {
         "40v": "40vw",
         "42v": "42vw",
         "45v": "45vw",
+        '47v': '47vw',
         "70v": "70vw",
         "62v": "62vw",
         "80v": "80vw",
         "72v": "72vw",
         "73v": "73vw",
         "50v": "50vw",
+        "52v": "52vw",
         "55v": "55vw",
         "60v": "60vw",
         "65v": "65vw",
@@ -163,7 +170,9 @@ module.exports = {
       screens: {
         tablet: "768px",
         laptop: "1024px",
-        desktop: "1445px",
+        screen: "1280px",
+        desktop: "1440px",
+        twok: "1920px",
       },
     },
   },

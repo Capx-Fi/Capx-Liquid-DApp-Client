@@ -41,7 +41,7 @@ function UploadTemplate({
         const ws = wb.Sheets[wsname];
         // let data = XLSX.utils.sheet_to_json(ws, { header: false });
         parseSheetObj(ws).then((res) => {
-          console.log(res, "parseResponse");
+          // console.log(res, "parseResponse");
           let errors = verifyVestingData(
             res,
             defaultWeb3,
@@ -68,8 +68,8 @@ function UploadTemplate({
   });
 
   return (
-    <div className="pt-10 laptop:pt-14">
-      <p className="vesting_pages_title">{t("upload_vesting_sheet")}</p>
+    <div className="pt-14 screen:w-10/12 desktop:w-11/12 twok:w-full">
+      <p className="font-bold mb-12 screen:text-heading-2 screen:leading-heading-2 desktop:text-heading-1 desktop:leading-heading-1 twok:leading-heading-1 twok:text-54px px-4">{t("upload_vesting_sheet")}</p>
       <UploadTemplateBox
         getInputProps={getInputProps}
         getRootProps={getRootProps}
@@ -78,13 +78,13 @@ function UploadTemplate({
         vestingArray={vestingArray}
         error={error}
       />
-      <hr className="border-dark-200 mt-10 h-2"></hr>
-      <div className="flex flex-row-reverse mt-8">
+      <hr className="border-dark-200 mt-16 h-2"></hr>
+      <div className="desktop:w-11/12 twok:w-full flex flex-row-reverse mt-8">
         <Level3CTA
           text={error ? "View Errors" : "Next"}
           icon={true}
           disabled={!uploadedFile}
-          onClick={() => setStep(error ? -1 : 5)}
+          onClick={() => setStep(error ? -1 : 3)}
         />
       </div>
     </div>

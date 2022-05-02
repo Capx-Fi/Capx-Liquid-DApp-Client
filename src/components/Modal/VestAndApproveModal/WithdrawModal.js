@@ -58,10 +58,10 @@ function WithdrawModal({ open, setOpen, withdrawModalStatus }) {
     >
       <Fade in={open}>
         <div className={classes.paper}>
-          <div className="flex flex-col laptop:flex-row justify-center mx-auto items-center laptop:h-72 pb-8">
-            {console.log(withdrawModalStatus)}
+          <div className="flex flex-col justify-center mx-auto items-center laptop:h-72 pb-8">
+            {/* {console.log(withdrawModalStatus)} */}
             <Lottie
-              className="w-24 tablet:w-32 laptop:w-64"
+              className="w-24 tablet:w-32 laptop:w-48"
               loop={true}
               animationData={
                 withdrawModalStatus === "success"
@@ -71,7 +71,7 @@ function WithdrawModal({ open, setOpen, withdrawModalStatus }) {
                   : WithdrawingAnimation
               }
             />
-            <div className="text-white text-center laptop:text-left text-paragraph-2 leading-paragraph-2 tablet:text-heading-1 tablet:leading-heading-1 font-semibold w-8/12 laptop:w-6/12">
+            <div className="text-white text-center screen:text-subheading screen:leading-subheading leading-paragraph-2 tablet:text-caption-1 tablet:leading-heading-1 desktop:text-subheading font-semibold w-8/12 laptop:w-6/12 desktop:w-8/12">
               {withdrawModalStatus === "success"
                 ? "Withdrawal Successful."
                 : withdrawModalStatus === "failure"

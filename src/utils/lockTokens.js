@@ -78,7 +78,7 @@ export const lockTokens = async (
   setVestModalOpen(true);
   let buyResult = null;
   let pinataHash = null;
-  console.log("contractDetails", contractDetails.projectDescription);
+  // console.log("contractDetails", contractDetails.projectDescription);
   let projectDescription = contractDetails.projectDescription.replace(
     /\n\r?/g,
     "<br />"
@@ -97,7 +97,7 @@ export const lockTokens = async (
         setVestModalStatus("");
       }, 2500);
   }
-  console.log(totalAmount, "taa");
+  // console.log(totalAmount, "taa");
   let allowedAmount = await vestingTokenContract.methods
     .allowance(metamaskAccount, contractDetails.contractAddress)
     .call();

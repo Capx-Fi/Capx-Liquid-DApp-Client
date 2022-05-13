@@ -23,14 +23,23 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
 					fill="currentColor"
 				>
 					<path
-						fill-rule="evenodd"
+						fillRule="evenodd"
 						d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-						clip-rule="evenodd"
+						clipRule="evenodd"
 					/>
 				</svg>
 			</button>
 			{open && (
 				<div className="absolute right-0 bg-dark-300 py-2 mt-2 bg-whitedivide-y divide-gray-600 rounded-md shadow-xl w-40">
+					<p
+						className="option"
+						onClick={() => {
+							chainChange("Ethereum");
+							setOpen(false);
+						}}
+					>
+						Ethereum
+					</p>
 					<p
 						className="option"
 						onClick={() => {
@@ -70,26 +79,6 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
 						}}
 					>
 						Fantom
-					</p>
-					<p
-						className="option"
-						onClick={() => {
-							chainChange("Moonbeam");
-							setOpen(false);
-							setShowMenu && setShowMenu(false);
-						}}
-					>
-						Moonbeam
-					</p>
-					<p
-						className="option"
-						onClick={() => {
-							chainChange("Arbitrum");
-							setOpen(false);
-							setShowMenu && setShowMenu(false);
-						}}
-					>
-						Arbitrum
 					</p>
 				</div>
 			)}

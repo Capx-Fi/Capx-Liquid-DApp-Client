@@ -68,7 +68,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 			try {
 				await web3.currentProvider.request({
 					method: "wallet_switchEthereumChain",
-					params: [{ chainId: "0x4" }],
+					params: [{ chainId: "0x1" }],
 				});
 			} catch (error) {}
 		} else if (chainName === "Matic") {
@@ -77,15 +77,15 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0x13881",
-							chainName: "Polygon Testnet",
+							chainId: "0x89",
+							chainName: "Polygon Matic",
 							nativeCurrency: {
 								name: "MATIC",
 								symbol: "MATIC",
 								decimals: 18,
 							},
-							rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
-							blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+							rpcUrls: ["https://polygon-rpc.com/"],
+							blockExplorerUrls: ["https://polygonscan.com/"],
 						},
 					],
 				});
@@ -98,15 +98,15 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0x61",
-							chainName: "Binance Smart Chain Test",
+							chainId: "0x38",
+							chainName: "Binance Smart Chain",
 							nativeCurrency: {
 								name: "BNB",
 								symbol: "BNB",
 								decimals: 18,
 							},
-							rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
-							blockExplorerUrls: ["https://testnet.bscscan.com/"],
+							rpcUrls: ["https://bsc-dataseed.binance.org/"],
+							blockExplorerUrls: ["https://bscscan.com/"],
 						},
 					],
 				});
@@ -119,15 +119,15 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0xA869",
+							chainId: "0xA86A",
 							chainName: "Avalanche Fuji",
 							nativeCurrency: {
 								name: "AVAX",
 								symbol: "AVAX",
 								decimals: 18,
 							},
-							rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
-							blockExplorerUrls: ["https://testnet.snowtrace.io/"],
+							rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
+							blockExplorerUrls: ["https://snowtrace.io/"],
 						},
 					],
 				});
@@ -140,15 +140,15 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0xFA2",
+							chainId: "0xFA",
 							chainName: "Fantom",
 							nativeCurrency: {
 								name: "FTM",
 								symbol: "FTM",
 								decimals: 18,
 							},
-							rpcUrls: ["https://rpc3.fantom.network"],
-							blockExplorerUrls: ["https://testnet.ftmscan.com/"],
+							rpcUrls: ["https://rpc.ftm.tools/"],
+							blockExplorerUrls: ["https://ftmscan.com/"],
 						},
 					],
 				});
@@ -265,25 +265,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 						{active ? (
 							<>
 								<div className="mr-4">
-									{connector?.constructor?.name === "InjectedConnector" ? (
-										<DropDown sortBy={sortBy} chainChange={chainChange} />
-									) : (
-										<HtmlTooltip
-											arrow
-											placement="bottom"
-											title={
-												<>
-													<span className="flex justify-between items-center">
-														{`Please switch chain on Wallet Provider`}
-													</span>
-												</>
-											}
-										>
-											<div className="bg-dark-200 w-32 p-2 flex justify-center items-center rounded-md cursor-pointer desktop:text-caption-1 twok:text-paragraph-2 screen:text-caption-3">
-												{sortBy === "matic" ? "Matic" : sortBy}
-											</div>
-										</HtmlTooltip>
-									)}
+									<DropDown sortBy={sortBy} chainChange={chainChange} />
 								</div>
 								<div className="header_navbar_logoutbutton">
 									<div className="header_navbar_logoutbutton_text">

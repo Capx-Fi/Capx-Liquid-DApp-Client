@@ -38,11 +38,11 @@ export const checkExistingProject = async (
       fetchPolicy: "network-only",
     });
     projectExistingData = projectExistingData?.data;
-    console.log(
-      projectExistingData?.projects[0]?.projectOwnerAddress,
-      "ped.po"
-    );
-    console.log(metamaskAccount, "met");
+    // console.log(
+    //   projectExistingData?.projects[0]?.projectOwnerAddress,
+    //   "ped.po"
+    // );
+    // console.log(metamaskAccount, "met");
 
     if (projectExistingData?.projects) {
       const res = await fetch(
@@ -50,7 +50,7 @@ export const checkExistingProject = async (
       );
       const desc = await res.json();
       description = desc.description;
-      console.log("description", description);
+      // console.log("description", description);
       data = {
         name: projectExistingData.projects[0].projectName,
         description,

@@ -14,9 +14,10 @@ import React, { useState } from "react";
 
 function MetamaskModal({ setModalMode }) {
 	const { t } = useTranslation();
-	const { active, account, library, connector, activate, error } =
-		useWeb3React();
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+	const isMetamask = window.ethereum && window.ethereum.isMetaMask;
+	const { active, account, library, connector, activate } = useWeb3React();
+	const { error } = useWeb3React();
 	const unsupportedChainIdError =
 		error && error instanceof UnsupportedChainIdError;
 
@@ -54,11 +55,13 @@ function MetamaskModal({ setModalMode }) {
 					<div
 						className="metamaskmodalscreen_maincontainer_herocontainer_button"
 						onClick={() => {
-							connect();
+							isMetamask
+								? connect()
+								: window.open("https://metamask.io/", "_blank").focus();
 						}}
 					>
 						<div className="metamaskmodalscreen_maincontainer_herocontainer_button_text">
-							{"Connect Metamask"}
+							{isMetamask ? "Connect Metamask" : "Install Metamask"}
 						</div>
 						<img
 							className="metamaskmodalscreen_maincontainer_herocontainer_button_icon"

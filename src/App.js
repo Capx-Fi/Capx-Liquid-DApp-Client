@@ -25,29 +25,18 @@ function App() {
 				<LoadingScreen />
 			) : (
 				<Router>
-					<div className="screen:block hidden">
-						<Switch>
-							<Route exact path="/" component={Landing} />
-							<Route exact path="/vesting" component={VestingScreen} />
-							<Route
-								exact
-								path="/investor"
-								component={InvestorDashboardScreen}
-							/>
-							<Route
-								exact
-								path="/projectoverview"
-								component={ProjectOwnerDashboardScreen}
-							/>
-							<Route exact path="/1" component={ChooseWalletModal} />
-							<Route path="*" component={PageNotFound} />
-						</Switch>
-					</div>
-					<div className="screen:hidden m-auto block align-middle justify-center items-center overflow-x-hidden">
-						<Header hiddenNav />
-						<BreakPoint />
-						<Footer />
-					</div>
+					<Switch>
+						<Route exact path="/" component={Landing} />
+						<Route exact path="/vesting" component={VestingScreen} />
+						<Route exact path="/investor" component={InvestorDashboardScreen} />
+						<Route
+							exact
+							path="/projectoverview"
+							component={ProjectOwnerDashboardScreen}
+						/>
+						<Route exact path="/1" component={ChooseWalletModal} />
+						<Route path="*" component={PageNotFound} />
+					</Switch>
 				</Router>
 			)}
 		</>

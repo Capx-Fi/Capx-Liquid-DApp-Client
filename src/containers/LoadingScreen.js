@@ -7,7 +7,7 @@ function LoadingScreen() {
 			<img
 				alt="logo"
 				src={CapxLogo}
-				className="animate-pulse w-auto align-middle justify-center m-auto "
+				className="animate-pulse phone:w-55v screen:w-auto align-middle justify-center m-auto "
 			/>
 		</div>
 	);

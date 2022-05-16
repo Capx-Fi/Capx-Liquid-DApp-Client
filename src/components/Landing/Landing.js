@@ -35,7 +35,7 @@ const Landing = () => {
 					</div>
 					<div className="herocontainer_button rounded-xl screen:mt-10 desktop:mt-12 twok:mt-8 justify-center items-center flex px-5 phone:py-2 phone:mt-8 screen:py-4 z-10 cursor-pointer">
 						<Link to="/vesting">
-							<div className="button_text text-white phone:text-caption-4 desktop:text-captions-1 twok:text-subheading desktop-captions-1 twok:leading-subheading towk:font-medium desktop:font-bold">
+							<div className="button_text text-white phone:text-caption-4 screen:text-caption-2 desktop:text-caption-1 twok:text-subheading twok:leading-subheading towk:font-medium desktop:font-bold">
 								{"Get Started"}
 								<img
 									src={NextIcon}

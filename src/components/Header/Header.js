@@ -234,7 +234,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 				<a href="/">
 					<div>
 						<img
-							className={`header_logo ${vesting && "flex tablet:hidden "}`}
+							className={`header_logo ${vesting && "flex screen:hidden "}`}
 							src={CapxLogo}
 							alt="capx logo"
 						/>

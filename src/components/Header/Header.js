@@ -264,7 +264,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 						)}
 						{active ? (
 							<>
-								<div className="mr-4">
+								<div className="mr-4 phone:hidden screen:block">
 									<DropDown sortBy={sortBy} chainChange={chainChange} />
 								</div>
 								<div className="header_navbar_logoutbutton">

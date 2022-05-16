@@ -64,6 +64,7 @@ module.exports = {
 				"caption-1": "16px",
 				"caption-2": "14px",
 				"caption-3": "12px",
+				"10px": "10px",
 				"caption-4": "9px",
 				"54px": "54px",
 				"58px": "58px",

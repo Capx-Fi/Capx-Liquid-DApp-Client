@@ -61,7 +61,7 @@ const Landing = () => {
 							</div>
 						</div>
 						<div>
-							<div className="lowercontainer_button phone:w-32 screen:w-40 rounded-md justify-center items-center flex my-3 px-1 py-1 w-40 cursor-pointer">
+							<div className="lowercontainer_button phone:w-32 screen:w-40 rounded-md justify-center items-center flex my-3 px-4 py-2 w-40 cursor-pointer">
 								<div
 									className="button_text flex text-black screen:py-1 twok:py-0 desktop:py-1 phone:text-caption-3 screen:text-caption-3 screen:leading-caption-3 desktop:text-caption-3 desktop:leading-text-caption-3 font-bold"
 									onClick={() => {
@@ -72,7 +72,7 @@ const Landing = () => {
 									<img
 										src={NextIconBlack}
 										alt="Next Icon"
-										className="inline-block items-center w-5 ml-3 mr-2"
+										className="inline-block items-center w-5 ml-2 mr-2"
 									></img>
 								</div>
 							</div>

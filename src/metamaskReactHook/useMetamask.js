@@ -30,21 +30,7 @@ const useMetamask = () => {
 	const _isConnectCalled = useRef(false);
 	let provider = null;
 
-	console.log(connector?.constructor?.name);
-
-	if (connector?.constructor?.name === "InjectedConnector") {
-		provider = window.ethereum;
-	} else {
-		provider = new WalletConnectProvider({
-			rpc: {
-				80001: "https://matic-mumbai.chainstacklabs.com",
-				97: "https://data-seed-prebsc-1-s1.binance.org:8545/",
-				4: "https://rinkeby.infura.io/web3/",
-				43113: "https://api.avax-test.network/ext/bc/C/rpc",
-				4002: "https://rpc3.fantom.network",
-			},
-		});
-	}
+	provider = window.ethereum;
 	console.log(provider);
 	useEffect(() => {
 		return () => {

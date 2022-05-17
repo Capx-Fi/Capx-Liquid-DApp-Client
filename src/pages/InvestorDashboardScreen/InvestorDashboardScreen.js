@@ -76,9 +76,9 @@ function InvestorDashboardScreen() {
 			},
 		});
 	}
-	// console.log(new Web3(Web3.currentProvider));
+	// console.log(new Web3(Web3.givenProvider));
 
-	const web3 = new Web3(Web3.currentProvider || provider);
+	const web3 = new Web3(Web3.givenProvider || provider);
 	console.log(web3);
 	const contractAddress = chainId && getContractAddress(chainId);
 

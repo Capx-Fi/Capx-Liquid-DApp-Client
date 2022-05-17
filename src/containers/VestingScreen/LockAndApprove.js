@@ -36,7 +36,7 @@ function LockAndApprove({
 	totalAddresses,
 	uniqueAddresses,
 }) {
-	const web3 = new Web3(Web3.currentProvider);
+	const web3 = new Web3(Web3.givenProvider);
 	window.w3 = web3;
 	const { chainId } = useWeb3React();
 

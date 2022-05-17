@@ -28,6 +28,7 @@ const VestingSteps = ({ setShowSteps }) => {
 					</div>
 				</div>
 
+				{/* For Breakpoint and above */}
 				<div className="side-container bg-opacity-70 text-white relative phone:mb-10 screen:mb-0 phone:w-90v desktop:w-40v screen:w-40v twok:w-30v flex flex-col justify-between">
 					<div className="download-template phone:mb-10 screen:mb-0 twok:mb-10 py-8 justify-self-start flex flex-col rounded-3xl items-center">
 						<a
@@ -69,6 +70,8 @@ const VestingSteps = ({ setShowSteps }) => {
 						</div>
 					</div>
 				</div>
+
+				{/* For Mobile and Tablet */}
 			</div>
 			<Footer />
 		</div>

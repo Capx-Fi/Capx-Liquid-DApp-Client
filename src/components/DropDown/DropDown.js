@@ -4,7 +4,7 @@ import Web3 from "web3";
 
 function DropDown({ sortBy, chainChange, setShowMenu }) {
 	const [open, setOpen] = useState(false);
-	const web3 = new Web3(Web3.currentProvider);
+	const web3 = new Web3(Web3.givenProvider);
 	window.w3 = web3;
 
 	return (

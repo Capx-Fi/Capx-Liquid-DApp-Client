@@ -66,14 +66,14 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 	const chainChange = async (chainName) => {
 		if (chainName === "Ethereum") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_switchEthereumChain",
 					params: [{ chainId: "0x1" }],
 				});
 			} catch (error) {}
 		} else if (chainName === "Matic") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -94,7 +94,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 			}
 		} else if (chainName === "BSC") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -115,7 +115,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 			}
 		} else if (chainName === "Avalanche") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -136,7 +136,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 			}
 		} else if (chainName === "Fantom") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -157,7 +157,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 			}
 		} else if (chainName === "Moonbeam") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -178,7 +178,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 			}
 		} else if (chainName === "Arbitrum") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{

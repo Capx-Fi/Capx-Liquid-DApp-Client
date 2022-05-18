@@ -74,7 +74,7 @@ const VestingSteps = ({ setShowSteps }) => {
 					</div>
 
 					<div
-						className="side-button justify-self-end rounded-2xl justify-center items-center flex px-1 py-3 w-full cursor-pointer"
+						className="side-button justify-self-end rounded-2xl phone:mb-10 screen:mb-0 justify-center items-center flex px-1 py-3 w-full cursor-pointer"
 						onClick={() => setShowSteps(false)}
 					>
 						<div className="button_text text-black phone:text-caption-2 screen:text-caption-1 screen:leading-caption-1 twok:text-subheading twok:leading-text-subheading font-bold">

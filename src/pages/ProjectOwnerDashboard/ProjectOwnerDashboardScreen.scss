@@ -1,39 +1,40 @@
 .projectownerdashboardscreen {
-  @apply h-screen bg-dark-400 flex;
+	@apply h-screen bg-dark-400 flex overflow-y-hidden;
 
-  &_maincontainer {
-    @apply flex flex-col my-28 w-80v laptop:w-75v mx-auto overflow-y-auto;
-    &_titlecontainer {
-      @apply flex justify-between items-center pb-4;
-      &_title {
-        @apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1  ml-4  text-primary-green-200 opacity-75 font-semibold;
-      }
-      &_projectsdropdown {
-        @apply bg-dark-300 rounded-lg p-2.5 text-caption-3 leading-caption-3 text-primary-green-100 outline-none mr-5 tablet:mr-9;      }
-    }
-    &_topcontainer {
-      @apply flex flex-col xl:flex-row justify-between;
-    }
-    &_innercontainer {
-      @apply flex flex-col overflow-y-auto pr-4 tablet:pr-8;
-      &::-webkit-scrollbar {
-        @apply w-1.5 bg-dark-200;
-      }
-      &::-webkit-scrollbar-thumb {
-        @apply rounded-md h-16;
-        background: linear-gradient(0deg, #2d884c -33.65%, #87dfa5 100%);
-      }
-      &::-webkit-scrollbar-track {
-        @apply rounded-md;
-      }
-      &_projectcontainer {
-        background: radial-gradient(
-          143.33% 143.33% at 82.41% -4.96%,
-          rgba(132, 214, 164, 0.2) 0%,
-          rgba(18, 28, 32, 0.2) 100%
-        );
-        @apply px-6 py-4 my-4 mx-4 text-white flex rounded-lg laptop:rounded-2xl bg-opacity-30 w-60v tablet:w-35v laptop:w-30v desktop:w-20v h-fit-content;
-      }
-    }
-  }
+	&_maincontainer {
+		@apply flex flex-col my-28 w-80v laptop:w-75v mx-auto overflow-y-auto;
+		&_titlecontainer {
+			@apply flex justify-between items-center pb-4;
+			&_title {
+				@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 phone:ml-0 screen:ml-4 text-primary-green-200 opacity-75 font-semibold;
+			}
+			&_projectsdropdown {
+				@apply bg-dark-300 rounded-lg p-3 phone:w-24 tablet:w-32 screen:w-48 text-caption-3 leading-caption-3 text-primary-green-100 outline-none mr-5 tablet:mr-9;
+			}
+		}
+		&_topcontainer {
+			@apply flex flex-col xl:flex-row justify-between;
+		}
+		&_innercontainer {
+			@apply flex flex-col overflow-y-auto pr-4 tablet:pr-8;
+			&::-webkit-scrollbar {
+				@apply w-1.5 bg-dark-200;
+			}
+			&::-webkit-scrollbar-thumb {
+				@apply rounded-md h-16;
+				background: linear-gradient(0deg, #2d884c -33.65%, #87dfa5 100%);
+			}
+			&::-webkit-scrollbar-track {
+				@apply rounded-md;
+			}
+			&_projectcontainer {
+				background: radial-gradient(
+					143.33% 143.33% at 82.41% -4.96%,
+					rgba(132, 214, 164, 0.2) 0%,
+					rgba(18, 28, 32, 0.2) 100%
+				);
+				@apply px-6 py-4 my-4 mx-4 text-white flex rounded-lg laptop:rounded-2xl bg-opacity-30 w-60v tablet:w-35v laptop:w-30v desktop:w-20v h-fit-content;
+			}
+		}
+	}
 }

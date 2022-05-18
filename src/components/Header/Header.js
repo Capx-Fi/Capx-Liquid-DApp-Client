@@ -9,19 +9,14 @@ import { injected } from "../../utils/connector";
 import ChooseDashboardModal from "../Modal/ChooseDashboardModal/ChooseDashboardModal";
 import DropDown from "../DropDown/DropDown";
 import { Tooltip, withStyles } from "@material-ui/core";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import { useEffect, useState } from "react";
 import { CHAIN_NAMES } from "../../constants/config";
 
 import { getSortBy } from "../../constants/getChainConfig";
 
-function Header({
-	vesting,
-	hiddenNav,
-	showSteps,
-	hiddenSwitch,
-	isWalletConnect,
-}) {
+function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const { active, account, library, connector, activate, deactivate, chainId } =
 		useWeb3React();
@@ -30,10 +25,27 @@ function Header({
 	const currentChainId = metaState.chain.id?.toString();
 	const [dashboardModal, setDashboardModal] = useState(false);
 	const [sortBy, setSortBy] = useState("Ethereum");
-	const web3 = new Web3(Web3.givenProvider);
 	const handleCloseSelectDashboard = () => {
 		setDashboardModal(false);
 	};
+
+	let provider = null;
+
+	if (connector?.constructor?.name === "InjectedConnector") {
+		provider = window.ethereum;
+	} else {
+		provider = new WalletConnectProvider({
+			rpc: {
+				80001: "https://matic-mumbai.chainstacklabs.com",
+				97: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+				4: "https://rinkeby.infura.io/web3/",
+				43113: "https://api.avax-test.network/ext/bc/C/rpc",
+				4002: "https://rpc3.fantom.network",
+			},
+		});
+	}
+	const web3 = new Web3(provider);
+	console.log(web3);
 
 	useEffect(() => {
 		setSortBy(chainId && getSortBy(chainId));
@@ -54,26 +66,26 @@ function Header({
 	const chainChange = async (chainName) => {
 		if (chainName === "Ethereum") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_switchEthereumChain",
 					params: [{ chainId: "0x4" }],
 				});
 			} catch (error) {}
 		} else if (chainName === "Matic") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
 							chainId: "0x13881",
-							chainName: "Polygon Testnet",
+							chainName: "Polygon Matic",
 							nativeCurrency: {
 								name: "MATIC",
 								symbol: "MATIC",
 								decimals: 18,
 							},
-							rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
-							blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+							rpcUrls: ["https://polygon-rpc.com/"],
+							blockExplorerUrls: ["https://polygonscan.com/"],
 						},
 					],
 				});
@@ -82,19 +94,19 @@ function Header({
 			}
 		} else if (chainName === "BSC") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
 							chainId: "0x61",
-							chainName: "Binance Smart Chain Test",
+							chainName: "Binance Smart Chain",
 							nativeCurrency: {
 								name: "BNB",
 								symbol: "BNB",
 								decimals: 18,
 							},
-							rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
-							blockExplorerUrls: ["https://testnet.bscscan.com/"],
+							rpcUrls: ["https://bsc-dataseed.binance.org/"],
+							blockExplorerUrls: ["https://bscscan.com/"],
 						},
 					],
 				});
@@ -103,7 +115,7 @@ function Header({
 			}
 		} else if (chainName === "Avalanche") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -114,8 +126,8 @@ function Header({
 								symbol: "AVAX",
 								decimals: 18,
 							},
-							rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
-							blockExplorerUrls: ["https://testnet.snowtrace.io/"],
+							rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
+							blockExplorerUrls: ["https://snowtrace.io/"],
 						},
 					],
 				});
@@ -124,7 +136,7 @@ function Header({
 			}
 		} else if (chainName === "Fantom") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -135,8 +147,8 @@ function Header({
 								symbol: "FTM",
 								decimals: 18,
 							},
-							rpcUrls: ["https://rpc.testnet.fantom.network"],
-							blockExplorerUrls: ["https://testnet.ftmscan.com/"],
+							rpcUrls: ["https://rpc.ftm.tools/"],
+							blockExplorerUrls: ["https://ftmscan.com/"],
 						},
 					],
 				});
@@ -145,7 +157,7 @@ function Header({
 			}
 		} else if (chainName === "Moonbeam") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -166,7 +178,7 @@ function Header({
 			}
 		} else if (chainName === "Arbitrum") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -222,7 +234,7 @@ function Header({
 				<a href="/">
 					<div>
 						<img
-							className={`header_logo ${vesting && "flex tablet:hidden "}`}
+							className={`header_logo ${vesting && "flex screen:hidden "}`}
 							src={CapxLogo}
 							alt="capx logo"
 						/>
@@ -252,7 +264,7 @@ function Header({
 						)}
 						{active ? (
 							<>
-								<div className="mr-4">
+								<div className="mr-4 phone:hidden screen:block">
 									<DropDown sortBy={sortBy} chainChange={chainChange} />
 								</div>
 								<div className="header_navbar_logoutbutton">

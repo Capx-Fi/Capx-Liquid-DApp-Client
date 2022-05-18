@@ -1,41 +1,41 @@
 .metamaskmodalscreen {
-  @apply h-screen bg-dark-400 flex;
+	@apply h-screen bg-dark-400 flex;
 
-  &_maincontainer {
-    @apply flex justify-center laptop:items-center m-auto mt-32 tablet:mt-48  laptop:mt-auto;
-    &_herocontainer {
-      @apply px-12 py-6 desktop:px-16 twok:px-20 twok:py-16 desktop:py-8 rounded-lg bg-opacity-70 tablet:rounded-2xl desktop:rounded-4xl text-white relative w-70v screen:w-60v desktop:w-60v twok:w-60v flex flex-col items-start;
-      background: linear-gradient(
-        270.08deg,
-        rgba(132, 214, 164, 0.3) 0.02%,
-        rgba(18, 28, 32, 0.3) 117.26%
-      );
+	&_maincontainer {
+		@apply flex justify-center items-center m-auto mt-32 phone:mt-48 laptop:mt-auto;
+		&_herocontainer {
+			@apply px-12 py-6 phone:px-6 phone:py-16 desktop:px-16 twok:px-20 twok:py-16 desktop:py-8 rounded-lg bg-opacity-70 tablet:rounded-2xl desktop:rounded-4xl text-white relative w-75v screen:w-60v desktop:w-60v twok:w-60v flex flex-col items-start;
+			background: linear-gradient(
+				270.08deg,
+				rgba(132, 214, 164, 0.3) 0.02%,
+				rgba(18, 28, 32, 0.3) 117.26%
+			);
 
-      &_cname {
-        @apply flex rounded-lg object-contain w-fit-content bg-opacity-70  px-3 mb-4 py-2.5 text-caption-4 tablet:text-caption-2 leading-caption-4 tablet:leading-caption-2;
-        background: linear-gradient(
-          270.08deg,
-          rgba(132, 214, 164, 0.3) 0.02%,
-          rgba(18, 28, 32, 0.3) 117.26%
-        );
-        border-radius: 16px;
-      }
-      &_title {
-        @apply text-paragraph-2 leading-paragraph-2 tablet:text-heading-1 tablet:leading-heading-1 font-bold laptop:mt-4 screen:text-heading-2 screen:leading-heading-1 desktop:text-40px desktop:leading-lh-54 desktop:font-semibold twok:text-display-2 twok:leading-display-2 screen:w-full desktop:w-11/12 twok:w-full;
-      }
-      &_button {
-        @apply rounded-xl justify-center items-center flex twok:py-5 twok:w-96 px-3 py-4 desktop:px-5 desktop:py-3 z-10 desktop:mb-20 screen:mb-12 screen:mt-12 desktop:mt-20 w-48 screen:w-64 twok:my-24 desktop:w-72 cursor-pointer;
-            background: linear-gradient(356.23deg, #96CF03 -65.8%, #F1FFF6 89%);
-        &_icon {
-          @apply w-5 mr-2 inline-block mx-3;
-        }
-        &_text {
-          @apply text-dark-400 font-bold twok:text-subheading twok:leading-subheading desktop:text-paragraph-2 tablet:text-caption-1 text-caption-2;
-        }
-      }
-      &_firefoxillustration {
-        @apply flex w-44 tablet:w-72 desktop:w-80 absolute -bottom-12 -right-8 tablet:-bottom-10 tablet:-right-16 laptop:-right-20;
-      }
-    }
-  }
+			&_cname {
+				@apply flex rounded-lg object-contain w-fit-content bg-opacity-70  px-3 mb-4 py-2.5 text-caption-4 tablet:text-caption-2 leading-caption-4 tablet:leading-caption-2;
+				background: linear-gradient(
+					270.08deg,
+					rgba(132, 214, 164, 0.3) 0.02%,
+					rgba(18, 28, 32, 0.3) 117.26%
+				);
+				border-radius: 16px;
+			}
+			&_title {
+				@apply text-paragraph-2 leading-paragraph-2 tablet:text-heading-1 tablet:leading-heading-1 font-bold laptop:mt-4 screen:text-heading-2 screen:leading-heading-1 desktop:text-40px desktop:leading-lh-54 desktop:font-semibold twok:text-display-2 twok:leading-display-2 screen:w-full desktop:w-11/12 twok:w-full;
+			}
+			&_button {
+				@apply rounded-xl justify-center items-center flex tablet:w-56 phone:px-2 twok:py-5 twok:w-96 px-3 py-4 desktop:px-5 desktop:py-3 z-10 desktop:mb-20 phone:mb-12 phone:mt-8 screen:mt-12 desktop:mt-20 w-48 screen:w-64 twok:my-24 desktop:w-72 cursor-pointer;
+				background: linear-gradient(356.23deg, #96cf03 -65.8%, #f1fff6 89%);
+				&_icon {
+					@apply w-5 mr-2 inline-block mx-3;
+				}
+				&_text {
+					@apply text-dark-400 font-bold twok:text-subheading twok:leading-subheading desktop:text-paragraph-2 tablet:text-caption-1 text-caption-3;
+				}
+			}
+			&_firefoxillustration {
+				@apply flex w-44 tablet:w-64 desktop:w-80 absolute -bottom-12 -right-8 tablet:-bottom-10 tablet:-right-16 laptop:-right-20;
+			}
+		}
+	}
 }

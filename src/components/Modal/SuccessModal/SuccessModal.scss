@@ -1,61 +1,62 @@
 .successmodalscreen {
-  @apply h-screen bg-dark-400 flex;
+	@apply h-screen bg-dark-400 flex;
 
-  &_maincontainer {
-    @apply flex justify-center laptop:items-center m-auto mt-32 tablet:mt-48 laptop:mt-auto;
-    &_herocontainer {
-      .border-div {
-        border-bottom: 2.98px solid #2A383C
-      }
+	&_maincontainer {
+		@apply flex justify-center laptop:items-center m-auto mt-32 tablet:mt-48 laptop:mt-auto;
+		&_herocontainer {
+			.border-div {
+				border-bottom: 2.98px solid #2a383c;
+			}
 
-      @apply px-5 py-8 tablet:pl-16 tablet:pr-12 screen:py-12 desktop:py-16 desktop:pb-20 rounded-lg tablet:rounded-2xl desktop:rounded-4xl text-white relative w-80v tablet:w-75v screen:w-62v desktop:w-62v laptop:w-75v flex flex-col items-center tablet:items-start;
-      background: radial-gradient(
-        143.33% 143.33% at 82.41% -4.96%,
-        rgba(132, 214, 164, 0.3) 0%,
-        rgba(18, 28, 32, 0.3) 100%
-      );
-      max-width: 960px;
-      &_cname {
-        @apply flex rounded-lg object-contain w-fit-content px-3 mb-4 py-2.5 text-caption-4 tablet:text-caption-2 leading-caption-4 tablet:leading-caption-2;
-        background: radial-gradient(
-          143.33% 143.33% at 82.41% -4.96%,
-          rgba(132, 214, 164, 0.3) 0%,
-          rgba(18, 28, 32, 0.3) 100%
-        );
-      }
-      &_title {
-        @apply text-subheading leading-subheading screen:text-heading-2 screen:leading-heading-1 screen:font-semibold desktop:font-bold desktop:text-40px twok:text-heading-1 desktop:leading-lh-64 twok:leading-heading-1 desktop:font-bold twok:font-semibold screen:w-3/4 desktop:w-11/12 twok:w-10/12 text-center tablet:text-left;
-      }
-      &_button {
-        @apply rounded-xl flex my-4 tablet:my-10 mb-28 tablet:mb-24 laptop:mb-8 laptop:my-10 w-40 tablet:w-72 desktop:w-56 cursor-pointer;
-      }
-      &_ethdropillustration {
-        @apply hidden tablet:flex w-56 screen:w-64 desktop:w-80 absolute -bottom-2 laptop:-bottom-4 right-0;      }
-    }
-  }
+			@apply px-5 py-8 tablet:pl-16 tablet:pr-12 screen:py-12 desktop:py-16 desktop:pb-20 rounded-lg tablet:rounded-2xl desktop:rounded-4xl text-white relative w-80v tablet:w-75v screen:w-62v desktop:w-62v laptop:w-75v flex flex-col items-center tablet:items-start;
+			background: radial-gradient(
+				143.33% 143.33% at 82.41% -4.96%,
+				rgba(132, 214, 164, 0.3) 0%,
+				rgba(18, 28, 32, 0.3) 100%
+			);
+			max-width: 960px;
+			&_cname {
+				@apply flex rounded-lg object-contain w-fit-content px-3 mb-4 py-2.5 text-caption-4 tablet:text-caption-2 leading-caption-4 tablet:leading-caption-2;
+				background: radial-gradient(
+					143.33% 143.33% at 82.41% -4.96%,
+					rgba(132, 214, 164, 0.3) 0%,
+					rgba(18, 28, 32, 0.3) 100%
+				);
+			}
+			&_title {
+				@apply text-subheading screen:leading-subheading phone:font-semibold phone:text-paragraph-2 screen:text-heading-2 screen:leading-heading-1 screen:font-semibold desktop:font-bold desktop:text-40px twok:text-heading-1 desktop:leading-lh-64 twok:leading-heading-1 desktop:font-bold twok:font-semibold screen:w-3/4 desktop:w-11/12 twok:w-10/12 text-center tablet:text-left;
+			}
+			&_button {
+				@apply rounded-xl flex my-4 tablet:my-10 mb-28 tablet:mb-24 laptop:mb-8 laptop:my-10 w-40 tablet:w-72 desktop:w-56 cursor-pointer;
+			}
+			&_ethdropillustration {
+				@apply hidden tablet:flex w-56 screen:w-64 desktop:w-80 absolute -bottom-2 laptop:-bottom-4 right-0;
+			}
+		}
+	}
 }
 
 @media screen and (max-width: 390px) {
-  .eth-liquid{
-    @apply h-32;
-  }
-  .successmodalscreen_maincontainer_herocontainer_title{
-    @apply text-paragraph-1 leading-paragraph-1;
-  }
-  .success_subtitle{
-    font-size: 14px;
-    @apply w-11/12; 
-  }
+	.eth-liquid {
+		@apply h-32;
+	}
+	.successmodalscreen_maincontainer_herocontainer_title {
+		@apply text-paragraph-1 leading-paragraph-1;
+	}
+	.success_subtitle {
+		font-size: 14px;
+		@apply w-11/12;
+	}
 }
 @media screen and (max-width: 320px) {
-  .eth-liquid-icon{
-    @apply hidden;
-  }
-  .successmodalscreen_maincontainer_herocontainer_title{
-    @apply text-paragraph-1 leading-paragraph-1;
-  }
-  .success_subtitle{
-    font-size: 14px;
-    @apply w-11/12; 
-  }
+	.eth-liquid-icon {
+		@apply hidden;
+	}
+	.successmodalscreen_maincontainer_herocontainer_title {
+		@apply text-paragraph-1 leading-paragraph-1;
+	}
+	.success_subtitle {
+		font-size: 14px;
+		@apply w-11/12;
+	}
 }

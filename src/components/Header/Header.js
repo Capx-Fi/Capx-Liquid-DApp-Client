@@ -68,7 +68,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 			try {
 				await web3.givenProvider.request({
 					method: "wallet_switchEthereumChain",
-					params: [{ chainId: "0x1" }],
+					params: [{ chainId: "0x4" }],
 				});
 			} catch (error) {}
 		} else if (chainName === "Matic") {
@@ -77,7 +77,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0x89",
+							chainId: "0x13881",
 							chainName: "Polygon Matic",
 							nativeCurrency: {
 								name: "MATIC",
@@ -98,7 +98,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0x38",
+							chainId: "0x61",
 							chainName: "Binance Smart Chain",
 							nativeCurrency: {
 								name: "BNB",
@@ -119,7 +119,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0xA86A",
+							chainId: "0xA869",
 							chainName: "Avalanche Fuji",
 							nativeCurrency: {
 								name: "AVAX",
@@ -140,7 +140,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0xFA",
+							chainId: "0xFA2",
 							chainName: "Fantom",
 							nativeCurrency: {
 								name: "FTM",

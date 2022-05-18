@@ -35,9 +35,9 @@ function SuccessModal() {
 						src={ETHDropIllustration}
 						alt="ETH Illustration"
 					/>
-					<div className="flex eth-liquid h-36 eth-liquid-icon"></div>
+					<div className="phone:flex tablet:hidden flex eth-liquid h-36 eth-liquid-icon"></div>
 					<img
-						className="flex w-64 absolute bottom-0 eth-liquid-icon"
+						className="phone:flex tablet:hidden flex w-64 absolute bottom-0 eth-liquid-icon"
 						src={CapxLiquidDiamond}
 						alt="ETH Illustration"
 					/>

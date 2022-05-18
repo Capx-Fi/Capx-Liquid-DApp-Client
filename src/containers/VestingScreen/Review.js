@@ -74,6 +74,7 @@ function Review({
 				setVestModalOpen={setVestModalOpen}
 				totalAddresses={totalAddresses}
 				uniqueAddresses={uniqueAddresses}
+				tokenTicker={tokenTicker}
 			/>
 		</div>
 	);

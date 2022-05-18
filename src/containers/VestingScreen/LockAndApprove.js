@@ -35,6 +35,7 @@ function LockAndApprove({
 	setVestModalOpen,
 	totalAddresses,
 	uniqueAddresses,
+	tokenTicker,
 }) {
 	const web3 = new Web3(Web3.givenProvider);
 	window.w3 = web3;
@@ -190,7 +191,7 @@ function LockAndApprove({
 							}}
 						>
 							<div className="flex items-center phone:text-caption-3 screen:text-caption-2 desktop:text-caption-1">
-								{"Lock ETT"}
+								{`Lock ${tokenTicker}`}
 							</div>
 							<img
 								src={LockIcon}

@@ -64,7 +64,7 @@ function InputField({
 							!disabled
 								? ""
 								: "pointer-events-none opacity-50 z-10 cursor-not-allowed"
-						} focus:border-transparent rounded-lg w-full py-2 px-3 text-white bg-dark-300 screen:h-12 desktop:h-12 twok:h-14 focus:outline-none focus:shadow-outline text-caption-4 leading-caption-4 screen:text-caption-2 screen:leading-caption-2 desktop:text-paragraph-1 desktop:leading-paragraph-1`}
+						} focus:border-transparent rounded-lg w-full phone:px-4 phone:py-3.5 screen:py-2 screen:px-3 text-white bg-dark-300 screen:h-12 desktop:h-12 twok:h-14 focus:outline-none focus:shadow-outline text-caption-4 leading-caption-4 screen:text-caption-2 screen:leading-caption-2 desktop:text-paragraph-1 desktop:leading-paragraph-1`}
 						id={label}
 						type="text"
 						value={

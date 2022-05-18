@@ -66,7 +66,7 @@ const UploadSheet = (
 
 	return (
 		<div className="upload_sheet_form pt-10">
-			<p className="font-bold mb-12 leading-heading-1 text-54px">
+			<p className="font-bold mb-12 phone:text-paragraph-1 screen:text-54px leading-heading-1 text-54px">
 				{"Upload Vesting Sheet"}
 			</p>
 			<div className="upload-message rounded-2xl pl-6 pr-8 screen:py-4 phone:py-10 flex justify-between">

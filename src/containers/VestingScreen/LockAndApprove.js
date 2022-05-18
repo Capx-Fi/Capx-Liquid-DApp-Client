@@ -162,7 +162,7 @@ function LockAndApprove({
 						}`}
 					>
 						<div
-							className="button_text flex text-black phone:px-2 screen:text-caption-1 twok:text-paragraph-2 leading-paragraph-2 font-bold"
+							className="button_text flex text-black phone:px-4 phone:pr-3 screen:pr-4 screen:text-caption-1 twok:text-paragraph-2 leading-paragraph-2 font-bold"
 							onClick={() => {
 								TryApproveToken();
 							}}
@@ -179,7 +179,7 @@ function LockAndApprove({
 					</div>
 
 					<div
-						className={`lowercontainer_button rounded-lg justify-center items-center flex my-3 phone:px-2 desktop:px-2 py-2 screen:w-36 desktop:w-40 cursor-pointer ${
+						className={`lowercontainer_button rounded-lg justify-center items-center flex my-3 phone:px-4 phone:pr-2 screen:pr-4 desktop:px-2 py-2 screen:w-36 desktop:w-40 cursor-pointer ${
 							(!tokenApproval || buttonClicked) &&
 							"opacity-50 pointer-events-none z-10"
 						}`}

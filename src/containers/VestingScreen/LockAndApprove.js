@@ -191,7 +191,7 @@ function LockAndApprove({
 							}}
 						>
 							<div className="flex items-center phone:text-caption-3 screen:text-caption-2 desktop:text-caption-1">
-								{`Lock ${tokenTicker}`}
+								{tokenTicker.length > 3 ? "Lock" : "Lock " + tokenTicker}
 							</div>
 							<img
 								src={LockIcon}

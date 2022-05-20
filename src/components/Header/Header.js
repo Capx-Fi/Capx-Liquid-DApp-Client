@@ -9,19 +9,14 @@ import { injected } from "../../utils/connector";
 import ChooseDashboardModal from "../Modal/ChooseDashboardModal/ChooseDashboardModal";
 import DropDown from "../DropDown/DropDown";
 import { Tooltip, withStyles } from "@material-ui/core";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import { useEffect, useState } from "react";
 import { CHAIN_NAMES } from "../../constants/config";
 
 import { getSortBy } from "../../constants/getChainConfig";
 
-function Header({
-	vesting,
-	hiddenNav,
-	showSteps,
-	hiddenSwitch,
-	isWalletConnect,
-}) {
+function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const { active, account, library, connector, activate, deactivate, chainId } =
 		useWeb3React();
@@ -30,10 +25,14 @@ function Header({
 	const currentChainId = metaState.chain.id?.toString();
 	const [dashboardModal, setDashboardModal] = useState(false);
 	const [sortBy, setSortBy] = useState("Ethereum");
-	const web3 = new Web3(Web3.givenProvider);
 	const handleCloseSelectDashboard = () => {
 		setDashboardModal(false);
 	};
+
+	const provider = window.ethereum;
+	console.log(provider);
+	const web3 = new Web3(provider);
+	console.log(web3);
 
 	useEffect(() => {
 		setSortBy(chainId && getSortBy(chainId));
@@ -54,14 +53,14 @@ function Header({
 	const chainChange = async (chainName) => {
 		if (chainName === "Ethereum") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_switchEthereumChain",
 					params: [{ chainId: "0x1" }],
 				});
 			} catch (error) {}
 		} else if (chainName === "Matic") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -82,7 +81,7 @@ function Header({
 			}
 		} else if (chainName === "BSC") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -103,7 +102,7 @@ function Header({
 			}
 		} else if (chainName === "Avalanche") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -124,7 +123,7 @@ function Header({
 			}
 		} else if (chainName === "Fantom") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -145,7 +144,7 @@ function Header({
 			}
 		} else if (chainName === "Moonbeam") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -166,7 +165,7 @@ function Header({
 			}
 		} else if (chainName === "Arbitrum") {
 			try {
-				await web3.currentProvider.request({
+				await web3.givenProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -222,7 +221,7 @@ function Header({
 				<a href="/">
 					<div>
 						<img
-							className={`header_logo ${vesting && "flex tablet:hidden "}`}
+							className={`header_logo ${vesting && "flex screen:hidden "}`}
 							src={CapxLogo}
 							alt="capx logo"
 						/>
@@ -252,7 +251,7 @@ function Header({
 						)}
 						{active ? (
 							<>
-								<div className="mr-4">
+								<div className="mr-4 phone:hidden screen:block">
 									<DropDown sortBy={sortBy} chainChange={chainChange} />
 								</div>
 								<div className="header_navbar_logoutbutton">

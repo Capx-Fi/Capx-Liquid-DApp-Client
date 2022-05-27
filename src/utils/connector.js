@@ -19,7 +19,7 @@ export const walletconnect = new WalletConnectConnector({
 		.split(", ")
 		.map(Number),
 	rpc: {
-		80001: "https://matic-mumbai.chainstacklabs.com",
+		80001: "https://rpc-mumbai.matic.today",
 		97: "https://data-seed-prebsc-1-s1.binance.org:8545/",
 		4: "https://rinkeby.infura.io/web3/",
 		43113: "https://api.avax-test.network/ext/bc/C/rpc",

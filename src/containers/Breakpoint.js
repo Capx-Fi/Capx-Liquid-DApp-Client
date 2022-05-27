@@ -12,7 +12,7 @@ function BreakPoint() {
 				/>
 
 				<p className="text-center w-full text-white font-semibold p-0 mt-3 phone:text-caption-2 tablet:text-caption-1 breakpoint:text-paragraph-2 desktop:text-paragraph-1">
-					Please open Capx Exchange on a larger viewport .i.e Desktops or
+					Please open Capx Liquid on a larger viewport .i.e Desktops or
 					Laptops to leverage the full experience
 				</p>
 			</div>

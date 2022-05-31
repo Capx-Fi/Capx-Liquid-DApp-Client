@@ -29,21 +29,8 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 		setDashboardModal(false);
 	};
 
-	let provider = null;
-
-	if (connector?.constructor?.name === "InjectedConnector") {
-		provider = window.ethereum;
-	} else {
-		provider = new WalletConnectProvider({
-			rpc: {
-				80001: "https://rpc-mumbai.matic.today",
-				97: "https://data-seed-prebsc-1-s1.binance.org:8545/",
-				4: "https://rinkeby.infura.io/web3/",
-				43113: "https://api.avax-test.network/ext/bc/C/rpc",
-				4002: "https://rpc3.fantom.network",
-			},
-		});
-	}
+	const provider = window.ethereum;
+	console.log(provider);
 	const web3 = new Web3(provider);
 	console.log(web3);
 

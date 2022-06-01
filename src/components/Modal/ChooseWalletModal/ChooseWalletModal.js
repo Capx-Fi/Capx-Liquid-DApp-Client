@@ -13,12 +13,11 @@ import { useTranslation } from "react-i18next";
 
 const Landing = () => {
 	const { active, account, library, connector, activate } = useWeb3React();
-	const [showChooseWalletModal, setShowChooseWalletModal] = useState(false);
+	const [isWalletConnect, setIsWalletConnect] = useState(false);
 
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const { t } = useTranslation();
 	const { error } = useWeb3React();
-	const isMetamask = window.ethereum && window.ethereum.isMetaMask;
 	const unsupportedChainIdError =
 		error && error instanceof UnsupportedChainIdError;
 
@@ -71,13 +70,15 @@ const Landing = () => {
 					</div>
 					<div className="herobuttons flex flex-col gap-y-2 my-14 w-full">
 						<div
-							onClick={connect}
+							onClick={() => {
+								connect();
+							}}
 							className="herocontainer_button flex flex-start rounded-xl items-center flex px-5 py-4 z-10 cursor-pointer"
 						>
 							<div>
 								<img
 									src={MetamaskIcon}
-									alt="Next Icon"
+									alt="Metamask Icon"
 									className="inline-block screen:w-10 screen:h-10 desktop:w-12 ml-3 mr-12"
 								/>
 							</div>
@@ -85,21 +86,23 @@ const Landing = () => {
 								{"Metamask"}
 							</div>
 						</div>
-						{/* <div
-							onClick={walletConnect}
+						<div
+							onClick={() => {
+								walletConnect();
+							}}
 							className="herocontainer_button flex flex-start rounded-xl items-center flex px-5 py-4 z-10 cursor-pointer"
 						>
 							<div>
 								<img
 									src={WalletConnectIcon}
-									alt="Next Icon"
+									alt="WalletConnect Icon"
 									className="inline-block screen:w-10 screen:h-10 desktop:w-12 ml-3 mr-12"
 								/>
 							</div>
 							<div className="button_text text-white desktop:text-captions-1 twok:text-subheading desktop-captions-1 twok:leading-subheading desktop:font-semibold">
 								{"WalletConnect"}
 							</div>
-						</div> */}
+						</div>
 					</div>
 				</div>
 			</div>

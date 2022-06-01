@@ -5,18 +5,23 @@ import { useSnackbar } from "notistack";
 import Web3 from "web3";
 import { useMetamask } from "../../metamaskReactHook/index";
 import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
-import { injected } from "../../utils/connector";
+import { injected, walletconnect } from "../../utils/connector";
 import ChooseDashboardModal from "../Modal/ChooseDashboardModal/ChooseDashboardModal";
 import DropDown from "../DropDown/DropDown";
 import { Tooltip, withStyles } from "@material-ui/core";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import { useEffect, useState } from "react";
 import { CHAIN_NAMES } from "../../constants/config";
 
 import { getSortBy } from "../../constants/getChainConfig";
 
-function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
+function Header({
+	vesting,
+	hiddenNav,
+	showSteps,
+	hiddenSwitch,
+	isWalletConnect,
+}) {
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const { active, account, library, connector, activate, deactivate, chainId } =
 		useWeb3React();
@@ -29,7 +34,24 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 		setDashboardModal(false);
 	};
 
-	const provider = window.ethereum;
+	console.log(isWalletConnect);
+	let provider = walletconnect;
+
+	// if (isWalletConnect) {
+	// 	try {
+	// 		provider = new WalletConnectProvider.default({
+	// 			rpc: {
+	// 				4: "https://rinkeby.infura.io/v3/031c5bdd74a54257994e2444875c5968", // https://ethereumnodes.com/
+	// 				// ...
+	// 			},
+	// 			qrcodeModalOptions: {
+	// 				mobileLinks: ["metamask"],
+	// 			},
+	// 		});
+	// 	} catch (err) {
+	// 		console.error(err);
+	// 	}
+	// }
 	console.log(provider);
 	const web3 = new Web3(provider);
 	console.log(web3);

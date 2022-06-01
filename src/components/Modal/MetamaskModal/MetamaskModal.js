@@ -46,7 +46,7 @@ function MetamaskModal({ setModalMode }) {
 				<div className="metamaskmodalscreen_maincontainer_herocontainer">
 					<div className="metamaskmodalscreen_maincontainer_herocontainer_title">
 						{t("please_connect_metamask")}
-						<br /> {t("please_connect_metamask_2")}
+						<br /> {t("Wallet to proceed")}
 					</div>
 					{/* <div className="metamaskmodalscreen_maincontainer_herocontainer_title">
             {t("please_connect_metamask_2")}
@@ -55,13 +55,11 @@ function MetamaskModal({ setModalMode }) {
 					<div
 						className="metamaskmodalscreen_maincontainer_herocontainer_button"
 						onClick={() => {
-							isMetamask
-								? connect()
-								: window.open("https://metamask.io/", "_blank").focus();
+							setModalMode(1);
 						}}
 					>
 						<div className="metamaskmodalscreen_maincontainer_herocontainer_button_text">
-							{isMetamask ? "Connect Metamask" : "Install Metamask"}
+							Connect Wallet
 						</div>
 						<img
 							className="metamaskmodalscreen_maincontainer_herocontainer_button_icon"

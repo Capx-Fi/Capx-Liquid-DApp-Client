@@ -1,7 +1,6 @@
 import { useWeb3React } from "@web3-react/core";
 import { useContext, useEffect, useRef } from "react";
 import { MetaStateContext } from "./store";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 
 const chains = (chainId) => {
 	if (Number(chainId) && chainId?.length > 9) {

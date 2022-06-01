@@ -24,7 +24,7 @@ import { CONTRACT_ABI_ERC20 } from "../../contracts/SampleERC20";
 import { withdrawWrappedTokens } from "../../utils/withdrawWrappedTokens";
 import { CONTRACT_ABI_CAPX } from "../../contracts/CapxController";
 import Web3 from "web3";
-import WalletConnectProvider from "@walletconnect/web3-provider";
+// import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import NothingHereInvestorDashboard from "../NothingHere/NothingHereInvestorDashboard";
 import LoadingScreen from "../../containers/LoadingScreen";
@@ -37,6 +37,7 @@ import { transformInvestorData } from "../../utils/transformInvestorData";
 import { withdrawVestedTokens } from "../../utils/withdrawVestedTokens";
 import InvestorLoading from "./InvestorLoading";
 import { Tooltip, withStyles } from "@material-ui/core";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 import {
 	getContractAddress,
 	getContractAddressController,
@@ -46,6 +47,8 @@ import {
 	getWrappedURL,
 } from "../../constants/getChainConfig";
 import { useMetamask } from "../../metamaskReactHook";
+import { walletconnect } from "../../utils/connector";
+import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
 
@@ -55,31 +58,35 @@ function InvestorDashboardScreen() {
 	const [projectOverviewData, setProjectOverviewData] = useState(null);
 	const [wrappedProjectData, setWrappedProjectData] = useState([]);
 	const [vestedProjectData, setVestedProjectData] = useState([]);
-	const { active, account, chainId, connector } = useWeb3React();
+	const { active, account, chainId, connector, library } = useWeb3React();
 	const [withdrawModalOpen, setWithdrawModalOpen] = useState(false);
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const [buttonDisabled, setButtonDisabled] = useState(false);
 	const [withdrawModalStatus, setWithdrawModalStatus] = useState("");
 
-	let provider = null;
-	console.log(connector?.constructor?.name);
-	if (connector?.constructor?.name === "InjectedConnector") {
-		provider = window.ethereum;
-	} else {
-		provider = new WalletConnectProvider({
-			rpc: {
-				80001: "https://rpc-mumbai.matic.today",
-				97: "https://data-seed-prebsc-1-s1.binance.org:8545/",
-				4: "https://rinkeby.infura.io/web3/",
-				43113: "https://api.avax-test.network/ext/bc/C/rpc",
-				4002: "https://rpc3.fantom.network",
-			},
-		});
-	}
-	// console.log(new Web3(Web3.givenProvider));
-
-	const web3 = new Web3(Web3.givenProvider || provider);
-	console.log(web3);
+	let provider = connector?.getProvider();
+	console.log(provider);
+	// await provider.enable();
+	// console.log(connector?.constructor?.name);
+	// if (connector?.constructor?.name === "InjectedConnector") {
+	// 	provider = window.ethereum;
+	// } else {
+	// 	provider = new WalletConnectProvider({
+	// 		rpc: {
+	// 			80001: "https://rpc-mumbai.matic.today",
+	// 			97: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+	// 			4: "https://rinkeby.infura.io/web3/",
+	// 			43113: "https://api.avax-test.network/ext/bc/C/rpc",
+	// 			4002: "https://rpc3.fantom.network",
+	// 		},
+	// 	});
+	// }
+	// // console.log(new Web3(Web3.givenProvider));
+	console.log(Web3);
+	const web3 = new Web3(provider?.enable);
+	window.w3 = web3;
+	console.log(window.w3);
+	// console.log(web3.eth.getAccounts());
 	const contractAddress = chainId && getContractAddress(chainId);
 
 	const contractAddressController =

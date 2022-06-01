@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import NextIcon from "../../assets/next.svg";
@@ -7,22 +7,23 @@ import CapxCoinIllustration from "../../assets/CapxCoinIllustration.png";
 import { Link } from "react-router-dom";
 import ChooseDashboardModal from "../Modal/ChooseDashboardModal/ChooseDashboardModal";
 import "./Landing.scss";
+import useWindowSize from "../../utils/windowSize";
 
 const Landing = () => {
 	const [dashboardModal, setDashboardModal] = useState(false);
 	const handleCloseSelectDashboard = () => {
 		setDashboardModal(false);
 	};
-	const windowWidth = window.innerWidth;
+	const windowWidth = useWindowSize().width;
 
 	return (
-		<div className="landing_screen h-screen flex bg-dark-400">
+		<article className="landing_screen h-screen m-auto flex bg-dark-400 overflow-hidden">
 			<Header hiddenNav />
 			<ChooseDashboardModal
 				dashboardModal={dashboardModal}
 				handleCloseSelectDashboard={handleCloseSelectDashboard}
 			/>
-			<div className="maincontainer flex flex-col justify-center phone:items-center screen:items-start m-auto mt-auto">
+			<div className="maincontainer flex flex-col justify-center phone:items-center screen:items-start phone:-ml-5 tablet:m-auto">
 				<div className="herocontainer phone:px-6 mx-10 screen:px-12 py-12 rounded-3xl bg-opacity-70 text-white relative phone:w-90v screen:w-65v desktop:w-65v twok:w-50v flex flex-col items-start">
 					<div className="upperbutton px-4 py-2.5 rounded-lg phone:text-caption-4 screen:leading-caption-3 desktop:text-caption-3 desktop:leading-caption-3 twok:text-caption-2 twok:leading-caption-2 desktop:font-bold twok:font-semibold">
 						{"CAPX LIQUID"}
@@ -48,7 +49,7 @@ const Landing = () => {
 					<img
 						src={CapxCoinIllustration}
 						alt="Next Icon"
-						className="inline-block screen:block z-40 phone:w-36 phone:w-52 desktop:w-72 twok:w-80 absolute phone:-bottom-36 desktop:-bottom-32 phone:-right-16 desktop:-right-24 twok:-bottom-40 twok:-right-32"
+						className="inline-block screen:block z-40 phone:w-48 desktop:w-72 twok:w-80 absolute phone:-bottom-36 desktop:-bottom-32 phone:-right-10 desktop:-right-24 twok:-bottom-40 twok:-right-32"
 					/>
 				</div>
 				<div className="lowercontainer screen:mt-4 desktop:mt-4 twok:mt-10 phone:px-6 screen:px-12 phone:py-2 screen:py-1 rounded-2xl bg-opacity-70 text-white relative phone:mt-6 phone:w-90v screen:ml-10 screen:w-52v desktop:w-50v twok:w-40v flex">
@@ -81,7 +82,7 @@ const Landing = () => {
 				</div>
 			</div>
 			<Footer />
-		</div>
+		</article>
 	);
 };
 

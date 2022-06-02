@@ -38,15 +38,22 @@ function LockAndApprove({
 	tokenTicker,
 }) {
 	const { active, chainId, connector } = useWeb3React();
-	let web3 = null;
+	const [web3, setWeb3] = useState(null);
 
 	const setupProvider = async () => {
-		await connector?.getProvider().then((res) => {
-			web3 = new Web3(res);
+		let result = await connector?.getProvider().then((res) => {
+			return res;
 		});
+		return result;
 	};
 
-	setupProvider();
+	useEffect(() => {
+		setupProvider().then((res) => {
+			setWeb3(new Web3(res));
+		});
+	}, [active, chainId]);
+
+	web3 && console.log(web3);
 
 	const CONTRACT_ADDRESS_CAPX = chainId && getContractAddress(chainId);
 
@@ -73,7 +80,7 @@ function LockAndApprove({
 				Math.pow(10, tokenDetails.decimal)
 			);
 			try {
-				approvedAmount = await vestingTokenContract.methods
+				approvedAmount = await vestingTokenContract?.methods
 					.allowance(metamaskAccount, CONTRACT_ADDRESS_CAPX)
 					.call();
 				approvedAmount = new BigNumber(approvedAmount);

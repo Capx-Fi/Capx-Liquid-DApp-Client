@@ -122,7 +122,7 @@ function Header({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0xA869",
+							chainId: "0xA86A",
 							chainName: "Avalanche Fuji",
 							nativeCurrency: {
 								name: "AVAX",
@@ -143,7 +143,7 @@ function Header({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0xFA2",
+							chainId: "0xFA",
 							chainName: "Fantom",
 							nativeCurrency: {
 								name: "FTM",

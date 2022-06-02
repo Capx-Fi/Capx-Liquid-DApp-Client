@@ -16,7 +16,7 @@ export const withdrawVestedTokens = async (
 	setWithdrawModalOpen(true);
 	let withdrawResult = null;
 	try {
-		withdrawResult = await capxContract.methods
+		withdrawResult = await capxContract?.methods
 			.withdrawVestingLock(vestID)
 			.send({ from: account });
 		if (withdrawResult) {

@@ -21,7 +21,7 @@ export const withdrawWrappedTokens = async (
 	let approvedAmount = null;
 	let approveResult = null;
 	try {
-		approvedAmount = await wrappedTokenContract.methods
+		approvedAmount = await wrappedTokenContract?.methods
 			.allowance(account, CONTRACT_ADDRESS_CAPX_CONTROLLER)
 			.call();
 		console.log(account);
@@ -34,7 +34,7 @@ export const withdrawWrappedTokens = async (
 			approvedAmount.dividedBy(Math.pow(10, tokenDecimal)).toString(10) === "0"
 		) {
 			try {
-				approveResult = await wrappedTokenContract.methods
+				approveResult = await wrappedTokenContract?.methods
 					.approve(CONTRACT_ADDRESS_CAPX_CONTROLLER, tokenAmount)
 					.send({ from: `${account}` });
 			} catch (err) {
@@ -49,7 +49,7 @@ export const withdrawWrappedTokens = async (
 		} else {
 			let approve0Result = null;
 			try {
-				approve0Result = await wrappedTokenContract.methods
+				approve0Result = await wrappedTokenContract?.methods
 					.approve(
 						CONTRACT_ADDRESS_CAPX_CONTROLLER,
 						new BigNumber(0)
@@ -63,7 +63,7 @@ export const withdrawWrappedTokens = async (
 			}
 			if (approve0Result) {
 				try {
-					approveResult = await wrappedTokenContract.methods
+					approveResult = await wrappedTokenContract?.methods
 						.approve(CONTRACT_ADDRESS_CAPX_CONTROLLER, tokenAmount)
 						.send({ from: account });
 				} catch (err) {

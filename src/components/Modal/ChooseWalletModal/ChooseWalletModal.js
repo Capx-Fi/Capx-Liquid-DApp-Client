@@ -61,11 +61,11 @@ const Landing = () => {
 		<article className="h-screen bg-dark-400 flex choose_screen">
 			<Header hiddenNav />
 			<div className="justify-center laptop:items-center m-auto mt-32 tablet:mt-48 laptop:mt-auto">
-				<div className="herocontainer screen:px-16 screen:py-10 desktop:px-20 desktop:py-14 rounded-3xl bg-opacity-70 text-white relative screen:w-65v desktop:w-60v flex flex-col items-start">
-					<div className="title screen:text-heading-2 screen:leading-lh-64 desktop:text-40px desktop:leading-lh-64 twok:text-50px twok:leading-lh-54 leading-title-1 font-semibold w-10/12 text-left">
+				<div className="herocontainer phone:w-90v phone:mt-12 screen:mt-0 tablet:w-75v phone:px-8 phone:py-6 screen:px-16 screen:py-10 desktop:px-20 desktop:py-14 rounded-3xl bg-opacity-70 text-white relative screen:w-65v desktop:w-60v flex flex-col items-start">
+					<div className="title phone:text-paragraph-2 phone:leading-1 tablet:text-heading-2 screen:text-heading-2 screen:leading-lh-64 desktop:text-40px desktop:leading-lh-64 twok:text-50px twok:leading-lh-54 tablet:leading-title-1 font-semibold w-10/12 text-left">
 						{"Connect your wallet"}
 					</div>
-					<div className="desktop:mt-2 desktop:text-paragraph-1 desktop:leading-subheading twok:text-subheading twok:leading-subheading text-greylabel">
+					<div className="tablet:text-paragraph-2 desktop:mt-2 desktop:text-paragraph-1 desktop:leading-subheading twok:text-subheading twok:leading-subheading text-greylabel">
 						{"Connect with one of our available wallet providers"}
 					</div>
 					<div className="herobuttons flex flex-col gap-y-2 my-14 w-full">
@@ -79,7 +79,7 @@ const Landing = () => {
 								<img
 									src={MetamaskIcon}
 									alt="Metamask Icon"
-									className="inline-block screen:w-10 screen:h-10 desktop:w-12 ml-3 mr-12"
+									className="inline-block phone:w-10 phone:h-10 desktop:w-12 ml-3 mr-12"
 								/>
 							</div>
 							<div className="button_text text-white desktop:text-captions-1 twok:text-subheading desktop-captions-1 twok:leading-subheading desktop:font-semibold">
@@ -96,7 +96,7 @@ const Landing = () => {
 								<img
 									src={WalletConnectIcon}
 									alt="WalletConnect Icon"
-									className="inline-block screen:w-10 screen:h-10 desktop:w-12 ml-3 mr-12"
+									className="inline-block phone:w-10 phone:h-10 desktop:w-12 ml-3 mr-12"
 								/>
 							</div>
 							<div className="button_text text-white desktop:text-captions-1 twok:text-subheading desktop-captions-1 twok:leading-subheading desktop:font-semibold">

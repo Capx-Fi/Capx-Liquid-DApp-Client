@@ -63,39 +63,32 @@ function InvestorDashboardScreen() {
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const [buttonDisabled, setButtonDisabled] = useState(false);
 	const [withdrawModalStatus, setWithdrawModalStatus] = useState("");
+	const [web3, setWeb3] = useState(null);
 
-	let provider = connector?.getProvider();
-	console.log(provider);
-	// await provider.enable();
-	// console.log(connector?.constructor?.name);
-	// if (connector?.constructor?.name === "InjectedConnector") {
-	// 	provider = window.ethereum;
-	// } else {
-	// 	provider = new WalletConnectProvider({
-	// 		rpc: {
-	// 			80001: "https://rpc-mumbai.matic.today",
-	// 			97: "https://data-seed-prebsc-1-s1.binance.org:8545/",
-	// 			4: "https://rinkeby.infura.io/web3/",
-	// 			43113: "https://api.avax-test.network/ext/bc/C/rpc",
-	// 			4002: "https://rpc3.fantom.network",
-	// 		},
-	// 	});
-	// }
-	// // console.log(new Web3(Web3.givenProvider));
-	console.log(Web3);
-	const web3 = new Web3(provider?.enable);
-	window.w3 = web3;
-	console.log(window.w3);
-	// console.log(web3.eth.getAccounts());
+	const setupProvider = async () => {
+		console.log("this is before");
+		let result = await connector?.getProvider().then((res) => {
+			return res;
+		});
+		console.log(result);
+		return result;
+	};
+
+	useEffect(() => {
+		let test = setupProvider().then((res) => {
+			setWeb3(new Web3(res));
+		});
+		console.log(test);
+	}, [active, chainId]);
+
+	web3 && console.log(web3);
 	const contractAddress = chainId && getContractAddress(chainId);
 
 	const contractAddressController =
 		chainId && getContractAddressController(chainId);
 
-	const capxContract = new web3.eth.Contract(
-		CONTRACT_ABI_CAPX,
-		contractAddress
-	);
+	const capxContract =
+		web3 && new web3.eth.Contract(CONTRACT_ABI_CAPX, contractAddress);
 	console.dir(capxContract);
 	const explorer = chainId && getExplorer(chainId);
 
@@ -176,10 +169,8 @@ function InvestorDashboardScreen() {
 				vestID
 			);
 		} else {
-			const wrappedTokenContract = new web3.eth.Contract(
-				CONTRACT_ABI_ERC20,
-				wrappedTokenAddress
-			);
+			const wrappedTokenContract =
+				web3 && new web3.eth.Contract(CONTRACT_ABI_ERC20, wrappedTokenAddress);
 			await withdrawWrappedTokens(
 				wrappedTokenAddress,
 				tokenAmount,

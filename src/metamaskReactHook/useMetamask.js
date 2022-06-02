@@ -30,7 +30,7 @@ const useMetamask = () => {
 	let provider = null;
 
 	provider = window.ethereum;
-	console.log(provider);
+	// console.log(provider);
 	useEffect(() => {
 		return () => {
 			_isMounted.current = false;

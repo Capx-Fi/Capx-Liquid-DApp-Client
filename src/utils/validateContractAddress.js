@@ -4,7 +4,7 @@ import { CONTRACT_ABI_ERC20 } from "../contracts/SampleERC20";
 import Web3 from "web3";
 // Hook
 export async function validateContractAddress(address) {
-	const web3 = new Web3(Web3.givenProvider);
+	const web3 = new Web3(Web3.currentProvider);
 	let contractDetails = { ticker: "", decimal: 10, valid: false };
 	let flag = address?.length === 42;
 	if (flag) {

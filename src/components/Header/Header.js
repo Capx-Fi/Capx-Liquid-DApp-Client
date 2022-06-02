@@ -34,7 +34,7 @@ function Header({
 		setDashboardModal(false);
 	};
 
-	console.log(isWalletConnect);
+	// console.log(isWalletConnect);
 	let provider = walletconnect;
 
 	// if (isWalletConnect) {
@@ -52,9 +52,9 @@ function Header({
 	// 		console.error(err);
 	// 	}
 	// }
-	console.log(provider);
+	// console.log(provider);
 	const web3 = new Web3(provider);
-	console.log(web3);
+	// console.log(web3);
 
 	useEffect(() => {
 		setSortBy(chainId && getSortBy(chainId));

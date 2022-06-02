@@ -15,7 +15,7 @@ export const withdrawWrappedTokens = async (
 	CONTRACT_ADDRESS_CAPX_CONTROLLER,
 	tokenDecimal
 ) => {
-	console.log(account);
+	console.log(capxContract);
 	setWithdrawModalOpen(true);
 	let withdrawResult = null;
 	let approvedAmount = null;
@@ -83,9 +83,9 @@ export const withdrawWrappedTokens = async (
 	}
 	if (approveResult) {
 		try {
-			withdrawResult = await capxContract.methods
-				.withdrawWrappedVestingToken(wrappedTokenAddress, tokenAmount)
-				.send({ from: account });
+			withdrawResult = await capxContract?.methods
+				?.withdrawWrappedVestingToken(wrappedTokenAddress, tokenAmount)
+				?.send({ from: account });
 			if (withdrawResult) {
 				setWithdrawModalStatus("success");
 				enqueueSnackbar("Transaction Successful", { variant: "success" });

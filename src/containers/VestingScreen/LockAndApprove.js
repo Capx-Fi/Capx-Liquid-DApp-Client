@@ -37,9 +37,16 @@ function LockAndApprove({
 	uniqueAddresses,
 	tokenTicker,
 }) {
-	const web3 = new Web3(Web3.givenProvider);
-	window.w3 = web3;
-	const { chainId } = useWeb3React();
+	const { active, chainId, connector } = useWeb3React();
+	let web3 = null;
+
+	const setupProvider = async () => {
+		await connector?.getProvider().then((res) => {
+			web3 = new Web3(res);
+		});
+	};
+
+	setupProvider();
 
 	const CONTRACT_ADDRESS_CAPX = chainId && getContractAddress(chainId);
 
@@ -54,14 +61,11 @@ function LockAndApprove({
 	const totalTokens = totalVested(vestingArray);
 
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-	const vestingTokenContract = new web3.eth.Contract(
-		CONTRACT_ABI_ERC20,
-		contractDetails.contractAddress
-	);
-	const capxContract = new web3.eth.Contract(
-		CONTRACT_ABI_CAPX,
-		CONTRACT_ADDRESS_CAPX
-	);
+	const vestingTokenContract =
+		web3 &&
+		new web3.eth.Contract(CONTRACT_ABI_ERC20, contractDetails.contractAddress);
+	const capxContract =
+		web3 && new web3.eth.Contract(CONTRACT_ABI_CAPX, CONTRACT_ADDRESS_CAPX);
 	useEffect(() => {
 		async function getApproval() {
 			let approvedAmount = null;

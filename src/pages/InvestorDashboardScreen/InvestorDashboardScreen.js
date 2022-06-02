@@ -66,19 +66,16 @@ function InvestorDashboardScreen() {
 	const [web3, setWeb3] = useState(null);
 
 	const setupProvider = async () => {
-		console.log("this is before");
 		let result = await connector?.getProvider().then((res) => {
 			return res;
 		});
-		console.log(result);
 		return result;
 	};
 
 	useEffect(() => {
-		let test = setupProvider().then((res) => {
+		setupProvider().then((res) => {
 			setWeb3(new Web3(res));
 		});
-		console.log(test);
 	}, [active, chainId]);
 
 	web3 && console.log(web3);

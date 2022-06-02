@@ -30,31 +30,25 @@ function Header({
 	const currentChainId = metaState.chain.id?.toString();
 	const [dashboardModal, setDashboardModal] = useState(false);
 	const [sortBy, setSortBy] = useState("Ethereum");
+	const [web3, setWeb3] = useState(null);
 	const handleCloseSelectDashboard = () => {
 		setDashboardModal(false);
 	};
 
-	// console.log(isWalletConnect);
-	let provider = walletconnect;
+	const setupProvider = async () => {
+		let result = await connector?.getProvider().then((res) => {
+			return res;
+		});
+		return result;
+	};
 
-	// if (isWalletConnect) {
-	// 	try {
-	// 		provider = new WalletConnectProvider.default({
-	// 			rpc: {
-	// 				4: "https://rinkeby.infura.io/v3/031c5bdd74a54257994e2444875c5968", // https://ethereumnodes.com/
-	// 				// ...
-	// 			},
-	// 			qrcodeModalOptions: {
-	// 				mobileLinks: ["metamask"],
-	// 			},
-	// 		});
-	// 	} catch (err) {
-	// 		console.error(err);
-	// 	}
-	// }
-	// console.log(provider);
-	const web3 = new Web3(provider);
-	// console.log(web3);
+	useEffect(() => {
+		setupProvider().then((res) => {
+			setWeb3(new Web3(res));
+		});
+	}, [active, chainId]);
+
+	web3 && console.log(web3);
 
 	useEffect(() => {
 		setSortBy(chainId && getSortBy(chainId));
@@ -75,14 +69,14 @@ function Header({
 	const chainChange = async (chainName) => {
 		if (chainName === "Ethereum") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_switchEthereumChain",
 					params: [{ chainId: "0x4" }],
 				});
 			} catch (error) {}
 		} else if (chainName === "Matic") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -103,7 +97,7 @@ function Header({
 			}
 		} else if (chainName === "BSC") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -124,7 +118,7 @@ function Header({
 			}
 		} else if (chainName === "Avalanche") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -145,7 +139,7 @@ function Header({
 			}
 		} else if (chainName === "Fantom") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -166,7 +160,7 @@ function Header({
 			}
 		} else if (chainName === "Moonbeam") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -187,7 +181,7 @@ function Header({
 			}
 		} else if (chainName === "Arbitrum") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{

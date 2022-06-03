@@ -3,5 +3,5 @@
 }
 
 .option {
-	@apply block px-4 text-left cursor-pointer py-2 w-11/12 text-caption-2 text-greylabel hover:bg-dark-300 hover:text-white;
+	@apply flex flex-row items-center px-4 text-left cursor-pointer py-2 w-11/12 text-caption-2 text-greylabel hover:bg-dark-300 hover:text-white;
 }

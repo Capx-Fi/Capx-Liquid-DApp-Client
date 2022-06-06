@@ -53,7 +53,7 @@ function LockAndApprove({
 		});
 	}, [active, chainId]);
 
-	web3 && console.log(web3);
+	// web3 && console.log(web3);
 
 	const CONTRACT_ADDRESS_CAPX = chainId && getContractAddress(chainId);
 

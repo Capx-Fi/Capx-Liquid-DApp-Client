@@ -15,7 +15,7 @@ export const withdrawWrappedTokens = async (
 	CONTRACT_ADDRESS_CAPX_CONTROLLER,
 	tokenDecimal
 ) => {
-	console.log(capxContract);
+	// console.log(capxContract);
 	setWithdrawModalOpen(true);
 	let withdrawResult = null;
 	let approvedAmount = null;
@@ -24,7 +24,7 @@ export const withdrawWrappedTokens = async (
 		approvedAmount = await wrappedTokenContract?.methods
 			.allowance(account, CONTRACT_ADDRESS_CAPX_CONTROLLER)
 			.call();
-		console.log(account);
+		// console.log(account);
 	} catch (err) {
 		setWithdrawModalStatus("failure");
 	}

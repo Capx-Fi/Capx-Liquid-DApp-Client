@@ -39,12 +39,12 @@ const useMetamask = () => {
 
 	const connect = async (Web3Interface, settings = {}) => {
 		if (!provider) throw Error("Metamask is not available.");
-		console.log(_isMounted);
+		// console.log(_isMounted);
 		if (!Web3Interface)
 			throw Error(
 				"Web3 Provider is required. You can use either ethers.js or web3.js."
 			);
-		console.log(provider, typeof _isMounted.current);
+		// console.log(provider, typeof _isMounted.current);
 		if (!_isMounted.current) throw Error("Component is not mounted.");
 		if (_isConnectCalled.current) throw Error("Connect method already called.");
 		_isConnectCalled.current = true;
@@ -54,7 +54,7 @@ const useMetamask = () => {
 		);
 
 		const account = await getAccounts({ requestPermission: true });
-		console.log(account);
+		// console.log(account);
 		const chainDet = await getChain();
 
 		dispatch({

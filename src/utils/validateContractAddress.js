@@ -5,7 +5,7 @@ import Web3 from "web3";
 // Hook
 
 export async function validateContractAddress(address, web3) {
-	web3 && console.log(web3);
+	// web3 && console.log(web3);
 	let contractDetails = { ticker: "", decimal: 10, valid: false };
 	let flag = address?.length === 42;
 	if (flag) {

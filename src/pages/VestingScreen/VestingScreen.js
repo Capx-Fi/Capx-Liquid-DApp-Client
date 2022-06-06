@@ -50,7 +50,7 @@ function VestingScreen() {
 		});
 	}, [active, chainId]);
 
-	web3 && console.log(web3);
+	// web3 && console.log(web3);
 
 	if (step === 0) {
 		history.push("/");

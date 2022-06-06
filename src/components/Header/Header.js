@@ -48,7 +48,7 @@ function Header({
 		});
 	}, [active, chainId]);
 
-	web3 && console.log(web3);
+	// web3 && console.log(web3);
 
 	useEffect(() => {
 		setSortBy(chainId && getSortBy(chainId));

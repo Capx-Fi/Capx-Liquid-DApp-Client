@@ -78,7 +78,7 @@ function InvestorDashboardScreen() {
 		});
 	}, [active, chainId]);
 
-	web3 && console.log(web3);
+	// web3 && console.log(web3);
 	const contractAddress = chainId && getContractAddress(chainId);
 
 	const contractAddressController =

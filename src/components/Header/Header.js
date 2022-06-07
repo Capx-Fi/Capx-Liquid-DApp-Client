@@ -87,7 +87,7 @@ function Header({
 								symbol: "MATIC",
 								decimals: 18,
 							},
-							rpcUrls: ["https://polygon-rpc.com/"],
+							rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
 							blockExplorerUrls: ["https://polygonscan.com/"],
 						},
 					],
@@ -108,8 +108,8 @@ function Header({
 								symbol: "BNB",
 								decimals: 18,
 							},
-							rpcUrls: ["https://bsc-dataseed.binance.org/"],
-							blockExplorerUrls: ["https://bscscan.com/"],
+							rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
+							blockExplorerUrls: ["https://testnet.bscscan.com/"],
 						},
 					],
 				});
@@ -122,15 +122,15 @@ function Header({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0xA86A",
+							chainId: "0xA869",
 							chainName: "Avalanche Fuji",
 							nativeCurrency: {
 								name: "AVAX",
 								symbol: "AVAX",
 								decimals: 18,
 							},
-							rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
-							blockExplorerUrls: ["https://snowtrace.io/"],
+							rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+							blockExplorerUrls: ["https://testnet.snowtrace.io/"],
 						},
 					],
 				});
@@ -143,7 +143,7 @@ function Header({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0xFA",
+							chainId: "0xFA2",
 							chainName: "Fantom",
 							nativeCurrency: {
 								name: "FTM",

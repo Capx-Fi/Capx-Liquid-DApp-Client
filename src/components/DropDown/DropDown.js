@@ -35,7 +35,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
 				/>
 				<span className="mr-4">{sortBy === "matic" ? "Matic" : sortBy}</span>
 				<svg
-					className="w-5 h-5 text-grayLabel dark:text-white"
+					className="screen:w-4 screen:h-4 desktop:w-5 desktop:h-5 text-grayLabel dark:text-white"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"

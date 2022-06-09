@@ -10,6 +10,7 @@ import { useSnackbar } from "notistack";
 import { injected, walletconnect } from "../../../utils/connector";
 import { CHAIN_NAMES } from "../../../constants/config";
 import { useTranslation } from "react-i18next";
+import infoIcon from "../../../assets/info.svg";
 
 const Landing = ({ setModalMode }) => {
 	const { active, account, library, connector, activate } = useWeb3React();
@@ -99,8 +100,18 @@ const Landing = ({ setModalMode }) => {
 									className="inline-block phone:w-10 phone:h-10 desktop:w-12 ml-3 mr-12"
 								/>
 							</div>
-							<div className="button_text text-white desktop:text-captions-1 twok:text-subheading desktop-captions-1 twok:leading-subheading desktop:font-semibold">
-								{"WalletConnect"}
+							<div className="flex flex-col text-left phone:pl-10 tablet:pl-0">
+								<div className="text-white desktop:text-paragraph-2 breakpoint:text-caption-1 twok:text-subheading desktop-captions-1 twok:leading-subheading font-semibold">
+									{"WalletConnect"}
+								</div>
+								<p className="infoText text-left mt-2 text-tradeTitle">
+									<img
+										src={infoIcon}
+										className="w-4 pb-0.5 mr-2 phone:hidden tablet:inline tablet:mr-1 items-center"
+										alt="info icon"
+									/>
+									{"Please refresh the page after connecting your wallet."}
+								</p>
 							</div>
 						</div>
 					</div>

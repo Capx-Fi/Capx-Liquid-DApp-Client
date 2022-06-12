@@ -46,7 +46,7 @@ function MetamaskModal({ setModalMode }) {
 				<div className="metamaskmodalscreen_maincontainer_herocontainer">
 					<div className="metamaskmodalscreen_maincontainer_herocontainer_title">
 						{t("please_connect_metamask")}
-						<br /> {t("Wallet to proceed")}
+						<br /> {t("Wallet to Proceed")}
 					</div>
 					{/* <div className="metamaskmodalscreen_maincontainer_herocontainer_title">
             {t("please_connect_metamask_2")}

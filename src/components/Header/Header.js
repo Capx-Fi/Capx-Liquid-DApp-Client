@@ -5,18 +5,23 @@ import { useSnackbar } from "notistack";
 import Web3 from "web3";
 import { useMetamask } from "../../metamaskReactHook/index";
 import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
-import { injected } from "../../utils/connector";
+import { injected, walletconnect } from "../../utils/connector";
 import ChooseDashboardModal from "../Modal/ChooseDashboardModal/ChooseDashboardModal";
 import DropDown from "../DropDown/DropDown";
 import { Tooltip, withStyles } from "@material-ui/core";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import { useEffect, useState } from "react";
 import { CHAIN_NAMES } from "../../constants/config";
 
 import { getSortBy } from "../../constants/getChainConfig";
 
-function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
+function Header({
+	vesting,
+	hiddenNav,
+	showSteps,
+	hiddenSwitch,
+	isWalletConnect,
+}) {
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const { active, account, library, connector, activate, deactivate, chainId } =
 		useWeb3React();
@@ -25,14 +30,25 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 	const currentChainId = metaState.chain.id?.toString();
 	const [dashboardModal, setDashboardModal] = useState(false);
 	const [sortBy, setSortBy] = useState("Ethereum");
+	const [web3, setWeb3] = useState(null);
 	const handleCloseSelectDashboard = () => {
 		setDashboardModal(false);
 	};
 
-	const provider = window.ethereum;
-	console.log(provider);
-	const web3 = new Web3(provider);
-	console.log(web3);
+	const setupProvider = async () => {
+		let result = await connector?.getProvider().then((res) => {
+			return res;
+		});
+		return result;
+	};
+
+	useEffect(() => {
+		setupProvider().then((res) => {
+			setWeb3(new Web3(res));
+		});
+	}, [active, chainId]);
+
+	// web3 && console.log(web3);
 
 	useEffect(() => {
 		setSortBy(chainId && getSortBy(chainId));
@@ -53,14 +69,14 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 	const chainChange = async (chainName) => {
 		if (chainName === "Ethereum") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_switchEthereumChain",
 					params: [{ chainId: "0x4" }],
 				});
 			} catch (error) {}
 		} else if (chainName === "Matic") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -71,7 +87,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 								symbol: "MATIC",
 								decimals: 18,
 							},
-							rpcUrls: ["https://polygon-rpc.com/"],
+							rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
 							blockExplorerUrls: ["https://polygonscan.com/"],
 						},
 					],
@@ -81,7 +97,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 			}
 		} else if (chainName === "BSC") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -92,8 +108,8 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 								symbol: "BNB",
 								decimals: 18,
 							},
-							rpcUrls: ["https://bsc-dataseed.binance.org/"],
-							blockExplorerUrls: ["https://bscscan.com/"],
+							rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
+							blockExplorerUrls: ["https://testnet.bscscan.com/"],
 						},
 					],
 				});
@@ -102,7 +118,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 			}
 		} else if (chainName === "Avalanche") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -113,8 +129,8 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 								symbol: "AVAX",
 								decimals: 18,
 							},
-							rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
-							blockExplorerUrls: ["https://snowtrace.io/"],
+							rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+							blockExplorerUrls: ["https://testnet.snowtrace.io/"],
 						},
 					],
 				});
@@ -123,7 +139,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 			}
 		} else if (chainName === "Fantom") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -144,7 +160,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 			}
 		} else if (chainName === "Moonbeam") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
@@ -165,7 +181,7 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 			}
 		} else if (chainName === "Arbitrum") {
 			try {
-				await web3.givenProvider.request({
+				await web3.currentProvider.request({
 					method: "wallet_addEthereumChain",
 					params: [
 						{

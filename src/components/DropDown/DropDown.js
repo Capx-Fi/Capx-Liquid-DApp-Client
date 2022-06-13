@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import "./DropDown.scss";
 import Web3 from "web3";
+import bscLogo from "../../assets/bsc-logo.svg";
+import maticLogo from "../../assets/matic-logo.svg";
+import avalancheLogo from "../../assets/avalanche-logo.svg";
+import ethLogo from "../../assets/ethereum-logo.svg";
+import fantomLogo from "../../assets/fantom-logo.svg";
 
 function DropDown({ sortBy, chainChange, setShowMenu }) {
 	const [open, setOpen] = useState(false);
@@ -15,9 +20,22 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
 				}`}
 				onClick={() => setOpen(!open)}
 			>
+				<img
+					src={
+						sortBy === "Matic"
+							? maticLogo
+							: sortBy === "BSC"
+							? bscLogo
+							: sortBy === "Ethereum"
+							? ethLogo
+							: avalancheLogo
+					}
+					alt="chain-logo"
+					className="w-4 h-4 tablet:w-3 tablet:h-3 breakpoint:w-4 breakpoint:h-4 mr-2"
+				/>
 				<span className="mr-4">{sortBy === "matic" ? "Matic" : sortBy}</span>
 				<svg
-					className="w-5 h-5 text-grayLabel dark:text-white"
+					className="screen:w-4 screen:h-4 desktop:w-5 desktop:h-5 text-grayLabel dark:text-white"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"
@@ -38,6 +56,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
 							setOpen(false);
 						}}
 					>
+						<img src={ethLogo} alt="eth-logo" className="w-4 h-4 mr-2" />
 						Ethereum
 					</p>
 					<p
@@ -48,6 +67,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
 							setShowMenu && setShowMenu(false);
 						}}
 					>
+						<img src={maticLogo} alt="matic-logo" className="w-4 h-4 mr-2" />
 						Matic
 					</p>
 					<p
@@ -58,6 +78,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
 							setShowMenu && setShowMenu(false);
 						}}
 					>
+						<img src={bscLogo} alt="bsc-logo" className="w-4 h-4 mr-2" />
 						BSC
 					</p>
 					<p
@@ -68,6 +89,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
 							setShowMenu && setShowMenu(false);
 						}}
 					>
+						<img src={avalancheLogo} alt="avax-logo" className="w-4 h-4 mr-2" />
 						Avalanche
 					</p>
 					<p
@@ -78,6 +100,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
 							setShowMenu && setShowMenu(false);
 						}}
 					>
+						<img src={fantomLogo} alt="fantom-logo" className="w-4 h-4 mr-2" />
 						Fantom
 					</p>
 				</div>

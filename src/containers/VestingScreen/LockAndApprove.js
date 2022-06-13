@@ -37,9 +37,23 @@ function LockAndApprove({
 	uniqueAddresses,
 	tokenTicker,
 }) {
-	const web3 = new Web3(Web3.givenProvider);
-	window.w3 = web3;
-	const { chainId } = useWeb3React();
+	const { active, chainId, connector } = useWeb3React();
+	const [web3, setWeb3] = useState(null);
+
+	const setupProvider = async () => {
+		let result = await connector?.getProvider().then((res) => {
+			return res;
+		});
+		return result;
+	};
+
+	useEffect(() => {
+		setupProvider().then((res) => {
+			setWeb3(new Web3(res));
+		});
+	}, [active, chainId]);
+
+	// web3 && console.log(web3);
 
 	const CONTRACT_ADDRESS_CAPX = chainId && getContractAddress(chainId);
 
@@ -54,14 +68,11 @@ function LockAndApprove({
 	const totalTokens = totalVested(vestingArray);
 
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-	const vestingTokenContract = new web3.eth.Contract(
-		CONTRACT_ABI_ERC20,
-		contractDetails.contractAddress
-	);
-	const capxContract = new web3.eth.Contract(
-		CONTRACT_ABI_CAPX,
-		CONTRACT_ADDRESS_CAPX
-	);
+	const vestingTokenContract =
+		web3 &&
+		new web3.eth.Contract(CONTRACT_ABI_ERC20, contractDetails.contractAddress);
+	const capxContract =
+		web3 && new web3.eth.Contract(CONTRACT_ABI_CAPX, CONTRACT_ADDRESS_CAPX);
 	useEffect(() => {
 		async function getApproval() {
 			let approvedAmount = null;
@@ -69,7 +80,7 @@ function LockAndApprove({
 				Math.pow(10, tokenDetails.decimal)
 			);
 			try {
-				approvedAmount = await vestingTokenContract.methods
+				approvedAmount = await vestingTokenContract?.methods
 					.allowance(metamaskAccount, CONTRACT_ADDRESS_CAPX)
 					.call();
 				approvedAmount = new BigNumber(approvedAmount);

@@ -1,7 +1,6 @@
 import { useWeb3React } from "@web3-react/core";
 import { useContext, useEffect, useRef } from "react";
 import { MetaStateContext } from "./store";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 
 const chains = (chainId) => {
 	if (Number(chainId) && chainId?.length > 9) {
@@ -31,7 +30,7 @@ const useMetamask = () => {
 	let provider = null;
 
 	provider = window.ethereum;
-	console.log(provider);
+	// console.log(provider);
 	useEffect(() => {
 		return () => {
 			_isMounted.current = false;
@@ -40,12 +39,12 @@ const useMetamask = () => {
 
 	const connect = async (Web3Interface, settings = {}) => {
 		if (!provider) throw Error("Metamask is not available.");
-		console.log(_isMounted);
+		// console.log(_isMounted);
 		if (!Web3Interface)
 			throw Error(
 				"Web3 Provider is required. You can use either ethers.js or web3.js."
 			);
-		console.log(provider, typeof _isMounted.current);
+		// console.log(provider, typeof _isMounted.current);
 		if (!_isMounted.current) throw Error("Component is not mounted.");
 		if (_isConnectCalled.current) throw Error("Connect method already called.");
 		_isConnectCalled.current = true;
@@ -55,7 +54,7 @@ const useMetamask = () => {
 		);
 
 		const account = await getAccounts({ requestPermission: true });
-		console.log(account);
+		// console.log(account);
 		const chainDet = await getChain();
 
 		dispatch({

@@ -18,11 +18,12 @@ import { useWeb3React } from "@web3-react/core";
 import VestingSteps from "../../components/VestingSteps/VestingSteps";
 import ProjectDetails2 from "../../components/VestingForm/ProjectDetails/ProjectDetails";
 import WalletModal from "../../components/Modal/WalletModal/WalletModal";
+import Web3 from "web3";
 
 import { useHistory } from "react-router";
 
 function VestingScreen() {
-	const { active, account, chainId } = useWeb3React();
+	const { active, account, chainId, connector } = useWeb3React();
 	const [step, setStep] = useState(1);
 	const [modalMode, setModalMode] = useState(0);
 	const [showSteps, setShowSteps] = useState(true);
@@ -33,6 +34,23 @@ function VestingScreen() {
 	const [approveModalOpen, setApproveModalOpen] = useState(false);
 	const [vestModalOpen, setVestModalOpen] = useState(false);
 	const history = useHistory();
+
+	const [web3, setWeb3] = useState(null);
+
+	const setupProvider = async () => {
+		let result = await connector?.getProvider().then((res) => {
+			return res;
+		});
+		return result;
+	};
+
+	useEffect(() => {
+		setupProvider().then((res) => {
+			setWeb3(new Web3(res));
+		});
+	}, [active, chainId]);
+
+	// web3 && console.log(web3);
 
 	if (step === 0) {
 		history.push("/");
@@ -191,6 +209,7 @@ function VestingScreen() {
 									setProjectName={setProjectTitle}
 									setProjectDescription={setProjectDescription}
 									setContractDetails={setContractDetails}
+									web3={web3}
 								/>
 							)}
 							{step === 2 && (

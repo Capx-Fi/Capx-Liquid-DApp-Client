@@ -22,6 +22,7 @@ const ProjectDetails = ({
 	setProjectName,
 	setProjectDescription,
 	setContractDetails,
+	web3,
 }) => {
 	useEffect(() => {
 		validContractAddress(contractAddress);
@@ -42,7 +43,7 @@ const ProjectDetails = ({
 				exists: false,
 			});
 		}
-		let validateResponse = await validateContractAddress(address);
+		let validateResponse = await validateContractAddress(address, web3);
 		// console.log(validateResponse)
 		if (validateResponse) {
 			setTokenDetails((prevState) => ({

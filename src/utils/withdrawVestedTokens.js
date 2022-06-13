@@ -12,11 +12,11 @@ export const withdrawVestedTokens = async (
 	CONTRACT_ADDRESS_CAPX,
 	vestID
 ) => {
-	console.log(account);
+	// console.log(account);
 	setWithdrawModalOpen(true);
 	let withdrawResult = null;
 	try {
-		withdrawResult = await capxContract.methods
+		withdrawResult = await capxContract?.methods
 			.withdrawVestingLock(vestID)
 			.send({ from: account });
 		if (withdrawResult) {

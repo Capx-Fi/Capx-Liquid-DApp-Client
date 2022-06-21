@@ -87,7 +87,7 @@ function Header({
 								symbol: "MATIC",
 								decimals: 18,
 							},
-							rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
+							rpcUrls: ["https://polygon-rpc.com/"],
 							blockExplorerUrls: ["https://polygonscan.com/"],
 						},
 					],
@@ -108,8 +108,8 @@ function Header({
 								symbol: "BNB",
 								decimals: 18,
 							},
-							rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
-							blockExplorerUrls: ["https://testnet.bscscan.com/"],
+							rpcUrls: ["https://bsc-dataseed.binance.org/"],
+							blockExplorerUrls: ["https://bscscan.com/"],
 						},
 					],
 				});
@@ -123,14 +123,14 @@ function Header({
 					params: [
 						{
 							chainId: "0xA86A",
-							chainName: "Avalanche Fuji",
+							chainName: "Avalanche C-Chain",
 							nativeCurrency: {
 								name: "AVAX",
 								symbol: "AVAX",
 								decimals: 18,
 							},
-							rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
-							blockExplorerUrls: ["https://testnet.snowtrace.io/"],
+							rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
+							blockExplorerUrls: ["https://snowtrace.io/"],
 						},
 					],
 				});
@@ -185,15 +185,15 @@ function Header({
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0xA4B1",
-							chainName: "Arbitrum",
+							chainId: "0x504",
+							chainName: "Moonbeam",
 							nativeCurrency: {
-								name: "ETH",
-								symbol: "ETH",
+								name: "GLMR",
+								symbol: "GLMR",
 								decimals: 18,
 							},
-							rpcUrls: ["https://rpc.ankr.com/arbitrum"],
-							blockExplorerUrls: ["https://testnet.arbiscan.io/"],
+							rpcUrls: ["https://rpc.api.moonbeam.network"],
+							blockExplorerUrls: ["https://moonscan.io/"],
 						},
 					],
 				});

@@ -48,6 +48,13 @@ import {
 	GRAPHAPIURL_WRAPPED_MOONBEAM,
 	MATIC_CHAIN_ID,
 	MOONBEAM_CHAIN_ID,
+	MANDALA_CHAIN_ID,
+	EXPLORER_MANDALA,
+	CONTRACT_ADDRESS_CAPX_MANDALA,
+	CONTRACT_ADDRESS_CAPX_CONTROLLER_MANDALA,
+	GRAPHAPIURL_WRAPPED_MANDALA,
+	GRAPHAPIURL_VESTING_MANDALA,
+	GRAPHAPIURL_MASTER_MANDALA,
 } from "./config";
 
 export const getContractAddress = (chainId) => {
@@ -64,6 +71,8 @@ export const getContractAddress = (chainId) => {
 			? CONTRACT_ADDRESS_CAPX_MOONBEAM
 			: chainId?.toString() === ARBITRUM_CHAIN_ID?.toString()
 			? CONTRACT_ADDRESS_CAPX_ARBITRUM
+			: chainId?.toString() === MANDALA_CHAIN_ID?.toString()
+			? CONTRACT_ADDRESS_CAPX_MANDALA
 			: CONTRACT_ADDRESS_CAPX_BSC;
 	return contractAddress;
 };
@@ -82,6 +91,8 @@ export const getContractAddressController = (chainId) => {
 			? CONTRACT_ADDRESS_CAPX_CONTROLLER_MOONBEAM
 			: chainId?.toString() === ARBITRUM_CHAIN_ID?.toString()
 			? CONTRACT_ADDRESS_CAPX_CONTROLLER_ARBITRUM
+			: chainId?.toString() === MANDALA_CHAIN_ID?.toString()
+			? CONTRACT_ADDRESS_CAPX_CONTROLLER_MANDALA
 			: CONTRACT_ADDRESS_CAPX_CONTROLLER_ETHEREUM;
 	return contractAddressController;
 };
@@ -100,6 +111,8 @@ export const getExplorer = (chainId) => {
 			? EXPLORER_MOONBEAM
 			: chainId?.toString() === ARBITRUM_CHAIN_ID?.toString()
 			? EXPLORER_ARBITRUM
+			: chainId?.toString() === MANDALA_CHAIN_ID?.toString()
+			? EXPLORER_MANDALA
 			: EXPLORER_BSC;
 	return explorer;
 };
@@ -118,6 +131,8 @@ export const getVestingURL = (chainId) => {
 			? GRAPHAPIURL_VESTING_MOONBEAM
 			: chainId?.toString() === ARBITRUM_CHAIN_ID?.toString()
 			? GRAPHAPIURL_VESTING_ARBITRUM
+			: chainId?.toString() === MANDALA_CHAIN_ID?.toString()
+			? GRAPHAPIURL_VESTING_MANDALA
 			: GRAPHAPIURL_VESTING_ETHEREUM;
 	return vestingURL;
 };
@@ -136,6 +151,8 @@ export const getWrappedURL = (chainId) => {
 			? GRAPHAPIURL_WRAPPED_MOONBEAM
 			: chainId?.toString() === ARBITRUM_CHAIN_ID?.toString()
 			? GRAPHAPIURL_WRAPPED_ARBITRUM
+			: chainId?.toString() === MANDALA_CHAIN_ID?.toString()
+			? GRAPHAPIURL_WRAPPED_MANDALA
 			: GRAPHAPIURL_WRAPPED_ETHEREUM;
 	return wrappedURL;
 };
@@ -154,6 +171,8 @@ export const getMasterURL = (chainId) => {
 			? GRAPHAPIURL_MASTER_MOONBEAM
 			: chainId?.toString() === ARBITRUM_CHAIN_ID?.toString()
 			? GRAPHAPIURL_MASTER_ARBITRUM
+			: chainId?.toString() === MANDALA_CHAIN_ID?.toString()
+			? GRAPHAPIURL_MASTER_MANDALA
 			: GRAPHAPIURL_MASTER_ETHEREUM;
 	return masterURL;
 };
@@ -172,6 +191,8 @@ export const getSortBy = (chainId) => {
 			? "Moonbeam"
 			: chainId?.toString() === ARBITRUM_CHAIN_ID?.toString()
 			? "Arbitrum"
+			: chainId?.toString() === MANDALA_CHAIN_ID?.toString()
+			? "Mandala"
 			: "Ethereum";
 	return sortBy;
 };

@@ -16,6 +16,7 @@ function ProjectDetailsContainer({ projectOverviewData, projectDisplayID }) {
     if (projectOverviewData.length > 0) {
       let description = "N/A";
       let currentProject = projectOverviewData[projectDisplayID];
+      console.log("Current Project", currentProject);
       try {
         const res = await fetch(
           `https://capx-liquid.mypinata.cloud/ipfs/${currentProject.projectDocHash}`

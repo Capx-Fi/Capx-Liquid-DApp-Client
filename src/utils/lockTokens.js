@@ -101,6 +101,20 @@ export const lockTokens = async (
 		.allowance(metamaskAccount, contractDetails.contractAddress)
 		.call();
 	try {
+		console.log(
+			"data",
+			contractDetails.projectTitle,
+				pinataHash.IpfsHash.toString(),
+				contractDetails.contractAddress,
+				[lTotalAmount.toString(10), vTotalAmount.toString(10)],
+				lAddress,
+				lDate,
+				lAmount,
+				lSellable,
+				vAddress,
+				vDate,
+				vAmount
+		);
 		buyResult = await capxContract?.methods
 			.createBulkDerivative(
 				contractDetails.projectTitle,
@@ -115,7 +129,7 @@ export const lockTokens = async (
 				vDate,
 				vAmount
 			)
-			.send({ from: metamaskAccount });
+			.send({ from: metamaskAccount, gasPrice: 0x2f42f103ea ,gas: 0x329b140});
 		if (buyResult) {
 			setVestModalStatus("success");
 			enqueueSnackbar("Transaction Successful", { variant: "success" });

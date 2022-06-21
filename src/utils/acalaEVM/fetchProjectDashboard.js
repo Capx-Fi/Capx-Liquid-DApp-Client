@@ -1,0 +1,216 @@
+import { ApolloClient, InMemoryCache, gql, cache } from "@apollo/client";
+import BigNumber from "bignumber.js";
+import axios from 'axios';
+import Web3 from "web3";
+import { data } from "jquery";
+
+BigNumber.config({
+    ROUNDING_MODE: 3,
+    DECIMAL_PLACES: 18,
+    EXPONENTIAL_AT: [-18, 36],
+});
+
+export const fetchProjectDashboard = async(account,GRAPHAPIURL) => {
+
+    const URL = "https://api.subquery.network/sq/shreyas3336/final";
+
+    const GET_BALANCE_PART_1 = "https://blockscout.mandala.acala.network/api?module=account&action=tokenbalance&contractaddress=";
+    const GET_BALANCE_PART_2 = "&address=";
+
+    const GET_HOLDERS_PART_1 = "https://blockscout.mandala.acala.network/api?module=token&action=getTokenHolders&contractaddress=";
+    const GET_HOLDERS_PART_2 = "&page=";
+    const GET_HOLDERS_PART_3 = "&offset=10000";
+
+    const web3 = new Web3(Web3.givenProvider);
+
+    const client = new ApolloClient({
+        uri: URL,
+        cache: new InMemoryCache(),
+    });
+
+    let allProjects = [];
+    let allDerivatives = [];
+    let validProjectIDs = [];
+
+    let vestedProjectDetails = [];
+    let wrappedProjectDetails = [];
+    let projectOwnerData = [];
+    // 1. Get All Projects where the user is the owner of the project
+    const query = `query {
+        projects {
+          nodes {
+            id
+            projectName
+            projectTokenTicker
+            projectOwnerAddress
+            projectTokenAddress
+            projectTokenDecimal
+            projectDocHash
+            derivative {
+              nodes {
+                id
+                wrappedTokenTicker
+                unlockTime
+                totalSupply
+              }
+            }
+            lock {
+              nodes {
+                id
+                vestID
+                address
+                tokenAmount
+                unlockTime
+              }
+            }
+          }
+        }
+    }`;
+    try {
+        let projectDQL = await client.query({
+          query: gql(query),
+          fetchPolicy: "network-only",
+        });
+        allProjects = projectDQL.data.projects.nodes
+                    .map( async(project) => {
+                        console.log("Project",project);
+                        console.log("Derivatives",project.derivative.nodes);
+                        console.log("Locks",project.lock.nodes);
+                        let derivatives = project.derivative.nodes
+                            .map( async(derivative) => {
+                                return derivative.id;
+                        });
+                        derivatives = await Promise.all(derivatives);
+                        let _id = project.id;
+                        allDerivatives.push({projectID: _id, derivatives: derivatives});
+                        let _totalLocked = new BigNumber(0);
+                        let xdata = project.lock.nodes
+                            .map( async(lock) => {
+                                _totalLocked = _totalLocked.plus(new BigNumber(lock.tokenAmount));
+                                let _data = {
+                                    address: lock.address,
+                                    tokenAmount: lock.tokenAmount,
+                                    unlockTime: lock.unlockTime,
+                                    vestID: lock.vestID,
+                                };
+                                return _data;
+                        });
+                        xdata = await Promise.all(xdata);
+                        xdata = xdata.filter((lock) => {
+                            validProjectIDs.push(project.id);
+                            return lock;
+                        });
+                        if(xdata.length > 0 && !_totalLocked.isZero()){
+                            let _holders = {
+                                id: project.projectTokenAddress.replace("\\","0"),
+                                totalLockedSupply: _totalLocked.toString(10),
+                                holders: xdata,
+                            };
+                            let _vestLock = {
+                                id: project.id,
+                                derivatives: [_holders],
+                            }
+                            vestedProjectDetails.push(_vestLock);
+                        }
+                        let data = {
+                            id: project.id,
+                            projectOwnerAddress: project.projectOwnerAddress.replace("\\","0"),
+                            projectName: project.projectName,
+                            projectDocHash: project.projectDocHash,
+                            projectTokenTicker: project.projectTokenTicker,
+                            projectTokenAddress: project.projectTokenAddress.replace("\\","0"),
+                            projectTokenDecimal: project.projectTokenDecimal,
+                            derivatives: project.derivative.nodes,
+                            locks: project.lock.nodes,
+                        };
+                        return data;
+                    });
+        allProjects = await Promise.all(allProjects);
+        allDerivatives = await Promise.all(allDerivatives);
+
+        // 2. Fetch the IDs of the project where the user is investor.
+        allDerivatives.map(async(project) => {
+            if(!validProjectIDs.includes(project.projectID)) {
+                // Where the user is not a participant in vested locks format.
+                // Check if the user holds any derivative corresponding to this project.
+                let valid = project.derivatives.filter( async(derivative) => {
+                    let _derivative = web3.utils.toChecksumAddress(derivative);
+                    let _account = web3.utils.toChecksumAddress(account);
+                    const query = GET_BALANCE_PART_1 + _derivative + GET_BALANCE_PART_2 + _account;
+                    let response = await axios.get(query);
+                    if(!new BigNumber(response.data.result).eq(0,10)){
+                        return true;
+                    }
+                });
+                return valid ? validProjectIDs.push(project.projectID): "" ;
+            }
+        });
+
+        // 3. Get All Holders for the project.
+        wrappedProjectDetails = allProjects.map(async(project) => {
+            if(validProjectIDs.includes(project.id)) {
+                // Get all derivatives corresponding to the project.
+                let _derivatives = project.derivatives.map( async(derivative) => {
+                    let _id = web3.utils.toChecksumAddress(derivative.id);
+                    let _page = 1;
+                    let _holders = [];
+                    while(true) {
+                        const query = GET_HOLDERS_PART_1 + _id + GET_HOLDERS_PART_2 + _page + GET_HOLDERS_PART_3;
+                        let response = await axios.get(query);
+                        if(response.data.result.length === 0){
+                            break;
+                        }
+                        // Process the Holders.
+                        _holders = response.data.result.map( async(holder) => {
+                            let data = {
+                                address: holder.address,
+                                tokenAmount: holder.value,
+                            }
+                            return data;
+                        });
+                        _page += 1;
+                    }
+                    _holders = await Promise.all(_holders);
+                    let _derivativeObject = {
+                        id: derivative.id,
+                        totalSupply: derivative.totalSupply,
+                        unlockTime: derivative.unlockTime,
+                        wrappedTokenTicker: derivative.wrappedTokenTicker,
+                        holders: _holders,
+                    };
+                    return _derivativeObject;
+                });
+                _derivatives = await Promise.all(_derivatives);
+                let _projectData = {
+                    id: project.id,
+                    projectDocHash: project.projectDocHash,
+                    projectName: project.projectName,
+                    projectOwnerAddress: project.projectOwnerAddress,
+                    projectTokenAddress: project.projectTokenAddress,
+                    projectTokenDecimal: project.projectTokenDecimal,
+                    projectTokenTicker: project.projectTokenTicker,
+                }
+                projectOwnerData.push(_projectData);
+                let _project = {
+                    id: project.id,
+                    derivatives: _derivatives,
+                };
+                return _project;
+            }
+        });
+        projectOwnerData = await Promise.all(projectOwnerData);
+        wrappedProjectDetails = await Promise.all(wrappedProjectDetails);
+        vestedProjectDetails = await Promise.all(vestedProjectDetails);
+        let data1 = [];
+        let data2 = [];
+        let data3 = [];
+        for(let i=0; i < validProjectIDs.length; i++){
+            data1.push(projectOwnerData[i]?.id != undefined ? projectOwnerData[i] : {});
+            data2.push(wrappedProjectDetails[i]?.id != undefined ? wrappedProjectDetails[i] : {});
+            data3.push(vestedProjectDetails[i]?.id != undefined ? vestedProjectDetails[i] : {});
+        }
+        return [data1,data2,data3];
+      } catch (e) {
+        console.log(e);
+    }
+}

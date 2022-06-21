@@ -38,6 +38,7 @@ import { withdrawVestedTokens } from "../../utils/withdrawVestedTokens";
 import InvestorLoading from "./InvestorLoading";
 import { Tooltip, withStyles } from "@material-ui/core";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+import { fetchInvestorDashboard } from "../../utils/acalaEVM/fetchInvestorDashboard";
 import {
 	getContractAddress,
 	getContractAddressController,
@@ -78,6 +79,7 @@ function InvestorDashboardScreen() {
 		});
 	}, [active, chainId]);
 
+	
 	// web3 && console.log(web3);
 	const contractAddress = chainId && getContractAddress(chainId);
 
@@ -116,32 +118,39 @@ function InvestorDashboardScreen() {
 	const loadProjectData = async () => {
 		setOwnedProjectsData(null);
 		if (account) {
-			const vInvestorIDs = await fetchVestedInvestorID(account, vestingURL);
-
-			const wInvestorIDs = await fetchWrappedInvestorID(account, wrappedURL);
-			const showIDs = [...wInvestorIDs, ...vInvestorIDs]
-				.filter(onlyUnique)
-				.sort();
-			const projectOwnerDetails = await fetchProjectDetails(showIDs, masterURL);
-			const vestedProjectDetails = await fetchVestedProjectDetails(
-				showIDs,
-				vestingURL
-			);
-			const wrappedProjectDetails = await fetchWrappedProjectDetails(
-				showIDs,
-				wrappedURL
-			);
-			if (projectOwnerDetails !== null) {
-				setProjectOverviewData(projectOwnerDetails.data.projects);
-				setWrappedProjectData(wrappedProjectDetails.data.projects);
-				setVestedProjectData(vestedProjectDetails.data.projects);
-				let projects = await transformInvestorData(
-					account,
-					projectOwnerDetails.data.projects,
-					wrappedProjectDetails.data.projects,
-					vestedProjectDetails.data.projects
-				);
+			if(chainId === 595) {
+				let projects = await fetchInvestorDashboard(account,vestingURL);
+				console.log("Investor Projects", projects);
 				setOwnedProjectsData(projects);
+			} else {
+				const vInvestorIDs = await fetchVestedInvestorID(account, vestingURL);
+	
+				const wInvestorIDs = await fetchWrappedInvestorID(account, wrappedURL);
+				const showIDs = [...wInvestorIDs, ...vInvestorIDs]
+					.filter(onlyUnique)
+					.sort();
+				const projectOwnerDetails = await fetchProjectDetails(showIDs, masterURL);
+				const vestedProjectDetails = await fetchVestedProjectDetails(
+					showIDs,
+					vestingURL
+				);
+				const wrappedProjectDetails = await fetchWrappedProjectDetails(
+					showIDs,
+					wrappedURL
+				);
+				if (projectOwnerDetails !== null) {
+					setProjectOverviewData(projectOwnerDetails.data.projects);
+					setWrappedProjectData(wrappedProjectDetails.data.projects);
+					setVestedProjectData(vestedProjectDetails.data.projects);
+					let projects = await transformInvestorData(
+						account,
+						projectOwnerDetails.data.projects,
+						wrappedProjectDetails.data.projects,
+						vestedProjectDetails.data.projects
+					);
+					console.log("Investor Projects", projects);
+					setOwnedProjectsData(projects);
+				}
 			}
 		}
 	};

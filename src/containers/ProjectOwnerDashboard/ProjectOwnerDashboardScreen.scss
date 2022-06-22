@@ -2,13 +2,13 @@
 	@apply xl:w-2/5 mb-4 xl:mb-0 p-6 rounded-2xl border rounded-2xl border-black bg-white;
 
 	&_title {
-		@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-4 font-semibold text-black opacity-50;
+		@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-4 font-semibold text-black;
 	}
 	&_innercontainer {
 		&_detailbox {
 			@apply py-3;
 			&_key {
-				@apply text-greyText opacity-50 pb-1 text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 font-semibold;
+				@apply text-greyText opacity-30 pb-1 text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 font-semibold;
 			}
 			&_value {
 				@apply text-darkText opacity-90 break-words font-medium text-caption-4 leading-caption-4 tablet:text-caption-2 tablet:leading-caption-2 desktop:text-caption-1 desktop:leading-caption-1;
@@ -64,10 +64,9 @@
 }
 
 .allocationtablecontainer {
-	background: linear-gradient(215.24deg, #263232 3.85%, #1a1f23 89.73%);
-	@apply my-4 phone:mb-0 screen:mb-4 rounded-lg;
+	@apply my-4 phone:mb-0 screen:mb-4 rounded-lg bg-white border border-black;
 	&_title {
-		@apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-primary-green-300 opacity-50 border-b-2 border-dark-200;
+		@apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-black font-bold border-b-2 border-lightGrayBorder;
 	}
 	&_innercontainer {
 		@apply px-5 py-2.5;
@@ -78,26 +77,24 @@
 }
 
 .rc-table {
-	@apply bg-none pb-6 rounded-b-lg;
+	@apply bg-none pb-6 rounded-b-lg px-6;
 	::-webkit-scrollbar:vertical {
-		@apply w-1.5 bg-dark-200;
+		@apply w-1.5 bg-scrollTrack;
 	}
 	::-webkit-scrollbar:horizontal {
-		@apply h-1.5 bg-dark-200;
+		@apply h-1.5 bg-scrollTrack;
 	}
 	::-webkit-scrollbar-thumb:vertical {
-		background: linear-gradient(0deg, #0a4d20 -33.65%, #288f4a 100%);
-		@apply rounded-md h-16 bg-opacity-50;
+		@apply rounded-md h-16 bg-scrollThumb bg-opacity-50;
 	}
 	::-webkit-scrollbar-thumb:horizontal {
-		background: linear-gradient(0deg, #0b421e -33.65%, #87dfa5 100%);
-		@apply rounded-md w-16 bg-opacity-50;
+		@apply rounded-md w-16 bg-scrollThumb;
 	}
 	::-webkit-scrollbar-track {
-		@apply rounded-md;
+		@apply rounded-md bg-scrollTrack;
 	}
 	.rc-table-cell {
-		@apply text-primary-green-100 text-xs tablet:text-sm xl:text-base font-light tablet:font-medium xl:font-semibold;
+		@apply text-darkText text-xs tablet:text-sm xl:text-base font-light tablet:font-medium xl:font-semibold;
 	}
 	.rc-table-placeholder {
 		.rc-table-cell {
@@ -106,7 +103,7 @@
 	}
 	.rc-table-thead {
 		th {
-			@apply text-primary-green-100 opacity-50 bg-transparent border-b border-dark-200;
+			@apply text-black font-bold bg-transparent border-b border-lightGrayBorder;
 			padding: 6px;
 			font-weight: normal;
 			&.text-green {
@@ -116,10 +113,10 @@
 	.rc-table-tbody {
 		tr {
 			td {
-				@apply text-primary-green-100 bg-transparent border-b border-dark-200;
+				@apply text-black font-bold bg-transparent border-b border-lightGrayBorder;
 				padding: 10px 6px;
 				&.text-green {
-					@apply text-primary-green-300;
+					@apply text-black font-bold;
 				}
 			}
 			&:hover {

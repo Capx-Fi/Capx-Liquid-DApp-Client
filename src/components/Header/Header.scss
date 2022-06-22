@@ -13,13 +13,13 @@
 		}
 		&_button {
 			@apply rounded-lg flex px-2 py-2 tablet:px-5 tablet:py-3 laptop:px-4 laptop:py-3 items-center justify-center text-center cursor-pointer w-48;
-			background: linear-gradient(180deg, #8DBC1A -8.65%, #206300 100%);
+			background: linear-gradient(180deg, #8dbc1a -8.65%, #206300 100%);
 			&_text {
 				@apply text-caption-3 leading-caption-3 tablet:text-caption-1 tablet:leading-caption-1 desktop:text-caption-2 desktop:leading-caption-2 font-medium;
 			}
 		}
 		&_logoutbutton {
-			@apply rounded-lg border border-dark-200 bg-dark-200 flex px-1 py-1 tablet:px-1 tablet:py-1 laptop:px-1 laptop:py-1 items-center justify-center text-center phone:w-36 tablet:w-40;
+			@apply rounded-lg border border-black bg-white flex px-1 py-1 tablet:px-1 tablet:py-1 laptop:px-1 laptop:py-1 items-center justify-center text-center phone:w-36 tablet:w-40;
 			&_text {
 				@apply text-caption-3 leading-caption-3 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 font-medium;
 			}

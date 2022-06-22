@@ -20,6 +20,7 @@ module.exports = {
 				tradeTitle: "#83A1A9",
 				scrollTrack: "#ECECEC",
 				scrollThumb: "#c4c4c4",
+				dropdownOption: "#ededee",
 				"error-color": {
 					100: "#FBDAE1",
 					200: "#F27D95",

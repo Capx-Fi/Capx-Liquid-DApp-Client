@@ -83,7 +83,7 @@ function ProjectDetailsContainer({ projectOverviewData, projectDisplayID }) {
 						dangerouslySetInnerHTML={{ __html: project?.projectDescription }}
 					></div>
 				</div>
-				<hr className="border-dark-200 -mx-6 mt-4 h-2"></hr>
+				<hr className="border-dark-200 -mx-6 mt-7 h-2"></hr>
 			</div>
 		</section>
 	) : (

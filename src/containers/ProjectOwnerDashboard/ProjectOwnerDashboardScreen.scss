@@ -28,22 +28,21 @@
 }
 
 .tokensreleasedgraphcontainer {
-	@apply p-6 rounded-2xl mb-2 xl:mb-0;
+	@apply p-6 rounded-2xl mb-2 xl:mb-0 bg-white border border-black;
 
 	@media only screen and (min-width: 1280px) {
 		width: calc(theme("width.3/5") - 15px) !important;
 	}
-	background: linear-gradient(215.24deg, #263232 3.85%, #1a1f23 89.73%);
 
 	&_titlecontainer {
 		@apply flex flex-col pb-4;
 		&_title {
-			@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-primary-green-300 opacity-50;
+			@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-darkText opacity-50;
 		}
 		&_tokensreleased {
 			@apply flex items-center w-fit-content;
 			&_value {
-				@apply text-primary-green-300 font-semibold text-paragraph-1 leading-paragraph-1;
+				@apply text-darkText font-semibold text-paragraph-1 leading-paragraph-1;
 				&_loading {
 					@apply h-8 w-44 animate-pulse bg-dark-100;
 				}

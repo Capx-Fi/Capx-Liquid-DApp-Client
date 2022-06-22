@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     width: "600px",
-    background: "linear-gradient(215.24deg, #263232 3.85%, #1a1f23 89.73%)",
+    background: "white",
     boxShadow: "0px 4px 140px rgba(0, 0, 0, 0.5)",
     borderRadius: "10px",
     padding: theme.spacing(2),
@@ -59,13 +59,13 @@ function ChooseDashboardModal({
             alt="close icon"
           />
         </div>
-        <hr className="border-dark-200 mt-2 mb-4 h-2"></hr>
+        <hr className="border-lightGrayBorder mt-2 mb-4 h-2"></hr>
         <div className="dmodal-maincontainer">
           <div className="choose-container">
             <Link
               to={`/projectoverview`}
               id="owner"
-              className={`owner-card choose-card`}
+              className={`owner-card choose-card bg-grayFill  border border-lightGrayBorder`}
             >
               <img
                 className={`card-img`}
@@ -78,7 +78,7 @@ function ChooseDashboardModal({
             <Link
               to={`/investor`}
               id="investor"
-              className={`investor-card choose-card`}
+              className={`investor-card choose-card bg-grayFill  border border-lightGrayBorder`}
             >
               <img
                 className={`card-img`}
@@ -90,7 +90,7 @@ function ChooseDashboardModal({
             </Link>
           </div>
         </div>
-        <hr className="border-dark-200 mt-8 mb-4 h-2"></hr>
+        <hr className="border-lightGrayBorder mt-8 mb-4 h-2"></hr>
       </div>
     </Modal>
   );

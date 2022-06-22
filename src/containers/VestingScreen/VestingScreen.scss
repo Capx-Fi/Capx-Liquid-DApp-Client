@@ -1,7 +1,7 @@
 .reviewtablecontainer {
-	@apply rounded-lg bg-dark-300;
+	@apply rounded-lg bg-dark-400 text-black border-2;
 	&_title {
-		@apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-primary-green-300 opacity-50 border-b-2 border-dark-200;
+		@apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-black opacity-50 border-b-2 border-dark-25;
 	}
 	&_innercontainer {
 		@apply px-5 py-2.5;
@@ -13,7 +13,7 @@
 		color: #151517;
 	}
 	.lowercontainer_button {
-		background: linear-gradient(356.23deg, #8DBC1A -65.8%, #f1fff6 89%);
+		background:  #8DBC1A;
 	}
 }
 
@@ -54,7 +54,7 @@
 	}
 	.rc-table-thead {
 		th {
-			@apply text-primary-green-100 opacity-50 bg-transparent border-b border-dark-200;
+			@apply text-primary-green-100 opacity-50 bg-transparent border-b border-dark-25;
 			padding: 6px;
 			font-weight: normal;
 			&.text-green {
@@ -64,7 +64,7 @@
 	.rc-table-tbody {
 		tr {
 			td {
-				@apply text-primary-green-100 bg-transparent border-b border-dark-200;
+				@apply text-primary-green-100 bg-transparent border-b border-dark-25;
 				padding: 10px 6px;
 				&.text-green {
 					@apply text-primary-green-300;

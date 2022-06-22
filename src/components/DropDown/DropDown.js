@@ -48,7 +48,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
         </svg>
       </button>
       {open && (
-        <div className="absolute right-0 bg-dark-300 py-2 mt-2 bg-whitedivide-y divide-gray-600 rounded-md shadow-xl w-40">
+        <div className="absolute right-0 bg-dark-400 py-2 mt-2 bg-whitedivide-y divide-gray-600 rounded-md shadow-xl w-40">
           <p
             className="option"
             onClick={() => {

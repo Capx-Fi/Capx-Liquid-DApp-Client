@@ -69,7 +69,7 @@
 	background: linear-gradient(215.24deg, #263232 3.85%, #1a1f23 89.73%);
 	@apply my-4 phone:mb-0 screen:mb-4 rounded-lg;
 	&_title {
-		@apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-primary-green-300 opacity-50 border-b-2 border-dark-200;
+		@apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-primary-green-300 opacity-50 border-b-2 border-dark-25;
 	}
 	&_innercontainer {
 		@apply px-5 py-2.5;
@@ -108,7 +108,7 @@
 	}
 	.rc-table-thead {
 		th {
-			@apply text-primary-green-100 opacity-50 bg-transparent border-b border-dark-200;
+			@apply text-primary-green-100 opacity-50 bg-transparent border-b border-dark-25;
 			padding: 6px;
 			font-weight: normal;
 			&.text-green {
@@ -118,7 +118,7 @@
 	.rc-table-tbody {
 		tr {
 			td {
-				@apply text-primary-green-100 bg-transparent border-b border-dark-200;
+				@apply text-primary-green-100 bg-transparent border-b border-dark-25;
 				padding: 10px 6px;
 				&.text-green {
 					@apply text-primary-green-300;

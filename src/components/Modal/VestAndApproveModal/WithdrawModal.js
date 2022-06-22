@@ -106,7 +106,7 @@ function WithdrawModal({ open, setOpen, withdrawModalStatus }) {
                 : withdrawMessage}
             </div>
           </div>
-          <hr className="border-dark-200 mt-2 mb-4 h-2"></hr>
+          <hr className="border-dark-25 mt-2 mb-4 h-2"></hr>
         </div>
       </Fade>
     </Modal>

@@ -6,7 +6,7 @@ function ProjectDetailsLoading() {
   return (
     <section className="projectdetailscontainer">
       <div className="projectdetailscontainer_title">DETAILS</div>
-      <hr className="border-dark-200 px-2 h-2"></hr>
+      <hr className="border-dark-25 px-2 h-2"></hr>
       <div className="projectdetailscontainer_innercontainer">
         <div className="flex justify-between">
           <div className="projectdetailscontainer_innercontainer_detailbox">

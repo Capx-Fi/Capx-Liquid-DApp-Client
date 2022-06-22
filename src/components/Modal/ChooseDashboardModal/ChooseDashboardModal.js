@@ -59,7 +59,7 @@ function ChooseDashboardModal({
             alt="close icon"
           />
         </div>
-        <hr className="border-dark-200 mt-2 mb-4 h-2"></hr>
+        <hr className="border-dark-25 mt-2 mb-4 h-2"></hr>
         <div className="dmodal-maincontainer">
           <div className="choose-container">
             <Link
@@ -90,7 +90,7 @@ function ChooseDashboardModal({
             </Link>
           </div>
         </div>
-        <hr className="border-dark-200 mt-8 mb-4 h-2"></hr>
+        <hr className="border-dark-25 mt-8 mb-4 h-2"></hr>
       </div>
     </Modal>
   );

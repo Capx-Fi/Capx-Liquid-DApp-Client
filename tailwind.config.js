@@ -15,6 +15,8 @@ module.exports = {
 				cyan: "#19EBD2",
 				azure: "#365CF0",
 				greyborder: "#2a383c",
+				lightGrayBorder: "#d8d8d9",
+				grayFill: "#f4f5f5",
 				tradeTitle: "#83A1A9",
 				scrollTrack: "#ECECEC",
 				scrollThumb: "#c4c4c4",

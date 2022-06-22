@@ -12,11 +12,10 @@
 .choose-card {
   box-sizing: border-box;
   border-radius: 10px;
-  background: radial-gradient(143.33% 143.33% at 82.41% -4.96%, rgba(132, 214, 164, 0.3) 0%, rgba(18, 28, 32, 0.3) 100%);
   @apply mx-3 px-6 py-4 cursor-pointer;
 }
 .active-card {
-  @apply bg-dark-400 border border-primary-green-300 box-border;
+  @apply bg-white border border-primary-green-300 box-border;
 }
 
 .choose-container {

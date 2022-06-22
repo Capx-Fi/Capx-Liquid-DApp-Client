@@ -10,7 +10,7 @@ import { useSnackbar } from "notistack";
 import { injected, walletconnect } from "../../../utils/connector";
 import { CHAIN_NAMES } from "../../../constants/config";
 import { useTranslation } from "react-i18next";
-import infoIcon from "../../../assets/info.svg";
+import infoIcon from "../../../assets/Info.png";
 
 const Landing = ({ setModalMode }) => {
   const { active, account, library, connector, activate } = useWeb3React();
@@ -62,11 +62,11 @@ const Landing = ({ setModalMode }) => {
     <article className="h-screen bg-dark-400 flex choose_screen">
       <Header hiddenNav />
       <div className="justify-center laptop:items-center m-auto mt-32 tablet:mt-48 laptop:mt-auto">
-        <div className="herocontainer phone:w-90v phone:mt-12 tablet:mt-0 desktop:mt-8 tablet:w-75v phone:px-8 phone:py-6 screen:px-16 screen:py-10 desktop:px-20 desktop:py-14 rounded-2xl bg-opacity-70 text-darkText relative screen:w-65v desktop:w-60v flex flex-col items-start">
+        <div className="herocontainer bg-white border border-lightGrayBorder phone:w-90v phone:mt-12 tablet:mt-0 desktop:mt-8 tablet:w-75v phone:px-8 phone:py-6 screen:px-16 screen:py-10 desktop:px-20 desktop:py-14 rounded-2xl bg-opacity-70 text-darkText relative screen:w-65v desktop:w-60v flex flex-col items-start">
           <div className="title phone:text-paragraph-2 phone:leading-1 tablet:text-heading-2 screen:text-heading-2 screen:leading-lh-64 desktop:text-40px desktop:leading-lh-64 twok:text-50px twok:leading-lh-54 tablet:leading-title-1 font-semibold w-10/12 text-left">
             {"Connect your wallet"}
           </div>
-          <div className="tablet:text-paragraph-2 desktop:mt-2 desktop:text-paragraph-1 desktop:leading-subheading twok:text-subheading twok:leading-subheading text-greylabel">
+          <div className="tablet:text-paragraph-2 desktop:mt-2 desktop:text-paragraph-1 desktop:leading-subheading twok:text-subheading twok:leading-subheading text-darkText">
             {"Connect with one of our available wallet providers"}
           </div>
           <div className="herobuttons flex flex-col gap-y-2 my-14 w-full">
@@ -74,7 +74,7 @@ const Landing = ({ setModalMode }) => {
               onClick={() => {
                 connect();
               }}
-              className="herocontainer_button flex flex-start rounded-xl items-center flex px-5 py-4 z-10 cursor-pointer"
+              className="herocontainer_button  border border-lightGrayBorder flex flex-start rounded-xl items-center flex px-5 py-4 z-10 cursor-pointer"
             >
               <div>
                 <img
@@ -91,7 +91,7 @@ const Landing = ({ setModalMode }) => {
               onClick={() => {
                 walletConnect();
               }}
-              className="herocontainer_button flex flex-start rounded-xl items-center flex px-5 py-4 z-10 cursor-pointer"
+              className="herocontainer_button  border border-lightGrayBorder flex flex-start rounded-xl items-center flex px-5 py-4 z-10 cursor-pointer"
             >
               <div>
                 <img

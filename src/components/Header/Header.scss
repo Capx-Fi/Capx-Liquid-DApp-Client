@@ -4,7 +4,7 @@
 		@apply h-7 screen:h-7 desktop:h-8 twok:h-9;
 	}
 	&_navbar {
-		@apply flex items-center text-white;
+		@apply flex items-center text-darkText;
 		&_text {
 			@apply text-primary-green-100 laptop:text-paragraph-2 laptop:leading-paragraph-2 desktop:text-caption-1 desktop:leading-caption-1 font-semibold cursor-pointer;
 		}
@@ -13,7 +13,7 @@
 		}
 		&_button {
 			@apply rounded-lg flex px-2 py-2 tablet:px-5 tablet:py-3 laptop:px-4 laptop:py-3 items-center justify-center text-center cursor-pointer w-48;
-			background: linear-gradient(180deg, #97d10a -8.65%, #206300 100%);
+			background: linear-gradient(180deg, #8DBC1A -8.65%, #206300 100%);
 			&_text {
 				@apply text-caption-3 leading-caption-3 tablet:text-caption-1 tablet:leading-caption-1 desktop:text-caption-2 desktop:leading-caption-2 font-medium;
 			}

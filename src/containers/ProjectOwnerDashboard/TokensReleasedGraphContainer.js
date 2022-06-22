@@ -53,11 +53,11 @@ function TokensReleasedGraphContainer({
           symbol: "circle",
           radius: 4,
           fillColor: "#599504",
-          lineColor: "#97D10A",
+          lineColor: "#8DBC1A",
 
           states: {
             hover: {
-              fillColor: "#97D10A",
+              fillColor: "#8DBC1A",
               lineColor: "green",
               lineWidth: 2,
             },
@@ -95,7 +95,7 @@ function TokensReleasedGraphContainer({
       useHTML: true,
       formatter: function () {
         return (
-          '<span style="color:#97D10A">Date: <b>' +
+          '<span style="color:#8DBC1A">Date: <b>' +
           this.x +
           "</b> </br>Amount: <b>" +
           this.y +
@@ -263,9 +263,7 @@ function TokensReleasedGraphContainer({
 
       graphData.forEach((element) => {
         charXAxis.push(element.displayGraphDate);
-        charYAxis.push(
-          element.numOfTokens
-        );
+        charYAxis.push(element.numOfTokens);
       });
       setChartOption({
         ...chartOption,

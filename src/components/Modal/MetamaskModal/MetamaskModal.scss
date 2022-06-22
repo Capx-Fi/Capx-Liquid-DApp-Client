@@ -4,7 +4,7 @@
 	&_maincontainer {
 		@apply flex justify-center items-center m-auto mt-32 phone:mt-48 desktop:mt-48;
 		&_herocontainer {
-			@apply px-12 py-6 phone:px-6 phone:rounded-2xl phone:w-90v phone:py-16 desktop:px-16 twok:px-20 twok:py-16 desktop:py-8 rounded-lg bg-opacity-70 tablet:rounded-2xl desktop:rounded-4xl text-white relative tablet:w-75v screen:w-60v desktop:w-60v twok:w-60v flex flex-col items-start;
+			@apply px-12 py-6 phone:px-6 phone:rounded-2xl phone:w-90v phone:py-16 desktop:px-16 twok:px-20 twok:py-16 desktop:py-8 rounded-lg bg-opacity-70 tablet:rounded-2xl desktop:rounded-4xl text-darkText relative tablet:w-75v screen:w-60v desktop:w-60v twok:w-60v flex flex-col items-start;
 			background: linear-gradient(
 				270.08deg,
 				rgba(132, 214, 164, 0.3) 0.02%,
@@ -25,7 +25,7 @@
 			}
 			&_button {
 				@apply rounded-xl justify-center items-center flex tablet:w-56 phone:px-2 twok:py-5 twok:w-96 px-3 py-4 desktop:px-5 desktop:py-3 z-10 desktop:mb-20 phone:mb-12 phone:mt-8 screen:mt-12 desktop:mt-20 w-48 screen:w-64 twok:my-24 desktop:w-72 cursor-pointer;
-				background: linear-gradient(356.23deg, #96cf03 -65.8%, #f1fff6 89%);
+				background: linear-gradient(356.23deg, #8DBC1A -65.8%, #f1fff6 89%);
 				&_icon {
 					@apply w-4 mr-2 inline-block mx-3 align-middle;
 				}

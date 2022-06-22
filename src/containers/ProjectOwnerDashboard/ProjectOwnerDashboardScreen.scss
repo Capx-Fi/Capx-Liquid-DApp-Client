@@ -44,7 +44,7 @@
 			&_value {
 				@apply text-darkText font-semibold text-paragraph-1 leading-paragraph-1;
 				&_loading {
-					@apply h-8 w-44 animate-pulse bg-dark-100;
+					@apply h-6 w-44 animate-pulse bg-dark-100;
 				}
 			}
 			&_date {

@@ -16,6 +16,8 @@ module.exports = {
 				azure: "#365CF0",
 				greyborder: "#2a383c",
 				tradeTitle: "#83A1A9",
+				scrollTrack: "#ECECEC",
+				scrollThumb: "#c4c4c4",
 				"error-color": {
 					100: "#FBDAE1",
 					200: "#F27D95",

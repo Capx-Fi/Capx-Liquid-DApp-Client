@@ -79,7 +79,6 @@ function InvestorDashboardScreen() {
 		});
 	}, [active, chainId]);
 
-	
 	// web3 && console.log(web3);
 	const contractAddress = chainId && getContractAddress(chainId);
 
@@ -118,18 +117,21 @@ function InvestorDashboardScreen() {
 	const loadProjectData = async () => {
 		setOwnedProjectsData(null);
 		if (account) {
-			if(chainId === 595) {
-				let projects = await fetchInvestorDashboard(account,vestingURL);
+			if (chainId === 595) {
+				let projects = await fetchInvestorDashboard(account, vestingURL);
 				console.log("Investor Projects", projects);
 				setOwnedProjectsData(projects);
 			} else {
 				const vInvestorIDs = await fetchVestedInvestorID(account, vestingURL);
-	
+
 				const wInvestorIDs = await fetchWrappedInvestorID(account, wrappedURL);
 				const showIDs = [...wInvestorIDs, ...vInvestorIDs]
 					.filter(onlyUnique)
 					.sort();
-				const projectOwnerDetails = await fetchProjectDetails(showIDs, masterURL);
+				const projectOwnerDetails = await fetchProjectDetails(
+					showIDs,
+					masterURL
+				);
 				const vestedProjectDetails = await fetchVestedProjectDetails(
 					showIDs,
 					vestingURL
@@ -266,45 +268,9 @@ function InvestorDashboardScreen() {
 												<div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_key">
 													UNLOCK DATE
 												</div>
-												<HtmlTooltip
-													arrow
-													placement="right-start"
-													title={
-														<React.Fragment className="flex justify-between">
-															<span className="flex justify-between items-center font-bold pr-2">
-																<Lottie
-																	className="w-8 mr-1"
-																	animationData={SandTimer}
-																/>
-																{Math.floor(
-																	(Date.parse(project.date) -
-																		Date.parse(datetime)) /
-																		86400000
-																) > 0
-																	? `${Math.floor(
-																			(Date.parse(project.date) -
-																				Date.parse(datetime)) /
-																				86400000
-																	  )} days to unlock`
-																	: Math.floor(
-																			(Date.parse(project.date) -
-																				Date.parse(datetime)) /
-																				3600000
-																	  ) >= 0
-																	? `${Math.floor(
-																			(Date.parse(project.date) -
-																				Date.parse(datetime)) /
-																				3600000
-																	  )} hours to unlock`
-																	: "Unlocked!"}
-															</span>
-														</React.Fragment>
-													}
-												>
-													<div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_value w-fit-content h-fit-content">
-														{project.displayDate}
-													</div>
-												</HtmlTooltip>
+												<div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_value w-fit-content h-fit-content">
+													{project.displayDate}
+												</div>
 											</div>
 											<div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_buttoncontainer">
 												{project.vestID ? null : (
@@ -347,35 +313,78 @@ function InvestorDashboardScreen() {
 														</HtmlTooltip>
 													</a>
 												)}
-
-												<div
-													onClick={() => {
-														tryWithdraw(
-															project.derivativeID,
-															project.tokenAmount,
-															project.vestID,
-															project.projectTokenDecimal
-														);
-													}}
-													className={`investordashboardscreen_maincontainer_innercontainer_projectcontainer_withdrawbutton 
+												<HtmlTooltip
+													arrow
+													placement="bottom-center"
+													title={
+														<React.Fragment className="flex justify-between">
+															<span className="flex justify-between items-center font-bold pr-2">
+																<Lottie
+																	className="w-8 mr-1"
+																	animationData={SandTimer}
+																/>
+																{Math.floor(
+																	(Date.parse(project.date) -
+																		Date.parse(datetime)) /
+																		86400000
+																) > 0
+																	? `${Math.floor(
+																			(Date.parse(project.date) -
+																				Date.parse(datetime)) /
+																				86400000
+																	  )} days to unlock`
+																	: Math.floor(
+																			(Date.parse(project.date) -
+																				Date.parse(datetime)) /
+																				3600000
+																	  ) >= 0
+																	? `${Math.floor(
+																			(Date.parse(project.date) -
+																				Date.parse(datetime)) /
+																				3600000
+																	  )} hours to unlock`
+																	: "Unlocked!"}
+															</span>
+														</React.Fragment>
+													}
+												>
+													<div
+														className={
+															project?.withdrawAllowed
+																? ""
+																: "cursor-not-allowed"
+														}
+													>
+														<div
+															onClick={() => {
+																tryWithdraw(
+																	project.derivativeID,
+																	project.tokenAmount,
+																	project.vestID,
+																	project.projectTokenDecimal
+																);
+															}}
+															className={`investordashboardscreen_maincontainer_innercontainer_projectcontainer_withdrawbutton 
                           ${
 														project.withdrawAllowed
 															? "cursor-pointer"
 															: "pointer-events-none opacity-50 z-10"
 													} 
                           `}
-												>
-													<div
-														className={`investordashboardscreen_maincontainer_innercontainer_projectcontainer_withdrawbutton_text`}
-													>
-														Withdraw
+														>
+															<div
+																className={`investordashboardscreen_maincontainer_innercontainer_projectcontainer_withdrawbutton_text`}
+															>
+																Withdraw
+															</div>
+															<img
+																className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_withdrawbutton_icon"
+																src={NextIconBlack}
+																alt="arrow icon"
+															/>
+														</div>
 													</div>
-													<img
-														className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_withdrawbutton_icon"
-														src={NextIconBlack}
-														alt="arrow icon"
-													/>
-												</div>
+												</HtmlTooltip>
 											</div>
 										</div>
 									</div>

@@ -10,7 +10,7 @@ const VestingSteps = ({ setShowSteps }) => {
   return (
     <div className="vesting_steps h-screen flex bg-dark-400">
       <Header hiddenNav />
-      <div className="maincontainer flex phone:flex-col screen:flex-row gap-x-14 justify-center phone:items-center screen:items-strech m-auto mt-auto">
+      <div className="maincontainer flex phone:flex-col screen:flex-row gap-x-14 justify-center phone:items-center screen:items-stretch m-auto mt-auto">
         <div className="herocontainer px-9 py-10 rounded-3xl bg-opacity-30 text-darkText relative phone:mt-24 screen:mt-0 phone:mb-10 screen:mb-0 phone:w-90v screen:w-40v desktop:w-47v twok:w-30v flex flex-col items-start">
           <div className="title phone:text-paragraph-1 screen:text-heading-2 screen:leading-heading-2 desktop:text-40px desktop:leading-lh-64 twok:text-5xl twok:leading-lh-54 font-bold tracking-tight mt-2 desktop:w-full twok:w-10/12 text-left">
             {"Vest Tokens in 3 simple steps"}

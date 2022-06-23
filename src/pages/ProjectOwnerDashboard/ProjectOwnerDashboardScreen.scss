@@ -9,7 +9,7 @@
 				@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 phone:ml-0 screen:ml-4 desktop:ml-0 text-black opacity-75 font-semibold;
 			}
 			&_projectsdropdown {
-				@apply bg-dark-400 rounded-lg p-3 twok:px-4 phone:w-24 tablet:w-32 screen:w-48 text-caption-3 leading-caption-3 text-primary-green-100 outline-none mr-5 tablet:mr-9;
+				@apply bg-dark-400 border border-greyborder rounded-lg p-3 twok:px-4 phone:w-24 tablet:w-32 screen:w-48 text-caption-3 leading-caption-3 text-darkText	 outline-none mr-5 tablet:mr-9;
 			}
 		}
 		&_topcontainer {

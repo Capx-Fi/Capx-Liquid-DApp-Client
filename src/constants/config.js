@@ -127,6 +127,6 @@ export const AVALANCHE_CHAIN_ID = process.env.REACT_APP_AVALANCHE_CHAIN_ID;
 export const FANTOM_CHAIN_ID = process.env.REACT_APP_FANTOM_CHAIN_ID;
 export const MOONBEAM_CHAIN_ID = process.env.REACT_APP_MOONBEAM_CHAIN_ID;
 export const ARBITRUM_CHAIN_ID = process.env.REACT_APP_ARBITRUM_CHAIN_ID;
-export const MANDALA_CHAIN_ID = process.env.REACT_APP_MANDALA_CHAIN_ID;
+export const MANDALA_CHAIN_ID = process.env.REACT_APP_ACALA_CHAIN_ID;
 
 export const CHAIN_NAMES = process.env.REACT_APP_CHAIN_NAMES;

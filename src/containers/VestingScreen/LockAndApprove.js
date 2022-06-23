@@ -36,6 +36,7 @@ function LockAndApprove({
   totalAddresses,
   uniqueAddresses,
   tokenTicker,
+  setApproveMessage,
 }) {
   const { active, chainId, connector } = useWeb3React();
   const [web3, setWeb3] = useState(null);
@@ -73,6 +74,9 @@ function LockAndApprove({
     new web3.eth.Contract(CONTRACT_ABI_ERC20, contractDetails.contractAddress);
   const capxContract =
     web3 && new web3.eth.Contract(CONTRACT_ABI_CAPX, CONTRACT_ADDRESS_CAPX);
+  tokenApproval === true
+    ? setApproveMessage("Tokens Approved! Please Lock your tokens.")
+    : setApproveMessage("Please approve your tokens before locking them");
   useEffect(() => {
     async function getApproval() {
       let approvedAmount = null;
@@ -168,36 +172,36 @@ function LockAndApprove({
         </div>
         <div className="flex flex-row gap-x-6">
           <div
-            className={`lowercontainer_button rounded-lg justify-center items-center flex my-3 screen:px-2 desktop:px-2 py-2 screen:w-36 desktop:w-40 cursor-pointer ${
+            className={`lowercontainer_button text-white rounded-lg justify-center items-center flex my-3 screen:px-2 desktop:px-2 py-2 screen:w-36 desktop:w-40 cursor-pointer ${
               (tokenApproval || buttonClicked) &&
               "opacity-50 pointer-events-none z-10"
             }`}
           >
             <div
-              className="button_text flex text-black phone:px-4 phone:pr-3 screen:pr-4 screen:text-caption-1 twok:text-paragraph-2 leading-paragraph-2 font-bold"
+              className="button_text flex text-white phone:px-4 phone:pr-3 screen:pr-4 screen:text-caption-1 twok:text-paragraph-2 leading-paragraph-2 font-bold"
               onClick={() => {
                 TryApproveToken();
               }}
             >
-              <div className="flex items-center phone:text-caption-3 screen:text-caption-2 desktop:text-caption-1">
+              <div className="flex text-white items-center phone:text-caption-3 screen:text-caption-2 desktop:text-caption-1">
                 {"Approve"}
               </div>
               <img
                 src={CheckIcon}
                 alt="Check Icon"
-                className="svg_black inline-block phone:w-4 screen:w-4 desktop:w-5 ml-3 mr-2"
+                className="svg_black text-white inline-block phone:w-4 screen:w-4 desktop:w-5 ml-3 mr-2"
               ></img>
             </div>
           </div>
 
           <div
-            className={`lowercontainer_button rounded-lg justify-center items-center flex my-3 phone:px-4 phone:pr-2 screen:pr-4 desktop:px-2 py-2 screen:w-36 desktop:w-40 cursor-pointer ${
+            className={`border-2 border-greyborder rounded-lg justify-center items-center flex my-3 phone:px-4 phone:pr-2 screen:pr-4 desktop:px-2 py-2 screen:w-36 desktop:w-40 cursor-pointer ${
               (!tokenApproval || buttonClicked) &&
               "opacity-50 pointer-events-none z-10"
             }`}
           >
             <div
-              className="button_text flex text-black screen:text-caption-1 twok:text-paragraph-2 leading-paragraph-2 font-bold"
+              className="button_text flex text-darkText screen:text-caption-1 twok:text-paragraph-2 leading-paragraph-2 font-bold"
               onClick={() => {
                 TryLockToken();
               }}

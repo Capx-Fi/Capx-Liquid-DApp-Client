@@ -1,5 +1,5 @@
 .projectdetailscontainer {
-	@apply xl:w-2/5 mb-4 xl:mb-0 p-6 rounded-2xl border rounded-2xl border-black bg-white;
+	@apply xl:w-2/5 mb-4 xl:mb-0 p-6 rounded-2xl border rounded-2xl border-greyborder bg-white;
 
 	&_title {
 		@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-4 font-semibold text-black;
@@ -8,12 +8,12 @@
 		&_detailbox {
 			@apply py-3;
 			&_key {
-				@apply text-grayText opacity-30 pb-1 text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 font-semibold;
+				@apply text-grayText pb-1 text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 font-medium;
 			}
 			&_value {
 				@apply text-darkText opacity-90 break-words font-medium text-caption-4 leading-caption-4 tablet:text-caption-2 tablet:leading-caption-2 desktop:text-caption-1 desktop:leading-caption-1;
 				&_loading {
-					@apply h-4 w-auto animate-pulse bg-dark-100;
+					@apply h-4 w-auto animate-pulse bg-dark-25;
 				}
 				&_description {
 					max-height: 80px;
@@ -28,7 +28,7 @@
 }
 
 .tokensreleasedgraphcontainer {
-	@apply p-6 rounded-2xl mb-2 xl:mb-0 bg-white border border-black;
+	@apply p-6 rounded-2xl mb-2 xl:mb-0 bg-white border border-greyborder;
 
 	@media only screen and (min-width: 1280px) {
 		width: calc(theme("width.3/5") - 15px) !important;
@@ -44,7 +44,7 @@
 			&_value {
 				@apply text-darkText font-semibold text-paragraph-1 leading-paragraph-1;
 				&_loading {
-					@apply h-6 w-44 animate-pulse bg-dark-100;
+					@apply h-6 w-44 animate-pulse bg-dark-25;
 				}
 			}
 			&_date {
@@ -58,15 +58,15 @@
 	&_innercontainer {
 		@apply px-5 py-2.5;
 		&_loading {
-			@apply h-3/4 w-full bg-dark-100 animate-pulse;
+			@apply h-3/4 w-full bg-dark-25 animate-pulse;
 		}
 	}
 }
 
 .allocationtablecontainer {
-	@apply my-4 phone:mb-0 screen:mb-4 rounded-lg bg-white border border-black;
+	@apply my-4 phone:mb-0 screen:mb-4 rounded-lg bg-white border border-greyborder;
 	&_title {
-		@apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-black font-bold border-b-2 border-dark-25;
+		@apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 text-black font-bold border-b-2 border-dark-25;
 	}
 	&_innercontainer {
 		@apply px-5 py-2.5;
@@ -105,7 +105,7 @@
 		th {
 			@apply text-black font-bold bg-transparent border-b border-dark-25;
 			padding: 6px;
-			font-weight: normal;
+			font-weight: medium;
 			&.text-green {
 			}
 		}
@@ -116,7 +116,7 @@
 				@apply text-black font-bold bg-transparent border-b border-dark-25;
 				padding: 10px 6px;
 				&.text-green {
-					@apply text-black font-bold;
+					@apply text-black font-semibold;
 				}
 			}
 			&:hover {

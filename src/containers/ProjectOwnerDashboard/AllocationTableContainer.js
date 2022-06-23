@@ -225,7 +225,7 @@ function AllocationTableContainer({
 				pagination={false}
 				scroll={{ y: 280 }}
 				emptyText={() => (
-					<p className="text-center text-primary-green-100 opacity-50">
+					<p className="text-center text-darkText opacity-50">
 						No Allocation Data!
 					</p>
 				)}

@@ -28,12 +28,12 @@
 				&_detailbox {
 					@apply py-3;
 					&_key {
-						@apply text-grayText pb-1 font-bold text-caption-3 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-1 desktop:leading-caption-1 opacity-50 font-semibold;
+						@apply text-grayText pb-1 font-bold text-caption-3 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-1 desktop:leading-caption-1 font-semibold;
 					}
 					&_value {
 						@apply text-darkText font-semibold text-caption-2 leading-caption-3 tablet:text-caption-2 tablet:leading-caption-2 desktop:text-paragraph-2 desktop:leading-paragraph-2;
 						&_loading {
-							@apply h-4 w-auto animate-pulse bg-dark-100;
+							@apply h-4 w-auto animate-pulse bg-dark-25;
 						}
 					}
 				}
@@ -45,7 +45,7 @@
 					&_text {
 						@apply pr-2 text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3;
 						&_loading {
-							@apply h-4 w-auto animate-pulse bg-dark-100;
+							@apply h-4 w-auto animate-pulse bg-dark-25;
 						}
 					}
 					&_icon {

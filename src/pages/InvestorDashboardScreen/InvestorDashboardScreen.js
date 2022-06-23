@@ -50,6 +50,7 @@ import {
 import { useMetamask } from "../../metamaskReactHook";
 import { walletconnect } from "../../utils/connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
+import { ACALA_CHAIN_ID } from "../../constants/config";
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
 
@@ -117,7 +118,7 @@ function InvestorDashboardScreen() {
 	const loadProjectData = async () => {
 		setOwnedProjectsData(null);
 		if (account) {
-			if (chainId === 595) {
+			if (chainId === parseInt(ACALA_CHAIN_ID)) {
 				let projects = await fetchInvestorDashboard(account, vestingURL);
 				console.log("Investor Projects", projects);
 				setOwnedProjectsData(projects);

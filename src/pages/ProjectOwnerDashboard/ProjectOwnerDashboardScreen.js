@@ -55,7 +55,7 @@ function ProjectOwnerDashboardScreen() {
   }, [account, chainId]);
   const loadProjectData = async () => {
     if (account) {
-      if (chainId === 595) {
+      if (chainId === parseInt(ACALA_CHAIN_ID)) {
         const [projectOwnerData, wrappedProjectDetails, vestedProjectDetails] =
           await fetchProjectDashboard(account, masterURL);
         console.log("ProjectOwnerData", projectOwnerData);

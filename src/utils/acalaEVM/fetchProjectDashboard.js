@@ -5,11 +5,11 @@ import Web3 from "web3";
 import { data } from "jquery";
 import {
   ACALA_URL,
-  GET_BALANCE_PART_1,
-  GET_BALANCE_PART_2,
-  GET_HOLDERS_PART_1,
-  GET_HOLDERS_PART_2,
-  GET_HOLDERS_PART_3,
+  GET_BALANCE_P1,
+  GET_BALANCE_P2,
+  GET_HOLDERS_P1,
+  GET_HOLDERS_P2,
+  GET_HOLDERS_P3,
 } from "../../constants/config";
 
 BigNumber.config({
@@ -23,11 +23,11 @@ export const fetchProjectDashboard = async (account, GRAPHAPIURL) => {
   // TODO : Below 6 and RPC to be configured as chain specific env variable
   const URL = ACALA_URL;
 
-  const GET_BALANCE_PART_1 = GET_BALANCE_PART_1;
-  const GET_BALANCE_PART_2 = GET_BALANCE_PART_2;
-  const GET_HOLDERS_PART_1 = GET_HOLDERS_PART_1;
-  const GET_HOLDERS_PART_2 = GET_HOLDERS_PART_2;
-  const GET_HOLDERS_PART_3 = GET_HOLDERS_PART_3;
+  const GET_BALANCE_PART_1 = GET_BALANCE_P1;
+  const GET_BALANCE_PART_2 = GET_BALANCE_P2;
+  const GET_HOLDERS_PART_1 = GET_HOLDERS_P1;
+  const GET_HOLDERS_PART_2 = GET_HOLDERS_P2;
+  const GET_HOLDERS_PART_3 = GET_HOLDERS_P3;
 
   const web3 = new Web3(Web3.givenProvider);
 

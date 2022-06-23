@@ -5,8 +5,8 @@ import Web3 from "web3";
 import { data } from "jquery";
 import {
   ACALA_URL,
-  GET_BALANCE_PART_1,
-  GET_BALANCE_PART_2,
+  GET_BALANCE_P1,
+  GET_BALANCE_P2,
 } from "../../constants/config";
 
 BigNumber.config({
@@ -20,8 +20,8 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
   const URL = ACALA_URL;
   const currentDate = new Date();
 
-  const GET_BALANCE_PART_1 = GET_BALANCE_PART_1;
-  const GET_BALANCE_PART_2 = GET_BALANCE_PART_2;
+  const GET_BALANCE_PART_1 = GET_BALANCE_P1;
+  const GET_BALANCE_PART_2 = GET_BALANCE_P2;
 
   const web3 = new Web3(Web3.givenProvider);
 

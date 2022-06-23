@@ -1,7 +1,7 @@
 export const PinataAPIKey = process.env.REACT_APP_PINATA_API_KEY;
 export const PinataSecretKey = process.env.REACT_APP_PINATA_API_SECRET;
 
-export const gasPriceURL = process.env.REACT_APP_GAS_PRICE_URL;
+export const acalaRPC = process.env.REACT_APP_ACALA_RPC_URL;
 
 //ACALA_URL
 export const ACALA_URL = process.env.REACT_APP_ACALA_URL;
@@ -10,6 +10,7 @@ export const GET_BALANCE_PART_2 = process.env.REACT_APP_GET_BALANCE_PART_2;
 export const GET_HOLDERS_PART_1 = process.env.REACT_APP_GET_HOLDERS_PART_1;
 export const GET_HOLDERS_PART_2 = process.env.REACT_APP_GET_HOLDERS_PART_2;
 export const GET_HOLDERS_PART_3 = process.env.REACT_APP_GET_HOLDERS_PART_3;
+export const ACALA_CHAIN_ID = process.env.REACT_APP_ACALA_CHAIN_ID;
 
 export const CONTRACT_ADDRESS_CAPX_ETHEREUM =
   process.env.REACT_APP_CONTRACT_ADDRESS_CAPX_ETHEREUM;

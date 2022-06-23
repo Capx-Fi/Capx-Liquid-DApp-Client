@@ -1,9 +1,9 @@
-import { gasPriceURL } from "../../constants/config";
+import { acalaRPC } from "../../constants/config";
 
 export const fetchGasPrice = () => {
   //Promise
   return new Promise((resolve, reject) => {
-    fetch(gasPriceURL, {
+    fetch(acalaRPC, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -66,7 +66,7 @@
 .allocationtablecontainer {
 	@apply my-4 phone:mb-0 screen:mb-4 rounded-lg bg-white border border-black;
 	&_title {
-		@apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-black font-bold border-b-2 border-lightGrayBorder;
+		@apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-black font-bold border-b-2 border-dark-25;
 	}
 	&_innercontainer {
 		@apply px-5 py-2.5;
@@ -103,7 +103,7 @@
 	}
 	.rc-table-thead {
 		th {
-			@apply text-black font-bold bg-transparent border-b border-lightGrayBorder;
+			@apply text-black font-bold bg-transparent border-b border-dark-25;
 			padding: 6px;
 			font-weight: normal;
 			&.text-green {
@@ -113,7 +113,7 @@
 	.rc-table-tbody {
 		tr {
 			td {
-				@apply text-black font-bold bg-transparent border-b border-lightGrayBorder;
+				@apply text-black font-bold bg-transparent border-b border-dark-25;
 				padding: 10px 6px;
 				&.text-green {
 					@apply text-black font-bold;

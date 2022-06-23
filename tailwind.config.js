@@ -37,6 +37,8 @@ module.exports = {
 					500: "#239249",
 				},
 				"warning-color": {
+					25: "#FFF2E6",
+					75: "#826A00",
 					100: "#FFFDF1",
 					200: "#F8E696",
 					300: "#F4D565",
@@ -44,6 +46,7 @@ module.exports = {
 					500: "#A75822",
 				},
 				dark: {
+					25: "#B5B6B8",
 					100: "#2C432E",
 					200: "#2A3B3F",
 					300: "#191D21",
@@ -55,7 +58,7 @@ module.exports = {
 				greenlabel: "#6348CA",
 				greylabel: "#A6A6A6",
 				greylabel2: "#B3B3B3",
-				greyText: "#3f3f3f",
+				grayText: "#9296A0",
 				darkText: "#2F3137",
 			},
 			backgroundImage: {

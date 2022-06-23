@@ -59,7 +59,7 @@ const VestingSteps = ({ setShowSteps }) => {
               download
               href="https://capx-resources.s3.amazonaws.com/vesting-sheet-template.xlsx"
             >
-              <div className="mobile-xldiv rounded-2xl bg-dark-300 w-9/12 mx-auto py-4 mt-4 px-4 phone:flex screen:hidden text-center font-semibold screen:text-caption-3 screen:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 justify-center items-center">
+              <div className="mobile-xldiv rounded-2xl bg-dark-400 w-9/12 mx-auto py-4 mt-4 px-4 phone:flex screen:hidden text-center font-semibold screen:text-caption-3 screen:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 justify-center items-center">
                 <img
                   src={DownloadIcon}
                   alt="Download Icon"

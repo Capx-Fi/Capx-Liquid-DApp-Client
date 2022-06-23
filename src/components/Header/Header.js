@@ -229,15 +229,13 @@ function Header({
       />
       <header
         className={`header z-20 ${
-          vesting
-            ? "border-b border-dark-25 tablet:border-none"
-            : "border-b border-dark-25 "
+          vesting ? "border-b border-dark-25 " : "border-b border-dark-25 "
         }`}
       >
         <a href="/">
           <div>
             <img
-              className={`header_logo ${vesting && "flex screen:hidden "}`}
+              className={`header_logo flex `}
               src={CapxLogo}
               alt="capx logo"
             />

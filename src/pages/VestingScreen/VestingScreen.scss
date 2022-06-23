@@ -1,7 +1,7 @@
 .left_div {
 	@apply w-22p bg-dark-400 hidden md:flex z-40 bg-center bg-no-repeat bg-cover fixed phone:hidden screen:flex top-0 h-screen;
 	&_psuedo {
-		@apply w-22p hidden md:flex z-0 bg-center bg-no-repeat bg-cover relative phone:-mr-24 screen:mr-0 h-screen;
+		@apply w-22p bg-dark-400 hidden md:flex z-0 bg-center bg-no-repeat bg-cover relative phone:-mr-24 screen:mr-0 h-screen;
 	}
 }
 

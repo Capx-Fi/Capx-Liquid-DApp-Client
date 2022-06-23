@@ -1,10 +1,7 @@
 .vesting_steps {
 	.herocontainer {
-		background: radial-gradient(
-			143.33% 143.33% at 82.41% -4.96%,
-			rgba(132, 214, 164, 0.3) 0%,
-			rgba(18, 28, 32, 0.3) 100%
-		);
+		@apply border-lightGrayBorder border-2;
+		background: #FFF;
 		.text-container {
 			background: rgba(73, 197, 116, 0.1);
 		}
@@ -12,18 +9,12 @@
 
 	.side-container {
 		.download-template {
-			background: radial-gradient(
-				143.33% 143.33% at 82.41% -4.96%,
-				rgba(132, 214, 164, 0.3) 0%,
-				rgba(18, 28, 32, 0.3) 100%
-			);
+			@apply border-lightGrayBorder border-2;
+		background: #FFF;
 
 			.xldiv {
-				background: radial-gradient(
-					143.33% 143.33% at 82.41% -4.96%,
-					rgba(132, 214, 164, 0.3) 0%,
-					rgba(18, 28, 32, 0.3) 100%
-				);
+				@apply border-lightGrayBorder border-2;
+		background: #FFF;
 			}
 
 			.mobile-xldiv {
@@ -32,7 +23,8 @@
 		}
 
 		.side-button {
-			background: linear-gradient(356.23deg, #8DBC1A -65.8%, #f1fff6 89%);
+			@apply text-white;
+			background:  #8DBC1A;
 		}
 	}
 }

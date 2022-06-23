@@ -216,17 +216,15 @@ export const fetchProjectDashboard = async (account, GRAPHAPIURL) => {
     let data2 = [];
     let data3 = [];
     for (let i = 0; i < validProjectIDs.length; i++) {
-      data1.push(
-        projectOwnerData[i]?.id != undefined ? projectOwnerData[i] : {}
-      );
-      data2.push(
-        wrappedProjectDetails[i]?.id != undefined
-          ? wrappedProjectDetails[i]
-          : {}
-      );
-      data3.push(
-        vestedProjectDetails[i]?.id != undefined ? vestedProjectDetails[i] : {}
-      );
+      if(projectOwnerData[i]?.id != undefined) {
+        data1.push(projectOwnerData[i]);
+        data2.push(wrappedProjectDetails[i]);
+        if(vestedProjectDetails[i]?.id != undefined){
+          data3.push(vestedProjectDetails[i]);
+        }else{
+          data3.push({});
+        }
+      }
     }
     return [data1, data2, data3];
   } catch (e) {

@@ -38,7 +38,7 @@ function ProjectDetailsContainer({ projectOverviewData, projectDisplayID }) {
 	return project ? (
 		<section className="projectdetailscontainer">
 			<div className="projectdetailscontainer_title">DETAILS</div>
-			<hr className="border-dark-200 -mx-6 h-2"></hr>
+			<hr className="border-greyborder opacity-50 -mx-6 h-2"></hr>
 			<div className="projectdetailscontainer_innercontainer">
 				<div className="flex justify-between">
 					<div className="projectdetailscontainer_innercontainer_detailbox">
@@ -83,7 +83,7 @@ function ProjectDetailsContainer({ projectOverviewData, projectDisplayID }) {
 						dangerouslySetInnerHTML={{ __html: project?.projectDescription }}
 					></div>
 				</div>
-				<hr className="border-dark-200 -mx-6 mt-7 h-2"></hr>
+				<hr className="border-greyborder opacity-50 -mx-6 mt-7 h-2"></hr>
 			</div>
 		</section>
 	) : (

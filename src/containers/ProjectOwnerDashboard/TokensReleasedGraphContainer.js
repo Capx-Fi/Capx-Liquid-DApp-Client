@@ -300,7 +300,7 @@ function TokensReleasedGraphContainer({
 					updateArgs={[true, true, true]}
 				/>
 			</div>
-			<hr className="border-dark-200 -mx-6 h-2"></hr>
+			<hr className="border-greyborder opacity-50 -mx-6 h-2"></hr>
 		</section>
 	);
 }

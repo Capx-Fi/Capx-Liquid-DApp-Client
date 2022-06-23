@@ -39,6 +39,7 @@ import InvestorLoading from "./InvestorLoading";
 import { Tooltip, withStyles } from "@material-ui/core";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { fetchInvestorDashboard } from "../../utils/acalaEVM/fetchInvestorDashboard";
+import { ACALA_CHAIN_ID } from "../../constants/config";
 import {
 	getContractAddress,
 	getContractAddressController,
@@ -117,7 +118,7 @@ function InvestorDashboardScreen() {
 	const loadProjectData = async () => {
 		setOwnedProjectsData(null);
 		if (account) {
-			if (chainId === 595) {
+			if (chainId === parseInt(ACALA_CHAIN_ID)) {
 				let projects = await fetchInvestorDashboard(account, vestingURL);
 				console.log("Investor Projects", projects);
 				setOwnedProjectsData(projects);

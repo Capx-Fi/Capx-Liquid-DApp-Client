@@ -7,6 +7,7 @@ import avalancheLogo from "../../assets/avalanche-logo.svg";
 import ethLogo from "../../assets/ethereum-logo.svg";
 import fantomLogo from "../../assets/fantom-logo.svg";
 import acalaLogo from "../../assets/acala-logo.svg";
+import karuraLogo from "../../assets/karura-logo.svg";
 
 function DropDown({ sortBy, chainChange, setShowMenu }) {
 	const [open, setOpen] = useState(false);
@@ -33,7 +34,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
 							? avalancheLogo
 							: sortBy === "Fantom"
 							? fantomLogo
-							: acalaLogo
+							: karuraLogo
 					}
 					alt="chain-logo"
 					className={`${
@@ -115,13 +116,13 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
 					<p
 						className="option"
 						onClick={() => {
-							chainChange("Acala");
+							chainChange("Karura");
 							setOpen(false);
 							setShowMenu && setShowMenu(false);
 						}}
 					>
-						<img src={acalaLogo} alt="acala-logo" className="w-5 h-5 mr-2" />
-						Acala
+						<img src={karuraLogo} alt="karura-logo" className="w-5 h-5 mr-2" />
+						Karura
 					</p>
 				</div>
 			)}

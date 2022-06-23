@@ -141,7 +141,8 @@ function LockAndApprove({
       setVestModalOpen,
       setVestModalStatus,
       enqueueSnackbar,
-      setStep
+      setStep,
+      chainId
     );
     setButtonClicked(false);
   };

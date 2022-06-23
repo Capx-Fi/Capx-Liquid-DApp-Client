@@ -6,7 +6,7 @@
 	&_navbar {
 		@apply flex items-center text-darkText;
 		&_text {
-			@apply text-primary-green-100 laptop:text-paragraph-2 laptop:leading-paragraph-2 desktop:text-caption-1 desktop:leading-caption-1 font-semibold cursor-pointer;
+			@apply text-darkText laptop:text-paragraph-2 laptop:leading-paragraph-2 desktop:text-caption-1 desktop:leading-caption-1 font-semibold cursor-pointer;
 		}
 		&_gap {
 			@apply bg-dark-200 h-14 mx-6 w-px border-dark-25;

@@ -8,7 +8,7 @@
 		&_detailbox {
 			@apply py-3;
 			&_key {
-				@apply text-greyText opacity-30 pb-1 text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 font-semibold;
+				@apply text-grayText opacity-30 pb-1 text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 font-semibold;
 			}
 			&_value {
 				@apply text-darkText opacity-90 break-words font-medium text-caption-4 leading-caption-4 tablet:text-caption-2 tablet:leading-caption-2 desktop:text-caption-1 desktop:leading-caption-1;

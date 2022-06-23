@@ -1,12 +1,12 @@
 .left_div {
-	@apply w-23p bg-dark-400 hidden md:flex z-40 bg-center bg-no-repeat bg-cover fixed phone:hidden screen:flex top-0 h-screen;
+	@apply w-22p bg-dark-400 hidden md:flex z-40 bg-center bg-no-repeat bg-cover fixed phone:hidden screen:flex top-0 h-screen;
 	&_psuedo {
-		@apply w-23p hidden md:flex z-0 bg-center bg-no-repeat bg-cover relative phone:-mr-24 screen:mr-0 h-screen;
+		@apply w-22p hidden md:flex z-0 bg-center bg-no-repeat bg-cover relative phone:-mr-24 screen:mr-0 h-screen;
 	}
 }
 
 .vesting_container {
-	@apply container screen:w-9/12 twok:w-1/2 desktop:ml-32 twok:ml-60 tablet:ml-0 screen:ml-28 mx-auto text-darkText mt-20 tablet:mt-24 laptop:mt-32 screen:mt-20 desktop:mt-20 twok:mt-32 mb-20;
+	@apply container screen:w-9/12 twok:w-2/3 desktop:ml-1 twok:ml-12 tablet:ml-0 screen:ml-28 mx-auto text-darkText mt-20 tablet:mt-24 laptop:mt-32 screen:mt-20 desktop:mt-20 twok:mt-32 mb-20;
 
 	.nav-pane {
 		border-bottom: 1.6px solid #2a383c;
@@ -14,11 +14,11 @@
 }
 
 .vesting_container_table {
-	@apply container screen:w-9/12 twok:w-2/3 desktop:ml-32 twok:ml-60 laptop:-ml-10 tablet:ml-0 screen:ml-28 mx-auto text-darkText mt-20 tablet:mt-24 laptop:mt-28 screen:mt-20 twok:mt-32 mb-20;
+	@apply container screen:w-9/12 twok:w-2/3 desktop:ml-1 twok:ml-12 laptop:-ml-10 tablet:ml-0 screen:ml-28 mx-auto text-darkText mt-20 tablet:mt-24 laptop:mt-28 screen:mt-20 twok:mt-32 mb-20;
 }
 
 .upload_container {
-	@apply container screen:w-9/12 twok:w-5/12 desktop:ml-32 twok:ml-60 laptop:ml-28 screen:ml-28 tablet:ml-0 mx-auto text-darkText mt-20 tablet:mt-24 laptop:mt-32 screen:mt-20 desktop:mt-20 twok:mt-32 mb-20;
+	@apply container screen:w-9/12 twok:w-2/3 desktop:ml-1 twok:ml-12 laptop:ml-28 screen:ml-28 tablet:ml-0 mx-auto text-darkText mt-20 tablet:mt-24 laptop:mt-32 screen:mt-20 desktop:mt-20 twok:mt-32 mb-20;
 
 	.nav-pane {
 		border-bottom: 1.6px solid #2a383c;

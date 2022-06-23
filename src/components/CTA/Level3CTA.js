@@ -1,7 +1,7 @@
 import React from "react";
 import "./CTA.scss";
 
-import NextIcon from "../../assets/next-black.png";
+import NextIcon from "../../assets/next.svg";
 
 function Level3CTA({ onClick, text, icon, disabled }) {
   return (

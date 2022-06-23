@@ -1,12 +1,12 @@
 .footer {
-	@apply h-10 screen:h-14 desktop:h-16 bottom-0 left-0 fixed flex bg-dark-400 w-full desktop:px-44 border-t z-50 border-dark-200;
+	@apply h-10 screen:h-14 desktop:h-16 bottom-0 left-0 fixed flex bg-dark-400 w-full desktop:px-44 border-t z-50 border-dark-25;
 	&_text {
-		@apply text-primary-green-100 font-light text-caption-4 leading-caption-4 screen:text-caption-3 screen:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 opacity-40;
+		@apply text-darkText font-light text-caption-4 leading-caption-4 screen:text-caption-3 screen:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 opacity-80;
 	}
 }
 
 .footerVesting {
-	@apply h-10 screen:h-14 desktop:h-16 bottom-0 right-0 fixed flex bg-dark-400 w-screen desktop:px-44 border-t border-dark-200;
+	@apply h-10 screen:h-14 desktop:h-16 bottom-0 right-0 fixed flex bg-dark-400 w-screen desktop:px-44 border-t border-dark-25;
 	&_text {
 		@apply text-primary-green-100 font-light text-caption-4 leading-caption-4 screen:text-caption-3 screen:leading-caption-3 desktop:text-caption-3 desktop:leading-caption-3 opacity-40;
 	}

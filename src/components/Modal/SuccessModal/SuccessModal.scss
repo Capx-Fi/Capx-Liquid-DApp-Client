@@ -8,12 +8,8 @@
 				border-bottom: 2.98px solid #2a383c;
 			}
 
-			@apply px-5 py-8 tablet:pl-16 tablet:pr-12 screen:py-12 desktop:py-16 desktop:pb-20 rounded-lg tablet:rounded-2xl desktop:rounded-4xl text-white relative w-80v tablet:w-75v screen:w-62v desktop:w-62v laptop:w-75v flex flex-col items-center tablet:items-start;
-			background: radial-gradient(
-				143.33% 143.33% at 82.41% -4.96%,
-				rgba(132, 214, 164, 0.3) 0%,
-				rgba(18, 28, 32, 0.3) 100%
-			);
+			@apply px-5 py-8 bg-white border border-lightGrayBorder tablet:pl-16 tablet:pr-12 screen:py-12 desktop:py-16 desktop:pb-20 rounded-lg tablet:rounded-2xl desktop:rounded-4xl text-darkText relative w-80v tablet:w-75v screen:w-62v desktop:w-62v laptop:w-75v flex flex-col items-center tablet:items-start;
+			
 			max-width: 960px;
 			&_cname {
 				@apply flex rounded-lg object-contain w-fit-content px-3 mb-4 py-2.5 text-caption-4 tablet:text-caption-2 leading-caption-4 tablet:leading-caption-2;

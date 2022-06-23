@@ -67,7 +67,7 @@ function ProjectDetails({
         multiline={true}
         disabled={projectExists.exists}
       />
-      <hr className="border-dark-200 mt-4 h-2"></hr>
+      <hr className="border-dark-25 mt-4 h-2"></hr>
       <div className="flex flex-row-reverse mt-6">
         <Level3CTA
           text="Next"

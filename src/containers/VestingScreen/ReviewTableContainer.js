@@ -18,16 +18,16 @@ function ReviewTableContainer({
   useEffect(() => {
     setDisplayWidth(size.width);
   }, [size]);
-    const HtmlTooltip = withStyles((theme) => ({
-      tooltip: {
-        background: "#2A383C",
-        color: "#F1FAF2",
-        maxWidth: 800,
-        fontSize: theme.typography.pxToRem(12),
-        borderRadius: "4px",
-        zIndex: 100,
-      },
-    }))(Tooltip);
+  const HtmlTooltip = withStyles((theme) => ({
+    tooltip: {
+      background: "#2A383C",
+      color: "#F1FAF2",
+      maxWidth: 800,
+      fontSize: theme.typography.pxToRem(12),
+      borderRadius: "4px",
+      zIndex: 100,
+    },
+  }))(Tooltip);
   const toggleSellable = (e, i, val) => {
     setVestingDataSellable(
       [...reviewData].map((object, index) => {
@@ -59,20 +59,22 @@ function ReviewTableContainer({
       <Table
         data={reviewData}
         pagination={false}
+        className="text-black"
         scroll={{
           y: displayWidth > 1450 ? 280 : displayWidth > 1023 ? 240 : 190,
         }}
         emptyText={() => <p className="text-center">No Allocatiion Data!</p>}
       >
         <Column
-          title="Sr.No."
+          title={<p className="text-titleGray">Sr. No.</p>}
           dataIndex="Sr. No."
           key="Sr. No."
           width={displayWidth < 825 ? `50px` : `10%`}
           align="center"
+          render={(text) => <p className="text-black">{text}</p>}
         />
         <Column
-          title="Address"
+          title={<p className="text-titleGray">Address</p>}
           dataIndex="Address"
           key="Address"
           width={
@@ -80,21 +82,37 @@ function ReviewTableContainer({
               ? `28%`
               : displayWidth < 825
               ? "100px"
-              : `30%`
+              : `33%`
           }
           align="left"
           render={(text) => {
-            if (displayWidth > 1750) return <div>{`${text}`}</div>;
+            if (displayWidth > 1750)
+              return <div className="text-black">{`${text}`}</div>;
             else if (displayWidth > 1280)
-              return <div>{`${text.substr(0, 14)}...${text.substr(-12)}`}</div>;
+              return (
+                <div className="text-black">{`${text.substr(
+                  0,
+                  14
+                )}...${text.substr(-12)}`}</div>
+              );
             else if (displayWidth > 824)
-              return <div>{`${text.substr(0, 6)}...${text.substr(-4)}`}</div>;
+              return (
+                <div className="text-black">{`${text.substr(
+                  0,
+                  6
+                )}...${text.substr(-4)}`}</div>
+              );
             else
-              return <div>{`${text.substr(0, 4)}...${text.substr(-4)}`}</div>;
+              return (
+                <div className="text-black">{`${text.substr(
+                  0,
+                  4
+                )}...${text.substr(-4)}`}</div>
+              );
           }}
         />
         <Column
-          title="Date"
+          title={<p className="text-titleGray">Date</p>}
           dataIndex={"Date(DD-MM-YYYY)"}
           align="center"
           width={displayWidth < 825 ? `120px` : `20%`}
@@ -104,11 +122,11 @@ function ReviewTableContainer({
             if (text.includes("/")) {
               kp = text.toString().split("/").join("-");
             } else kp = text.toString().split("-").join("-");
-            return kp;
+            return <p className="text-black">{kp}</p>;
           }}
         />
         <Column
-          title="Amount"
+          title={<p className="text-titleGray">Amount</p>}
           dataIndex="Amount of Tokens"
           key="amount"
           align="center"
@@ -122,7 +140,7 @@ function ReviewTableContainer({
           <Column
             title={
               <div className="flex justify-center items-center">
-                <p>Wrapped</p>
+                <p className="text-titleGray">Wrapped</p>
                 <HtmlTooltip
                   arrow
                   placement="top"
@@ -154,7 +172,7 @@ function ReviewTableContainer({
                   onClick={(e) => {
                     toggleWrapped(e, index, text);
                   }}
-                  className="w-3.5 h-3.5 border-primary-green-400 bg-primary-green-400 border-2 m-auto cursor-pointer flex justify-center items-center"
+                  className="w-3.5 h-3.5 border-success-color-350 bg-success-color-350 border-2 m-auto cursor-pointer flex justify-center items-center"
                 >
                   <img
                     className="w-2.5 h-2.5"
@@ -167,7 +185,7 @@ function ReviewTableContainer({
                   onClick={(e) => {
                     toggleWrapped(e, index, text);
                   }}
-                  className="w-3.5 h-3.5 border-primary-green-400 border-2 m-auto cursor-pointer flex justify-center items-center"
+                  className="w-3.5 h-3.5 border-success-color-350 border-2 m-auto cursor-pointer flex justify-center items-center"
                 ></div>
               );
             }}
@@ -177,7 +195,7 @@ function ReviewTableContainer({
           <Column
             title={
               <div className="flex justify-center items-center">
-                <p>Sellable</p>
+                <p className="text-titleGray">Sellable</p>
                 <HtmlTooltip
                   arrow
                   placement="top"
@@ -209,7 +227,7 @@ function ReviewTableContainer({
                   onClick={(e) => {
                     toggleSellable(e, index, text);
                   }}
-                  className="w-3.5 h-3.5 border-primary-green-400 bg-primary-green-400 border-2 m-auto cursor-pointer flex justify-center items-center"
+                  className="w-3.5 h-3.5 border-success-color-350 bg-success-color-350 border-2 m-auto cursor-pointer flex justify-center items-center"
                 >
                   <img
                     className="w-2.5 h-2.5"
@@ -222,7 +240,7 @@ function ReviewTableContainer({
                   onClick={(e) => {
                     toggleSellable(e, index, text);
                   }}
-                  className="w-3.5 h-3.5 border-primary-green-400 border-2 m-auto cursor-pointer flex justify-center items-center"
+                  className="w-3.5 h-3.5 border-success-color-350 border-2 m-auto cursor-pointer flex justify-center items-center"
                 ></div>
               );
             }}

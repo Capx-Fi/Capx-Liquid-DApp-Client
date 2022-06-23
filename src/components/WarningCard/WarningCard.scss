@@ -1,0 +1,15 @@
+.warning_gradient {
+	@apply bg-warning-color-100 border-2 border-warning-color-400;
+	width: fit-content;
+	border: 0.6px solid #a75822;
+	box-sizing: border-box;
+	border-radius: 12px;
+}
+
+.info_gradient {
+	background: #20282a;
+	width: fit-content;
+	border: 0.6px solid #7797844d;
+	box-sizing: border-box;
+	border-radius: 12px;
+}

@@ -7,6 +7,7 @@ import { validateProjectName } from "../../../utils/validateProjectName";
 import { validateProjectDescription } from "../../../utils/validateProjectDescription";
 import { useWeb3React } from "@web3-react/core";
 import "./ProjectDetails.scss";
+import WarningCard from "../../WarningCard/WarningCard";
 
 const ProjectDetails = ({
 	contractAddress,
@@ -140,8 +141,25 @@ const ProjectDetails = ({
 				loading={checkingContract}
 			/>
 
-			<hr className="border-dark-200 phone:mt-6 desktop:mt-12 h-2" />
-			<div className="flex flex-row-reverse screen:mt-4 desktop:mt-8">
+			<hr className="border-dark-25 phone:mt-6 desktop:mt-12 h-2" />
+			<div
+				className={`flex ${
+					!tokenDetails?.valid ||
+					!isValidProjectName ||
+					!isValidProjectDescription
+						? "flex-row justify-between"
+						: "flex-row-reverse"
+				} screen:mt-4 desktop:mt-8`}
+			>
+				{!tokenDetails?.valid ? (
+					<WarningCard text="Please Enter a Valid Contract Address." />
+				) : !isValidProjectName ? (
+					<WarningCard text="Please Enter a Valid Project Name." />
+				) : !isValidProjectDescription ? (
+					<WarningCard text="Please Enter a Valid project Description." />
+				) : (
+					<></>
+				)}
 				<Level3CTA
 					text="Next"
 					icon={true}

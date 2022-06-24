@@ -53,7 +53,7 @@ function ProjectDetailsContainer({ projectOverviewData, projectDisplayID }) {
 			// console.log("Current Project", currentProject);
 			try {
 				const res = await fetch(
-					`https://capx-liquid.mypinata.cloud/ipfs/${currentProject.projectDocHash}`
+					`https://capx-liquid.mypinata.cloud/ipfs/${currentProject?.projectDocHash}`
 				);
 				const desc = await res.json();
 				description = desc.description;
@@ -61,10 +61,10 @@ function ProjectDetailsContainer({ projectOverviewData, projectDisplayID }) {
 				console.log(error);
 			}
 			setProject({
-				projectName: currentProject.projectName,
-				tokenTicker: currentProject.projectTokenTicker,
-				contractAddress: getCheckSumAddress(currentProject.projectTokenAddress),
-				projectOwnerAddress: getCheckSumAddress(currentProject.projectOwnerAddress),
+				projectName: currentProject?.projectName,
+				tokenTicker: currentProject?.projectTokenTicker,
+				contractAddress: getCheckSumAddress(currentProject?.projectTokenAddress),
+				projectOwnerAddress: getCheckSumAddress(currentProject?.projectOwnerAddress),
 				projectDescription: description,
 			});
 		}
@@ -101,8 +101,8 @@ function ProjectDetailsContainer({ projectOverviewData, projectDisplayID }) {
               ? project?.contractAddress
               : `${project?.contractAddress?.substr(
                   0,
-                  6
-                )}...${project?.contractAddress?.substr(-4)}`}
+                  8
+                )}...${project?.contractAddress?.substr(-6)}`}
             <CopyToClipboard
               text={project?.contractAddress}
               onCopy={() => setContractAddressCopied(true)}
@@ -136,8 +136,8 @@ function ProjectDetailsContainer({ projectOverviewData, projectDisplayID }) {
               ? project?.projectOwnerAddress
               : `${project?.projectOwnerAddress?.substr(
                   0,
-                  6
-                )}...${project?.projectOwnerAddress?.substr(-4)}`}
+                  8
+                )}...${project?.projectOwnerAddress?.substr(-6)}`}
             <CopyToClipboard
               text={project?.projectOwnerAddress}
               onCopy={() => setCreatorAddressCopied(true)}

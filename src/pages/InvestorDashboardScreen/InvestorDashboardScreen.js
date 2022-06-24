@@ -88,7 +88,7 @@ function InvestorDashboardScreen() {
 
 	const capxContract =
 		web3 && new web3.eth.Contract(CONTRACT_ABI_CAPX, contractAddress);
-	console.dir(capxContract);
+	// console.dir(capxContract);
 	const explorer = chainId && getExplorer(chainId);
 
 	function onlyUnique(value, index, self) {
@@ -200,6 +200,9 @@ function InvestorDashboardScreen() {
 			loadProjectData();
 		}, 6000);
 	};
+
+	console.log(ownedProjectsData);
+
 	return (
 		<>
 			{!active ? (
@@ -325,26 +328,27 @@ function InvestorDashboardScreen() {
 																	animationData={SandTimer}
 																/>
 																{Math.floor(
-																	(Date.parse(project.date) -
+																	(Date.parse(project?.date) -
 																		Date.parse(datetime)) /
 																		86400000
 																) > 0
 																	? `${Math.floor(
-																			(Date.parse(project.date) -
+																			(Date.parse(project?.date) -
 																				Date.parse(datetime)) /
 																				86400000
 																	  )} days to unlock`
 																	: Math.floor(
-																			(Date.parse(project.date) -
+																			(Date.parse(project?.date) -
 																				Date.parse(datetime)) /
 																				3600000
 																	  ) >= 0
 																	? `${Math.floor(
-																			(Date.parse(project.date) -
+																			(Date.parse(project?.date) -
 																				Date.parse(datetime)) /
 																				3600000
 																	  )} hours to unlock`
 																	: "Unlocked!"}
+																{console.log(project.date)}
 															</span>
 														</React.Fragment>
 													}

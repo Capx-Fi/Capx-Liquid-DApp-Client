@@ -133,7 +133,7 @@ function ProjectOwnerDashboardScreen() {
 											return (
 												<option
 													value={i}
-												>{`${project.projectTokenTicker}`}</option>
+												>{`${project?.projectName}`}</option>
 											);
 									  })
 									: null}

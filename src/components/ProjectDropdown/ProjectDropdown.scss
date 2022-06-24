@@ -1,7 +1,7 @@
 .project-header-dropdown-button {
-	@apply flex flex-row mr-6 tablet:mr-10 justify-between z-50 items-center rounded-lg px-0.5 py-1 tablet:px-1.5 tablet:py-1.5 screen:px-2.5 screen:py-2.5 bg-white border text-darkText text-caption-3 tablet:text-caption-1 font-semibold border-black screen:w-36 screen:text-caption-3 screen:py-1.5 desktop:py-2.5 desktop:text-caption-2 desktop:w-52 tablet:w-20 w-16 tablet:text-caption-3;
+	@apply flex flex-row mr-6 tablet:mr-10 justify-between z-50 items-center rounded-lg px-0.5 py-1 tablet:px-1.5 tablet:py-1.5 screen:px-2.5 screen:py-2.5 bg-white border text-darkText text-10px tablet:text-caption-1 font-semibold border-black screen:w-36 screen:text-caption-1 screen:py-1.5 desktop:py-2.5 desktop:text-caption-2 desktop:w-52 tablet:w-24 w-20 tablet:text-caption-3;
 }
 
 .project-option {
-	@apply flex flex-row items-center px-2 tablet:px-3 screen:px-6 text-left cursor-pointer py-2 w-full text-caption-3 tablet:text-caption-2 text-darkText  hover:opacity-100 hover:bg-dark-400 hover:text-darkText;
+	@apply flex flex-row items-center px-2 tablet:px-3 screen:px-6 text-left cursor-pointer py-2 w-full text-10px tablet:text-caption-3 text-darkText  hover:opacity-100 hover:bg-dark-400 hover:text-darkText;
 }

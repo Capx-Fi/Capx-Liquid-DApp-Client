@@ -18,7 +18,7 @@ function DropDown({
         }`}
         onClick={() => setOpen(!open)}
       >
-        <span className=" mr-4 tablet:mr-6 pl-1 tablet:pl-1.5 screen:pl-3">
+        <span className=" mr-16 screen:mr-6 pl-2 tablet:pl-3 screen:pl-3">
           {projectOverviewData?.length > 0
             ? projectOverviewData[projectDisplayID]?.projectName
             : ""}
@@ -37,7 +37,7 @@ function DropDown({
         </svg>
       </button>
       {open && (
-        <div className="absolute z-50 bg-grayFill pt-2 pb-0.5 divide-y divide-grayFill rounded-md shadow-xl screen:w-36 tablet:w-20 desktop:w-52 tablet:w-20 w-16">
+        <div className="absolute z-50 bg-grayFill pt-2 pb-0.5 divide-y divide-grayFill rounded-md shadow-xl screen:w-36 tablet:w-20 desktop:w-52 tablet:w-24 w-20">
           {projectOverviewData.map((project, index) => (
             <p
               className="project-option"

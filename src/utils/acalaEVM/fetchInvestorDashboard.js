@@ -99,7 +99,7 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
             .dividedBy(Math.pow(10, project.projectTokenDecimal))
             .toNumber();
           return {
-            data: date,
+            date: date,
             projectName: project.projectName,
             projectOwnerAddress: project.projectOwnerAddress.replace("\\", "0"),
             projectTokenTicker: project.projectTokenTicker,
@@ -136,7 +136,7 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
             .dividedBy(Math.pow(10, project.projectTokenDecimal))
             .toNumber();
           return {
-            data: date,
+            date: date,
             projectName: project.projectName,
             projectOwnerAddress: project.projectOwnerAddress.replace("\\", "0"),
             projectTokenTicker: project.projectTokenTicker,

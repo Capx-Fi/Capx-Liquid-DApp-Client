@@ -6,10 +6,17 @@ import { useEffect, useState } from "react";
 import BigNumber from "bignumber.js";
 import { useWeb3React } from "@web3-react/core";
 import { convertToInternationalCurrencySystem } from "../../utils/convertToInternationalCurrencySystem";
-
+import Web3 from "web3";
 import { getExplorer } from "../../constants/getChainConfig";
+
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
+const web3 = new Web3(Web3.givenProvider);
+
+function getCheckSumAddress(_address) {
+	return web3.utils.toChecksumAddress(_address);
+}
+
 function AllocationTableContainer({
 	projectOverviewData,
 	projectDisplayID,
@@ -74,7 +81,7 @@ function AllocationTableContainer({
 												)
 												.toNumber();
 											return {
-												address: holder.address,
+												address: getCheckSumAddress(holder.address),
 												displayDate: displayDate,
 												displayNumericDate: displayNumericDate,
 												amount: convertToInternationalCurrencySystem(
@@ -83,7 +90,7 @@ function AllocationTableContainer({
 													.toString()
 													.concat(" ")
 													.concat(currentProjectDetails.projectTokenTicker),
-												wrappedAsset: derivative.id,
+												wrappedAsset: getCheckSumAddress(derivative.id),
 												wrappedAssetTicker: derivative.wrappedTokenTicker,
 												projectTokenTicker:
 													currentProjectDetails.projectTokenTicker,
@@ -133,7 +140,7 @@ function AllocationTableContainer({
 												)
 												.toNumber();
 											return {
-												address: holder.address,
+												address: getCheckSumAddress(holder.address),
 												displayDate: displayDate,
 												displayNumericDate: displayNumericDate,
 												amount: convertToInternationalCurrencySystem(
@@ -142,7 +149,7 @@ function AllocationTableContainer({
 													.toString()
 													.concat(" ")
 													.concat(currentProjectDetails.projectTokenTicker),
-												wrappedAsset: derivative.id,
+												wrappedAsset: getCheckSumAddress(derivative.id),
 												wrappedAssetTicker: "N/A",
 												projectTokenTicker:
 													currentProjectDetails.projectTokenTicker,
@@ -252,7 +259,7 @@ function AllocationTableContainer({
 					}
 					align="left"
 					render={(text) => {
-						if (displayWidth > 1400) return <div>{`${text}`}</div>;
+						if (displayWidth > 1500) return <div>{`${text}`}</div>;
 						else if (displayWidth >= 1280)
 							return <div>{`${text.substr(0, 14)}...${text.substr(-12)}`}</div>;
 						// else if (displayWidth >= 1024)

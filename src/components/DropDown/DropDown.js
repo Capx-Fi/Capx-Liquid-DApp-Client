@@ -14,7 +14,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
   window.w3 = web3;
 
   return (
-    <div className="relative">
+    <div className="relative z-50">
       <button
         className={`header-dropdown-button ${
           open ? "border-success-color-400" : "border-dark-50"

@@ -11,14 +11,14 @@ function DropDown({
   console.log(projectOverviewData);
 
   return (
-    <div className="relative z-50">
+    <div className="relative">
       <button
         className={`project-header-dropdown-button ${
           open ? "border-success-color-400" : "border-dark-50"
         }`}
         onClick={() => setOpen(!open)}
       >
-        <span className="mr-6 pl-3">
+        <span className=" mr-4 tablet:mr-6 pl-1 tablet:pl-1.5 screen:pl-3">
           {projectOverviewData?.length > 0
             ? projectOverviewData[projectDisplayID]?.projectName
             : ""}
@@ -37,7 +37,7 @@ function DropDown({
         </svg>
       </button>
       {open && (
-        <div className="absolute bg-grayFill pt-2 pb-0.5 divide-y divide-grayFill rounded-md shadow-xl screen:w-36 tablet:w-20 desktop:w-52 tablet:w-20">
+        <div className="absolute z-50 bg-grayFill pt-2 pb-0.5 divide-y divide-grayFill rounded-md shadow-xl screen:w-36 tablet:w-20 desktop:w-52 tablet:w-20 w-16">
           {projectOverviewData.map((project, index) => (
             <p
               className="project-option"

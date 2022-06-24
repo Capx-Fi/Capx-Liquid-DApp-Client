@@ -19,8 +19,8 @@ function DropDown({
         onClick={() => setOpen(!open)}
       >
         <span className="mr-6 pl-3">
-          {projectOverviewData.length > 0
-            ? projectOverviewData[projectDisplayID].projectName
+          {projectOverviewData?.length > 0
+            ? projectOverviewData[projectDisplayID]?.projectName
             : ""}
         </span>
         <svg
@@ -43,6 +43,7 @@ function DropDown({
               className="project-option"
               onClick={() => {
                 setProjectDisplayID(index);
+                setOpen(false);
               }}
             >
               {project?.projectName}

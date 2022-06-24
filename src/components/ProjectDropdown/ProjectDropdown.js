@@ -37,7 +37,7 @@ function DropDown({
         </svg>
       </button>
       {open && (
-        <div className="absolute bg-grayFill pt-2 pb-0.5 divide-y divide-grayFill rounded-md shadow-xl w-40">
+        <div className="absolute bg-grayFill pt-2 pb-0.5 divide-y divide-grayFill rounded-md shadow-xl desktop:w-52 tablet:w-20">
           {projectOverviewData.map((project, index) => (
             <p
               className="project-option"

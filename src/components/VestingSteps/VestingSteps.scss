@@ -3,7 +3,8 @@
 		@apply border-lightGrayBorder border-2;
 		background: #FFF;
 		.text-container {
-			background: rgba(73, 197, 116, 0.1);
+	
+			@apply bg-grayFill;
 		}
 	}
 

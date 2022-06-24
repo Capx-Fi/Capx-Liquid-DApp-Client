@@ -49,8 +49,8 @@ function AllocationTableContainer({
 							.map((project) =>
 								project?.derivatives
 									.map((derivative, _index) =>
-										derivative.holders.map((holder, index) => {
-											const unixTime = derivative.unlockTime;
+										derivative?.holders.map((holder, index) => {
+											const unixTime = derivative?.unlockTime;
 											const date = new Date(unixTime * 1000);
 											let unlockDate = date.toLocaleDateString("en-US");
 											let unlockDay = date.toLocaleDateString("en-US", {
@@ -75,12 +75,12 @@ function AllocationTableContainer({
 												.dividedBy(
 													Math.pow(
 														10,
-														currentProjectDetails.projectTokenDecimal
+														currentProjectDetails?.projectTokenDecimal
 													)
 												)
 												.toNumber();
 											return {
-												address: getCheckSumAddress(holder.address),
+												address: getCheckSumAddress(holder?.address),
 												displayDate: displayDate,
 												displayNumericDate: displayNumericDate,
 												amount: convertToInternationalCurrencySystem(
@@ -88,12 +88,12 @@ function AllocationTableContainer({
 												)
 													.toString()
 													.concat(" ")
-													.concat(currentProjectDetails.projectTokenTicker),
-												wrappedAsset: getCheckSumAddress(derivative.id),
-												wrappedAssetTicker: derivative.wrappedTokenTicker,
+													.concat(currentProjectDetails?.projectTokenTicker),
+												wrappedAsset: getCheckSumAddress(derivative?.id),
+												wrappedAssetTicker: derivative?.wrappedTokenTicker,
 												projectTokenTicker:
-													currentProjectDetails.projectTokenTicker,
-												decimal: currentProjectDetails.projectTokenDecimal,
+													currentProjectDetails?.projectTokenTicker,
+												decimal: currentProjectDetails?.projectTokenDecimal,
 												date: unlockDate,
 											};
 										})
@@ -108,8 +108,8 @@ function AllocationTableContainer({
 							.map((project) =>
 								project?.derivatives
 									.map((derivative, _index) =>
-										derivative.holders.map((holder, index) => {
-											const unixTime = holder.unlockTime;
+										derivative?.holders.map((holder, index) => {
+											const unixTime = holder?.unlockTime;
 											const date = new Date(unixTime * 1000);
 											let unlockDate = date.toLocaleDateString("en-US");
 											let unlockDay = date.toLocaleDateString("en-US", {
@@ -134,12 +134,12 @@ function AllocationTableContainer({
 												.dividedBy(
 													Math.pow(
 														10,
-														currentProjectDetails.projectTokenDecimal
+														currentProjectDetails?.projectTokenDecimal
 													)
 												)
 												.toNumber();
 											return {
-												address: getCheckSumAddress(holder.address),
+												address: getCheckSumAddress(holder?.address),
 												displayDate: displayDate,
 												displayNumericDate: displayNumericDate,
 												amount: convertToInternationalCurrencySystem(
@@ -147,12 +147,12 @@ function AllocationTableContainer({
 												)
 													.toString()
 													.concat(" ")
-													.concat(currentProjectDetails.projectTokenTicker),
-												wrappedAsset: getCheckSumAddress(derivative.id),
+													.concat(currentProjectDetails?.projectTokenTicker),
+												wrappedAsset: getCheckSumAddress(derivative?.id),
 												wrappedAssetTicker: "N/A",
 												projectTokenTicker:
-													currentProjectDetails.projectTokenTicker,
-												decimal: currentProjectDetails.projectTokenDecimal,
+													currentProjectDetails?.projectTokenTicker,
+												decimal: currentProjectDetails?.projectTokenDecimal,
 												date: unlockDate,
 											};
 										})

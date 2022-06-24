@@ -200,7 +200,7 @@ function Header({
 			} catch (error) {
 				console.error(error);
 			}
-		} else if (chainName === "Acala") {
+		} else if (chainName === "Karura") {
 			try {
 				await web3.currentProvider.request({
 					method: "wallet_addEthereumChain",

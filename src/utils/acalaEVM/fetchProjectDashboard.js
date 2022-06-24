@@ -80,9 +80,6 @@ export const fetchProjectDashboard = async (account, GRAPHAPIURL) => {
       fetchPolicy: "network-only",
     });
     allProjects = projectDQL.data.projects.nodes.map(async (project) => {
-      console.log("Project", project);
-      console.log("Derivatives", project.derivative.nodes);
-      console.log("Locks", project.lock.nodes);
       let derivatives = project.derivative.nodes.map(async (derivative) => {
         return derivative.id;
       });
@@ -218,11 +215,19 @@ export const fetchProjectDashboard = async (account, GRAPHAPIURL) => {
     for (let i = 0; i < validProjectIDs.length; i++) {
       if(projectOwnerData[i]?.id != undefined) {
         data1.push(projectOwnerData[i]);
-        data2.push(wrappedProjectDetails[i]);
-        if(vestedProjectDetails[i]?.id != undefined){
-          data3.push(vestedProjectDetails[i]);
-        }else{
-          data3.push({});
+        for(let j=0; j < wrappedProjectDetails.length; j++) {
+          if(wrappedProjectDetails[j].id === projectOwnerData[i].id){
+            data2.push(wrappedProjectDetails[j]);
+            break;
+          }
+        }
+        for(let k=0; k < vestedProjectDetails.length; k++) {
+          if(vestedProjectDetails[k].id === projectOwnerData[i].id){
+            data3.push(vestedProjectDetails[k]);
+            break;
+          }else{
+            data3.push({});
+          }
         }
       }
     }

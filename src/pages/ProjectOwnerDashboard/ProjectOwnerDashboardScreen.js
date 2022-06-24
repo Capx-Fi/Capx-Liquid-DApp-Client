@@ -58,10 +58,10 @@ function ProjectOwnerDashboardScreen() {
 			if (chainId === parseInt(ACALA_CHAIN_ID)) {
 				const [projectOwnerData, wrappedProjectDetails, vestedProjectDetails] =
 					await fetchProjectDashboard(account, masterURL);
-				console.log("ProjectOwnerData", projectOwnerData);
-				console.log("wrappedProjectDetails", wrappedProjectDetails);
-				console.log("vestedProjectDetails", vestedProjectDetails);
-				console.log("Present", vestedProjectDetails[1]?.id === undefined);
+				// console.log("ProjectOwnerData", projectOwnerData);
+				// console.log("wrappedProjectDetails", wrappedProjectDetails);
+				// console.log("vestedProjectDetails", vestedProjectDetails);
+				// console.log("Present", vestedProjectDetails[1]?.id === undefined);
 				setProjectOverviewData(projectOwnerData);
 				setWrappedProjectData(wrappedProjectDetails);
 				setVestedProjectData(vestedProjectDetails);
@@ -82,12 +82,12 @@ function ProjectOwnerDashboardScreen() {
 					showIDs,
 					wrappedURL
 				);
-				console.log("ProjectOwnerData", projectOwnerData.data.projects);
-				console.log(
-					"wrappedProjectDetails",
-					wrappedProjectDetails.data.projects
-				);
-				console.log("vestedProjectDetails", vestedProjectDetails.data.projects);
+				// console.log("ProjectOwnerData", projectOwnerData.data.projects);
+				// console.log(
+				// 	"wrappedProjectDetails",
+				// 	wrappedProjectDetails.data.projects
+				// );
+				// console.log("vestedProjectDetails", vestedProjectDetails.data.projects);
 				if (projectOwnerData !== null) {
 					setProjectOverviewData(projectOwnerData.data.projects);
 					setWrappedProjectData(wrappedProjectDetails.data.projects);

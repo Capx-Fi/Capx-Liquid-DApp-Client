@@ -120,7 +120,7 @@ function InvestorDashboardScreen() {
 		if (account) {
 			if (chainId === parseInt(ACALA_CHAIN_ID)) {
 				let projects = await fetchInvestorDashboard(account, vestingURL);
-				console.log("Investor Projects", projects);
+				// console.log("Investor Projects", projects);
 				setOwnedProjectsData(projects);
 			} else {
 				const vInvestorIDs = await fetchVestedInvestorID(account, vestingURL);
@@ -151,7 +151,7 @@ function InvestorDashboardScreen() {
 						wrappedProjectDetails.data.projects,
 						vestedProjectDetails.data.projects
 					);
-					console.log("Investor Projects", projects);
+					// console.log("Investor Projects", projects);
 					setOwnedProjectsData(projects);
 				}
 			}

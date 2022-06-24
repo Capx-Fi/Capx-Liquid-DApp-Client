@@ -4,27 +4,21 @@
 	&_maincontainer {
 		@apply flex flex-col pt-28 w-80v laptop:w-75v mx-auto;
 		&_title {
-			@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 pb-4 ml-4  text-primary-green-300 opacity-75 font-semibold;
+			@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 pb-4 ml-4 text-black font-bold;
 		}
 		&_innercontainer {
 			@apply flex flex-wrap overflow-y-auto mb-28;
 			&::-webkit-scrollbar {
-				@apply w-1.5 bg-dark-200;
+				@apply w-1.5 bg-scrollTrack;
 			}
 			&::-webkit-scrollbar-thumb {
-				@apply rounded-md h-16;
-				background: linear-gradient(0deg, #2d884c -33.65%, #87dfa5 100%);
+				@apply rounded-md h-16 bg-scrollThumb;
 			}
 			&::-webkit-scrollbar-track {
-				@apply rounded-md;
+				@apply rounded-md bg-scrollTrack;
 			}
 			&_projectcontainer {
-				background: radial-gradient(
-					143.33% 143.33% at 82.41% -4.96%,
-					rgba(132, 214, 164, 0.2) 0%,
-					rgba(18, 28, 32, 0.2) 100%
-				);
-				@apply px-6 py-4 my-4 mx-4 text-white flex rounded-lg laptop:rounded-2xl bg-opacity-30 w-75v tablet:w-35v laptop:w-31v desktop:w-22v h-fit-content;
+				@apply px-6 py-4 my-4 mx-4 text-darkText flex rounded-lg laptop:rounded-2xl w-75v tablet:w-35v laptop:w-31v desktop:w-22v h-fit-content bg-white border-2 border-lightGrayBorder;
 				&_leftcontainer {
 					@apply flex flex-col;
 				}
@@ -34,12 +28,12 @@
 				&_detailbox {
 					@apply py-3;
 					&_key {
-						@apply text-primary-green-300 pb-1 text-caption-3 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-1 desktop:leading-caption-1 opacity-50 font-semibold;
+						@apply text-grayText pb-1 font-bold text-caption-3 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-1 desktop:leading-caption-1 font-semibold;
 					}
 					&_value {
-						@apply text-primary-green-100 opacity-90 font-medium text-caption-2 leading-caption-3 tablet:text-caption-2 tablet:leading-caption-2 desktop:text-paragraph-2 desktop:leading-paragraph-2;
+						@apply text-darkText font-semibold text-caption-2 leading-caption-3 tablet:text-caption-2 tablet:leading-caption-2 desktop:text-paragraph-2 desktop:leading-paragraph-2;
 						&_loading {
-							@apply h-4 w-auto animate-pulse bg-dark-100;
+							@apply h-4 w-auto animate-pulse bg-dark-25;
 						}
 					}
 				}
@@ -47,12 +41,11 @@
 					@apply mt-2 laptop:mt-4 flex flex-col laptop:flex-row justify-start w-full;
 				}
 				&_button {
-					@apply laptop:mr-4 w-28 px-2 py-2 flex justify-center items-center rounded-lg laptop:rounded-xl text-primary-green-100 font-bold tablet:w-28;
-					background: linear-gradient(180deg, #97d10a -8.65%, #206300 100%);
+					@apply laptop:mr-4 w-28 px-2 py-2 flex justify-center items-center rounded-lg laptop:rounded-xl text-white font-bold tablet:w-28 bg-primary-green-300;
 					&_text {
 						@apply pr-2 text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3;
 						&_loading {
-							@apply h-4 w-auto animate-pulse bg-dark-100;
+							@apply h-4 w-auto animate-pulse bg-dark-25;
 						}
 					}
 					&_icon {
@@ -60,8 +53,7 @@
 					}
 				}
 				&_withdrawbutton {
-					@apply mt-2 w-28 laptop:mt-0 px-2 py-2 flex justify-center items-center rounded-lg laptop:rounded-xl text-dark-400 font-bold cursor-pointer tablet:w-28;
-					background: linear-gradient(356.23deg, #96cf03 -65.8%, #f1fff6 89%);
+					@apply mt-2 w-28 laptop:mt-0 px-2 py-2 flex justify-center items-center rounded-lg laptop:rounded-xl text-darkText font-bold cursor-pointer tablet:w-28 border-2 border-lightGrayBorder;
 					&_text {
 						@apply pr-2 text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3;
 						&_loading {

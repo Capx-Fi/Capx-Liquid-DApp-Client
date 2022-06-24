@@ -3,9 +3,9 @@ import "./Footer.scss";
 function Footer({ vesting, centered }) {
   return (
     <footer
-      className={`${vesting ? "footerVesting" : "footer"} ${
+      className={`${"footer"} ${
         centered ? "centered" : "notcentered"
-      } z-30 text-white`}
+      } z-30 text-primary-green-100`}
     >
       <div className="footer_text">© 2021 CapX All rights reserved.</div>
     </footer>

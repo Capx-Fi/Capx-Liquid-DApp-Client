@@ -31,7 +31,7 @@ function Errors({ setStep, error, resetUploadData }) {
         </div>
       </div>
 
-      <div className="bg-dark-300 max-h-35v h-fit-content rounded-xl flex-grow overflow-auto w-full">
+      <div className="bg-dark-400 max-h-35v h-fit-content rounded-xl flex-grow overflow-auto w-full border-2">
         {error.map(function (e) {
           return (
             <>
@@ -48,12 +48,12 @@ function Errors({ setStep, error, resetUploadData }) {
                   dangerouslySetInnerHTML={{ __html: e }}
                 />
               </div>
-              <hr className="border-dark-200  mx-auto"></hr>
+              <hr className="border-dark-25  mx-auto"></hr>
             </>
           );
         })}
       </div>
-      <hr className="border-dark-200 mt-10 h-2"></hr>
+      <hr className="border-dark-25 mt-10 h-2"></hr>
       <div className="flex flex-row-reverse mt-8">
         <Level3CTA
           text="Reupload Vesting Sheet"

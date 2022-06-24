@@ -5,18 +5,23 @@ import { useSnackbar } from "notistack";
 import Web3 from "web3";
 import { useMetamask } from "../../metamaskReactHook/index";
 import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
-import { injected } from "../../utils/connector";
+import { injected, walletconnect } from "../../utils/connector";
 import ChooseDashboardModal from "../Modal/ChooseDashboardModal/ChooseDashboardModal";
 import DropDown from "../DropDown/DropDown";
 import { Tooltip, withStyles } from "@material-ui/core";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import { useEffect, useState } from "react";
 import { CHAIN_NAMES } from "../../constants/config";
 
 import { getSortBy } from "../../constants/getChainConfig";
 
-function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
+function Header({
+	vesting,
+	hiddenNav,
+	showSteps,
+	hiddenSwitch,
+	isWalletConnect,
+}) {
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const { active, account, library, connector, activate, deactivate, chainId } =
 		useWeb3React();
@@ -25,14 +30,25 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 	const currentChainId = metaState.chain.id?.toString();
 	const [dashboardModal, setDashboardModal] = useState(false);
 	const [sortBy, setSortBy] = useState("Ethereum");
+	const [web3, setWeb3] = useState(null);
 	const handleCloseSelectDashboard = () => {
 		setDashboardModal(false);
 	};
 
-	const provider = window.ethereum;
-	console.log(provider);
-	const web3 = new Web3(provider);
-	console.log(web3);
+	const setupProvider = async () => {
+		let result = await connector?.getProvider().then((res) => {
+			return res;
+		});
+		return result;
+	};
+
+	useEffect(() => {
+		setupProvider().then((res) => {
+			setWeb3(new Web3(res));
+		});
+	}, [active, chainId]);
+
+	// web3 && console.log(web3);
 
 	useEffect(() => {
 		setSortBy(chainId && getSortBy(chainId));
@@ -184,6 +200,27 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 			} catch (error) {
 				console.error(error);
 			}
+		} else if (chainName === "Karura") {
+			try {
+				await web3.currentProvider.request({
+					method: "wallet_addEthereumChain",
+					params: [
+						{
+							chainId: "0x2AE",
+							chainName: "Karura",
+							nativeCurrency: {
+								name: "KAR",
+								symbol: "KAR",
+								decimals: 18,
+							},
+							rpcUrls: ["https://eth-rpc-karura.aca-api.network/"],
+							blockExplorerUrls: ["https://blockscout.karura.network/"],
+						},
+					],
+				});
+			} catch (error) {
+				console.error(error);
+			}
 		}
 	};
 
@@ -213,15 +250,13 @@ function Header({ vesting, hiddenNav, showSteps, hiddenSwitch }) {
 			/>
 			<header
 				className={`header z-20 ${
-					vesting
-						? "border-b border-dark-200 tablet:border-none"
-						: "border-b border-dark-200 "
+					vesting ? "border-b border-dark-25 " : "border-b border-dark-25 "
 				}`}
 			>
 				<a href="/">
 					<div>
 						<img
-							className={`header_logo ${vesting && "flex screen:hidden "}`}
+							className={`header_logo flex `}
 							src={CapxLogo}
 							alt="capx logo"
 						/>

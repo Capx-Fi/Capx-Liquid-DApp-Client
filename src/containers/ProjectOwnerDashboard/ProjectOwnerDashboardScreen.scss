@@ -1,20 +1,19 @@
 .projectdetailscontainer {
-	@apply xl:w-2/5 mb-4 xl:mb-0 p-6 rounded-2xl;
-	background: linear-gradient(215.24deg, #263232 3.85%, #1a1f23 89.73%);
+	@apply xl:w-2/5 mb-4 xl:mb-0 p-6 rounded-2xl border rounded-2xl border-greyborder bg-white;
 
 	&_title {
-		@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-4 font-semibold text-primary-green-300 opacity-50;
+		@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-4 font-semibold text-black;
 	}
 	&_innercontainer {
 		&_detailbox {
 			@apply py-3;
 			&_key {
-				@apply text-primary-green-100 opacity-50 pb-1 text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 font-semibold;
+				@apply text-grayText pb-1 text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 font-medium;
 			}
 			&_value {
-				@apply text-primary-green-100 opacity-90 break-words font-medium text-caption-4 leading-caption-4 tablet:text-caption-2 tablet:leading-caption-2 desktop:text-caption-1 desktop:leading-caption-1;
+				@apply text-darkText opacity-90 break-words font-medium text-caption-4 leading-caption-4 tablet:text-caption-2 tablet:leading-caption-2 desktop:text-caption-1 desktop:leading-caption-1;
 				&_loading {
-					@apply h-4 w-auto animate-pulse bg-dark-100;
+					@apply h-4 w-auto animate-pulse bg-dark-25;
 				}
 				&_description {
 					max-height: 80px;
@@ -29,24 +28,23 @@
 }
 
 .tokensreleasedgraphcontainer {
-	@apply p-6 rounded-2xl mb-2 xl:mb-0;
+	@apply p-6 rounded-2xl mb-2 xl:mb-0 bg-white border border-greyborder;
 
 	@media only screen and (min-width: 1280px) {
 		width: calc(theme("width.3/5") - 15px) !important;
 	}
-	background: linear-gradient(215.24deg, #263232 3.85%, #1a1f23 89.73%);
 
 	&_titlecontainer {
 		@apply flex flex-col pb-4;
 		&_title {
-			@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-primary-green-300 opacity-50;
+			@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-darkText opacity-50;
 		}
 		&_tokensreleased {
 			@apply flex items-center w-fit-content;
 			&_value {
-				@apply text-primary-green-300 font-semibold text-paragraph-1 leading-paragraph-1;
+				@apply text-darkText font-semibold text-paragraph-1 leading-paragraph-1;
 				&_loading {
-					@apply h-8 w-44 animate-pulse bg-dark-100;
+					@apply h-6 w-44 animate-pulse bg-dark-25;
 				}
 			}
 			&_date {
@@ -60,16 +58,15 @@
 	&_innercontainer {
 		@apply px-5 py-2.5;
 		&_loading {
-			@apply h-3/4 w-full bg-dark-100 animate-pulse;
+			@apply h-3/4 w-full bg-dark-25 animate-pulse;
 		}
 	}
 }
 
 .allocationtablecontainer {
-	background: linear-gradient(215.24deg, #263232 3.85%, #1a1f23 89.73%);
-	@apply my-4 phone:mb-0 screen:mb-4 rounded-lg;
+	@apply my-4 phone:mb-0 screen:mb-4 rounded-lg bg-white border border-greyborder;
 	&_title {
-		@apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-primary-green-300 opacity-50 border-b-2 border-dark-200;
+		@apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 text-black font-bold border-b-2 border-dark-25;
 	}
 	&_innercontainer {
 		@apply px-5 py-2.5;
@@ -80,26 +77,24 @@
 }
 
 .rc-table {
-	@apply bg-none pb-6 rounded-b-lg;
+	@apply bg-none pb-6 rounded-b-lg px-6;
 	::-webkit-scrollbar:vertical {
-		@apply w-1.5 bg-dark-200;
+		@apply w-1.5 bg-scrollTrack;
 	}
 	::-webkit-scrollbar:horizontal {
-		@apply h-1.5 bg-dark-200;
+		@apply h-1.5 bg-scrollTrack;
 	}
 	::-webkit-scrollbar-thumb:vertical {
-		background: linear-gradient(0deg, #0a4d20 -33.65%, #288f4a 100%);
-		@apply rounded-md h-16 bg-opacity-50;
+		@apply rounded-md h-16 bg-scrollThumb bg-opacity-50;
 	}
 	::-webkit-scrollbar-thumb:horizontal {
-		background: linear-gradient(0deg, #0b421e -33.65%, #87dfa5 100%);
-		@apply rounded-md w-16 bg-opacity-50;
+		@apply rounded-md w-16 bg-scrollThumb;
 	}
 	::-webkit-scrollbar-track {
-		@apply rounded-md;
+		@apply rounded-md bg-scrollTrack;
 	}
 	.rc-table-cell {
-		@apply text-primary-green-100 text-xs tablet:text-sm xl:text-base font-light tablet:font-medium xl:font-semibold;
+		@apply text-darkText text-xs tablet:text-sm xl:text-base font-light tablet:font-medium xl:font-semibold;
 	}
 	.rc-table-placeholder {
 		.rc-table-cell {
@@ -108,9 +103,9 @@
 	}
 	.rc-table-thead {
 		th {
-			@apply text-primary-green-100 opacity-50 bg-transparent border-b border-dark-200;
+			@apply text-black font-bold bg-transparent border-b border-dark-25;
 			padding: 6px;
-			font-weight: normal;
+			font-weight: medium;
 			&.text-green {
 			}
 		}
@@ -118,10 +113,10 @@
 	.rc-table-tbody {
 		tr {
 			td {
-				@apply text-primary-green-100 bg-transparent border-b border-dark-200;
+				@apply text-black font-bold bg-transparent border-b border-dark-25;
 				padding: 10px 6px;
 				&.text-green {
-					@apply text-primary-green-300;
+					@apply text-black font-semibold;
 				}
 			}
 			&:hover {

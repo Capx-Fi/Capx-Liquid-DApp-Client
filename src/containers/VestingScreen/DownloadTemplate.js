@@ -13,7 +13,7 @@ function DownloadTemplate({ setStep }) {
         {t("recommended_sheet_text")}
       </p>
       <DownloadTemplateBox />
-      <hr className="border-dark-200 mt-10 h-2"></hr>
+      <hr className="border-dark-25 mt-10 h-2"></hr>
       <div className="flex flex-row-reverse mt-8">
         <Level3CTA text="Next" icon={true} onClick={() => setStep(4)} />
       </div>

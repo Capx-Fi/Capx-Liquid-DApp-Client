@@ -1,4 +1,6 @@
 import BigNumber from "bignumber.js";
+import { gasPriceURL } from "../constants/config";
+import { fetchGasPrice } from "./acalaEVM/fetchGasPrice";
 import { totalVested } from "./totalVested";
 
 const pinataSDK = require("@pinata/sdk");
@@ -18,7 +20,8 @@ export const lockTokens = async (
   setVestModalOpen,
   setVestModalStatus,
   enqueueSnackbar,
-  setStep
+  setStep,
+  chainID
 ) => {
   setVestModalOpen(true);
   let vDate = [];
@@ -42,13 +45,10 @@ export const lockTokens = async (
 
     // var timestamp =
     //   new Date(kp.toString().split("-").reverse().join("-")).getTime() / 1000;
-    var timestamp = new Date (
-      Date.UTC(
-        kp.split("-")[2],
-        kp.split("-")[1] - 1,
-        kp.split("-")[0]
-      )
-    ).getTime() / 1000;
+    var timestamp =
+      new Date(
+        Date.UTC(kp.split("-")[2], kp.split("-")[1] - 1, kp.split("-")[0])
+      ).getTime() / 1000;
     return timestamp;
   };
   const amountFormat = (amt) => {
@@ -70,10 +70,10 @@ export const lockTokens = async (
     }
   });
   lAmount.forEach((amt) => {
-        lTotalAmount = BigNumber.sum(lTotalAmount, BigNumber(amt));
+    lTotalAmount = BigNumber.sum(lTotalAmount, BigNumber(amt));
   });
   vAmount.forEach((amt) => {
-        vTotalAmount = BigNumber.sum(vTotalAmount, BigNumber(amt));
+    vTotalAmount = BigNumber.sum(vTotalAmount, BigNumber(amt));
   });
   setVestModalOpen(true);
   let buyResult = null;
@@ -89,20 +89,45 @@ export const lockTokens = async (
     });
   } catch (err) {
     console.log(err);
-    enqueueSnackbar("Transaction failed! Please try again.", { variant: "error" });
+    enqueueSnackbar("Transaction failed! Please try again.", {
+      variant: "error",
+    });
     setButtonClicked(false);
     setVestModalStatus("failure");
-      setTimeout(() => {
-        setVestModalOpen(false);
-        setVestModalStatus("");
-      }, 2500);
+    setTimeout(() => {
+      setVestModalOpen(false);
+      setVestModalStatus("");
+    }, 2500);
   }
   // console.log(totalAmount, "taa");
-  let allowedAmount = await vestingTokenContract.methods
+  let allowedAmount = await vestingTokenContract?.methods
     .allowance(metamaskAccount, contractDetails.contractAddress)
     .call();
   try {
-    buyResult = await capxContract.methods
+    console.log(
+      "data",
+      contractDetails.projectTitle,
+      pinataHash.IpfsHash.toString(),
+      contractDetails.contractAddress,
+      [lTotalAmount.toString(10), vTotalAmount.toString(10)],
+      lAddress,
+      lDate,
+      lAmount,
+      lSellable,
+      vAddress,
+      vDate,
+      vAmount
+    );
+
+    //await fetch
+    const gasPriceResponse = await fetchGasPrice();
+    console.log({
+      chainID,
+      from: metamaskAccount,
+      gasPrice: gasPriceResponse.gasPrice,
+      gas: gasPriceResponse.gasLimit,
+    });
+    buyResult = await capxContract?.methods
       .createBulkDerivative(
         contractDetails.projectTitle,
         pinataHash.IpfsHash.toString(),
@@ -114,9 +139,17 @@ export const lockTokens = async (
         lSellable,
         vAddress,
         vDate,
-        vAmount,
+        vAmount
       )
-      .send({ from: metamaskAccount });
+      .send(
+        chainID === 595
+          ? {
+              from: metamaskAccount,
+              gasPrice: gasPriceResponse.gasPrice,
+              gas: gasPriceResponse.gasLimit,
+            }
+          : { from: metamaskAccount }
+      );
     if (buyResult) {
       setVestModalStatus("success");
       enqueueSnackbar("Transaction Successful", { variant: "success" });

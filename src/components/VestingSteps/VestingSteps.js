@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import DownloadIcon from "../../assets/download.png";
-import NextIcon from "../../assets/next-black.svg";
+import NextIcon from "../../assets/next.svg";
 
 import "./VestingSteps.scss";
 
@@ -16,13 +16,13 @@ const VestingSteps = ({ setShowSteps }) => {
             {"Vest Tokens in 3 simple steps"}
           </div>
           <div className="steps-container phone:mt-1 tablet:mt-2 w-full tracking-tight phone:text-caption-3 screen:text-caption-3 screen:leading-paragraph-1 desktop:text-paragraph-2 twok:text-paragraph-1 desktop:leading-paragraph-1">
-            <div className="text-container px-6 my-6 py-1 rounded-lg">
+            <div className="text-container px-6 my-6 py-2 rounded-lg">
               {"1. Enter your Project Details & Contract Address"}
             </div>
-            <div className="text-container px-6 my-6 py-1 rounded-lg">
+            <div className="text-container px-6 my-6 py-2 rounded-lg">
               {"2. Upload your Vesting Sheet"}
             </div>
-            <div className="text-container px-6 my-6 py-1 rounded-lg">
+            <div className="text-container px-6 my-6 py-2 rounded-lg">
               {"3. Lock & Review your Vesting Sheet"}
             </div>
           </div>
@@ -74,10 +74,10 @@ const VestingSteps = ({ setShowSteps }) => {
           </div>
 
           <div
-            className="side-button justify-self-end rounded-2xl phone:mb-10 screen:mb-0 justify-center items-center flex px-1 py-3 w-full cursor-pointer"
+            className="side-button justify-self-end rounded-2xl phone:mb-10 screen:mb-0 justify-center items-center flex px-1 py-4 w-full cursor-pointer"
             onClick={() => setShowSteps(false)}
           >
-            <div className="button_text text-black phone:text-caption-2 screen:text-caption-1 screen:leading-caption-1 twok:text-subheading twok:leading-text-subheading font-bold">
+            <div className="button_text text-white phone:text-caption-2 screen:text-caption-1 screen:leading-caption-1 twok:text-subheading twok:leading-text-subheading font-bold">
               {"Begin Vesting"}
               <img
                 src={NextIcon}

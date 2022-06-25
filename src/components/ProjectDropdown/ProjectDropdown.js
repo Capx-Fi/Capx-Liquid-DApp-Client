@@ -37,7 +37,7 @@ function DropDown({
         </svg>
       </button>
       {open && (
-        <div className="absolute z-50 bg-grayFill pt-2 pb-0.5 divide-y divide-grayFill rounded-md shadow-xl screen:w-44 tablet:w-20 desktop:w-52 tablet:w-24 w-20">
+        <div className="absolute z-50 bg-grayFill max-h-28 overflow-y-scroll pt-2 pb-0.5 divide-y divide-grayFill rounded-md shadow-xl screen:w-44 tablet:w-20 desktop:w-52 tablet:w-24 w-20">
           {projectOverviewData.map((project, index) => (
             <p
               className="project-option"
@@ -49,6 +49,46 @@ function DropDown({
               {project?.projectName}
             </p>
           ))}
+          <p
+            className="project-option"
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            {"TEST"}
+          </p>
+          <p
+            className="project-option"
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            {"TEST"}
+          </p>
+          <p
+            className="project-option"
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            {"TEST"}
+          </p>
+          <p
+            className="project-option"
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            {"TEST"}
+          </p>
+          <p
+            className="project-option"
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            {"TEST"}
+          </p>
         </div>
       )}
     </div>

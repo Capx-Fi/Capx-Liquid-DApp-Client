@@ -7,6 +7,10 @@ import avalancheLogo from "../../assets/avalanche-logo.svg";
 import ethLogo from "../../assets/ethereum-logo.svg";
 import fantomLogo from "../../assets/fantom-logo.svg";
 import acalaLogo from "../../assets/acala-logo.svg";
+import {
+  SUPPORTED_CHAIN_IDS,
+  SUPPORTED_CHAIN_NAMES,
+} from "../../constants/config";
 
 function DropDown({ sortBy, chainChange, setShowMenu }) {
   const [open, setOpen] = useState(false);
@@ -58,71 +62,38 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
       </button>
       {open && (
         <div className="absolute right-0 bg-grayFill pt-2 pb-0.5 divide-y divide-grayFill rounded-md shadow-xl w-40">
-          <p
-            className="option"
-            onClick={() => {
-              chainChange("Ethereum");
-              setOpen(false);
-            }}
-          >
-            <img src={ethLogo} alt="eth-logo" className="w-4 h-4 mr-2" />
-            Ethereum
-          </p>
-          <p
-            className="option"
-            onClick={() => {
-              chainChange("Matic");
-              setOpen(false);
-              setShowMenu && setShowMenu(false);
-            }}
-          >
-            <img src={maticLogo} alt="matic-logo" className="w-4 h-4 mr-2" />
-            Matic
-          </p>
-          <p
-            className="option"
-            onClick={() => {
-              chainChange("BSC");
-              setOpen(false);
-              setShowMenu && setShowMenu(false);
-            }}
-          >
-            <img src={bscLogo} alt="bsc-logo" className="w-4 h-4 mr-2" />
-            BSC
-          </p>
-          <p
-            className="option"
-            onClick={() => {
-              chainChange("Avalanche");
-              setOpen(false);
-              setShowMenu && setShowMenu(false);
-            }}
-          >
-            <img src={avalancheLogo} alt="avax-logo" className="w-4 h-4 mr-2" />
-            Avalanche
-          </p>
-          <p
-            className="option"
-            onClick={() => {
-              chainChange("Fantom");
-              setOpen(false);
-              setShowMenu && setShowMenu(false);
-            }}
-          >
-            <img src={fantomLogo} alt="fantom-logo" className="w-4 h-4 mr-2" />
-            Fantom
-          </p>
-          <p
-            className="option"
-            onClick={() => {
-              chainChange("Acala");
-              setOpen(false);
-              setShowMenu && setShowMenu(false);
-            }}
-          >
-            <img src={acalaLogo} alt="acala-logo" className="w-5 h-5 mr-2" />
-            Acala
-          </p>
+          {SUPPORTED_CHAIN_IDS.split(",").map((chain, id) => {
+            return (
+              <p
+                key={id}
+                className="option"
+                onClick={() => {
+                  chainChange(parseInt(chain));
+                  setOpen(false);
+                  setShowMenu && setShowMenu(false);
+                }}
+              >
+                <img
+                  src={
+                    chain.trim() === "80001"
+                      ? maticLogo
+                      : chain.trim() === "97"
+                      ? bscLogo
+                      : chain.trim() === "4"
+                      ? ethLogo
+                      : chain.trim() === "595"
+                      ? acalaLogo
+                      : chain.trim() === "4002"
+                      ? fantomLogo
+                      : avalancheLogo
+                  }
+                  alt="chain-logo"
+                  className="w-4 h-4 mr-2"
+                />
+                {SUPPORTED_CHAIN_NAMES.split(",")[id]}
+              </p>
+            );
+          })}
         </div>
       )}
     </div>

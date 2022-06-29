@@ -15,7 +15,7 @@ import { WagmiConfig, createClient, configureChains } from "wagmi";
 import { rinkeby, polygonMumbai } from "wagmi/chains";
 
 import { publicProvider } from "wagmi/providers/public";
-import { InjectedConnector } from "wagmi/connectors/injected";
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import { avalancheChain, bscTestnet } from "./chainObjects";
 
@@ -27,7 +27,7 @@ const { chains, provider, webSocketProvider } = configureChains(
 const client = createClient({
   autoConnect: false,
   connectors: [
-    new InjectedConnector({ chains }),
+    new MetaMaskConnector({ chains }),
     new WalletConnectConnector({
       chains,
       options: {

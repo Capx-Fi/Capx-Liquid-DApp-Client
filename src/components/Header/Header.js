@@ -4,7 +4,7 @@ import LogoutIcon from "../../assets/logout.svg";
 import { useSnackbar } from "notistack";
 import Web3 from "web3";
 import { useMetamask } from "../../metamaskReactHook/index";
-import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
+import { UnsupportedChainIdError } from "@web3-react/core";
 import { injected, walletconnect } from "../../utils/connector";
 import ChooseDashboardModal from "../Modal/ChooseDashboardModal/ChooseDashboardModal";
 import DropDown from "../DropDown/DropDown";
@@ -24,8 +24,17 @@ function Header({
   isWalletConnect,
 }) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const { active, account, library, connector, activate, deactivate, chainId } =
-    useWagmi();
+  const {
+    active,
+    account,
+    library,
+    connector,
+    activate,
+    deactivate,
+    chainId,
+    switchNetwork,
+    provider,
+  } = useWagmi();
 
   const [dashboardModal, setDashboardModal] = useState(false);
   const [sortBy, setSortBy] = useState("Ethereum");
@@ -42,9 +51,10 @@ function Header({
   };
 
   useEffect(() => {
-    setupProvider().then((res) => {
-      setWeb3(new Web3(res));
-    });
+    active &&
+      provider.then((res) => {
+        setWeb3(new Web3(res));
+      });
   }, [active, chainId]);
 
   // web3 && console.log(web3);
@@ -65,162 +75,8 @@ function Header({
     }
   }
 
-  const chainChange = async (chainName) => {
-    if (chainName === "Ethereum") {
-      try {
-        await web3.currentProvider.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: "0x4" }],
-        });
-      } catch (error) {}
-    } else if (chainName === "Matic") {
-      try {
-        await web3.currentProvider.request({
-          method: "wallet_addEthereumChain",
-          params: [
-            {
-              chainId: "0x13881",
-              chainName: "Polygon Matic",
-              nativeCurrency: {
-                name: "MATIC",
-                symbol: "MATIC",
-                decimals: 18,
-              },
-              rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
-              blockExplorerUrls: ["https://polygonscan.com/"],
-            },
-          ],
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (chainName === "BSC") {
-      try {
-        await web3.currentProvider.request({
-          method: "wallet_addEthereumChain",
-          params: [
-            {
-              chainId: "0x61",
-              chainName: "Binance Smart Chain",
-              nativeCurrency: {
-                name: "BNB",
-                symbol: "BNB",
-                decimals: 18,
-              },
-              rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
-              blockExplorerUrls: ["https://testnet.bscscan.com/"],
-            },
-          ],
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (chainName === "Avalanche") {
-      try {
-        await web3.currentProvider.request({
-          method: "wallet_addEthereumChain",
-          params: [
-            {
-              chainId: "0xA869",
-              chainName: "Avalanche Fuji",
-              nativeCurrency: {
-                name: "AVAX",
-                symbol: "AVAX",
-                decimals: 18,
-              },
-              rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
-              blockExplorerUrls: ["https://testnet.snowtrace.io/"],
-            },
-          ],
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (chainName === "Fantom") {
-      try {
-        await web3.currentProvider.request({
-          method: "wallet_addEthereumChain",
-          params: [
-            {
-              chainId: "0xFA2",
-              chainName: "Fantom",
-              nativeCurrency: {
-                name: "FTM",
-                symbol: "FTM",
-                decimals: 18,
-              },
-              rpcUrls: ["https://rpc.testnet.fantom.network"],
-              blockExplorerUrls: ["https://testnet.ftmscan.com"],
-            },
-          ],
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (chainName === "Moonbeam") {
-      try {
-        await web3.currentProvider.request({
-          method: "wallet_addEthereumChain",
-          params: [
-            {
-              chainId: "0x504",
-              chainName: "Moonbeam",
-              nativeCurrency: {
-                name: "GLMR",
-                symbol: "GLMR",
-                decimals: 18,
-              },
-              rpcUrls: ["https://rpc.api.moonbeam.network"],
-              blockExplorerUrls: ["https://moonscan.io/"],
-            },
-          ],
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (chainName === "Arbitrum") {
-      try {
-        await web3.currentProvider.request({
-          method: "wallet_addEthereumChain",
-          params: [
-            {
-              chainId: "0xA4B1",
-              chainName: "Arbitrum",
-              nativeCurrency: {
-                name: "ETH",
-                symbol: "ETH",
-                decimals: 18,
-              },
-              rpcUrls: ["https://rpc.ankr.com/arbitrum"],
-              blockExplorerUrls: ["https://testnet.arbiscan.io/"],
-            },
-          ],
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (chainName === "Acala") {
-      try {
-        await web3.currentProvider.request({
-          method: "wallet_addEthereumChain",
-          params: [
-            {
-              chainId: "0x253",
-              chainName: "Acala",
-              nativeCurrency: {
-                name: "ACA",
-                symbol: "ACA",
-                decimals: 18,
-              },
-              rpcUrls: ["https://tc7-eth.aca-dev.network"],
-              blockExplorerUrls: ["https://blockscout.mandala.acala.network/"],
-            },
-          ],
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    }
+  const chainChange = async (chainId) => {
+    await switchNetwork(chainId);
   };
 
   async function disconnect() {

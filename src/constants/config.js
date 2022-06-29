@@ -2,6 +2,9 @@ export const PinataAPIKey = process.env.REACT_APP_PINATA_API_KEY;
 export const PinataSecretKey = process.env.REACT_APP_PINATA_API_SECRET;
 
 export const acalaRPC = process.env.REACT_APP_ACALA_RPC_URL;
+export const SUPPORTED_CHAIN_IDS = process.env.REACT_APP_SUPPORTED_CHAIN_IDS;
+export const SUPPORTED_CHAIN_NAMES =
+  process.env.REACT_APP_SUPPORTED_CHAIN_NAMES;
 
 //ACALA_URL
 export const ACALA_URL = process.env.REACT_APP_ACALA_URL;

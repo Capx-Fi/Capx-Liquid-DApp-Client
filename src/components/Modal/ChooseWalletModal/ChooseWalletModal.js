@@ -3,20 +3,12 @@ import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
 import MetamaskIcon from "../../../assets/metamask.svg";
 import WalletConnectIcon from "../../../assets/walletconnect-logo.svg";
-import { Link } from "react-router-dom";
 import "./ChooseWalletModal.scss";
-import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
-import { useSnackbar } from "notistack";
-import { injected, walletconnect } from "../../../utils/connector";
-import { CHAIN_NAMES } from "../../../constants/config";
-import { useTranslation } from "react-i18next";
-import infoIcon from "../../../assets/Info.png";
 import useWagmi from "../../../useWagmi";
 
 const Landing = ({ setModalMode }) => {
   const { active, account, library, connectors, connect } = useWagmi();
 
-  console.log(connectors);
   return (
     <article className="h-screen bg-dark-400 flex choose_screen">
       <Header hiddenNav />

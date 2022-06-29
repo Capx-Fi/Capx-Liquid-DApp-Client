@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { CHAIN_NAMES } from "../../constants/config";
 
 import { getSortBy } from "../../constants/getChainConfig";
+import useWagmi from "../../useWagmi";
 
 function Header({
   vesting,
@@ -24,10 +25,8 @@ function Header({
 }) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { active, account, library, connector, activate, deactivate, chainId } =
-    useWeb3React();
-  const { metaState, getChain } = useMetamask();
-  const desiredChainId = "4";
-  const currentChainId = metaState.chain.id?.toString();
+    useWagmi();
+
   const [dashboardModal, setDashboardModal] = useState(false);
   const [sortBy, setSortBy] = useState("Ethereum");
   const [web3, setWeb3] = useState(null);

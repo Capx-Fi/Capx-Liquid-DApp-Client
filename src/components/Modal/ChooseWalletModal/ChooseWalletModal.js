@@ -11,52 +11,10 @@ import { injected, walletconnect } from "../../../utils/connector";
 import { CHAIN_NAMES } from "../../../constants/config";
 import { useTranslation } from "react-i18next";
 import infoIcon from "../../../assets/Info.png";
+import useWagmi from "../../../useWagmi";
 
 const Landing = ({ setModalMode }) => {
-  const { active, account, library, connector, activate } = useWeb3React();
-  const [isWalletConnect, setIsWalletConnect] = useState(false);
-
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const { t } = useTranslation();
-  const { error } = useWeb3React();
-  const unsupportedChainIdError =
-    error && error instanceof UnsupportedChainIdError;
-
-  async function connect() {
-    try {
-      await activate(injected);
-      if (unsupportedChainIdError) {
-        enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-          variant: "error",
-        });
-      }
-    } catch (ex) {
-      if (error instanceof UnsupportedChainIdError) {
-        enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-          variant: "error",
-        });
-      }
-      alert(ex);
-    }
-  }
-
-  async function walletConnect() {
-    try {
-      await activate(walletconnect);
-      if (unsupportedChainIdError) {
-        enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-          variant: "error",
-        });
-      }
-    } catch (ex) {
-      if (error instanceof UnsupportedChainIdError) {
-        enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-          variant: "error",
-        });
-      }
-      console.log(ex);
-    }
-  }
+  const { active, account, library, connectors, connect } = useWagmi();
 
   return (
     <article className="h-screen bg-dark-400 flex choose_screen">
@@ -70,50 +28,40 @@ const Landing = ({ setModalMode }) => {
             {"Connect with one of our available wallet providers"}
           </div>
           <div className="herobuttons flex flex-col gap-y-2 my-14 w-full">
-            <div
-              onClick={() => {
-                connect();
-              }}
-              className="herocontainer_button  border border-lightGrayBorder flex flex-start rounded-xl items-center flex px-5 py-4 z-10 cursor-pointer"
-            >
-              <div>
-                <img
-                  src={MetamaskIcon}
-                  alt="Metamask Icon"
-                  className="inline-block phone:w-10 phone:h-10 desktop:w-12 ml-3 mr-12"
-                />
-              </div>
-              <div className="button_text text-darkText desktop:text-captions-1 twok:text-subheading desktop-captions-1 twok:leading-subheading desktop:font-semibold">
-                {"Metamask"}
-              </div>
-            </div>
-            <div
-              onClick={() => {
-                walletConnect();
-              }}
-              className="herocontainer_button  border border-lightGrayBorder flex flex-start rounded-xl items-center flex px-5 py-4 z-10 cursor-pointer"
-            >
-              <div>
-                <img
-                  src={WalletConnectIcon}
-                  alt="WalletConnect Icon"
-                  className="inline-block phone:w-10 phone:h-10 desktop:w-12 ml-3 mr-12"
-                />
-              </div>
-              <div className="flex flex-col text-left phone:pl-10 tablet:pl-0">
-                <div className="text-darkText desktop:text-paragraph-2 breakpoint:text-caption-1 twok:text-subheading desktop-captions-1 twok:leading-subheading font-semibold">
-                  {"WalletConnect"}
-                </div>
-                <p className="infoText text-left mt-2 text-tradeTitle">
+            {connectors[0].ready && (
+              <div
+                onClick={() => connect(connectors[0])}
+                className="herocontainer_connectbutton flex flex-start rounded-xl items-center  px-5 py-4 z-10 cursor-pointer"
+              >
+                <div>
                   <img
-                    src={infoIcon}
-                    className="w-4 pb-0.5 mr-2 phone:hidden tablet:inline tablet:mr-1 items-center"
-                    alt="info icon"
+                    src={MetamaskIcon}
+                    alt="Metamask Icon"
+                    className="inline-block phone:w-10 phone:h-10 desktop:w-16 desktop:h-16 ml-3 tablet:mr-12 phone:mr-6"
                   />
-                  {"Please refresh the page after connecting your wallet."}
-                </p>
+                </div>
+                <div className="text-black desktop:text-paragraph-2 breakpoint:text-caption-1 twok:text-subheading desktop-captions-1 twok:leading-subheading font-semibold">
+                  {connectors[0].name}
+                </div>
               </div>
-            </div>
+            )}
+            {connectors[1].ready && (
+              <div
+                onClick={() => connect(connectors[1])}
+                className="herocontainer_connectbutton flex flex-start rounded-xl items-center  px-5 py-4 z-10 cursor-pointer"
+              >
+                <div>
+                  <img
+                    src={WalletConnectIcon}
+                    alt="WalletConnect Icon"
+                    className="inline-block phone:w-10 phone:h-10 desktop:w-16 desktop:h-16 ml-3 tablet:mr-12 phone:mr-6"
+                  />
+                </div>
+                <div className="text-black desktop:text-paragraph-2 breakpoint:text-caption-1 twok:text-subheading desktop-captions-1 twok:leading-subheading font-semibold">
+                  {connectors[1].name}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

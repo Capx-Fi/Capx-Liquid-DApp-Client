@@ -16,6 +16,7 @@ import useWagmi from "../../../useWagmi";
 const Landing = ({ setModalMode }) => {
   const { active, account, library, connectors, connect } = useWagmi();
 
+  console.log(connectors);
   return (
     <article className="h-screen bg-dark-400 flex choose_screen">
       <Header hiddenNav />

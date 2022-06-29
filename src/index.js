@@ -10,13 +10,7 @@ import { I18nextProvider } from "react-i18next";
 import i18next from "i18next";
 import { Web3ReactProvider } from "@web3-react/core";
 import Web3 from "web3";
-import {
-  WagmiConfig,
-  createClient,
-  configureChains,
-  defaultChains,
-  Chain,
-} from "wagmi";
+import { WagmiConfig, createClient, configureChains } from "wagmi";
 
 import { rinkeby, polygonMumbai } from "wagmi/chains";
 

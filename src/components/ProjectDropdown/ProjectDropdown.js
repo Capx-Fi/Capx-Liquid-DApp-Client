@@ -8,7 +8,6 @@ function DropDown({
   setShowMenu,
 }) {
   const [open, setOpen] = useState(false);
-  console.log(projectOverviewData);
 
   return (
     <div className="relative">

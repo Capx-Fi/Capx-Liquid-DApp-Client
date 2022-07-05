@@ -49,46 +49,6 @@ function DropDown({
               {project?.projectName}
             </p>
           ))}
-          <p
-            className="project-option"
-            onClick={() => {
-              setOpen(false);
-            }}
-          >
-            {"TEST"}
-          </p>
-          <p
-            className="project-option"
-            onClick={() => {
-              setOpen(false);
-            }}
-          >
-            {"TEST"}
-          </p>
-          <p
-            className="project-option"
-            onClick={() => {
-              setOpen(false);
-            }}
-          >
-            {"TEST"}
-          </p>
-          <p
-            className="project-option"
-            onClick={() => {
-              setOpen(false);
-            }}
-          >
-            {"TEST"}
-          </p>
-          <p
-            className="project-option"
-            onClick={() => {
-              setOpen(false);
-            }}
-          >
-            {"TEST"}
-          </p>
         </div>
       )}
     </div>

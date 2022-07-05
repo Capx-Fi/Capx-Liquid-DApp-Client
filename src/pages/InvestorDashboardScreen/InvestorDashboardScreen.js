@@ -1,32 +1,23 @@
 import "./InvestorDashboardScreen.scss";
-
-import NextIcon from "../../assets/next.svg";
-import CapxCoinIllustration from "../../assets/CapxCoinIllustration.png";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-import { Link } from "react-router-dom";
 import WalletModal from "../../components/Modal/WalletModal/WalletModal";
 
-import OwnedProjectToken from "../../assets/OwnedProjectToken.svg";
 import Redirect from "../../assets/Redirect.svg";
 import Lottie from "lottie-react";
 import NextIconBlack from "../../assets/next-black.svg";
 import SandTimer from "../../assets/SandTimer.json";
-import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
 import { convertToInternationalCurrencySystem } from "../../utils/convertToInternationalCurrencySystem";
 
 import { useSnackbar } from "notistack";
 import React, { useEffect, useState } from "react";
-import { fetchOwnedTokens } from "../../utils/fetchOwnedTokens";
 import WithdrawModal from "../../components/Modal/VestAndApproveModal/WithdrawModal";
 import { CONTRACT_ABI_ERC20 } from "../../contracts/SampleERC20";
 import { withdrawWrappedTokens } from "../../utils/withdrawWrappedTokens";
 import { CONTRACT_ABI_CAPX } from "../../contracts/CapxController";
 import Web3 from "web3";
-// import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import NothingHereInvestorDashboard from "../NothingHere/NothingHereInvestorDashboard";
-import LoadingScreen from "../../containers/LoadingScreen";
 import { fetchWrappedInvestorID } from "../../utils/fetchWrappedInvestorID";
 import { fetchVestedInvestorID } from "../../utils/fetchVestedInvestorID";
 import { fetchProjectDetails } from "../../utils/fetchProjectDetails";
@@ -36,21 +27,16 @@ import { transformInvestorData } from "../../utils/transformInvestorData";
 import { withdrawVestedTokens } from "../../utils/withdrawVestedTokens";
 import InvestorLoading from "./InvestorLoading";
 import { Tooltip, withStyles } from "@material-ui/core";
-import WalletConnectProvider from "@walletconnect/web3-provider";
-import { fetchInvestorDashboard } from "../../utils/acalaEVM/fetchInvestorDashboard";
+import { fetchAcalaInvestorDashboard } from "../../utils/acalaEVM/fetchInvestorDashboard";
 import {
   getContractAddress,
   getContractAddressController,
   getExplorer,
-  getMasterURL,
-  getVestingURL,
-  getWrappedURL,
+  getGraphURL,
 } from "../../constants/getChainConfig";
-import { useMetamask } from "../../metamaskReactHook";
-import { walletconnect } from "../../utils/connector";
-import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 import { ACALA_CHAIN_ID } from "../../constants/config";
 import useWagmi from "../../useWagmi";
+import { fetchInvestorDashboard } from "../../utils/graphFetch/fetchInvestorDashboard";
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
 
@@ -66,13 +52,6 @@ function InvestorDashboardScreen() {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [withdrawModalStatus, setWithdrawModalStatus] = useState("");
   const [web3, setWeb3] = useState(null);
-
-  const setupProvider = async () => {
-    let result = await connector?.getProvider().then((res) => {
-      return res;
-    });
-    return result;
-  };
 
   useEffect(() => {
     active &&
@@ -110,51 +89,17 @@ function InvestorDashboardScreen() {
     },
   }))(Tooltip);
 
-  const vestingURL = chainId && getVestingURL(chainId);
-
-  const wrappedURL = chainId && getWrappedURL(chainId);
-
   // console.log(account);
-  const masterURL = chainId && getMasterURL(chainId);
+  const graphURL = chainId && getGraphURL(chainId);
   const loadProjectData = async () => {
     setOwnedProjectsData(null);
     if (account) {
       if (chainId === parseInt(ACALA_CHAIN_ID)) {
-        let projects = await fetchInvestorDashboard(account, vestingURL);
-        // console.log("Investor Projects", projects);
+        let projects = await fetchAcalaInvestorDashboard(account, graphURL);
         setOwnedProjectsData(projects);
       } else {
-        const vInvestorIDs = await fetchVestedInvestorID(account, vestingURL);
-
-        const wInvestorIDs = await fetchWrappedInvestorID(account, wrappedURL);
-        const showIDs = [...wInvestorIDs, ...vInvestorIDs]
-          .filter(onlyUnique)
-          .sort();
-        const projectOwnerDetails = await fetchProjectDetails(
-          showIDs,
-          masterURL
-        );
-        const vestedProjectDetails = await fetchVestedProjectDetails(
-          showIDs,
-          vestingURL
-        );
-        const wrappedProjectDetails = await fetchWrappedProjectDetails(
-          showIDs,
-          wrappedURL
-        );
-        if (projectOwnerDetails !== null) {
-          setProjectOverviewData(projectOwnerDetails.data.projects);
-          setWrappedProjectData(wrappedProjectDetails.data.projects);
-          setVestedProjectData(vestedProjectDetails.data.projects);
-          let projects = await transformInvestorData(
-            account,
-            projectOwnerDetails.data.projects,
-            wrappedProjectDetails.data.projects,
-            vestedProjectDetails.data.projects
-          );
-          // console.log("Investor Projects", projects);
-          setOwnedProjectsData(projects);
-        }
+        let projects = await fetchInvestorDashboard(account, graphURL);
+        setOwnedProjectsData(projects);
       }
     }
   };

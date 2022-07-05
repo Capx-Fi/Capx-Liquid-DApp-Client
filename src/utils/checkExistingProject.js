@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache, gql, cache } from "@apollo/client";
 
-import { getMasterURL } from "../constants/getChainConfig";
+import { getGraphURL } from "../constants/getChainConfig";
 
 export const checkExistingProject = async (
   address,
@@ -14,9 +14,9 @@ export const checkExistingProject = async (
     description: null,
     exists: false,
   };
-  const masterURL = getMasterURL(chainId);
+  const graphURL = getGraphURL(chainId);
   const client = new ApolloClient({
-    uri: masterURL,
+    uri: graphURL,
     cache: new InMemoryCache(),
   });
   let projectID = `${metamaskAccount}-LOCK-${address}`;

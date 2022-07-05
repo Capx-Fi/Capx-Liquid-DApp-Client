@@ -25,36 +25,18 @@ import {
   EXPLORER_MATIC,
   EXPLORER_MOONBEAM,
   FANTOM_CHAIN_ID,
-  GRAPHAPIURL_MASTER_ARBITRUM,
-  GRAPHAPIURL_MASTER_AVALANCHE,
-  GRAPHAPIURL_MASTER_BSC,
-  GRAPHAPIURL_MASTER_ETHEREUM,
-  GRAPHAPIURL_MASTER_FANTOM,
-  GRAPHAPIURL_MASTER_MATIC,
-  GRAPHAPIURL_MASTER_MOONBEAM,
-  GRAPHAPIURL_VESTING_ARBITRUM,
-  GRAPHAPIURL_VESTING_AVALANCHE,
-  GRAPHAPIURL_VESTING_BSC,
-  GRAPHAPIURL_VESTING_ETHEREUM,
-  GRAPHAPIURL_VESTING_FANTOM,
-  GRAPHAPIURL_VESTING_MATIC,
-  GRAPHAPIURL_VESTING_MOONBEAM,
-  GRAPHAPIURL_WRAPPED_ARBITRUM,
-  GRAPHAPIURL_WRAPPED_AVALANCHE,
-  GRAPHAPIURL_WRAPPED_BSC,
-  GRAPHAPIURL_WRAPPED_ETHEREUM,
-  GRAPHAPIURL_WRAPPED_FANTOM,
-  GRAPHAPIURL_WRAPPED_MATIC,
-  GRAPHAPIURL_WRAPPED_MOONBEAM,
+  GRAPHAPIURL_AVALANCHE,
+  GRAPHAPIURL_BSC,
+  GRAPHAPIURL_ETHEREUM,
+  GRAPHAPIURL_FANTOM,
+  GRAPHAPIURL_MATIC,
   MATIC_CHAIN_ID,
   MOONBEAM_CHAIN_ID,
   MANDALA_CHAIN_ID,
   EXPLORER_MANDALA,
   CONTRACT_ADDRESS_CAPX_MANDALA,
   CONTRACT_ADDRESS_CAPX_CONTROLLER_MANDALA,
-  GRAPHAPIURL_WRAPPED_MANDALA,
-  GRAPHAPIURL_VESTING_MANDALA,
-  GRAPHAPIURL_MASTER_MANDALA,
+  GRAPHAPIURL_MANDALA,
 } from "./config";
 
 export const getContractAddress = (chainId) => {
@@ -117,64 +99,20 @@ export const getExplorer = (chainId) => {
   return explorer;
 };
 
-export const getVestingURL = (chainId) => {
-  const vestingURL =
+export const getGraphURL = (chainId) => {
+  const graphURL =
     chainId?.toString() === BSC_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_VESTING_BSC
+      ? GRAPHAPIURL_BSC
       : chainId?.toString() === MATIC_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_VESTING_MATIC
+      ? GRAPHAPIURL_MATIC
       : chainId?.toString() === AVALANCHE_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_VESTING_AVALANCHE
+      ? GRAPHAPIURL_AVALANCHE
       : chainId?.toString() === FANTOM_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_VESTING_FANTOM
-      : chainId?.toString() === MOONBEAM_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_VESTING_MOONBEAM
-      : chainId?.toString() === ARBITRUM_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_VESTING_ARBITRUM
+      ? GRAPHAPIURL_FANTOM
       : chainId?.toString() === MANDALA_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_VESTING_MANDALA
-      : GRAPHAPIURL_VESTING_ETHEREUM;
-  return vestingURL;
-};
-
-export const getWrappedURL = (chainId) => {
-  const wrappedURL =
-    chainId?.toString() === BSC_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_WRAPPED_BSC
-      : chainId?.toString() === MATIC_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_WRAPPED_MATIC
-      : chainId?.toString() === AVALANCHE_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_WRAPPED_AVALANCHE
-      : chainId?.toString() === FANTOM_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_WRAPPED_FANTOM
-      : chainId?.toString() === MOONBEAM_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_WRAPPED_MOONBEAM
-      : chainId?.toString() === ARBITRUM_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_WRAPPED_ARBITRUM
-      : chainId?.toString() === MANDALA_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_WRAPPED_MANDALA
-      : GRAPHAPIURL_WRAPPED_ETHEREUM;
-  return wrappedURL;
-};
-
-export const getMasterURL = (chainId) => {
-  const masterURL =
-    chainId?.toString() === BSC_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_MASTER_BSC
-      : chainId?.toString() === MATIC_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_MASTER_MATIC
-      : chainId?.toString() === AVALANCHE_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_MASTER_AVALANCHE
-      : chainId?.toString() === FANTOM_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_MASTER_FANTOM
-      : chainId?.toString() === MOONBEAM_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_MASTER_MOONBEAM
-      : chainId?.toString() === ARBITRUM_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_MASTER_ARBITRUM
-      : chainId?.toString() === MANDALA_CHAIN_ID?.toString()
-      ? GRAPHAPIURL_MASTER_MANDALA
-      : GRAPHAPIURL_MASTER_ETHEREUM;
-  return masterURL;
+      ? GRAPHAPIURL_MANDALA
+      : GRAPHAPIURL_ETHEREUM;
+  return graphURL;
 };
 
 export const getSortBy = (chainId) => {

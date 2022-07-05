@@ -19,7 +19,7 @@ BigNumber.config({
 });
 
 //TODO: Review this function
-export const fetchProjectDashboard = async (account, GRAPHAPIURL) => {
+export const fetchAcalaProjectDashboard = async (account, GRAPHAPIURL) => {
   // TODO : Below 6 and RPC to be configured as chain specific env variable
   const URL = ACALA_URL;
 
@@ -216,19 +216,19 @@ export const fetchProjectDashboard = async (account, GRAPHAPIURL) => {
     let data2 = [];
     let data3 = [];
     for (let i = 0; i < validProjectIDs.length; i++) {
-      if(projectOwnerData[i]?.id != undefined) {
+      if (projectOwnerData[i]?.id != undefined) {
         data1.push(projectOwnerData[i]);
-        for(let j=0; j < wrappedProjectDetails.length; j++) {
-          if(wrappedProjectDetails[j].id === projectOwnerData[i].id){
+        for (let j = 0; j < wrappedProjectDetails.length; j++) {
+          if (wrappedProjectDetails[j].id === projectOwnerData[i].id) {
             data2.push(wrappedProjectDetails[j]);
             break;
           }
         }
-        for(let k=0; k < vestedProjectDetails.length; k++) {
-          if(vestedProjectDetails[k].id === projectOwnerData[i].id){
+        for (let k = 0; k < vestedProjectDetails.length; k++) {
+          if (vestedProjectDetails[k].id === projectOwnerData[i].id) {
             data3.push(vestedProjectDetails[k]);
             break;
-          }else{
+          } else {
             data3.push({});
           }
         }

@@ -23,7 +23,7 @@ import { fetchWrappedInvestorID } from "../../utils/fetchWrappedInvestorID";
 import { fetchVestedInvestorID } from "../../utils/fetchVestedInvestorID";
 import ProjectDetailsLoading from "../../containers/ProjectOwnerDashboard/ProjectDetailsLoading";
 import TokensReleasedGraphLoading from "../../containers/ProjectOwnerDashboard/TokenReleaseGraphLoading";
-import { fetchProjectDashboard } from "../../utils/acalaEVM/fetchProjectDashboard";
+import { fetchAcalaProjectDashboard } from "../../utils/acalaEVM/fetchProjectDashboard";
 
 import LoadingScreen from "../../containers/LoadingScreen";
 import WalletModal from "../../components/Modal/WalletModal/WalletModal";
@@ -31,14 +31,11 @@ import WalletModal from "../../components/Modal/WalletModal/WalletModal";
 import NothingHereProjectOwner from "../NothingHere/NothingHereProjectOwner";
 import { fetchVestedProjectDetails } from "../../utils/fetchVestedProjectDetails";
 import { fetchWrappedProjectDetails } from "../../utils/fetchWrappedProjectDetails";
-import {
-  getMasterURL,
-  getVestingURL,
-  getWrappedURL,
-} from "../../constants/getChainConfig";
+import { getGraphURL } from "../../constants/getChainConfig";
 import { ACALA_CHAIN_ID } from "../../constants/config";
 import { Dropdown } from "antd";
 import useWagmi from "../../useWagmi";
+import { fetchProjectOverviewDetails } from "../../utils/graphFetch/fetchProjectOverviewDetails";
 
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
@@ -51,59 +48,31 @@ function ProjectOwnerDashboardScreen() {
   const [projectOverviewData, setProjectOverviewData] = useState(null);
   const [wrappedProjectData, setWrappedProjectData] = useState([]);
   const [vestedProjectData, setVestedProjectData] = useState([]);
+
+  const graphURL = chainId && getGraphURL(chainId);
   useEffect(() => {
     setProjectOverviewData(null);
     loadProjectData();
   }, [account, chainId]);
+
   const loadProjectData = async () => {
     if (account) {
       if (chainId === parseInt(ACALA_CHAIN_ID)) {
         const [projectOwnerData, wrappedProjectDetails, vestedProjectDetails] =
-          await fetchProjectDashboard(account, masterURL);
-        console.log("ProjectOwnerData", projectOwnerData);
-        console.log("wrappedProjectDetails", wrappedProjectDetails);
-        console.log("vestedProjectDetails", vestedProjectDetails);
-        console.log("Present", vestedProjectDetails[1]?.id === undefined);
+          await fetchAcalaProjectDashboard(account, graphURL);
         setProjectOverviewData(projectOwnerData);
         setWrappedProjectData(wrappedProjectDetails);
         setVestedProjectData(vestedProjectDetails);
       } else {
-        const ownerIDs = await fetchOwnerID(account, masterURL);
-        const vInvestorIDs = await fetchVestedInvestorID(account, vestingURL);
-        const wInvestorIDs = await fetchWrappedInvestorID(account, wrappedURL);
-        const showIDs = [...ownerIDs, ...wInvestorIDs, ...vInvestorIDs]
-          .filter(onlyUnique)
-          .sort();
-
-        const projectOwnerData = await fetchProjectDetails(showIDs, masterURL);
-        const vestedProjectDetails = await fetchVestedProjectDetails(
-          showIDs,
-          vestingURL
-        );
-        const wrappedProjectDetails = await fetchWrappedProjectDetails(
-          showIDs,
-          wrappedURL
-        );
-        console.log("ProjectOwnerData", projectOwnerData.data.projects);
-        console.log(
-          "wrappedProjectDetails",
-          wrappedProjectDetails.data.projects
-        );
-        console.log("vestedProjectDetails", vestedProjectDetails.data.projects);
-        if (projectOwnerData !== null) {
-          setProjectOverviewData(projectOwnerData.data.projects);
-          setWrappedProjectData(wrappedProjectDetails.data.projects);
-          setVestedProjectData(vestedProjectDetails.data.projects);
-        }
+        const [projectOwnerData, wrappedProjectDetails, vestedProjectDetails] =
+          await fetchProjectOverviewDetails(account, graphURL);
+        setProjectOverviewData(projectOwnerData);
+        setWrappedProjectData(wrappedProjectDetails);
+        setVestedProjectData(vestedProjectDetails);
       }
     }
   };
 
-  const vestingURL = chainId && getVestingURL(chainId);
-
-  const wrappedURL = chainId && getWrappedURL(chainId);
-
-  const masterURL = chainId && getMasterURL(chainId);
   return (
     <>
       {!active ? (

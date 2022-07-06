@@ -1,45 +1,23 @@
 import "./ProjectOwnerDashboardScreen.scss";
 
-import NextIcon from "../../assets/next.svg";
-import CapxCoinIllustration from "../../assets/CapxCoinIllustration.png";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-import { Link } from "react-router-dom";
-import OwnedProjectToken from "../../assets/OwnedProjectToken.svg";
-import Redirect from "../../assets/Redirect.svg";
 import ProjectDetailsContainer from "../../containers/ProjectOwnerDashboard/ProjectDetailsContainer";
 import TokensReleasedGraphContainer from "../../containers/ProjectOwnerDashboard/TokensReleasedGraphContainer";
 import AllocationTableContainer from "../../containers/ProjectOwnerDashboard/AllocationTableContainer";
 import ProjectDropDown from "../../components/ProjectDropdown/ProjectDropdown";
 
-import MetamaskModal from "../../components/Modal/MetamaskModal/MetamaskModal";
-import { ApolloClient, InMemoryCache, gql, cache } from "@apollo/client";
-
 import { useEffect, useState } from "react";
-import { fetchProjectDetails } from "../../utils/fetchProjectDetails";
-import { fetchOwnerID } from "../../utils/fetchOwnerID";
-// import { fetchInvestorID } from "../../utils/fetchVestedInvestorID";
-import { fetchWrappedInvestorID } from "../../utils/fetchWrappedInvestorID";
-import { fetchVestedInvestorID } from "../../utils/fetchVestedInvestorID";
 import ProjectDetailsLoading from "../../containers/ProjectOwnerDashboard/ProjectDetailsLoading";
 import TokensReleasedGraphLoading from "../../containers/ProjectOwnerDashboard/TokenReleaseGraphLoading";
 import { fetchAcalaProjectDashboard } from "../../utils/acalaEVM/fetchProjectDashboard";
-
-import LoadingScreen from "../../containers/LoadingScreen";
 import WalletModal from "../../components/Modal/WalletModal/WalletModal";
 
 import NothingHereProjectOwner from "../NothingHere/NothingHereProjectOwner";
-import { fetchVestedProjectDetails } from "../../utils/fetchVestedProjectDetails";
-import { fetchWrappedProjectDetails } from "../../utils/fetchWrappedProjectDetails";
 import { getGraphURL } from "../../constants/getChainConfig";
 import { ACALA_CHAIN_ID } from "../../constants/config";
-import { Dropdown } from "antd";
 import useWagmi from "../../useWagmi";
 import { fetchProjectOverviewDetails } from "../../utils/graphFetch/fetchProjectOverviewDetails";
-
-function onlyUnique(value, index, self) {
-  return self.indexOf(value) === index;
-}
 
 function ProjectOwnerDashboardScreen() {
   const { active, account, chainId } = useWagmi();

@@ -18,12 +18,6 @@ import { CONTRACT_ABI_CAPX } from "../../contracts/CapxController";
 import Web3 from "web3";
 
 import NothingHereInvestorDashboard from "../NothingHere/NothingHereInvestorDashboard";
-import { fetchWrappedInvestorID } from "../../utils/fetchWrappedInvestorID";
-import { fetchVestedInvestorID } from "../../utils/fetchVestedInvestorID";
-import { fetchProjectDetails } from "../../utils/fetchProjectDetails";
-import { fetchVestedProjectDetails } from "../../utils/fetchVestedProjectDetails";
-import { fetchWrappedProjectDetails } from "../../utils/fetchWrappedProjectDetails";
-import { transformInvestorData } from "../../utils/transformInvestorData";
 import { withdrawVestedTokens } from "../../utils/withdrawVestedTokens";
 import InvestorLoading from "./InvestorLoading";
 import { Tooltip, withStyles } from "@material-ui/core";
@@ -43,9 +37,6 @@ let datetime = currentDate.toLocaleString("en-US");
 function InvestorDashboardScreen() {
   const [modalMode, setModalMode] = useState(0);
   const [ownedProjectsData, setOwnedProjectsData] = useState(null);
-  const [projectOverviewData, setProjectOverviewData] = useState(null);
-  const [wrappedProjectData, setWrappedProjectData] = useState([]);
-  const [vestedProjectData, setVestedProjectData] = useState([]);
   const { active, account, chainId, connector, library, provider } = useWagmi();
   const [withdrawModalOpen, setWithdrawModalOpen] = useState(false);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();

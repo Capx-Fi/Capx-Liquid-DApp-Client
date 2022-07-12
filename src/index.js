@@ -18,6 +18,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import { avalancheChain, bscTestnet } from "./chainObjects";
+import { SolanaContext } from "./contexts/SolanaContext";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [avalancheChain, bscTestnet, goerli, polygonMumbai],
@@ -45,7 +46,7 @@ i18next.init({
 
 ReactDOM.render(
   <I18nextProvider i18n={i18next}>
-    <WagmiConfig client={client}>
+    <SolanaContext>
       <SnackbarProvider
         anchorOrigin={{
           vertical: "top",
@@ -55,7 +56,7 @@ ReactDOM.render(
       >
         <App />
       </SnackbarProvider>
-    </WagmiConfig>
+    </SolanaContext>
   </I18nextProvider>,
   document.getElementById("root")
 );

@@ -1,4 +1,5 @@
 // craco.config.js
+const webpack = require("webpack");
 module.exports = {
   style: {
     postcss: {
@@ -16,6 +17,12 @@ module.exports = {
           },
         ],
       },
+      plugins: [
+        new webpack.ProvidePlugin({
+          Buffer: ["buffer", "Buffer"],
+          process: "process/browser",
+        }),
+      ],
     },
   },
 };

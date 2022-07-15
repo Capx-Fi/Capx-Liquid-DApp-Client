@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
@@ -18,7 +17,67 @@ import { publicProvider } from "wagmi/providers/public";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 import { avalancheChain, bscTestnet } from "./chainObjects";
-import { SolanaContext } from "./contexts/SolanaContext";
+
+import {
+  createDefaultAuthorizationResultCache,
+  SolanaMobileWalletAdapter,
+} from "@solana-mobile/wallet-adapter-mobile";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import {
+  ConnectionProvider,
+  WalletProvider,
+} from "@solana/wallet-adapter-react";
+import {
+  WalletModalProvider,
+  WalletMultiButton,
+} from "@solana/wallet-adapter-react-ui";
+import {
+  GlowWalletAdapter,
+  PhantomWalletAdapter,
+  SlopeWalletAdapter,
+  SolflareWalletAdapter,
+  TorusWalletAdapter,
+} from "@solana/wallet-adapter-wallets";
+import { clusterApiUrl } from "@solana/web3.js";
+import React, { FC, ReactNode, useMemo } from "react";
+import { WagmiContext } from "./contexts/WagmiContext";
+
+require("./App.css");
+require("@solana/wallet-adapter-react-ui/styles.css");
+
+const SolanaContext = ({ children }) => {
+  // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
+  const network = WalletAdapterNetwork.Devnet;
+
+  // You can also provide a custom RPC endpoint.
+  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+
+  // @solana/wallet-adapter-wallets includes all the adapters but supports tree shaking and lazy loading --
+  // Only the wallets you configure here will be compiled into your application, and only the dependencies
+  // of wallets that your users connect to will be loaded.
+  const wallets = useMemo(
+    () => [
+      new SolanaMobileWalletAdapter({
+        appIdentity: { name: "Solana Create React App Starter App" },
+        authorizationResultCache: createDefaultAuthorizationResultCache(),
+      }),
+      new PhantomWalletAdapter(),
+      new GlowWalletAdapter(),
+      new SlopeWalletAdapter(),
+      new SolflareWalletAdapter({ network }),
+      new TorusWalletAdapter(),
+    ],
+    [network]
+  );
+
+  return (
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets} autoConnect>
+        <WalletModalProvider>{children}</WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
+  );
+};
 
 const { chains, provider, webSocketProvider } = configureChains(
   [avalancheChain, bscTestnet, goerli, polygonMumbai],
@@ -47,15 +106,17 @@ i18next.init({
 ReactDOM.render(
   <I18nextProvider i18n={i18next}>
     <SolanaContext>
-      <SnackbarProvider
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        maxSnack={3}
-      >
-        <App />
-      </SnackbarProvider>
+      <WagmiContext>
+        <SnackbarProvider
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          maxSnack={3}
+        >
+          <App />
+        </SnackbarProvider>
+      </WagmiContext>
     </SolanaContext>
   </I18nextProvider>,
   document.getElementById("root")

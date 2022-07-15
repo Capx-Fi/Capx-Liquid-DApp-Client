@@ -5,6 +5,7 @@ import MetamaskIcon from "../../../assets/metamask.svg";
 import WalletConnectIcon from "../../../assets/walletconnect-logo.svg";
 import "./ChooseWalletModal.scss";
 import useWagmi from "../../../useWagmi";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 const Landing = ({ setModalMode }) => {
   const { active, account, library, connectors, connect } = useWagmi();
@@ -55,6 +56,9 @@ const Landing = ({ setModalMode }) => {
                 </div>
               </div>
             )}
+            <div className="herocontainer_connectbutton flex flex-start rounded-xl items-center  px-5 py-4 z-10 cursor-pointer">
+              <WalletMultiButton />
+            </div>
           </div>
         </div>
       </div>

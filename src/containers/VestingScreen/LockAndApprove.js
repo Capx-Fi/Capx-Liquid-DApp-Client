@@ -19,7 +19,7 @@ import "../../translations/i18n";
 import "./VestingScreen.scss";
 import BigNumber from "bignumber.js";
 import { getContractAddress } from "../../constants/getChainConfig";
-import useWagmi from "../../useWagmi";
+import useCapxWalletConnection from "../../useCapxWalletConnection";
 
 function LockAndApprove({
   setStep,
@@ -38,7 +38,7 @@ function LockAndApprove({
   tokenTicker,
   setApproveMessage,
 }) {
-  const { active, chainId, connector, provider } = useWagmi();
+  const { active, chainId, connector, provider } = useCapxWalletConnection();
   const [web3, setWeb3] = useState(null);
 
   const setupProvider = async () => {

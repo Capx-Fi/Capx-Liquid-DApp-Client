@@ -7,7 +7,7 @@ import { validateProjectName } from "../../../utils/validateProjectName";
 import { validateProjectDescription } from "../../../utils/validateProjectDescription";
 import "./ProjectDetails.scss";
 import WarningCard from "../../WarningCard/WarningCard";
-import useWagmi from "../../../useWagmi";
+import useCapxWalletConnection from "../../../useCapxWalletConnection";
 
 const ProjectDetails = ({
   contractAddress,
@@ -29,7 +29,7 @@ const ProjectDetails = ({
     validContractAddress(contractAddress);
   }, [contractAddress]);
 
-  const { active, account, chainId } = useWagmi();
+  const { active, account, chainId } = useCapxWalletConnection();
 
   const [detailsFetched, setDetailsFetched] = useState(false);
 

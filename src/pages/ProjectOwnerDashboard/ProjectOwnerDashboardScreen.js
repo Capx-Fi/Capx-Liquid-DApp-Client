@@ -16,11 +16,11 @@ import WalletModal from "../../components/Modal/WalletModal/WalletModal";
 import NothingHereProjectOwner from "../NothingHere/NothingHereProjectOwner";
 import { getGraphURL } from "../../constants/getChainConfig";
 import { ACALA_CHAIN_ID } from "../../constants/config";
-import useWagmi from "../../useWagmi";
+import useCapxWalletConnection from "../../useCapxWalletConnection";
 import { fetchProjectOverviewDetails } from "../../utils/graphFetch/fetchProjectOverviewDetails";
 
 function ProjectOwnerDashboardScreen() {
-  const { active, account, chainId } = useWagmi();
+  const { active, account, chainId } = useCapxWalletConnection();
   const [modalMode, setModalMode] = useState(0);
   const [projectDisplayID, setProjectDisplayID] = useState(0);
   const [projectOverviewData, setProjectOverviewData] = useState(null);

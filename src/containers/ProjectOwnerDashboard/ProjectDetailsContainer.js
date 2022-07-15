@@ -7,7 +7,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import CopyIcon from "../../assets/copy-icon.svg";
 import { Tooltip } from "@material-ui/core";
 import useWindowSize from "../../utils/windowSize";
-import useWagmi from "../../useWagmi";
+import useCapxWalletConnection from "../../useCapxWalletConnection";
 
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
@@ -25,7 +25,7 @@ function ProjectDetailsContainer({ projectOverviewData, projectDisplayID }) {
   const [creatorAddressCopied, setCreatorAddressCopied] = useState(false);
   const windowWidth = useWindowSize().width;
 
-  const { chainId } = useWagmi();
+  const { chainId } = useCapxWalletConnection();
   const [project, setProject] = useState(null);
 
   useEffect(() => {

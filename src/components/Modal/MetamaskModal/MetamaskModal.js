@@ -11,13 +11,14 @@ import { useTranslation } from "react-i18next";
 import "../../../translations/i18n";
 import { CHAIN_NAMES } from "../../../constants/config";
 import React, { useState } from "react";
-import useWagmi from "../../../useWagmi";
+import useCapxWalletConnection from "../../../useCapxWalletConnection";
 
 function MetamaskModal({ setModalMode }) {
   const { t } = useTranslation();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const isMetamask = window.ethereum && window.ethereum.isMetaMask;
-  const { active, account, library, connector, connect, error } = useWagmi();
+  const { active, account, library, connector, connect, error } =
+    useCapxWalletConnection();
   const unsupportedChainIdError =
     error && error instanceof UnsupportedChainIdError;
 

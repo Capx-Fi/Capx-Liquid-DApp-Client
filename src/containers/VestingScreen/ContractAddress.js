@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import "../../translations/i18n";
 
 import "./VestingScreen.scss";
-import useWagmi from "../../useWagmi";
+import useCapxWalletConnection from "../../useCapxWalletConnection";
 
 function ContractAddress({
   contractAddress,
@@ -23,7 +23,7 @@ function ContractAddress({
     validContractAddress(contractAddress);
   }, [contractAddress]);
   const { t } = useTranslation();
-  const { active, account, chainId } = useWagmi();
+  const { active, account, chainId } = useCapxWalletConnection();
   const [detailsFetched, setDetailsFetched] = useState(false);
   const validContractAddress = async (address) => {
     if (projectExists.exists === true) {

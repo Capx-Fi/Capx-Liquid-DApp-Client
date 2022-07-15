@@ -29,7 +29,7 @@ import {
   getGraphURL,
 } from "../../constants/getChainConfig";
 import { ACALA_CHAIN_ID } from "../../constants/config";
-import useWagmi from "../../useWagmi";
+import useCapxWalletConnection from "../../useCapxWalletConnection";
 import { fetchInvestorDashboard } from "../../utils/graphFetch/fetchInvestorDashboard";
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
@@ -37,7 +37,8 @@ let datetime = currentDate.toLocaleString("en-US");
 function InvestorDashboardScreen() {
   const [modalMode, setModalMode] = useState(0);
   const [ownedProjectsData, setOwnedProjectsData] = useState(null);
-  const { active, account, chainId, connector, library, provider } = useWagmi();
+  const { active, account, chainId, connector, library, provider } =
+    useCapxWalletConnection();
   const [withdrawModalOpen, setWithdrawModalOpen] = useState(false);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [buttonDisabled, setButtonDisabled] = useState(false);

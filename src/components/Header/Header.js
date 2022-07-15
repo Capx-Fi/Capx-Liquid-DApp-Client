@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { CHAIN_NAMES } from "../../constants/config";
 
 import { getSortBy } from "../../constants/getChainConfig";
-import useWagmi from "../../useWagmi";
+import useCapxWalletConnection from "../../useCapxWalletConnection";
 
 function Header({
   vesting,
@@ -34,7 +34,10 @@ function Header({
     chainId,
     switchNetwork,
     provider,
-  } = useWagmi();
+    isSolana,
+    phantomDisconnect,
+    phantomPublicKey,
+  } = useCapxWalletConnection();
 
   const [dashboardModal, setDashboardModal] = useState(false);
   const [sortBy, setSortBy] = useState("Ethereum");
@@ -52,6 +55,7 @@ function Header({
 
   useEffect(() => {
     active &&
+      !isSolana &&
       provider.then((res) => {
         setWeb3(new Web3(res));
       });
@@ -146,12 +150,19 @@ function Header({
                 </div>
                 <div className="header_navbar_logoutbutton">
                   <div className="header_navbar_logoutbutton_text">
-                    {" "}
-                    {`${account.substr(0, 6)}...${account.substr(-4)}`}
+                    {isSolana
+                      ? `${phantomPublicKey
+                          ?.toBase58()
+                          .toString()
+                          ?.substr(0, 6)}...${phantomPublicKey
+                          ?.toBase58()
+                          .toString()
+                          ?.substr(-4)}`
+                      : `${account.substr(0, 6)}...${account.substr(-4)}`}
                   </div>
                   <img
                     className="header_navbar_logoutbutton_icon"
-                    onClick={disconnect}
+                    onClick={isSolana ? phantomDisconnect : disconnect}
                     src={LogoutIcon}
                     alt="logout icon"
                   />

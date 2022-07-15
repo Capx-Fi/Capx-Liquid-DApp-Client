@@ -3,11 +3,21 @@ import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
 import MetamaskIcon from "../../../assets/metamask.svg";
 import WalletConnectIcon from "../../../assets/walletconnect-logo.svg";
+import PhantomIcon from "../../../assets/phantom-icon-purple.svg";
 import "./ChooseWalletModal.scss";
-import useWagmi from "../../../useWagmi";
+import useCapxWalletConnection from "../../../useCapxWalletConnection";
+import PhantomConnect from "../../PhantomConnect/PhantomConnect";
 
 const Landing = ({ setModalMode }) => {
-  const { active, account, library, connectors, connect } = useWagmi();
+  const {
+    active,
+    account,
+    library,
+    connectors,
+    connect,
+    phantomConnect,
+    hasPhantom,
+  } = useCapxWalletConnection();
 
   return (
     <article className="h-screen bg-dark-400 flex choose_screen">
@@ -52,6 +62,23 @@ const Landing = ({ setModalMode }) => {
                 </div>
                 <div className="text-black desktop:text-paragraph-2 breakpoint:text-caption-1 twok:text-subheading desktop-captions-1 twok:leading-subheading font-semibold">
                   {connectors[1].name}
+                </div>
+              </div>
+            )}
+            {hasPhantom && (
+              <div
+                onClick={phantomConnect}
+                className="herocontainer_connectbutton flex flex-start rounded-xl items-center  px-5 py-4 z-10 cursor-pointer"
+              >
+                <div>
+                  <img
+                    src={PhantomIcon}
+                    alt="Phantom Icon"
+                    className="inline-block phone:w-10 phone:h-10 desktop:w-16 desktop:h-16 ml-3 tablet:mr-12 phone:mr-6"
+                  />
+                </div>
+                <div className="text-black desktop:text-paragraph-2 breakpoint:text-caption-1 twok:text-subheading desktop-captions-1 twok:leading-subheading font-semibold">
+                  Phantom
                 </div>
               </div>
             )}

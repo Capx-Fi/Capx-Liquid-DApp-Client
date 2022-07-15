@@ -7,7 +7,7 @@ import BigNumber from "bignumber.js";
 import { convertToInternationalCurrencySystem } from "../../utils/convertToInternationalCurrencySystem";
 import Web3 from "web3";
 import { getExplorer } from "../../constants/getChainConfig";
-import useWagmi from "../../useWagmi";
+import useCapxWalletConnection from "../../useCapxWalletConnection";
 
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
@@ -24,7 +24,7 @@ function AllocationTableContainer({
   vestedProjectData,
 }) {
   const [allocationTableDetails, setAllocationTableDetails] = useState([]);
-  const { active, account, chainId } = useWagmi();
+  const { active, account, chainId } = useCapxWalletConnection();
   const explorer = chainId && getExplorer(chainId);
   useEffect(() => {
     displayAllocationTableDetails();

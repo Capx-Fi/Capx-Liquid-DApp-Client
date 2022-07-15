@@ -20,10 +20,12 @@ import WalletModal from "../../components/Modal/WalletModal/WalletModal";
 import Web3 from "web3";
 
 import { useHistory } from "react-router";
-import useWagmi from "../../useWagmi";
+import useCapxWalletConnection from "../../useCapxWalletConnection";
 
 function VestingScreen() {
-  const { active, account, chainId, connector, provider } = useWagmi();
+  const { active, account, chainId, connector, provider, isSolana } =
+    useCapxWalletConnection();
+  console.log(active, account, chainId, connector, provider, isSolana);
   const [step, setStep] = useState(1);
   const [modalMode, setModalMode] = useState(0);
   const [showSteps, setShowSteps] = useState(true);
@@ -46,6 +48,7 @@ function VestingScreen() {
 
   useEffect(() => {
     active &&
+      !isSolana &&
       provider.then((res) => {
         setWeb3(new Web3(res));
       });

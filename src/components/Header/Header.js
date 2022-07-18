@@ -9,12 +9,20 @@ import { injected, walletconnect } from "../../utils/connector";
 import ChooseDashboardModal from "../Modal/ChooseDashboardModal/ChooseDashboardModal";
 import DropDown from "../DropDown/DropDown";
 import { Tooltip, withStyles } from "@material-ui/core";
-
+import * as anchor from "@project-serum/anchor";
 import { useEffect, useState } from "react";
 import { CHAIN_NAMES } from "../../constants/config";
-
+// import { idl } from "../../idl";
 import { getSortBy } from "../../constants/getChainConfig";
 import useCapxWalletConnection from "../../useCapxWalletConnection";
+import { PublicKey } from "@solana/web3.js";
+import {
+  useAnchorWallet,
+  useWallet,
+  useConnection,
+} from "@solana/wallet-adapter-react/lib/cjs";
+import { idl } from "../../idl";
+import { config } from "../../consts";
 
 function Header({
   vesting,
@@ -34,11 +42,13 @@ function Header({
     chainId,
     switchNetwork,
     provider,
+    providerSolana,
     isSolana,
     phantomDisconnect,
     phantomPublicKey,
   } = useCapxWalletConnection();
 
+  console.log(providerSolana);
   const [dashboardModal, setDashboardModal] = useState(false);
   const [sortBy, setSortBy] = useState("Ethereum");
   const [web3, setWeb3] = useState(null);
@@ -101,6 +111,17 @@ function Header({
       zIndex: 100,
     },
   }))(Tooltip);
+
+  // const { connection } = useConnection();
+  // const { publicKey, wallet, signTransaction, signAllTransactions } =
+  //   useWallet();
+  const PROGRAM_ID = new PublicKey(config.PROGRAM_ID);
+  const getProvider = () => {
+    const myProgram = new anchor.Program(idl, PROGRAM_ID, providerSolana);
+    console.log(myProgram);
+  };
+
+  getProvider();
   return (
     <>
       <ChooseDashboardModal

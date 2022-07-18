@@ -116,12 +116,14 @@ function Header({
   // const { publicKey, wallet, signTransaction, signAllTransactions } =
   //   useWallet();
   const PROGRAM_ID = new PublicKey(config.PROGRAM_ID);
-  const getProvider = () => {
-    const myProgram = new anchor.Program(idl, PROGRAM_ID, providerSolana);
-    console.log(myProgram);
-  };
 
-  getProvider();
+  //TODO:ANCHOR INTEGRATION
+  // const getProvider = () => {
+  //   const myProgram = new anchor.Program(idl, PROGRAM_ID, providerSolana);
+  //   console.log(myProgram);
+  // };
+
+  // getProvider();
   return (
     <>
       <ChooseDashboardModal

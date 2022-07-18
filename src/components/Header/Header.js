@@ -15,7 +15,6 @@ import { CHAIN_NAMES } from "../../constants/config";
 // import { idl } from "../../idl";
 import { getSortBy } from "../../constants/getChainConfig";
 import useCapxWalletConnection from "../../useCapxWalletConnection";
-import { PublicKey } from "@solana/web3.js";
 import {
   useAnchorWallet,
   useWallet,
@@ -23,6 +22,13 @@ import {
 } from "@solana/wallet-adapter-react/lib/cjs";
 import { idl } from "../../idl";
 import { config } from "../../consts";
+import {
+  Keypair as SolanaKeypair,
+  Connection,
+  clusterApiUrl,
+  Transaction,
+  SystemProgram,
+} from "@solana/web3.js";
 
 function Header({
   vesting,
@@ -115,7 +121,7 @@ function Header({
   // const { connection } = useConnection();
   // const { publicKey, wallet, signTransaction, signAllTransactions } =
   //   useWallet();
-  const PROGRAM_ID = new PublicKey(config.PROGRAM_ID);
+  // const PROGRAM_ID = new PublicKey(config.PROGRAM_ID);
 
   //TODO:ANCHOR INTEGRATION
   // const getProvider = () => {
@@ -124,6 +130,40 @@ function Header({
   // };
 
   // getProvider();
+
+  //WITHOUT ANCHOR
+  let connection = new Connection(clusterApiUrl("devnet"), "processed");
+  console.log(connection);
+
+  let randomKey = SolanaKeypair.generate();
+  const asyncFn = async () => {
+    const recentBH = await connection?.getRecentBlockhash();
+    let t = new Transaction({
+      feePayer: phantomPublicKey,
+      recentBlockhash: recentBH.blockhash,
+    });
+    // .add
+    // SystemProgram.createAccount({
+    //   fromPubkey: phantomPublicKey,
+    //   newAccountPubkey: randomKey.publicKey,
+    //   space: MintLayout.span,
+    //   lamports: await spl.getMinimumBalanceForRentExemptMint(connection),
+    //   programId: spl.TOKEN_PROGRAM_ID,
+    // })
+    // init mint account
+    // spl.createInitializeMintInstruction(
+    //   randomKey.publicKey,
+    //   7,
+    //   phantomPublicKey,
+    //   phantomPublicKey,
+    //   spl.TOKEN_PROGRAM_ID
+    // )
+    const sendTransaction = await providerSolana.signTransaction(t);
+    const rawTransaction = await connection.sendRawTransaction(t.serialize());
+    const complete = await connection.confirmTransaction(rawTransaction);
+    console.log(complete);
+  };
+
   return (
     <>
       <ChooseDashboardModal
@@ -144,6 +184,7 @@ function Header({
             />
           </div>
         </a>
+        <button onClick={() => asyncFn()}>TRANSACTION</button>
         {!hiddenNav && (
           <div className="header_navbar">
             {!vesting && (

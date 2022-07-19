@@ -1,0 +1,1 @@
+export const idl = {"version":"0.1.0","name":"hello_anchor","instructions":[{"name":"initialize","accounts":[],"args":[{"name":"data","type":"u64"}]}],"accounts":[{"name":"NewAccount","type":{"kind":"struct","fields":[{"name":"data","type":"u64"}]}}]}

@@ -29,7 +29,8 @@ const ProjectDetails = ({
     validContractAddress(contractAddress);
   }, [contractAddress]);
 
-  const { active, account, chainId } = useCapxWalletConnection();
+  const { active, account, chainId, isSolana, solanaConnection } =
+    useCapxWalletConnection();
 
   const [detailsFetched, setDetailsFetched] = useState(false);
 
@@ -44,7 +45,12 @@ const ProjectDetails = ({
         exists: false,
       });
     }
-    let validateResponse = await validateContractAddress(address, web3);
+    let validateResponse = await validateContractAddress(
+      address,
+      web3,
+      isSolana,
+      solanaConnection
+    );
     // console.log(validateResponse)
     if (validateResponse) {
       setTokenDetails((prevState) => ({
@@ -55,7 +61,8 @@ const ProjectDetails = ({
         let existingDetails = await checkExistingProject(
           address,
           chainId,
-          metamaskAccount
+          metamaskAccount,
+          isSolana
         );
         setDetailsFetched(true);
         setProjectExists((prevState) => ({
@@ -108,7 +115,7 @@ const ProjectDetails = ({
         valid={tokenDetails.valid}
         value={contractAddress}
         setValue={setContractAddress}
-        maxLength={42}
+        // maxLength={isSolana ? 44 : 42}
         disabled={checkingContract}
         className={
           "phone:mb-4 desktop:mb-6 screen:mt-4 desktop:mt-8 twok:mt-12"

@@ -104,3 +104,11 @@ export const ARBITRUM_CHAIN_ID = process.env.REACT_APP_ARBITRUM_CHAIN_ID;
 export const MANDALA_CHAIN_ID = process.env.REACT_APP_ACALA_CHAIN_ID;
 
 export const CHAIN_NAMES = process.env.REACT_APP_CHAIN_NAMES;
+
+//SOLANA
+export const SOLANA_CONTRACT_PUBLIC_KEY =
+  process.env.REACT_APP_SOLANA_CONTRACT_PUBLIC_KEY;
+export const SOLANA_CLUSTER_API_URL =
+  process.env.REACT_APP_SOLANA_CLUSTER_API_URL;
+
+export const DB_BASE_URL = process.env.REACT_APP_DB_BASE_URL;

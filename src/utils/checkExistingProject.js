@@ -1,11 +1,13 @@
 import { ApolloClient, InMemoryCache, gql, cache } from "@apollo/client";
 
 import { getGraphURL } from "../constants/getChainConfig";
+import { fetchSolanaProjectDetails } from "./solana/fetchProjectDetails";
 
 export const checkExistingProject = async (
   address,
   chainId,
-  metamaskAccount
+  metamaskAccount,
+  isSolana
 ) => {
   let description = "";
   let projectExistingData = [];
@@ -19,7 +21,7 @@ export const checkExistingProject = async (
     uri: graphURL,
     cache: new InMemoryCache(),
   });
-  let projectID = `${metamaskAccount}-LOCK-${address}`;
+  //let projectID = `${metamaskAccount}-LOCK-${address}`;
   const projectExistQuery = `query{
     projects
     
@@ -33,10 +35,13 @@ export const checkExistingProject = async (
     }
   }`;
   try {
-    projectExistingData = await client.query({
-      query: gql(projectExistQuery),
-      fetchPolicy: "network-only",
-    });
+    projectExistingData = isSolana
+      ? await fetchSolanaProjectDetails(address)
+      : await client.query({
+          query: gql(projectExistQuery),
+          fetchPolicy: "network-only",
+        });
+    console.log(projectExistingData, "exisiting SOL");
     projectExistingData = projectExistingData?.data;
     // console.log(
     //   projectExistingData?.projects[0]?.projectOwnerAddress,

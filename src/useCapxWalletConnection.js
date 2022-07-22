@@ -7,11 +7,27 @@ import {
   useSwitchNetwork,
 } from "wagmi";
 
+import {
+  Keypair as SolanaKeypair,
+  Connection,
+  clusterApiUrl,
+  PublicKey,
+} from "@solana/web3.js";
+
+import * as anchor from "@project-serum/anchor";
+
+import { idl } from "./assets/idl_tk";
+import {
+  SOLANA_CLUSTER_API_URL,
+  SOLANA_CONTRACT_PUBLIC_KEY,
+} from "./constants/config";
+
 function useCapxWalletConnection() {
   const [walletAvail, setWalletAvail] = useState(false);
   const [providerSolana, setProviderSolana] = useState(null);
   const [connected, setConnected] = useState(false);
   const [pubKey, setPubKey] = useState(null);
+  const [anchorProgram, setAnchorProgram] = useState(null);
 
   useEffect(() => {
     if ("solana" in window) {
@@ -23,6 +39,22 @@ function useCapxWalletConnection() {
       }
     }
   }, []);
+
+  const loadAnchor = async () => {
+    if (providerSolana) {
+      const myProgram = new anchor.Program(
+        idl,
+        new PublicKey(SOLANA_CONTRACT_PUBLIC_KEY),
+        providerSolana
+      );
+      console.log(myProgram);
+      setAnchorProgram(myProgram);
+    }
+  };
+
+  useEffect(() => {
+    loadAnchor();
+  }, [providerSolana]);
 
   useEffect(() => {
     providerSolana?.on("connect", (publicKey) => {
@@ -69,6 +101,11 @@ function useCapxWalletConnection() {
   const provider = wagmiAccount.connector?.getProvider().then((res) => {
     return res;
   });
+  const randomKey = SolanaKeypair.generate();
+  const solanaConnection = new Connection(
+    clusterApiUrl(SOLANA_CLUSTER_API_URL),
+    "processed"
+  );
 
   return {
     active: active || connected,
@@ -83,7 +120,10 @@ function useCapxWalletConnection() {
     connectors,
     error,
     connect,
+    randomKey,
     switchNetwork,
+    solanaConnection,
+    anchorProgram,
     provider,
     phantomConnect: connectHandler,
     phantomDisconnect: disconnectHandler,

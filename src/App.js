@@ -8,6 +8,7 @@ import LoadingScreen from "./containers/LoadingScreen";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Landing from "./components/Landing/Landing";
 import ChooseWalletModal from "./components/Modal/ChooseWalletModal/ChooseWalletModal";
+import InvestedProjectDetails from "./pages/InvestorDashboardScreen/InvestedProjectDetails";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -24,7 +25,13 @@ function App() {
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/vesting" component={VestingScreen} />
+
             <Route exact path="/investor" component={InvestorDashboardScreen} />
+            <Route
+              exact
+              path="/investor/:id"
+              component={InvestedProjectDetails}
+            />
             <Route
               exact
               path="/projectoverview"

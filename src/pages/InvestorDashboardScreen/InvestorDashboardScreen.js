@@ -31,6 +31,7 @@ import {
 import { ACALA_CHAIN_ID } from "../../constants/config";
 import useWagmi from "../../useWagmi";
 import { fetchInvestorDashboard } from "../../utils/graphFetch/fetchInvestorDashboard";
+import { useHistory } from "react-router-dom";
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
 
@@ -139,7 +140,7 @@ function InvestorDashboardScreen() {
   };
 
   console.log(ownedProjectsData);
-
+  const history = useHistory();
   return (
     <>
       {!active ? (
@@ -183,21 +184,24 @@ function InvestorDashboardScreen() {
               {ownedProjectsData?.map((project) => {
                 return (
                   <div
+                    onClick={() =>
+                      history.push(`/investor/${project.derivativeID}`)
+                    }
                     key={`${project.derivativeID}+${project.holderAddress}`}
-                    className="investordashboardscreen_maincontainer_innercontainer_projectcontainer"
+                    className="investordashboardscreen_maincontainer_innercontainer_projectcontainer cursor-pointer"
                   >
                     <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_leftcontainer">
                       <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox">
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_key">
-                          PROJECT NAME
+                          PROJECT DETAILS
                         </div>
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_value">
-                          {project.projectName}
+                          {project.projectName} [{project.projectTokenTicker}]
                         </div>
                       </div>
                       <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox">
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_key">
-                          ALLOCATED ASSETS
+                          TOTAL ALLOCATED ASSETS
                         </div>
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_value">
                           {convertToInternationalCurrencySystem(
@@ -207,13 +211,13 @@ function InvestorDashboardScreen() {
                       </div>
                       <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox">
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_key">
-                          UNLOCK DATE
+                          NEXT UNLOCK DATE
                         </div>
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_value w-fit-content h-fit-content">
                           {project.displayDate}
                         </div>
                       </div>
-                      <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_buttoncontainer">
+                      {/* <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_buttoncontainer">
                         {project.vestID ? null : (
                           <a
                             href={`${explorer}${project.derivativeID}?a=${project.holderAddress}`}
@@ -327,7 +331,7 @@ function InvestorDashboardScreen() {
                             </div>
                           </div>
                         </HtmlTooltip>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 );

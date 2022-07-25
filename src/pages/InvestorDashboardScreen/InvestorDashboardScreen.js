@@ -152,6 +152,7 @@ function InvestorDashboardScreen() {
             <div className="investordashboardscreen_maincontainer_title">
               INVESTOR DASHBOARD
             </div>
+
             <div className="investordashboardscreen_maincontainer_innercontainer">
               {[0, 1, 2]?.map((project) => {
                 return <InvestorLoading />;
@@ -173,7 +174,11 @@ function InvestorDashboardScreen() {
           <section className="investordashboardscreen_maincontainer">
             <div className="investordashboardscreen_maincontainer_title">
               INVESTOR DASHBOARD
+              <p className="text-sm font-medium text-gray-500 mt-2">
+                Projects that you're vested in.
+              </p>
             </div>
+
             <div className="investordashboardscreen_maincontainer_innercontainer">
               <WithdrawModal
                 open={withdrawModalOpen}
@@ -188,20 +193,20 @@ function InvestorDashboardScreen() {
                       history.push(`/investor/${project.derivativeID}`)
                     }
                     key={`${project.derivativeID}+${project.holderAddress}`}
-                    className="investordashboardscreen_maincontainer_innercontainer_projectcontainer cursor-pointer"
+                    className="hover:border-primary-green-400 hover:shadow-lg investordashboardscreen_maincontainer_innercontainer_projectcontainer cursor-pointer"
                   >
                     <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_leftcontainer">
                       <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox">
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_key">
-                          PROJECT DETAILS
+                          Project Details
                         </div>
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_value">
-                          {project.projectName} [{project.projectTokenTicker}]
+                          {project.projectName} ({project.projectTokenTicker})
                         </div>
                       </div>
                       <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox">
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_key">
-                          TOTAL ALLOCATED ASSETS
+                          Total Allocated Assets
                         </div>
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_value">
                           {convertToInternationalCurrencySystem(
@@ -211,10 +216,40 @@ function InvestorDashboardScreen() {
                       </div>
                       <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox">
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_key">
-                          NEXT UNLOCK DATE
+                          Next Unlock Date
                         </div>
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_value w-fit-content h-fit-content">
                           {project.displayDate}
+                          {/* <React.Fragment className="flex justify-between">
+                            <span className="flex justify-between items-center font-bold pr-2">
+                              <Lottie
+                                className="w-8 mr-1"
+                                animationData={SandTimer}
+                              />
+                              {Math.floor(
+                                (Date.parse(project?.date) -
+                                  Date.parse(datetime)) /
+                                  86400000
+                              ) > 0
+                                ? `${Math.floor(
+                                    (Date.parse(project?.date) -
+                                      Date.parse(datetime)) /
+                                      86400000
+                                  )} days to unlock`
+                                : Math.floor(
+                                    (Date.parse(project?.date) -
+                                      Date.parse(datetime)) /
+                                      3600000
+                                  ) >= 0
+                                ? `${Math.floor(
+                                    (Date.parse(project?.date) -
+                                      Date.parse(datetime)) /
+                                      3600000
+                                  )} hours to unlock`
+                                : "Unlocked!"}
+                              {console.log(project.date)}
+                            </span>
+                          </React.Fragment> */}
                         </div>
                       </div>
                       {/* <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_buttoncontainer">

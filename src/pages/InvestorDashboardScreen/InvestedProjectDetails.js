@@ -11,7 +11,7 @@ import { convertToInternationalCurrencySystem } from "../../utils/convertToInter
 import Popup from "reactjs-popup";
 
 import { useSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import WithdrawModal from "../../components/Modal/VestAndApproveModal/WithdrawModal";
 import { CONTRACT_ABI_ERC20 } from "../../contracts/SampleERC20";
 import { withdrawWrappedTokens } from "../../utils/withdrawWrappedTokens";
@@ -49,6 +49,7 @@ function InvestedProjectDetails() {
   const [withdrawModalStatus, setWithdrawModalStatus] = useState("");
   const [web3, setWeb3] = useState(null);
 
+  const [showtype, setShowtype] = useState("UNLOCKED");
   useEffect(() => {
     active &&
       provider.then((res) => {
@@ -164,6 +165,68 @@ function InvestedProjectDetails() {
   console.log(ownedProjectsData);
   const history = useHistory();
   const project = ownedProjectsData && ownedProjectsData[0];
+
+  //timer
+
+  const Ref = useRef(null);
+  const [timer, setTimer] = useState({
+    days: 0,
+    hours: "00",
+    minutes: "00",
+    seconds: "00",
+  });
+
+  const getTimeRemaining = (e) => {
+    const total = Date.parse(e) - Date.parse(new Date());
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    const hours = Math.floor((total / 1000 / 60 / 60) % 24);
+    const days = Math.floor(total / (1000 * 3600 * 24));
+
+    return {
+      total,
+      days,
+      hours,
+      minutes,
+      seconds,
+    };
+  };
+
+  const startTimer = (e) => {
+    let { total, days, hours, minutes, seconds } = getTimeRemaining(e);
+    if (total >= 0) {
+      setTimer({
+        days: days,
+        hours: hours < 10 ? `0${hours}` : hours,
+        minutes: minutes < 10 ? `0${minutes}` : minutes,
+        seconds: seconds < 10 ? `0${seconds}` : seconds,
+      });
+    }
+  };
+
+  const clearTimer = (e) => {
+    setTimer({
+      days: 0,
+      hours: "00",
+      minutes: "00",
+      seconds: "00",
+    });
+    if (Ref.current) clearInterval(Ref.current);
+    const id = setInterval(() => {
+      startTimer(e);
+    }, 1000);
+    Ref.current = id;
+  };
+
+  const getDeadTime = () => {
+    let deadline = new Date();
+    deadline.setSeconds(deadline.getSeconds() + 360000);
+    return deadline;
+  };
+  useEffect(() => {
+    clearTimer(getDeadTime());
+  }, []);
+
   return (
     <>
       {!active ? (
@@ -209,8 +272,8 @@ function InvestedProjectDetails() {
                   clipRule="evenodd"
                 />
               </svg>
-              {ownedProjectsData?.[0]?.projectName} [
-              {ownedProjectsData?.[0]?.projectTokenTicker}]
+              {ownedProjectsData?.[0]?.projectName} (
+              {ownedProjectsData?.[0]?.projectTokenTicker})
             </div>
             <div className="investedprojectdetails_maincontainer_innercontainer">
               <WithdrawModal
@@ -224,9 +287,13 @@ function InvestedProjectDetails() {
                 <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv">
                   <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_unlockcard">
                     <div className="w-full mx-auto">
-                      <p className="font-light mb-10">UNLOCKED</p>
-                      <p className="font-bold text-lg">0.00000</p>
-                      <p>/4.00000 {project?.projectTokenTicker}</p>
+                      <p className="font-light mb-10">{showtype}</p>
+                      <p className="font-bold text-xl">
+                        <span className="text-3xl">0</span>.000
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        /4.00000 {project?.projectTokenTicker}
+                      </p>
                     </div>
                   </div>
                   <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection">
@@ -255,12 +322,14 @@ function InvestedProjectDetails() {
                                     d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                                   />
                                 </svg>
-                                <p>0.00000</p>
+                                <p>
+                                  0.000{" "}
+                                  {ownedProjectsData?.[0]?.projectTokenTicker}
+                                </p>
+                                <p className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection_minidetailcard_value">
+                                  {unlock}
+                                </p>
                               </div>
-
-                              <p className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection_minidetailcard_value">
-                                {unlock}
-                              </p>
                             </div>
                           }
                           position="right top"
@@ -271,19 +340,27 @@ function InvestedProjectDetails() {
                             </p>
                             <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer">
                               <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                                <div className="font-extrabold">18</div>
+                                <div className="font-extrabold">
+                                  {timer.days}
+                                </div>
                                 <div className="font-normal">days</div>
                               </div>
                               <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                                <div className="font-extrabold">18</div>
+                                <div className="font-extrabold">
+                                  {timer.hours}
+                                </div>
                                 <div className="font-normal">hours</div>
                               </div>
                               <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                                <div className="font-extrabold">18</div>
+                                <div className="font-extrabold">
+                                  {timer.minutes}
+                                </div>
                                 <div className="font-normal">min</div>
                               </div>
                               <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                                <div className="font-extrabold">18</div>
+                                <div className="font-extrabold">
+                                  {timer.seconds}
+                                </div>
                                 <div className="font-normal">sec</div>
                               </div>
                             </div>
@@ -306,8 +383,14 @@ function InvestedProjectDetails() {
                 </div>
 
                 <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv">
-                  <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_percentagecard">
-                    <div>Unlocked</div>
+                  <div
+                    className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_percentagecard"
+                    onMouseEnter={() => setShowtype("UNLOCKED")}
+                  >
+                    <div className="flex flex-row justify-between">
+                      <div>Unlocked</div>
+                      <div>45%</div>
+                    </div>
                     <div className="w-full bg-gray-200 h-2 mt-2 rounded-md">
                       <div
                         className="bg-primary-green-400 h-2 rounded-md"
@@ -317,33 +400,40 @@ function InvestedProjectDetails() {
                       ></div>
                     </div>
                   </div>
-                  <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_percentagecard">
-                    Unlocked
+                  <div
+                    className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_percentagecard hover:bg-primary-green-100 cursor-pointer"
+                    onMouseLeave={() => setShowtype("UNLOCKED")}
+                    onMouseEnter={() => setShowtype("WITHDRAWN")}
+                  >
+                    <div className="flex flex-row justify-between">
+                      <div>Withdrawn</div>
+                      <div>35%</div>
+                    </div>
                     <div className="w-full bg-gray-200 h-2 mt-2 rounded-md">
                       <div
                         className="bg-primary-green-400 h-2 rounded-md"
                         style={{
-                          width: "45%",
+                          width: "35%",
                         }}
                       ></div>
                     </div>
                   </div>
-                  <p className="font-light">NEXT PAYMENT IN</p>
+                  <p className="font-light mt-5">NEXT PAYMENT IN</p>
                   <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer px-10 py-4">
                     <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                      <div className="font-extrabold">18</div>
+                      <div className="font-extrabold">{timer.days}</div>
                       <div className="font-normal">days</div>
                     </div>
                     <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                      <div className="font-extrabold">18</div>
+                      <div className="font-extrabold">{timer.hours}</div>
                       <div className="font-normal">hours</div>
                     </div>
                     <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                      <div className="font-extrabold">18</div>
+                      <div className="font-extrabold">{timer.minutes}</div>
                       <div className="font-normal">min</div>
                     </div>
                     <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                      <div className="font-extrabold">18</div>
+                      <div className="font-extrabold">{timer.seconds}</div>
                       <div className="font-normal">sec</div>
                     </div>
                   </div>

@@ -42,7 +42,7 @@ function InvestedDetailsLoading() {
       <div className="investedprojectdetails_maincontainer_innercontainer">
         <div className="investedprojectdetails_maincontainer_innercontainer_detailsection">
           <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv">
-            <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_unlockcard">
+            <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_unlockcard p-20">
               <p className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_unlockcard_loading">
                 -
               </p>
@@ -50,7 +50,7 @@ function InvestedDetailsLoading() {
             <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection">
               {[0, 1, 2].map(function () {
                 return (
-                  <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection_minidetailcard">
+                  <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection_minidetailcard px-20">
                     <p className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection_minidetailcard_title">
                       <p className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection_minidetailcard_title_loading">
                         -
@@ -93,20 +93,20 @@ function InvestedDetailsLoading() {
             <p>NEXT PAYMENT IN</p>
             <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer">
               <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                <div>18</div>
+                <div>0</div>
                 <div>days</div>
               </div>
               <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                <div>18</div>
+                <div>0</div>
                 <div>hours</div>
               </div>
               <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                <div>18</div>
-                <div>minutes</div>
+                <div>0</div>
+                <div>min</div>
               </div>
               <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                <div>18</div>
-                <div>seconds</div>
+                <div>0</div>
+                <div>sec</div>
               </div>
             </div>
             <div className={"cursor-not-allowed"}>

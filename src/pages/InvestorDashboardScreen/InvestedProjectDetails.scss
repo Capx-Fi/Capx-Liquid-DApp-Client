@@ -6,7 +6,7 @@
 		&_title {
 			@apply text-caption-3 leading-caption-3 flex flex-row tablet:text-paragraph-1 tablet:leading-paragraph-1 pb-4 ml-4 text-black font-bold;
             &_loading {
-                @apply h-4 w-32 animate-pulse bg-dark-25 text-dark-25;
+                @apply h-4 w-20 animate-pulse bg-dark-25 text-dark-25;
             }
 		}
 		&_innercontainer {
@@ -21,29 +21,29 @@
 				@apply rounded-md bg-scrollTrack;
 			}
 			&_detailsection {
-                @apply flex flex-col  md:flex-row gap-x-8 justify-center ;
+                @apply flex flex-col  md:flex-row gap-x-16 justify-center ;
                 &_leftdiv{
                     @apply flex flex-col gap-y-4 text-center;
                     &_unlockcard {
                         @apply  text-darkText text-center flex rounded-lg laptop:rounded-2xl flex-1 p-10 bg-white border-2 border-lightGrayBorder;
                         &_loading {
-                            @apply h-4 w-32 animate-pulse bg-dark-25 text-dark-25;
+                            @apply h-4 w-auto animate-pulse bg-dark-25 text-dark-25;
                         }
                     }
                     &_minidetailsection {
                         @apply flex flex-col md:flex-row gap-x-4;
                         &_minidetailcard {
-                            @apply  text-darkText mb-3 cursor-pointer hover:border-primary-green-400 relative text-center flex rounded-lg laptop:rounded-2xl flex-1 p-16 bg-white border-2 border-lightGrayBorder;
+                            @apply  text-darkText mb-3 w-full p-12 cursor-pointer hover:border-primary-green-400 relative text-center flex rounded-lg laptop:rounded-2xl flex-1  bg-white border-2 border-lightGrayBorder;
                             &_title {
                                 @apply absolute top-3 left-4 text-dark-25; 
                                 &_loading {
-                                    @apply h-4 w-32 animate-pulse bg-dark-25 text-dark-25;
+                                    @apply h-4 w-20 animate-pulse bg-dark-25 text-dark-25;
                                 }
                             }
                             &_value {
-                                @apply absolute bottom-3 left-3 text-black;
+                                @apply  text-dark-25 w-28 text-xs ;
                                 &_loading {
-                                    @apply h-4 w-32 animate-pulse bg-dark-25 text-dark-25;
+                                    @apply h-4 w-20 animate-pulse bg-dark-25 text-dark-25;
                                 }
                             }
                         }

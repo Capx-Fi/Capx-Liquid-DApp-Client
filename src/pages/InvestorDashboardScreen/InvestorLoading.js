@@ -12,23 +12,23 @@ function InvestorLoading({ i }) {
       <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_leftcontainer">
         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox">
           <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_key">
-            PROJECT NAME
+            Project Details
           </div>
           <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_value_loading"></div>
         </div>
         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox">
           <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_key">
-            ALLOCATED ASSETS
+            Total Allocated Assets
           </div>
           <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_value_loading"></div>
         </div>
         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox">
           <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_key">
-            UNLOCK DATE
+            Next Unlock Time
           </div>
           <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_value_loading"></div>
         </div>
-        <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_buttoncontainer">
+        {/* <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_buttoncontainer">
           <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_button pointer-events-none opacity-50 z-10">
             <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_button_text_loading "></div>
             <img
@@ -55,7 +55,7 @@ function InvestorLoading({ i }) {
               alt="arrow icon"
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

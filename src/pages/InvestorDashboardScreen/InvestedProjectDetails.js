@@ -35,7 +35,7 @@ import { fetchInvestorDashboard } from "../../utils/graphFetch/fetchInvestorDash
 import Level3CTA from "../../components/CTA/Level3CTA";
 import InvestedDetailsLoading from "./InvestedDetailsLoading";
 import Pagination from "../../components/Pagination";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
 
@@ -66,25 +66,6 @@ function InvestedProjectDetails() {
   const capxContract =
     web3 && new web3.eth.Contract(CONTRACT_ABI_CAPX, contractAddress);
   // console.dir(capxContract);
-  const explorer = chainId && getExplorer(chainId);
-
-  function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-  }
-  useEffect(() => {
-    // fetchOwnedTokens(account, setOwnedProjectsData, GRAPHAPIURL);
-    loadProjectData();
-  }, [account, chainId]);
-  const HtmlTooltip = withStyles((theme) => ({
-    tooltip: {
-      background: "#2A383C",
-      color: "#F1FAF2",
-      maxWidth: 800,
-      fontSize: theme.typography.pxToRem(12),
-      borderRadius: "4px",
-      zIndex: 100,
-    },
-  }))(Tooltip);
 
   const data = [
     "16th July, 2020",
@@ -106,18 +87,7 @@ function InvestedProjectDetails() {
 
   // console.log(account);
   const graphURL = chainId && getGraphURL(chainId);
-  const loadProjectData = async () => {
-    setOwnedProjectsData(null);
-    if (account) {
-      if (chainId === parseInt(ACALA_CHAIN_ID)) {
-        let projects = await fetchAcalaInvestorDashboard(account, graphURL);
-        setOwnedProjectsData(projects);
-      } else {
-        let projects = await fetchInvestorDashboard(account, graphURL);
-        setOwnedProjectsData(projects);
-      }
-    }
-  };
+
   const tryWithdraw = async (
     wrappedTokenAddress,
     tokenAmount,
@@ -157,14 +127,17 @@ function InvestedProjectDetails() {
       );
     }
     setButtonDisabled(false);
-    setTimeout(() => {
-      loadProjectData();
-    }, 6000);
   };
 
   console.log(ownedProjectsData);
   const history = useHistory();
-  const project = ownedProjectsData && ownedProjectsData[0];
+  const location = useLocation();
+  const project = location?.state?.project;
+
+  console.log(project, "investedDetail");
+  if (!project) {
+    history.push("/investors");
+  }
 
   //timer
 
@@ -231,7 +204,7 @@ function InvestedProjectDetails() {
     <>
       {!active ? (
         <WalletModal modalMode={modalMode} setModalMode={setModalMode} />
-      ) : !ownedProjectsData ? (
+      ) : !project ? (
         <article className="investedprojectdetails">
           <Header hiddenSwitch={true} />
           <section className="investedprojectdetails_maincontainer">
@@ -239,8 +212,6 @@ function InvestedProjectDetails() {
           </section>
           <Footer />
         </article>
-      ) : ownedProjectsData.length === 0 ? (
-        <NothingHereInvestorDashboard />
       ) : (
         <article
           style={{
@@ -272,8 +243,7 @@ function InvestedProjectDetails() {
                   clipRule="evenodd"
                 />
               </svg>
-              {ownedProjectsData?.[0]?.projectName} (
-              {ownedProjectsData?.[0]?.projectTokenTicker})
+              {project?.projectName} ({project?.projectTokenTicker})
             </div>
             <div className="investedprojectdetails_maincontainer_innercontainer">
               <WithdrawModal
@@ -302,6 +272,8 @@ function InvestedProjectDetails() {
                         <Popup
                           on={"hover"}
                           arrow={false}
+                          offsetX={14}
+                          offsetY={-10}
                           trigger={
                             <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection_minidetailcard">
                               <p className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection_minidetailcard_title">
@@ -322,10 +294,7 @@ function InvestedProjectDetails() {
                                     d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                                   />
                                 </svg>
-                                <p>
-                                  0.000{" "}
-                                  {ownedProjectsData?.[0]?.projectTokenTicker}
-                                </p>
+                                <p>0.000 {project?.projectTokenTicker}</p>
                                 <p className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection_minidetailcard_value">
                                   {unlock}
                                 </p>
@@ -377,8 +346,42 @@ function InvestedProjectDetails() {
                       paginate={paginate}
                     />
                   </div>
-                  <div className="mx-auto">
-                    <Level3CTA text={"Schedule"} />
+                  <div className="mx-auto flex flex-row gap-x-4">
+                    <Level3CTA
+                      text={"Details"}
+                      svgIcon={
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 text-white mr-3"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2h-1.528A6 6 0 004 9.528V4z" />
+                          <path
+                            fillRule="evenodd"
+                            d="M8 10a4 4 0 00-3.446 6.032l-1.261 1.26a1 1 0 101.414 1.415l1.261-1.261A4 4 0 108 10zm-2 4a2 2 0 114 0 2 2 0 01-4 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      }
+                    />{" "}
+                    <Level3CTA
+                      text={"Schedule"}
+                      svgIcon={
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 text-white mr-3"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      }
+                    />
                   </div>
                 </div>
 
@@ -391,7 +394,7 @@ function InvestedProjectDetails() {
                       <div>Unlocked</div>
                       <div>45%</div>
                     </div>
-                    <div className="w-full bg-gray-200 h-2 mt-2 rounded-md">
+                    <div className="w-full bg-gray-200 h-2 mt-2 rounded-md hover:bg-primary-green-100 cursor-pointer">
                       <div
                         className="bg-primary-green-400 h-2 rounded-md"
                         style={{

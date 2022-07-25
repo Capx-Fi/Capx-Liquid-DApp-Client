@@ -3,7 +3,7 @@ import "./CTA.scss";
 
 import NextIcon from "../../assets/next.svg";
 
-function Level3CTA({ onClick, text, icon, disabled, fullWidth }) {
+function Level3CTA({ onClick, text, icon, disabled, fullWidth, svgIcon }) {
   return (
     <div
       onClick={() => onClick()}
@@ -16,6 +16,7 @@ function Level3CTA({ onClick, text, icon, disabled, fullWidth }) {
           fullWidth ? "w-full" : "w-fit-content"
         }`}
       >
+        {svgIcon && svgIcon}
         <div className="cta_main_level3_button_text">{text}</div>
         {icon && (
           <img

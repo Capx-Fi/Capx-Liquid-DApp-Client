@@ -190,7 +190,10 @@ function InvestorDashboardScreen() {
                 return (
                   <div
                     onClick={() =>
-                      history.push(`/investor/${project.derivativeID}`)
+                      history.push({
+                        pathname: `/investor/${project.derivativeID}`,
+                        state: { project: project },
+                      })
                     }
                     key={`${project.derivativeID}+${project.holderAddress}`}
                     className="hover:border-primary-green-400 hover:shadow-lg investordashboardscreen_maincontainer_innercontainer_projectcontainer cursor-pointer"

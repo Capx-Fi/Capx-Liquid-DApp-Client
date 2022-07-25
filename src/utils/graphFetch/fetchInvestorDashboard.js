@@ -142,6 +142,79 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
     });
 
     investorData = await Promise.all(investorData);
+
+    let projectData = {};
+    let projectInvestorData = {};
+    
+    investorData.forEach(function(investor, index) {
+      if(!projectData[investor.projectTokenAddress]) {
+        projectData[investor.projectTokenAddress] = {
+          date: investor.date,
+          projectName: investor.projectName,
+          projectOwner: investor.projectOwnerAddress,
+          projectTokenTicker: investor.projectTokenTicker,
+          projectTokenDecimal: investor.projectTokenDecimal,
+          allocatedTokens: investor.numOfTokens,
+          upcomingUnlockDate: investor.unlockDate
+        }
+      } else {
+        if(projectData[investor.projectTokenAddress].date > investor.date){
+          projectData[investor.projectTokenAddress].date = investor.date;
+          projectData[investor.projectTokenAddress].upcomingUnlockDate = investor.unlockDate;
+        }
+        projectData[investor.projectTokenAddress].allocatedTokens += investor.numOfTokens;
+      }
+    });
+
+    const returnProject = Object.entries(projectData).map(([key,value]) => {
+      return {
+        projectID: key,
+        details: value
+      }
+    });
+
+    console.log("Project Data", returnProject);
+
+    investorData.forEach(function(investor, index) {
+      if(!projectInvestorData[investor.projectTokenAddress]) {
+        let data = {
+          date: investor.date,
+          unlockDate: investor.unlockDate,
+          wrappedTokenTicker: investor.wrappedTokenTicker,
+          derivativeID: investor.derivativeID,
+          numOfTokens: investor.numOfTokens,
+          tokenAmount: investor.tokenAmount,
+          withdrawAllowed: investor.withdrawAllowed,
+          holderAddress: investor.holderAddress,
+          vestID: investor.vestID,
+          displayDate: investor.displayDate
+        };
+        projectInvestorData[investor.projectTokenAddress]= [data];
+      } else {
+        let data = {
+          date: investor.date,
+          unlockDate: investor.unlockDate,
+          wrappedTokenTicker: investor.wrappedTokenTicker,
+          derivativeID: investor.derivativeID,
+          numOfTokens: investor.numOfTokens,
+          tokenAmount: investor.tokenAmount,
+          withdrawAllowed: investor.withdrawAllowed,
+          holderAddress: investor.holderAddress,
+          vestID: investor.vestID,
+          displayDate: investor.displayDate
+        };
+        projectInvestorData[investor.projectTokenAddress].push(data);
+      }
+    });
+
+    const returnProjectInvestor = Object.entries(projectInvestorData).map(([key,value]) => {
+      return {
+        projectID: key,
+        details: value
+      }
+    })
+    console.log("Project Investor Date",returnProjectInvestor);
+
     return investorData;
   } catch (e) {
     console.log(e);

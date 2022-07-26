@@ -154,7 +154,7 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
           projectOwner: investor.projectOwnerAddress,
           projectTokenTicker: investor.projectTokenTicker,
           projectTokenDecimal: investor.projectTokenDecimal,
-          allocatedTokens: investor.numOfTokens,
+          totalAllocatedTokens: investor.numOfTokens,
           upcomingUnlockDate: investor.unlockDate
         }
       } else {
@@ -175,6 +175,8 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
 
     console.log("Project Data", returnProject);
 
+    let projectUnlockedTokens = {};
+
     investorData.forEach(function(investor, index) {
       if(!projectInvestorData[investor.projectTokenAddress]) {
         let data = {
@@ -189,7 +191,13 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
           vestID: investor.vestID,
           displayDate: investor.displayDate
         };
-        projectInvestorData[investor.projectTokenAddress]= [data];
+        if(projectUnlockedTokens[investor.projectTokenAddress] == undefined){
+          projectUnlockedTokens[investor.projectTokenAddress] = 0;
+        }
+        if(investor.withdrawAllowed) {
+          projectUnlockedTokens[investor.projectTokenAddress] = projectUnlockedTokens[investor.projectTokenAddress] + parseInt(investor.numOfTokens);
+        }
+        projectInvestorData[investor.projectTokenAddress] = [data];
       } else {
         let data = {
           date: investor.date,
@@ -203,6 +211,9 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
           vestID: investor.vestID,
           displayDate: investor.displayDate
         };
+        if(investor.withdrawAllowed) {
+          projectUnlockedTokens[investor.projectTokenAddress] = projectUnlockedTokens[investor.projectTokenAddress] + parseInt(investor.numOfTokens);
+        }
         projectInvestorData[investor.projectTokenAddress].push(data);
       }
     });
@@ -210,6 +221,8 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
     const returnProjectInvestor = Object.entries(projectInvestorData).map(([key,value]) => {
       return {
         projectID: key,
+        withdrawnTokens: 0,
+        unlockedTokens: projectUnlockedTokens[key],
         details: value
       }
     })

@@ -145,6 +145,8 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
 
     let projectData = {};
     let projectInvestorData = {};
+    let projectUnlockedTokens = {};
+    let projectTotalTokens = {};
     
     investorData.forEach(function(investor, index) {
       if(!projectData[investor.projectTokenAddress]) {
@@ -157,12 +159,17 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
           totalAllocatedTokens: investor.numOfTokens,
           upcomingUnlockDate: investor.unlockDate
         }
+        if(projectTotalTokens[investor.projectTokenAddress] == undefined){
+          projectTotalTokens[investor.projectTokenAddress] = 0;
+        }
+        projectTotalTokens[investor.projectTokenAddress] = projectTotalTokens[investor.projectTokenAddress] + parseInt(investor.numOfTokens);
       } else {
         if(projectData[investor.projectTokenAddress].date > investor.date){
           projectData[investor.projectTokenAddress].date = investor.date;
           projectData[investor.projectTokenAddress].upcomingUnlockDate = investor.unlockDate;
         }
-        projectData[investor.projectTokenAddress].allocatedTokens += investor.numOfTokens;
+        projectTotalTokens[investor.projectTokenAddress] = projectTotalTokens[investor.projectTokenAddress] + parseInt(investor.numOfTokens);
+        projectData[investor.projectTokenAddress].allocatedTokens += investor.numOfTokens; 
       }
     });
 
@@ -174,8 +181,6 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
     });
 
     console.log("Project Data", returnProject);
-
-    let projectUnlockedTokens = {};
 
     investorData.forEach(function(investor, index) {
       if(!projectInvestorData[investor.projectTokenAddress]) {
@@ -223,6 +228,7 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
         projectID: key,
         withdrawnTokens: 0,
         unlockedTokens: projectUnlockedTokens[key],
+        totalAllocatedTokens: projectTotalTokens[key],
         details: value
       }
     })

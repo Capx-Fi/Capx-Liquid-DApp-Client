@@ -37,6 +37,7 @@ import InvestedDetailsLoading from "./InvestedDetailsLoading";
 import Pagination from "../../components/Pagination";
 import { useHistory, useLocation } from "react-router-dom";
 import UnlockCard from "../../components/UnlockCard/UnlockCard";
+import Timer from "../../components/Timer/Timer";
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
 
@@ -133,66 +134,6 @@ function InvestedProjectDetails() {
   if (!project || !projectOverview) {
     history.push("/investors");
   }
-  //timer
-
-  const Ref = useRef(null);
-  const [timer, setTimer] = useState({
-    days: 0,
-    hours: "00",
-    minutes: "00",
-    seconds: "00",
-  });
-
-  const getTimeRemaining = (e) => {
-    const total = Date.parse(e) - Date.parse(new Date());
-    const seconds = Math.floor((total / 1000) % 60);
-    const minutes = Math.floor((total / 1000 / 60) % 60);
-    const hours = Math.floor((total / 1000 / 60 / 60) % 24);
-    const days = Math.floor(total / (1000 * 3600 * 24));
-
-    return {
-      total,
-      days,
-      hours,
-      minutes,
-      seconds,
-    };
-  };
-
-  const startTimer = (e) => {
-    let { total, days, hours, minutes, seconds } = getTimeRemaining(e);
-    if (total >= 0) {
-      setTimer({
-        days: days,
-        hours: hours < 10 ? `0${hours}` : hours,
-        minutes: minutes < 10 ? `0${minutes}` : minutes,
-        seconds: seconds < 10 ? `0${seconds}` : seconds,
-      });
-    }
-  };
-
-  const clearTimer = (e) => {
-    setTimer({
-      days: 0,
-      hours: "00",
-      minutes: "00",
-      seconds: "00",
-    });
-    if (Ref.current) clearInterval(Ref.current);
-    const id = setInterval(() => {
-      startTimer(e);
-    }, 1000);
-    Ref.current = id;
-  };
-
-  const getDeadTime = () => {
-    let deadline = new Date();
-    deadline.setSeconds(deadline.getSeconds() + 360000);
-    return deadline;
-  };
-  useEffect(() => {
-    clearTimer(getDeadTime());
-  }, []);
 
   return (
     <>
@@ -386,24 +327,7 @@ function InvestedProjectDetails() {
                     </div>
                   </div>
                   <p className="font-light mt-5">NEXT PAYMENT IN</p>
-                  <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer px-10 py-4">
-                    <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                      <div className="font-extrabold">{timer.days}</div>
-                      <div className="font-normal">days</div>
-                    </div>
-                    <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                      <div className="font-extrabold">{timer.hours}</div>
-                      <div className="font-normal">hours</div>
-                    </div>
-                    <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                      <div className="font-extrabold">{timer.minutes}</div>
-                      <div className="font-normal">min</div>
-                    </div>
-                    <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                      <div className="font-extrabold">{timer.seconds}</div>
-                      <div className="font-normal">sec</div>
-                    </div>
-                  </div>
+                  <Timer date={new Date(76767677676767676767)} />
                   <div
                     className={
                       project?.withdrawAllowed ? "" : "cursor-not-allowed"

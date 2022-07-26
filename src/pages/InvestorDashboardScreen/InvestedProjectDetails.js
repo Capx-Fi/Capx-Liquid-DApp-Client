@@ -36,6 +36,7 @@ import Level3CTA from "../../components/CTA/Level3CTA";
 import InvestedDetailsLoading from "./InvestedDetailsLoading";
 import Pagination from "../../components/Pagination";
 import { useHistory, useLocation } from "react-router-dom";
+import UnlockCard from "../../components/UnlockCard/UnlockCard";
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
 
@@ -66,24 +67,6 @@ function InvestedProjectDetails() {
   const capxContract =
     web3 && new web3.eth.Contract(CONTRACT_ABI_CAPX, contractAddress);
   // console.dir(capxContract);
-
-  const data = [
-    "16th July, 2020",
-    "17th July, 2020",
-    "18th July, 2020",
-    "19th July, 2020",
-    "20th July, 2020",
-    "21st July, 2020",
-  ];
-
-  const [currentpage, setCurrentpage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(3);
-  const indexOfLastItem = currentpage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems =
-    data.length > 0 ? data.slice(indexOfFirstItem, indexOfLastItem) : [];
-
-  const paginate = (pageNumber) => setCurrentpage(pageNumber);
 
   // console.log(account);
   const graphURL = chainId && getGraphURL(chainId);
@@ -133,12 +116,23 @@ function InvestedProjectDetails() {
   const history = useHistory();
   const location = useLocation();
   const project = location?.state?.project;
+  const projectOverview = location?.state?.projectOverview;
 
-  console.log(project, "investedDetail");
-  if (!project) {
+  const data = project?.details;
+
+  const [currentpage, setCurrentpage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const indexOfLastItem = currentpage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems =
+    data.length > 0 ? data.slice(indexOfFirstItem, indexOfLastItem) : [];
+
+  const paginate = (pageNumber) => setCurrentpage(pageNumber);
+
+  console.log(project, projectOverview, "investedDetail");
+  if (!project || !projectOverview) {
     history.push("/investors");
   }
-
   //timer
 
   const Ref = useRef(null);
@@ -243,7 +237,8 @@ function InvestedProjectDetails() {
                   clipRule="evenodd"
                 />
               </svg>
-              {project?.projectName} ({project?.projectTokenTicker})
+              {projectOverview?.details?.projectName} (
+              {projectOverview?.details?.projectTokenTicker})
             </div>
             <div className="investedprojectdetails_maincontainer_innercontainer">
               <WithdrawModal
@@ -259,82 +254,30 @@ function InvestedProjectDetails() {
                     <div className="w-full mx-auto">
                       <p className="font-light mb-10">{showtype}</p>
                       <p className="font-bold text-xl">
-                        <span className="text-3xl">0</span>.000
+                        <span className="text-3xl">
+                          {convertToInternationalCurrencySystem(
+                            showtype === "UNLOCKED"
+                              ? project?.unlockedTokens
+                              : project?.withdrawnTokens
+                          )}
+                        </span>
                       </p>
                       <p className="text-sm text-gray-500">
-                        /4.00000 {project?.projectTokenTicker}
+                        /
+                        {convertToInternationalCurrencySystem(
+                          project?.totalAllocatedTokens
+                        )}{" "}
+                        {projectOverview?.details?.projectTokenTicker}
                       </p>
                     </div>
                   </div>
                   <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection">
                     {currentItems.map(function (unlock) {
                       return (
-                        <Popup
-                          on={"hover"}
-                          arrow={false}
-                          offsetX={14}
-                          offsetY={-10}
-                          trigger={
-                            <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection_minidetailcard">
-                              <p className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection_minidetailcard_title">
-                                Unlock
-                              </p>
-                              <div className="flex flex-col">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="h-6 w-6 text-primary-green-400 mx-auto"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                  strokeWidth={2}
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                                  />
-                                </svg>
-                                <p>0.000 {project?.projectTokenTicker}</p>
-                                <p className="investedprojectdetails_maincontainer_innercontainer_detailsection_leftdiv_minidetailsection_minidetailcard_value">
-                                  {unlock}
-                                </p>
-                              </div>
-                            </div>
-                          }
-                          position="right top"
-                        >
-                          <div className="border-2 border-primary-green-300 bg-white rounded-lg shadow-md p-5">
-                            <p className="font-light text-sm mb-2">
-                              Unlocks in
-                            </p>
-                            <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer">
-                              <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                                <div className="font-extrabold">
-                                  {timer.days}
-                                </div>
-                                <div className="font-normal">days</div>
-                              </div>
-                              <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                                <div className="font-extrabold">
-                                  {timer.hours}
-                                </div>
-                                <div className="font-normal">hours</div>
-                              </div>
-                              <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                                <div className="font-extrabold">
-                                  {timer.minutes}
-                                </div>
-                                <div className="font-normal">min</div>
-                              </div>
-                              <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_timer_timercard">
-                                <div className="font-extrabold">
-                                  {timer.seconds}
-                                </div>
-                                <div className="font-normal">sec</div>
-                              </div>
-                            </div>
-                          </div>
-                        </Popup>
+                        <UnlockCard
+                          unlock={unlock}
+                          projectOverview={projectOverview}
+                        />
                       );
                     })}
                   </div>
@@ -348,7 +291,7 @@ function InvestedProjectDetails() {
                   </div>
                   <div className="mx-auto flex flex-row gap-x-4">
                     <Level3CTA
-                      text={"Details"}
+                      text={"History"}
                       svgIcon={
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -356,10 +299,9 @@ function InvestedProjectDetails() {
                           viewBox="0 0 20 20"
                           fill="currentColor"
                         >
-                          <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2h-1.528A6 6 0 004 9.528V4z" />
                           <path
                             fillRule="evenodd"
-                            d="M8 10a4 4 0 00-3.446 6.032l-1.261 1.26a1 1 0 101.414 1.415l1.261-1.261A4 4 0 108 10zm-2 4a2 2 0 114 0 2 2 0 01-4 0z"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                             clipRule="evenodd"
                           />
                         </svg>
@@ -387,18 +329,29 @@ function InvestedProjectDetails() {
 
                 <div className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv">
                   <div
-                    className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_percentagecard"
+                    className="investedprojectdetails_maincontainer_innercontainer_detailsection_rightdiv_percentagecard hover:bg-primary-green-100 cursor-pointe"
                     onMouseEnter={() => setShowtype("UNLOCKED")}
                   >
                     <div className="flex flex-row justify-between">
                       <div>Unlocked</div>
-                      <div>45%</div>
+                      <div>
+                        {Math.round(
+                          project?.unlockedTokens /
+                            project?.totalAllocatedTokens
+                        ) * 100}
+                        %
+                      </div>
                     </div>
-                    <div className="w-full bg-gray-200 h-2 mt-2 rounded-md hover:bg-primary-green-100 cursor-pointer">
+                    <div className="w-full bg-gray-200 h-2 mt-2 rounded-md r">
                       <div
                         className="bg-primary-green-400 h-2 rounded-md"
                         style={{
-                          width: "45%",
+                          width: `${
+                            Math.round(
+                              project?.unlockedTokens /
+                                project?.totalAllocatedTokens
+                            ) * 100
+                          }%`,
                         }}
                       ></div>
                     </div>
@@ -410,13 +363,24 @@ function InvestedProjectDetails() {
                   >
                     <div className="flex flex-row justify-between">
                       <div>Withdrawn</div>
-                      <div>35%</div>
+                      <div>
+                        {Math.round(
+                          project?.withdrawnTokens /
+                            project?.totalAllocatedTokens
+                        ) * 100}
+                        %
+                      </div>
                     </div>
                     <div className="w-full bg-gray-200 h-2 mt-2 rounded-md">
                       <div
                         className="bg-primary-green-400 h-2 rounded-md"
                         style={{
-                          width: "35%",
+                          width: `${
+                            Math.round(
+                              project?.withdrawnTokens /
+                                project?.totalAllocatedTokens
+                            ) * 100
+                          }%`,
                         }}
                       ></div>
                     </div>

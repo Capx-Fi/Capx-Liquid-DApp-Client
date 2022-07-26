@@ -147,9 +147,9 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
     let projectInvestorData = {};
     let projectUnlockedTokens = {};
     let projectTotalTokens = {};
-    
-    investorData.forEach(function(investor, index) {
-      if(!projectData[investor.projectTokenAddress]) {
+
+    investorData.forEach(function (investor, index) {
+      if (!projectData[investor.projectTokenAddress]) {
         projectData[investor.projectTokenAddress] = {
           date: investor.date,
           projectName: investor.projectName,
@@ -157,33 +157,39 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
           projectTokenTicker: investor.projectTokenTicker,
           projectTokenDecimal: investor.projectTokenDecimal,
           totalAllocatedTokens: investor.numOfTokens,
-          upcomingUnlockDate: investor.unlockDate
-        }
-        if(projectTotalTokens[investor.projectTokenAddress] == undefined){
+          upcomingUnlockDate: investor.unlockDate,
+        };
+        if (projectTotalTokens[investor.projectTokenAddress] == undefined) {
           projectTotalTokens[investor.projectTokenAddress] = 0;
         }
-        projectTotalTokens[investor.projectTokenAddress] = projectTotalTokens[investor.projectTokenAddress] + parseInt(investor.numOfTokens);
+        projectTotalTokens[investor.projectTokenAddress] =
+          projectTotalTokens[investor.projectTokenAddress] +
+          parseInt(investor.numOfTokens);
       } else {
-        if(projectData[investor.projectTokenAddress].date > investor.date){
+        if (projectData[investor.projectTokenAddress].date > investor.date) {
           projectData[investor.projectTokenAddress].date = investor.date;
-          projectData[investor.projectTokenAddress].upcomingUnlockDate = investor.unlockDate;
+          projectData[investor.projectTokenAddress].upcomingUnlockDate =
+            investor.unlockDate;
         }
-        projectTotalTokens[investor.projectTokenAddress] = projectTotalTokens[investor.projectTokenAddress] + parseInt(investor.numOfTokens);
-        projectData[investor.projectTokenAddress].allocatedTokens += investor.numOfTokens; 
+        projectTotalTokens[investor.projectTokenAddress] =
+          projectTotalTokens[investor.projectTokenAddress] +
+          parseInt(investor.numOfTokens);
+        projectData[investor.projectTokenAddress].allocatedTokens +=
+          investor.numOfTokens;
       }
     });
 
-    const returnProject = Object.entries(projectData).map(([key,value]) => {
+    const returnProject = Object.entries(projectData).map(([key, value]) => {
       return {
         projectID: key,
-        details: value
-      }
+        details: value,
+      };
     });
 
     console.log("Project Data", returnProject);
 
-    investorData.forEach(function(investor, index) {
-      if(!projectInvestorData[investor.projectTokenAddress]) {
+    investorData.forEach(function (investor, index) {
+      if (!projectInvestorData[investor.projectTokenAddress]) {
         let data = {
           date: investor.date,
           unlockDate: investor.unlockDate,
@@ -194,13 +200,15 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
           withdrawAllowed: investor.withdrawAllowed,
           holderAddress: investor.holderAddress,
           vestID: investor.vestID,
-          displayDate: investor.displayDate
+          displayDate: investor.displayDate,
         };
-        if(projectUnlockedTokens[investor.projectTokenAddress] == undefined){
+        if (projectUnlockedTokens[investor.projectTokenAddress] == undefined) {
           projectUnlockedTokens[investor.projectTokenAddress] = 0;
         }
-        if(investor.withdrawAllowed) {
-          projectUnlockedTokens[investor.projectTokenAddress] = projectUnlockedTokens[investor.projectTokenAddress] + parseInt(investor.numOfTokens);
+        if (investor.withdrawAllowed) {
+          projectUnlockedTokens[investor.projectTokenAddress] =
+            projectUnlockedTokens[investor.projectTokenAddress] +
+            parseInt(investor.numOfTokens);
         }
         projectInvestorData[investor.projectTokenAddress] = [data];
       } else {
@@ -214,27 +222,31 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
           withdrawAllowed: investor.withdrawAllowed,
           holderAddress: investor.holderAddress,
           vestID: investor.vestID,
-          displayDate: investor.displayDate
+          displayDate: investor.displayDate,
         };
-        if(investor.withdrawAllowed) {
-          projectUnlockedTokens[investor.projectTokenAddress] = projectUnlockedTokens[investor.projectTokenAddress] + parseInt(investor.numOfTokens);
+        if (investor.withdrawAllowed) {
+          projectUnlockedTokens[investor.projectTokenAddress] =
+            projectUnlockedTokens[investor.projectTokenAddress] +
+            parseInt(investor.numOfTokens);
         }
         projectInvestorData[investor.projectTokenAddress].push(data);
       }
     });
 
-    const returnProjectInvestor = Object.entries(projectInvestorData).map(([key,value]) => {
-      return {
-        projectID: key,
-        withdrawnTokens: 0,
-        unlockedTokens: projectUnlockedTokens[key],
-        totalAllocatedTokens: projectTotalTokens[key],
-        details: value
+    const returnProjectInvestor = Object.entries(projectInvestorData).map(
+      ([key, value]) => {
+        return {
+          projectID: key,
+          withdrawnTokens: 0,
+          unlockedTokens: projectUnlockedTokens[key],
+          totalAllocatedTokens: projectTotalTokens[key],
+          details: value,
+        };
       }
-    })
-    console.log("Project Investor Date",returnProjectInvestor);
+    );
+    console.log("Project Investor Date", returnProjectInvestor);
 
-    return investorData;
+    return { investorData, returnProject, returnProjectInvestor };
   } catch (e) {
     console.log(e);
   }

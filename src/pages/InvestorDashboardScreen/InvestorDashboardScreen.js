@@ -91,6 +91,7 @@ function InvestorDashboardScreen() {
         setOwnedProjectsData(projects);
       } else {
         let projects = await fetchInvestorDashboard(account, graphURL);
+        console.log(projects.returnProject);
         setOwnedProjectsData(projects);
       }
     }
@@ -145,7 +146,7 @@ function InvestorDashboardScreen() {
     <>
       {!active ? (
         <WalletModal modalMode={modalMode} setModalMode={setModalMode} />
-      ) : !ownedProjectsData ? (
+      ) : !ownedProjectsData?.returnProject ? (
         <article className="investordashboardscreen">
           <Header hiddenSwitch={true} />
           <section className="investordashboardscreen_maincontainer">
@@ -161,7 +162,7 @@ function InvestorDashboardScreen() {
           </section>
           <Footer />
         </article>
-      ) : ownedProjectsData.length === 0 ? (
+      ) : ownedProjectsData?.returnProject.length === 0 ? (
         <NothingHereInvestorDashboard />
       ) : (
         <article
@@ -186,16 +187,20 @@ function InvestorDashboardScreen() {
                 withdrawModalStatus={withdrawModalStatus}
                 setWithdrawModalStatus={setWithdrawModalStatus}
               />
-              {ownedProjectsData?.map((project) => {
+              {ownedProjectsData?.returnProject.map((project, index) => {
                 return (
                   <div
                     onClick={() =>
                       history.push({
-                        pathname: `/investor/${project.derivativeID}`,
-                        state: { project: project },
+                        pathname: `/investor/${project?.projectID}`,
+                        state: {
+                          project:
+                            ownedProjectsData?.returnProjectInvestor[index],
+                          projectOverview: project,
+                        },
                       })
                     }
-                    key={`${project.derivativeID}+${project.holderAddress}`}
+                    key={`${project?.projectID}+${project?.details?.projectOwner}`}
                     className="hover:border-primary-green-400 hover:shadow-lg investordashboardscreen_maincontainer_innercontainer_projectcontainer cursor-pointer"
                   >
                     <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_leftcontainer">
@@ -204,7 +209,8 @@ function InvestorDashboardScreen() {
                           Project Details
                         </div>
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_value">
-                          {project.projectName} ({project.projectTokenTicker})
+                          {project?.details?.projectName} (
+                          {project?.details?.projectTokenTicker})
                         </div>
                       </div>
                       <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox">
@@ -213,7 +219,7 @@ function InvestorDashboardScreen() {
                         </div>
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_value">
                           {convertToInternationalCurrencySystem(
-                            project.numOfTokens
+                            project?.details?.totalAllocatedTokens
                           )}
                         </div>
                       </div>
@@ -222,7 +228,7 @@ function InvestorDashboardScreen() {
                           Next Unlock Date
                         </div>
                         <div className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_detailbox_value w-fit-content h-fit-content">
-                          {project.displayDate}
+                          {project?.details?.upcomingUnlockDate}
                           {/* <React.Fragment className="flex justify-between">
                             <span className="flex justify-between items-center font-bold pr-2">
                               <Lottie

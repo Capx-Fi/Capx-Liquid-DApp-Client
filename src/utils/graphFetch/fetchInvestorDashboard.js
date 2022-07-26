@@ -157,7 +157,7 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
           projectTokenTicker: investor.projectTokenTicker,
           projectTokenDecimal: investor.projectTokenDecimal,
           totalAllocatedTokens: investor.numOfTokens,
-          upcomingUnlockDate: investor.unlockDate,
+          upcomingUnlockDate: investor.displayDate,
         };
         if (projectTotalTokens[investor.projectTokenAddress] == undefined) {
           projectTotalTokens[investor.projectTokenAddress] = 0;
@@ -169,12 +169,12 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
         if (projectData[investor.projectTokenAddress].date > investor.date) {
           projectData[investor.projectTokenAddress].date = investor.date;
           projectData[investor.projectTokenAddress].upcomingUnlockDate =
-            investor.unlockDate;
+            investor.displayDate;
         }
         projectTotalTokens[investor.projectTokenAddress] =
           projectTotalTokens[investor.projectTokenAddress] +
           parseInt(investor.numOfTokens);
-        projectData[investor.projectTokenAddress].allocatedTokens +=
+        projectData[investor.projectTokenAddress].totalAllocatedTokens +=
           investor.numOfTokens;
       }
     });

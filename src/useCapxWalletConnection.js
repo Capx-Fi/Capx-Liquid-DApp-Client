@@ -22,6 +22,8 @@ import {
   SOLANA_CONTRACT_PUBLIC_KEY,
 } from "./constants/config";
 
+import CapxSolanaSDK from "@capx/capx-solana-sdk";
+
 function useCapxWalletConnection() {
   const [walletAvail, setWalletAvail] = useState(false);
   const [providerSolana, setProviderSolana] = useState(null);
@@ -69,11 +71,20 @@ function useCapxWalletConnection() {
     });
   }, [providerSolana]);
 
+  const client = new CapxSolanaSDK({
+    providerSolana: providerSolana,
+    clusterURL: "devnet",
+    commitment: "processed",
+    idl: idl,
+    publicKey: pubKey,
+  });
+
   const connectHandler = (event) => {
     console.log(`connect handler`);
-    providerSolana?.connect().catch((err) => {
-      console.error("connect ERROR:", err);
-    });
+    // providerSolana?.connect().catch((err) => {
+    //   console.error("connect ERROR:", err);
+    // });
+    client.connectWallet(1);
   };
 
   const disconnectHandler = (event) => {

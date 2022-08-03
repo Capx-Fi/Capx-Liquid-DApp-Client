@@ -10,15 +10,6 @@ const TokenModal = () => {
     const handleClose = () => setOpen(false);
     return (
         <>
-            <div className="form-item" onClick={handleOpen}>
-                <label htmlFor="token" className="block text-sm font-medium text-gray-700">
-                    Token
-                </label>
-                <div className="token-select formfeilds">
-                    <div className="text-placeholder">Select a currency</div>
-                    {/* <div className="text-placeholder">Select a currency</div> */}
-                </div>
-            </div>
             <div className="selectcurrency" onClick={handleOpen}>
                 Select
                 <svg width="23.616" height="13.503" viewBox="0 0 23.616 13.503">
@@ -39,6 +30,66 @@ const TokenModal = () => {
                     </div>
                     <h4 className='token-title'>Wallet Balances</h4>
                     <ul className='token-list'>
+                        <li>
+                            <div className='left-col'>
+                                <div className='icons'>
+                                    <img src={EtherLogo} />
+                                </div>
+                                <div>
+                                    <p>RIN</p>
+                                    <small>Rinkeby Ether</small>
+                                </div>
+                            </div>
+                            <div className='right-col'>0.00854</div>
+                        </li>
+                        <li>
+                            <div className='left-col'>
+                                <div className='icons'>
+                                    <img src={EtherLogo} />
+                                </div>
+                                <div>
+                                    <p>RIN</p>
+                                    <small>Rinkeby Ether</small>
+                                </div>
+                            </div>
+                            <div className='right-col'>0.00854</div>
+                        </li>
+                        <li>
+                            <div className='left-col'>
+                                <div className='icons'>
+                                    <img src={EtherLogo} />
+                                </div>
+                                <div>
+                                    <p>RIN</p>
+                                    <small>Rinkeby Ether</small>
+                                </div>
+                            </div>
+                            <div className='right-col'>0.00854</div>
+                        </li>
+                        <li>
+                            <div className='left-col'>
+                                <div className='icons'>
+                                    <img src={EtherLogo} />
+                                </div>
+                                <div>
+                                    <p>RIN</p>
+                                    <small>Rinkeby Ether</small>
+                                </div>
+                            </div>
+                            <div className='right-col'>0.00854</div>
+                        </li>
+                        <li>
+                            <div className='left-col'>
+                                <div className='icons'>
+                                    <img src={EtherLogo} />
+                                </div>
+                                <div>
+                                    <p>RIN</p>
+                                    <small>Rinkeby Ether</small>
+                                </div>
+                            </div>
+                            <div className='right-col'>0.00854</div>
+                        </li>
                         <li>
                             <div className='left-col'>
                                 <div className='icons'>

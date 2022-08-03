@@ -106,6 +106,54 @@ const TokenModal = () => {
                             </div>
                             <div className='right-col'>0.00854</div>
                         </li>
+                        <li>
+                            <div className='left-col'>
+                                <div className='icons'>
+                                    <img src={EtherLogo} />
+                                </div>
+                                <div>
+                                    <p>RIN</p>
+                                    <small>Rinkeby Ether</small>
+                                </div>
+                            </div>
+                            <div className='right-col'>0.00854</div>
+                        </li>
+                        <li>
+                            <div className='left-col'>
+                                <div className='icons'>
+                                    <img src={EtherLogo} />
+                                </div>
+                                <div>
+                                    <p>RIN</p>
+                                    <small>Rinkeby Ether</small>
+                                </div>
+                            </div>
+                            <div className='right-col'>0.00854</div>
+                        </li>
+                        <li>
+                            <div className='left-col'>
+                                <div className='icons'>
+                                    <img src={EtherLogo} />
+                                </div>
+                                <div>
+                                    <p>RIN</p>
+                                    <small>Rinkeby Ether</small>
+                                </div>
+                            </div>
+                            <div className='right-col'>0.00854</div>
+                        </li>
+                        <li>
+                            <div className='left-col'>
+                                <div className='icons'>
+                                    <img src={EtherLogo} />
+                                </div>
+                                <div>
+                                    <p>RIN</p>
+                                    <small>Rinkeby Ether</small>
+                                </div>
+                            </div>
+                            <div className='right-col'>0.00854</div>
+                        </li>
                     </ul>
                 </div>
             </Modal>

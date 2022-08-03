@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Footer from "../../../components/Footer/Footer";
 import Header from "../../../components/Header/Header";
 import TokenModal from "../TokenModal";
+import ProjectDropDown from "../../../components/ProjectDropdown/ProjectDropdown";
 import "./index.scss";
 
 const CreateSingle = () => {
@@ -132,7 +133,7 @@ const CreateSingle = () => {
                                                 <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
                                                     Cliff End Date
                                                 </label>
-                                                <input type="datetime-local" className="formfeilds" />
+                                                <input type="datetime-local" className="formfeilds" disabled />
                                             </div>
                                         </div>
 
@@ -141,7 +142,7 @@ const CreateSingle = () => {
                                                 <label htmlFor="recipient" className="block text-sm font-medium text-gray-700">
                                                     Cliff Amount
                                                 </label>
-                                                <div className="cliff-amount-col formfeilds">
+                                                <div className="cliff-amount-col formfeilds" disabled>
                                                     <input placeholder="0.00" />
                                                     <div className="bottom-label">Balance</div>
                                                 </div>
@@ -195,7 +196,7 @@ const CreateSingle = () => {
                                                 <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
                                                     Period Length
                                                 </label>
-                                                <select
+                                                {/* <select
                                                     id="country"
                                                     name="country"
                                                     className="formfeilds">
@@ -204,7 +205,8 @@ const CreateSingle = () => {
                                                     <option>Monthly</option>
                                                     <option>Quarterly</option>
                                                     <option>Yearly</option>
-                                                </select>
+                                                </select> */}
+                                                <ProjectDropDown></ProjectDropDown>
                                             </div>
                                         </div>
                                         <div className="col-span-12 sm:col-span-12 lg:col-span-12">

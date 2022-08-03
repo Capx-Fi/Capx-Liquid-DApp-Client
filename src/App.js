@@ -34,7 +34,7 @@ function App() {
               component={ProjectOwnerDashboardScreen}
             />
             <Route exact path="/1" component={ChooseWalletModal} />
-            <Route path="*" component={PageNotFound} />
+            {/* <Route path="*" component={PageNotFound} /> */}
             <Route exact path="/create-vesting" component={CreateVesting} />
             <Route exact path="/create-single-vesting" component={CreateSingle} />
             <Route exact path="/create-multiple-vesting" component={CreateMultiple} />

@@ -1,0 +1,179 @@
+
+.createvesting-wrapper{
+    .upper-section{
+        display: flex;
+        margin-top: 1.5rem;
+        @media screen and (max-width:767px) {
+            display: block;
+        }
+        .left-section{
+            width: 40%;
+            padding-right: 10%;
+            @media screen and (max-width:767px) {
+                width: 100%;
+            }
+            h3{
+                font-size: 1.5rem;
+                font-weight: 500;
+                margin-bottom: 0.5rem;
+            }
+            p{
+                margin-bottom: 0.8rem;
+            }
+            button{
+                background: #8DBC1A;
+                color: #ffffff;
+                height: 45px;
+                padding: 0 20px;
+                border-radius: 10px;
+                margin-top: 10px;
+                display: flex;
+                align-items: center;
+                svg{
+                    width: 20px;
+                    margin-right: 10px;
+                }
+            }
+        }
+        .right-drop{
+            width: 60%;
+            @media screen and (max-width:767px) {
+                width: 100%;
+                margin-top: 1rem;
+            }
+        }
+    }
+    .bottom-section{
+        margin-top: 3rem;
+        .bottom-title{
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .vestings-table{
+            .vestings-table-th{
+                display: flex;
+                background: #cccc;
+                border-radius: 15px 15px 0 0;
+                .th-col{
+                    width: 10%;
+                    padding: 14px 8px 14px 15px;
+                    &:nth-child(2){
+                        width: 15%;
+                    }
+                    &:nth-child(4){
+                        width: 20%;
+                    }
+                    &:nth-child(5){
+                        width: 20%;
+                    }
+                    &:nth-child(6){
+                        width: 15%;
+                    }
+                }
+            }
+            .vestings-table-td{
+                display: flex;
+                background: #e9e9e9;
+                &:last-child{
+                    border-radius: 0 0 15px 15px;
+                }
+                .td-col{
+                    width: 10%;
+                    padding: 14px 8px 14px 15px;
+                    &:nth-child(2){
+                        width: 15%;
+                    }
+                    &:nth-child(4){
+                        width: 20%;
+                    }
+                    &:nth-child(5){
+                        width: 20%;
+                    }
+                    &:nth-child(6){
+                        width: 15%;
+                    }
+                }
+                input{
+                    &:focus{
+                        outline: none;
+                    }
+                }
+                .selectcurrency{
+                    display: flex;
+                    align-items: center;
+                    svg{
+                        width: 12px;
+                        margin-left: 8px;
+                    }
+                }
+                .recipient-input{
+                    height: 100%;
+                    box-shadow: none;
+                    outline: none;
+                    width: 90%;
+                    background: none;
+                }
+                .start-date{
+                    width: 90%;
+                    background: none;
+                }
+                .selectsource{
+                    max-width: 96%;
+                    background: none;
+                }
+                .vs-edit-col{
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    svg{
+                        margin-left: 2px;
+                    }
+                    &:hover{
+                        color: #8DBC1A;
+                        svg{
+                            fill: #8DBC1A;
+                        }
+                    }
+                }
+                .add-items-btn{
+                    cursor: pointer;
+                }
+            }
+            .expaned-row{
+                background: #f7f7f7;
+                .amount-number{
+                    background: #ffffff;
+                }
+                .save-btn{
+                    background: #8DBC1A;
+                    color: #ffffff;
+                    height: 45px;
+                    padding: 0 20px;
+                    border-radius: 10px;
+                    margin-top: 0;
+                    width: 80px;
+                }
+            }
+            .hint-text{
+                font-size: 11px;
+                max-width: 240px;
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.max-w240{
+    max-width: 240px;
+}
+
+.createvestins-btn{
+    background: #8DBC1A;
+    color: #ffffff;
+    height: 45px;
+    padding: 0 20px;
+    border-radius: 10px;
+    margin-top: 0;
+    width: 180px;
+}

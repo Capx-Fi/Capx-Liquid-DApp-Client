@@ -8,6 +8,9 @@ import LoadingScreen from "./containers/LoadingScreen";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Landing from "./components/Landing/Landing";
 import ChooseWalletModal from "./components/Modal/ChooseWalletModal/ChooseWalletModal";
+import CreateVesting from "./containers/CreateVesting";
+import CreateSingle from "./containers/CreateVesting/CreateSingle";
+import CreateMultiple from "./containers/CreateVesting/CreateMultiple";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -32,6 +35,9 @@ function App() {
             />
             <Route exact path="/1" component={ChooseWalletModal} />
             <Route path="*" component={PageNotFound} />
+            <Route exact path="/create-vesting" component={CreateVesting} />
+            <Route exact path="/create-single-vesting" component={CreateSingle} />
+            <Route exact path="/create-multiple-vesting" component={CreateMultiple} />
           </Switch>
         </Router>
       )}

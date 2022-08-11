@@ -26,7 +26,7 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/" component={Landing} />
-            <Route exact path="/vesting" component={VestingScreen} />
+            {/*  <Route exact path="/vesting" component={VestingScreen} /> */}
             <Route exact path="/investor" component={InvestorDashboardScreen} />
             <Route
               exact
@@ -35,9 +35,17 @@ function App() {
             />
             <Route exact path="/1" component={ChooseWalletModal} />
             {/* <Route path="*" component={PageNotFound} /> */}
-            <Route exact path="/create-vesting" component={CreateVesting} />
-            <Route exact path="/create-single-vesting" component={CreateSingle} />
-            <Route exact path="/create-multiple-vesting" component={CreateMultiple} />
+            <Route exact path="/vesting" component={CreateVesting} />
+            <Route
+              exact
+              path="/create-single-vesting"
+              component={CreateSingle}
+            />
+            <Route
+              exact
+              path="/create-multiple-vesting"
+              component={CreateMultiple}
+            />
           </Switch>
         </Router>
       )}

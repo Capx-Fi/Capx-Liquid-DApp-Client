@@ -14,6 +14,12 @@ export const parseSheetObj = async (ws) => {
     let sB = "B" + index.toString();
     let sC = "C" + index.toString();
     let sD = "D" + index.toString();
+    let sE = "E" + index.toString();
+    let sF = "F" + index.toString();
+    let sG = "G" + index.toString();
+    let sH = "H" + index.toString();
+    let sI = "I" + index.toString();
+    let sJ = "J" + index.toString();
 
     // check if there are correct value in these
 
@@ -36,6 +42,36 @@ export const parseSheetObj = async (ws) => {
       objc[ws["D1"]["w"]] = ws[sD]["w"];
     } else {
       if (ws["D1"] !== undefined) objc[ws["D1"]["w"]] = undefined;
+    }
+    if (ws[sE] !== undefined && ws["E1"] !== undefined) {
+      objc[ws["E1"]["w"]] = ws[sE]["w"];
+    } else {
+      if (ws["E1"] !== undefined) objc[ws["E1"]["w"]] = undefined;
+    }
+    if (ws[sF] !== undefined && ws["F1"] !== undefined) {
+      objc[ws["F1"]["w"]] = ws[sF]["w"];
+    } else {
+      if (ws["F1"] !== undefined) objc[ws["F1"]["w"]] = undefined;
+    }
+    if (ws[sG] !== undefined && ws["G1"] !== undefined) {
+      objc[ws["G1"]["w"]] = ws[sG]["w"];
+    } else {
+      if (ws["G1"] !== undefined) objc[ws["G1"]["w"]] = undefined;
+    }
+    if (ws[sH] !== undefined && ws["H1"] !== undefined) {
+      objc[ws["H1"]["w"]] = ws[sH]["w"];
+    } else {
+      if (ws["H1"] !== undefined) objc[ws["H1"]["w"]] = undefined;
+    }
+    if (ws[sI] !== undefined && ws["I1"] !== undefined) {
+      objc[ws["I1"]["w"]] = ws[sI]["w"];
+    } else {
+      if (ws["I1"] !== undefined) objc[ws["I1"]["w"]] = undefined;
+    }
+    if (ws[sJ] !== undefined && ws["J1"] !== undefined) {
+      objc[ws["J1"]["w"]] = ws[sJ]["w"];
+    } else {
+      if (ws["J1"] !== undefined) objc[ws["J1"]["w"]] = undefined;
     }
     listOfObjs.push(objc);
     // console.log(ws, "sheetdata");

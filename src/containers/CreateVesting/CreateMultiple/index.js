@@ -1,15 +1,138 @@
-import { Switch } from "@material-ui/core";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
+import { Link, useHistory } from "react-router-dom";
+import Web3 from "web3";
+import XLSX from "xlsx";
 import Footer from "../../../components/Footer/Footer";
 import Header from "../../../components/Header/Header";
-import TokenModal from "./TokenModal";
-import { Link } from "react-router-dom";
-import ProjectDropDown from "../../../components/ProjectDropdown/ProjectDropdown";
-import "./index.scss";
-import useWagmi from "../../../useWagmi";
 import WalletModal from "../../../components/Modal/WalletModal/WalletModal";
+import useWagmi from "../../../useWagmi";
+import { parseSheetObj } from "../../../utils/parseSheetObject";
+import "./index.scss";
+import TableListItem from "./TableListItem";
 
 const CreateMultiple = () => {
+  const { active, account, chainId, connector, provider } = useWagmi();
+  const [step, setStep] = useState(1);
+  const [modalMode, setModalMode] = useState(0);
+  const [showSteps, setShowSteps] = useState(true);
+  useEffect(() => {
+    setShowSteps(true);
+    setStep(1);
+  }, [account, chainId]);
+  const [approveModalOpen, setApproveModalOpen] = useState(false);
+  const [vestModalOpen, setVestModalOpen] = useState(false);
+  const history = useHistory();
+
+  const [web3, setWeb3] = useState(null);
+
+  const setupProvider = async () => {
+    let result = await connector?.getProvider().then((res) => {
+      return res;
+    });
+    return result;
+  };
+
+  useEffect(() => {
+    active &&
+      provider.then((res) => {
+        setWeb3(new Web3(res));
+      });
+  }, [active, chainId]);
+
+  // web3 && console.log(web3);
+
+  if (step === 0) {
+    history.push("/");
+  }
+
+  const [contractDetails, setContractDetails] = useState({
+    contractAddress: null,
+    projectTitle: "",
+    projectDescription: "",
+    uploadedFile: null,
+    vestingArray: [],
+    error: null,
+  });
+  const [tokenDetails, setTokenDetails] = useState({
+    ticker: "",
+    decimal: null,
+    valid: false,
+  });
+  const [projectExists, setProjectExists] = useState({
+    name: "",
+    description: null,
+    exists: false,
+  });
+
+  const setContractAddress = (addr) => {
+    setContractDetails({
+      ...contractDetails,
+      contractAddress: addr,
+      projectTitle: "",
+      projectDescription: "",
+    });
+  };
+
+  const setProjectTitle = (name) => {
+    setContractDetails({ ...contractDetails, projectTitle: name });
+  };
+
+  const setProjectDescription = (desc) => {
+    setContractDetails({ ...contractDetails, projectDescription: desc });
+  };
+
+  const setVestingData = (data, name) => {
+    setContractDetails({
+      ...contractDetails,
+      vestingArray: data,
+      uploadedFile: name,
+      error: null,
+    });
+  };
+
+  const addVestingRow = () => {
+    let currentArray = contractDetails.vestingArray;
+    currentArray.push({ Address: null });
+    setContractDetails({
+      ...contractDetails,
+      vestingArray: currentArray,
+      error: null,
+    });
+  };
+  const setVestingDataSellable = (data) => {
+    setContractDetails({
+      ...contractDetails,
+      vestingArray: data,
+      error: null,
+    });
+  };
+
+  const setVestingDataWrapped = (data) => {
+    setContractDetails({
+      ...contractDetails,
+      vestingArray: data,
+      error: null,
+    });
+  };
+
+  const setUploadErrors = (data, file) => {
+    setContractDetails({
+      ...contractDetails,
+      error: data,
+      vestingArray: [],
+      uploadedFile: file,
+    });
+  };
+
+  const setUploadedFile = (data) => {
+    setContractDetails({ ...contractDetails, uploadedFile: data });
+  };
+
+  const resetUploadedFile = (data) => {
+    setContractDetails({ ...contractDetails, uploadedFile: null });
+  };
+
   const [isActive, setActive] = useState(false);
 
   const handleToggle = () => {
@@ -30,8 +153,60 @@ const CreateMultiple = () => {
   let handleChange = (e) => {
     setNum(e.target.value);
   };
-  const { active } = useWagmi();
-  const [modalMode, setModalMode] = useState(0);
+
+  useEffect(() => {
+    console.log(contractDetails);
+  }, [contractDetails]);
+
+  //DropZone Data
+  const SheetJSFT = ["xlsx", "xlsb", "xlsm", "xls", "xml", "csv", "txt"]
+    .map((x) => `.${x}`)
+    .join(",");
+
+  const defaultWeb3 = new Web3(
+    "https://rinkeby.infura.io/v3/6351bb49adde41ec86bd60b451b9f1c5"
+  );
+
+  const onDrop = async (acceptedFiles) => {
+    acceptedFiles.forEach((file) => {
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onload = (e) => {
+        const ab = e.target.result;
+        const wb = XLSX.read(ab, { type: "array" });
+        const wsname = wb.SheetNames[0];
+        const ws = wb.Sheets[wsname];
+        parseSheetObj(ws).then((res) => {
+          console.log(res, "parseResponse");
+
+          // TODO: Set Errors
+          // let errors = verifyVestingData(
+          //   res,
+          //   defaultWeb3,
+          //   tokenDetails.decimal
+          // );
+
+          let errors = [];
+
+          if (errors.length === 0) {
+            res = res.map((v) => ({ ...v, isSellable: true, isWrapped: true }));
+
+            setVestingData(res, file);
+          } else setUploadErrors(errors, file);
+        });
+
+        // setVestingData(data);
+        // verifyVestingData(data);
+      };
+    });
+  };
+
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+    disabled: false,
+    accept: SheetJSFT,
+    onDrop,
+  });
+
   return active ? (
     <article className="m-auto flex">
       <Header />
@@ -62,17 +237,19 @@ const CreateMultiple = () => {
               effort! Please use the demo file to check if your data is
               formatted correctly.
             </p>
-            <button>
-              <svg width="29.5" height="29.5" viewBox="0 0 29.5 29.5">
-                <path
-                  d="M4.25,29.5A4.255,4.255,0,0,1,0,25.25v-6a1.25,1.25,0,1,1,2.5,0v6A1.751,1.751,0,0,0,4.25,27h21A1.751,1.751,0,0,0,27,25.25v-6a1.25,1.25,0,1,1,2.5,0v6a4.255,4.255,0,0,1-4.25,4.25Zm10.5-9h-.092l-.023,0h-.007l-.026,0h0l-.028,0h0a1.242,1.242,0,0,1-.233-.057h0l-.025-.009,0,0-.023-.009-.007,0-.021-.009-.009,0-.018-.008-.011-.005-.016-.008-.013-.006-.014-.007-.013-.007-.013-.007-.014-.008-.012-.007-.014-.008-.013-.008-.013-.008-.014-.009-.011-.007-.016-.011-.009-.006-.018-.013-.006,0-.021-.016,0,0a1.258,1.258,0,0,1-.128-.114l-7.491-7.49a1.251,1.251,0,0,1,1.768-1.768L13.5,16.232V1.25a1.25,1.25,0,0,1,2.5,0V16.232l5.366-5.367a1.25,1.25,0,0,1,1.768,1.768l-7.49,7.49a1.257,1.257,0,0,1-.179.152h0l-.024.016,0,0-.024.015h0l-.025.015h0a1.242,1.242,0,0,1-.515.167h0l-.028,0H14.75Z"
-                  fill="#fff"
-                />
-              </svg>
-              Example
-            </button>
+            <a href="/vesting-sheet-template.xlsx" download>
+              <button>
+                <svg width="29.5" height="29.5" viewBox="0 0 29.5 29.5">
+                  <path
+                    d="M4.25,29.5A4.255,4.255,0,0,1,0,25.25v-6a1.25,1.25,0,1,1,2.5,0v6A1.751,1.751,0,0,0,4.25,27h21A1.751,1.751,0,0,0,27,25.25v-6a1.25,1.25,0,1,1,2.5,0v6a4.255,4.255,0,0,1-4.25,4.25Zm10.5-9h-.092l-.023,0h-.007l-.026,0h0l-.028,0h0a1.242,1.242,0,0,1-.233-.057h0l-.025-.009,0,0-.023-.009-.007,0-.021-.009-.009,0-.018-.008-.011-.005-.016-.008-.013-.006-.014-.007-.013-.007-.013-.007-.014-.008-.012-.007-.014-.008-.013-.008-.013-.008-.014-.009-.011-.007-.016-.011-.009-.006-.018-.013-.006,0-.021-.016,0,0a1.258,1.258,0,0,1-.128-.114l-7.491-7.49a1.251,1.251,0,0,1,1.768-1.768L13.5,16.232V1.25a1.25,1.25,0,0,1,2.5,0V16.232l5.366-5.367a1.25,1.25,0,0,1,1.768,1.768l-7.49,7.49a1.257,1.257,0,0,1-.179.152h0l-.024.016,0,0-.024.015h0l-.025.015h0a1.242,1.242,0,0,1-.515.167h0l-.028,0H14.75Z"
+                    fill="#fff"
+                  />
+                </svg>
+                Example
+              </button>
+            </a>
           </div>
-          <div className="right-drop">
+          <div className="right-drop" {...getRootProps()}>
             <div className="mt-1 flex justify-center px-6 pt-8 pb-9 border-2 border-gray-300 border-dashed rounded-md">
               <div className="space-y-1 text-center">
                 <svg
@@ -89,6 +266,7 @@ const CreateMultiple = () => {
                   >
                     <span>Select a CSV file to upload</span>
                     <input
+                      {...getInputProps()}
                       id="file-upload"
                       name="file-upload"
                       type="file"
@@ -113,200 +291,16 @@ const CreateMultiple = () => {
               <div className="th-col">Vesting Schedule</div>
               <div className="th-col"></div>
             </div>
-            <div class="vestings-table-td">
-              <div className="td-col">
-                <TokenModal />
-              </div>
-              <div className="td-col">
-                <input className="recipient-input" placeholder="0x..." />
-              </div>
-              <div className="td-col">
-                <select className="selectsource">
-                  <option>Select</option>
-                  <option>Wallet</option>
-                  <option>BentoBox</option>
-                </select>
-              </div>
-              <div className="td-col">
-                <input type="datetime-local" className="start-date" />
-              </div>
-              <div className="td-col">0.00</div>
-              <div className="td-col">
-                <div className="vs-edit-col" onClick={handleToggle}>
-                  Weekly
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                    width="16"
-                    height="16"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                    ></path>
-                  </svg>
-                </div>
-              </div>
-              <div className="td-col">
-                <button className="mr-2">
-                  <svg
-                    viewBox="0 0 20 20"
-                    fill="#e74c3c"
-                    aria-hidden="true"
-                    width="20"
-                    height="20"
-                    class="text-red"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </button>
-                <button>
-                  <svg
-                    viewBox="0 0 20 20"
-                    fill="#66880f"
-                    aria-hidden="true"
-                    width="20"
-                    height="20"
-                    class="text-slate-300"
-                  >
-                    <path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z"></path>
-                    <path d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-            {isActive ? (
-              <div className="expaned-row">
-                <div className="flex flex-col flex-grow gap-6 p-6">
-                  <div className="flex gap-6 items-center">
-                    <div className="form-item flex items-center">
-                      <label
-                        htmlFor="enable-cliff"
-                        className="block text-sm font-medium text-gray-700 mb-0"
-                      >
-                        Enable Cliff
-                      </label>
-                      <Switch color="primary" />
-                    </div>
-                  </div>
-                  <div className="flex gap-6">
-                    <div className="form-item">
-                      <label
-                        htmlFor="street-address"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Cliff End Date
-                      </label>
-                      <input type="datetime-local" className="formfeilds" />
-                    </div>
-                    <div className="form-item">
-                      <label
-                        htmlFor="cliff-amount"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Cliff Amount
-                      </label>
-                      <input className="formfeilds" placeholder="0.00" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-6 md:flex-row">
-                    <div className="flex flex-col gap-2">
-                      <div className="form-item">
-                        <label
-                          htmlFor="payout-period"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Payout per Period
-                        </label>
-                        <input className="formfeilds" placeholder="0.00" />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <div className="form-item">
-                        <label
-                          htmlFor="street-address"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Amount of Periods
-                        </label>
-                        <div class="formfeilds amount-number">
-                          <div class="input-group-prepend">
-                            <button
-                              class="btn btn-outline-primary"
-                              type="button"
-                              onClick={decNum}
-                            >
-                              -
-                            </button>
-                          </div>
-                          <input
-                            type="text"
-                            class="form-control"
-                            value={num}
-                            onChange={handleChange}
-                          />
-                          <div class="input-group-prepend">
-                            <button
-                              class="btn btn-outline-primary"
-                              type="button"
-                              onClick={incNum}
-                            >
-                              +
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <div className="form-item">
-                        <label
-                          htmlFor="street-address"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Period Length
-                        </label>
-                        {/* <select
-                                                    id="country"
-                                                    name="country"
-                                                    className="formfeilds">
-                                                    <option>Weekly</option>
-                                                    <option>Bi-weekly</option>
-                                                    <option>Monthly</option>
-                                                    <option>Quarterly</option>
-                                                    <option>Yearly</option>
-                                                </select> */}
-                        <ProjectDropDown></ProjectDropDown>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-span-12 sm:col-span-12 lg:col-span-12">
-                    <div className="form-item">
-                      <label className="block text-sm font-medium text-gray-700">
-                        End Date
-                      </label>
-                      <h4>Not Available</h4>
-                    </div>
-                  </div>
-                  <div className="flex justify-end">
-                    <button className="save-btn">Save</button>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              ""
-            )}
+
+            {contractDetails?.vestingArray?.length > 0 &&
+              contractDetails?.vestingArray.map(function (e) {
+                return <TableListItem data={e} />;
+              })}
           </div>
           <div className="py-3">
             <button
-              class="add-items-btn btn font-medium flex items-center justify-center gap-2 rounded-xl cursor-pointer text-blue hover:text-blue-300 px-3 h-[36px] text-sm rounded-lg font-semibold"
+              onClick={addVestingRow}
+              class="add-items-btn btn font-medium flex items-center justify-center gap-2 rounded-xl cursor-pointer text-blue hover:text-blue-300 px-3 h-[36px] text-sm"
               type="button"
             >
               <svg

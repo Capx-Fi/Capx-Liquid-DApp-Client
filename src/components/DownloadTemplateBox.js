@@ -1,6 +1,4 @@
-import React from "react";
 import DownloadIcon from "../assets/download.png";
-import vestingSheetTemplate from "../assets/vesting-sheet-template.xlsx";
 
 function DownloadTemplateBox() {
   return (

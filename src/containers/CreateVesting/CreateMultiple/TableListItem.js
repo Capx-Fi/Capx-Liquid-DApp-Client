@@ -26,7 +26,7 @@ function TableListItem({ data }) {
     setNum(e.target.value);
   };
   return (
-    <div>
+    <>
       {data?.Address ? (
         <>
           <div class="vestings-table-td">
@@ -40,7 +40,6 @@ function TableListItem({ data }) {
                 value={data?.Address}
               />
             </div>
-
             <div className="td-col">
               <input type="datetime-local" className="start-date" />
             </div>
@@ -227,7 +226,13 @@ function TableListItem({ data }) {
             <div className="td-col">
               <input className="recipient-input" placeholder="0x..." />
             </div>
-
+            <div className="td-col">
+                <select className="selectsource">
+                  <option>Select</option>
+                  <option>Wallet</option>
+                  <option>BentoBox</option>
+                </select>
+            </div>
             <div className="td-col">
               <input type="datetime-local" className="start-date" />
             </div>
@@ -406,7 +411,7 @@ function TableListItem({ data }) {
           )}
         </>
       )}
-    </div>
+    </>
   );
 }
 

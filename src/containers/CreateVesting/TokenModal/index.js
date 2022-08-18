@@ -12,11 +12,11 @@ const TokenModal = () => {
     return (
         <>
             <div className="form-item" onClick={handleOpen}>
-                <label htmlFor="token" className="block text-sm font-medium text-gray-700">
+                {/* <label htmlFor="token" className="block text-sm font-medium text-gray-700">
                     Token
-                </label>
+                </label> */}
                 <div className="token-select formfeilds">
-                    <div className="text-placeholder">Select a currency</div>
+                    <div className="text-placeholder">Select</div>
                     {/* <div className="text-placeholder">Select a currency</div> */}
                 </div>
             </div>

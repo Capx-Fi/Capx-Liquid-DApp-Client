@@ -59,7 +59,10 @@
                     width: 10%;
                     padding: 14px 8px 14px 15px;
                     &:nth-child(2){
-                        width: 15%;
+                        width: 30%;
+                    }
+                    &:nth-child(3){
+                        width: 20%;
                     }
                     &:nth-child(4){
                         width: 20%;
@@ -68,7 +71,7 @@
                         width: 20%;
                     }
                     &:nth-child(6){
-                        width: 15%;
+                        width: 10%;
                     }
                 }
             }
@@ -82,7 +85,10 @@
                     width: 10%;
                     padding: 14px 8px 14px 15px;
                     &:nth-child(2){
-                        width: 15%;
+                        width: 30%;
+                    }
+                    &:nth-child(3){
+                        width: 20%;
                     }
                     &:nth-child(4){
                         width: 20%;
@@ -91,7 +97,7 @@
                         width: 20%;
                     }
                     &:nth-child(6){
-                        width: 15%;
+                        width: 10%;
                     }
                 }
                 input{

@@ -1,7 +1,6 @@
 import { Switch } from "antd";
 import { useState } from "react";
 import ProjectDropDown from "../../../components/ProjectDropdown/ProjectDropdown";
-import TokenModal from "../TokenModal";
 import "./index.scss";
 
 function TableListItem({ data }) {
@@ -30,9 +29,10 @@ function TableListItem({ data }) {
       {data?.Address ? (
         <>
           <div class="vestings-table-td">
-            <div className="td-col">
+            {/* <div className="td-col">
               <TokenModal />
-            </div>
+            </div> */}
+            <div className="td-col">{data?.["Sr. No."]}</div>
             <div className="td-col">
               <input
                 className="recipient-input"
@@ -43,7 +43,7 @@ function TableListItem({ data }) {
             <div className="td-col">
               <input type="datetime-local" className="start-date" />
             </div>
-            <div className="td-col">0.00</div>
+            <div className="td-col">{data?.["Amount of Tokens"]}</div>
             <div className="td-col">
               <div className="vs-edit-col" onClick={handleToggle}>
                 {data?.["Payout Period"]}
@@ -220,23 +220,23 @@ function TableListItem({ data }) {
       ) : (
         <>
           <div class="vestings-table-td">
-            <div className="td-col">
-              <TokenModal />
-            </div>
+            <div className="td-col">{data?.["Sr. No."]}</div>
             <div className="td-col">
               <input className="recipient-input" placeholder="0x..." />
             </div>
-            <div className="td-col">
-                <select className="selectsource">
-                  <option>Select</option>
-                  <option>Wallet</option>
-                  <option>BentoBox</option>
-                </select>
-            </div>
+            {/* <div className="td-col">
+              <select className="selectsource">
+                <option>Select</option>
+                <option>Wallet</option>
+                <option>BentoBox</option>
+              </select>
+            </div> */}
             <div className="td-col">
               <input type="datetime-local" className="start-date" />
             </div>
-            <div className="td-col">0.00</div>
+            <div className="td-col">
+              <input className="recipient-input" placeholder="0.00" />
+            </div>
             <div className="td-col">
               <div className="vs-edit-col" onClick={handleToggle}>
                 Weekly

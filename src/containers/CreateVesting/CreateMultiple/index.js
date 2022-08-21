@@ -93,7 +93,7 @@ const CreateMultiple = () => {
 
   const addVestingRow = () => {
     let currentArray = contractDetails.vestingArray;
-    currentArray.push({ Address: null });
+    currentArray.push({ "Sr. No.": currentArray.length + 1, Address: null });
     setContractDetails({
       ...contractDetails,
       vestingArray: currentArray,
@@ -283,9 +283,8 @@ const CreateMultiple = () => {
           <h3 className="bottom-title">Vestings</h3>
           <div className="vestings-table">
             <div class="vestings-table-th">
-              <div className="th-col">Currency</div>
-              <div className="th-col">Recipient</div>
-              <div className="th-col">Source</div>
+              <div className="th-col">Sr. No.</div>
+              <div className="th-col">Address</div>
               <div className="th-col">Start Date</div>
               <div className="th-col">Total Amount</div>
               <div className="th-col">Vesting Schedule</div>

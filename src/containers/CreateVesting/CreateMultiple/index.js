@@ -93,7 +93,31 @@ const CreateMultiple = () => {
 
   const addVestingRow = () => {
     let currentArray = contractDetails.vestingArray;
-    currentArray.push({ "Sr. No.": currentArray.length + 1, Address: null });
+    currentArray.push({ Address: null });
+    setContractDetails({
+      ...contractDetails,
+      vestingArray: currentArray,
+      error: null,
+    });
+  };
+
+  const removeVestingRow = (key) => {
+    console.log(key);
+    let currentArray = contractDetails.vestingArray;
+    console.log(currentArray);
+    currentArray.splice(key, 1);
+    console.log(currentArray, "splice");
+    setContractDetails({
+      ...contractDetails,
+      vestingArray: currentArray,
+      error: null,
+    });
+  };
+
+  const duplicateVestingRow = (key) => {
+    let currentArray = contractDetails.vestingArray;
+
+    currentArray.push(currentArray[key]);
     setContractDetails({
       ...contractDetails,
       vestingArray: currentArray,
@@ -292,8 +316,17 @@ const CreateMultiple = () => {
             </div>
 
             {contractDetails?.vestingArray?.length > 0 &&
-              contractDetails?.vestingArray.map(function (e) {
-                return <TableListItem data={e} />;
+              contractDetails?.vestingArray.map(function (e, i) {
+                console.log(i);
+                return (
+                  <TableListItem
+                    data={e}
+                    key={i}
+                    index={parseInt(i)}
+                    removeVestingRow={removeVestingRow}
+                    duplicateVestingRow={duplicateVestingRow}
+                  />
+                );
               })}
           </div>
           <div className="py-3">

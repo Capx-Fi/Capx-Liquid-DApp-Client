@@ -3,7 +3,7 @@ import { useState } from "react";
 import ProjectDropDown from "../../../components/ProjectDropdown/ProjectDropdown";
 import "./index.scss";
 
-function TableListItem({ data }) {
+function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
   const [isActive, setIsActive] = useState();
   console.log(data, "TableItem");
   const handleToggle = () => {
@@ -32,7 +32,7 @@ function TableListItem({ data }) {
             {/* <div className="td-col">
               <TokenModal />
             </div> */}
-            <div className="td-col">{data?.["Sr. No."]}</div>
+            <div className="td-col">{index + 1}</div>
             <div className="td-col">
               <input
                 className="recipient-input"
@@ -41,7 +41,19 @@ function TableListItem({ data }) {
               />
             </div>
             <div className="td-col">
-              <input type="datetime-local" className="start-date" />
+              <input
+                type="datetime-local"
+                className="start-date"
+                value={
+                  new Date(
+                    (data?.["Start Date(DD-MM-YYYY)"]).split("-")[2],
+                    (data?.["Start Date(DD-MM-YYYY)"]).split("-")[1],
+                    (data?.["Start Date(DD-MM-YYYY)"]).split("-")[0]
+                  )
+                    .toISOString()
+                    .split(".")[0]
+                }
+              />
             </div>
             <div className="td-col">{data?.["Amount of Tokens"]}</div>
             <div className="td-col">
@@ -65,7 +77,7 @@ function TableListItem({ data }) {
               </div>
             </div>
             <div className="td-col">
-              <button className="mr-2">
+              <button onClick={() => removeVestingRow(index)} className="mr-2">
                 <svg
                   viewBox="0 0 20 20"
                   fill="#e74c3c"
@@ -81,7 +93,7 @@ function TableListItem({ data }) {
                   ></path>
                 </svg>
               </button>
-              <button>
+              <button onClick={() => duplicateVestingRow(index)}>
                 <svg
                   viewBox="0 0 20 20"
                   fill="#66880f"
@@ -220,7 +232,7 @@ function TableListItem({ data }) {
       ) : (
         <>
           <div class="vestings-table-td">
-            <div className="td-col">{data?.["Sr. No."]}</div>
+            <div className="td-col">{index + 1}</div>
             <div className="td-col">
               <input className="recipient-input" placeholder="0x..." />
             </div>
@@ -258,7 +270,7 @@ function TableListItem({ data }) {
               </div>
             </div>
             <div className="td-col">
-              <button className="mr-2">
+              <button onClick={() => removeVestingRow(index)} className="mr-2">
                 <svg
                   viewBox="0 0 20 20"
                   fill="#e74c3c"
@@ -274,7 +286,7 @@ function TableListItem({ data }) {
                   ></path>
                 </svg>
               </button>
-              <button>
+              <button onClick={() => duplicateVestingRow(index)}>
                 <svg
                   viewBox="0 0 20 20"
                   fill="#66880f"

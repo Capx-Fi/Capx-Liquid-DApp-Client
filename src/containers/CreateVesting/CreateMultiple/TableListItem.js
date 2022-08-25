@@ -3,7 +3,14 @@ import { useState } from "react";
 import ProjectDropDown from "../../../components/ProjectDropdown/ProjectDropdown";
 import "./index.scss";
 
-function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
+function TableListItem({
+  data,
+  index,
+  removeVestingRow,
+  duplicateVestingRow,
+  toggleEnableCliff,
+  toggleDetailValue,
+}) {
   const [isActive, setIsActive] = useState();
   console.log(data, "TableItem");
   const handleToggle = () => {
@@ -27,9 +34,22 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
   };
 
   const dateToDTLocal = (date) => {
-    return new Date(date.split("-")[2], date.split("-")[1], date.split("-")[0])
-      .toISOString()
-      .split(".")[0];
+    let dd = "";
+    let mm = "";
+    let yyyy = "";
+    if (date.split("-")[2].length === 4) {
+      dd = date.split("-")[0];
+      mm = date.split("-")[1];
+      yyyy = date.split("-")[2];
+    } else {
+      dd = date.split("-")[2];
+      mm = date.split("-")[1];
+      yyyy = date.split("-")[0];
+    }
+    // return new Date(date.split("-")[2], date.split("-")[1], date.split("-")[0])
+    //   .toISOString()
+    //   .split(".")[0];
+    return yyyy + "-" + mm + "-" + dd;
   };
   return (
     <>
@@ -45,16 +65,36 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
                 className="recipient-input"
                 placeholder="0x..."
                 value={data?.Address}
+                onChange={(e) =>
+                  toggleDetailValue(index, "Address", e.target.value)
+                }
               />
             </div>
             <div className="td-col">
               <input
-                type="datetime-local"
+                type="date"
                 className="start-date"
+                onChange={(e) =>
+                  toggleDetailValue(
+                    index,
+                    "Start Date(DD-MM-YYYY)",
+                    e.target.value
+                  )
+                }
                 value={dateToDTLocal(data?.["Start Date(DD-MM-YYYY)"])}
               />
             </div>
-            <div className="td-col">{data?.["Amount of Tokens"]}</div>
+            <div className="td-col">
+              {" "}
+              <input
+                className="recipient-input"
+                placeholder="0.00"
+                value={data?.["Amount of Tokens"]}
+                onChange={(e) =>
+                  toggleDetailValue(index, "Amount of Tokens", e.target.value)
+                }
+              />
+            </div>
             <div className="td-col">
               <div className="vs-edit-col" onClick={handleToggle}>
                 {data?.["Payout Period"]}
@@ -114,6 +154,9 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
                   <div>
                     <Checkbox
                       color="primary"
+                      onChange={(e) =>
+                        toggleEnableCliff(index, e.target.checked)
+                      }
                       checked={data?.["Enable Cliff"] === "Y"}
                     />
                   </div>
@@ -126,36 +169,38 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
                     </label>
                   </div>
                 </div>
-                <div className="flex gap-6">
-                  <div className="form-item">
-                    <label
-                      htmlFor="street-address"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Cliff End Date
-                    </label>
-                    <input
-                      type="datetime-local"
-                      className="formfeilds"
-                      value={dateToDTLocal(
-                        data?.["Cliff End Date(DD-MM-YYYY)"]
-                      )}
-                    />
+                {data?.["Enable Cliff"] === "Y" && (
+                  <div className="flex gap-6">
+                    <div className="form-item">
+                      <label
+                        htmlFor="street-address"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Cliff End Date
+                      </label>
+                      <input
+                        type="date"
+                        className="formfeilds"
+                        value={dateToDTLocal(
+                          data?.["Cliff End Date(DD-MM-YYYY)"]
+                        )}
+                      />
+                    </div>
+                    <div className="form-item">
+                      <label
+                        htmlFor="cliff-amount"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Cliff Amount
+                      </label>
+                      <input
+                        className="formfeilds"
+                        placeholder="0.00"
+                        value={data?.["Cliff Amount"]}
+                      />
+                    </div>
                   </div>
-                  <div className="form-item">
-                    <label
-                      htmlFor="cliff-amount"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Cliff Amount
-                    </label>
-                    <input
-                      className="formfeilds"
-                      placeholder="0.00"
-                      value={data?.["Cliff Amount"]}
-                    />
-                  </div>
-                </div>
+                )}
                 <div className="flex flex-col gap-6 md:flex-row">
                   <div className="flex flex-col gap-2">
                     <div className="form-item">
@@ -214,7 +259,7 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
                         End Date
                       </label>
                       <input
-                        type="datetime-local"
+                        type="date"
                         className="formfeilds"
                         value={dateToDTLocal(
                           data?.["Cliff End Date(DD-MM-YYYY)"]
@@ -246,9 +291,9 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
                   </div>
                 </div>
 
-                <div className="flex justify-end">
+                {/* <div className="flex justify-end">
                   <button className="save-btn">Save</button>
-                </div>
+                </div> */}
               </div>
             </div>
           ) : (
@@ -270,7 +315,7 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
               </select>
             </div> */}
             <div className="td-col">
-              <input type="datetime-local" className="start-date" />
+              <input type="date" className="start-date" />
             </div>
             <div className="td-col">
               <input className="recipient-input" placeholder="0.00" />
@@ -349,7 +394,7 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
                     >
                       Cliff End Date
                     </label>
-                    <input type="datetime-local" className="formfeilds" />
+                    <input type="date" className="formfeilds" />
                   </div>
                   <div className="form-item">
                     <label
@@ -439,9 +484,9 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
                     <h4>Not Available</h4>
                   </div>
                 </div>
-                <div className="flex justify-end">
+                {/* <div className="flex justify-end">
                   <button className="save-btn">Save</button>
-                </div>
+                </div> */}
               </div>
             </div>
           ) : (

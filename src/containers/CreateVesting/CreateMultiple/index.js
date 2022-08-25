@@ -114,6 +114,38 @@ const CreateMultiple = () => {
     });
   };
 
+  const toggleEnableCliff = (key, checked) => {
+    let currentArray = contractDetails.vestingArray;
+    console.log(currentArray, key, checked);
+    currentArray[key]["Enable Cliff"] = checked ? "Y" : "N";
+
+    setContractDetails({
+      ...contractDetails,
+      vestingArray: currentArray,
+      error: null,
+    });
+  };
+
+  const toggleDetailValue = (index, key, value) => {
+    console.log(value);
+    let currentArray = contractDetails.vestingArray;
+
+    // if (key === "Start Date(DD-MM-YYYY)") {
+    //   let date = value.toString();
+    //   let dd = date.split("-")[0];
+    //   let mm = date.split("-")[1];
+    //   let yyyy = date.split("-")[2];
+    //   currentArray[index][key] = dd + "-" + mm + "-" + yyyy;
+    // } else
+    currentArray[index][key] = value;
+
+    setContractDetails({
+      ...contractDetails,
+      vestingArray: currentArray,
+      error: null,
+    });
+  };
+
   const duplicateVestingRow = (key) => {
     let currentArray = contractDetails.vestingArray;
 
@@ -310,8 +342,8 @@ const CreateMultiple = () => {
               <div className="th-col">Sr. No.</div>
               <div className="th-col">Address</div>
               <div className="th-col">Start Date</div>
-              <div className="th-col">Total Amount</div>
-              <div className="th-col">Vesting Schedule</div>
+              <div className="th-col"> Amount</div>
+              <div className="th-col">Schedule</div>
               <div className="th-col"></div>
             </div>
 
@@ -323,8 +355,10 @@ const CreateMultiple = () => {
                     data={e}
                     key={i}
                     index={parseInt(i)}
+                    toggleEnableCliff={toggleEnableCliff}
                     removeVestingRow={removeVestingRow}
                     duplicateVestingRow={duplicateVestingRow}
+                    toggleDetailValue={toggleDetailValue}
                   />
                 );
               })}

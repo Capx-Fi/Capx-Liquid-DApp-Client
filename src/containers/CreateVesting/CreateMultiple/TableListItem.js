@@ -1,4 +1,4 @@
-import { Switch } from "antd";
+import { Checkbox, Select, Switch } from "antd";
 import { useState } from "react";
 import ProjectDropDown from "../../../components/ProjectDropdown/ProjectDropdown";
 import "./index.scss";
@@ -9,13 +9,14 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
   const handleToggle = () => {
     setIsActive(!isActive);
   };
-
-  let [num, setNum] = useState(0);
+  const { Option } = Select;
+  let [num, setNum] = useState(data?.["Intervals"]);
   let incNum = () => {
     if (num < 10) {
       setNum(Number(num) + 1);
     }
   };
+
   let decNum = () => {
     if (num > 0) {
       setNum(num - 1);
@@ -23,6 +24,12 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
   };
   let handleChange = (e) => {
     setNum(e.target.value);
+  };
+
+  const dateToDTLocal = (date) => {
+    return new Date(date.split("-")[2], date.split("-")[1], date.split("-")[0])
+      .toISOString()
+      .split(".")[0];
   };
   return (
     <>
@@ -44,15 +51,7 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
               <input
                 type="datetime-local"
                 className="start-date"
-                value={
-                  new Date(
-                    (data?.["Start Date(DD-MM-YYYY)"]).split("-")[2],
-                    (data?.["Start Date(DD-MM-YYYY)"]).split("-")[1],
-                    (data?.["Start Date(DD-MM-YYYY)"]).split("-")[0]
-                  )
-                    .toISOString()
-                    .split(".")[0]
-                }
+                value={dateToDTLocal(data?.["Start Date(DD-MM-YYYY)"])}
               />
             </div>
             <div className="td-col">{data?.["Amount of Tokens"]}</div>
@@ -111,7 +110,13 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
           {isActive ? (
             <div className="expaned-row">
               <div className="flex flex-col flex-grow gap-6 p-6">
-                <div className="flex gap-6 items-center">
+                <div className="flex gap-4 items-center">
+                  <div>
+                    <Checkbox
+                      color="primary"
+                      checked={data?.["Enable Cliff"] === "Y"}
+                    />
+                  </div>
                   <div className="form-item flex items-center">
                     <label
                       htmlFor="enable-cliff"
@@ -119,7 +124,6 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
                     >
                       Enable Cliff
                     </label>
-                    <Switch color="primary" />
                   </div>
                 </div>
                 <div className="flex gap-6">
@@ -130,7 +134,13 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
                     >
                       Cliff End Date
                     </label>
-                    <input type="datetime-local" className="formfeilds" />
+                    <input
+                      type="datetime-local"
+                      className="formfeilds"
+                      value={dateToDTLocal(
+                        data?.["Cliff End Date(DD-MM-YYYY)"]
+                      )}
+                    />
                   </div>
                   <div className="form-item">
                     <label
@@ -139,7 +149,11 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
                     >
                       Cliff Amount
                     </label>
-                    <input className="formfeilds" placeholder="0.00" />
+                    <input
+                      className="formfeilds"
+                      placeholder="0.00"
+                      value={data?.["Cliff Amount"]}
+                    />
                   </div>
                 </div>
                 <div className="flex flex-col gap-6 md:flex-row">
@@ -151,7 +165,11 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
                       >
                         Payout per Period
                       </label>
-                      <input className="formfeilds" placeholder="0.00" />
+                      <input
+                        className="formfeilds"
+                        placeholder="0.00"
+                        value={data?.["Payout Per Period"]}
+                      />
                     </div>
                   </div>
                   <div className="flex flex-col gap-2">
@@ -192,34 +210,42 @@ function TableListItem({ data, index, removeVestingRow, duplicateVestingRow }) {
                   </div>
                   <div className="flex flex-col gap-2">
                     <div className="form-item">
+                      <label className="block text-sm font-medium text-gray-700">
+                        End Date
+                      </label>
+                      <input
+                        type="datetime-local"
+                        className="formfeilds"
+                        value={dateToDTLocal(
+                          data?.["Cliff End Date(DD-MM-YYYY)"]
+                        )}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    {/* <div className="form-item">
                       <label
                         htmlFor="street-address"
                         className="block text-sm font-medium text-gray-700"
                       >
                         Period Length
                       </label>
-                      {/* <select
-                                                    id="country"
-                                                    name="country"
-                                                    className="formfeilds">
-                                                    <option>Weekly</option>
-                                                    <option>Bi-weekly</option>
-                                                    <option>Monthly</option>
-                                                    <option>Quarterly</option>
-                                                    <option>Yearly</option>
-                                                </select> */}
-                      <ProjectDropDown />
-                    </div>
+
+                      <Select
+                        defaultValue="Weekly"
+                        style={{
+                          width: 120,
+                        }}
+                        className="formfeilds"
+                      >
+                        <Option value="Weekly">Weekly</Option>
+                        <Option value="Biweekly">Biweekly</Option>
+                      </Select>
+
+                    </div> */}
                   </div>
                 </div>
-                <div className="col-span-12 sm:col-span-12 lg:col-span-12">
-                  <div className="form-item">
-                    <label className="block text-sm font-medium text-gray-700">
-                      End Date
-                    </label>
-                    <h4>Not Available</h4>
-                  </div>
-                </div>
+
                 <div className="flex justify-end">
                   <button className="save-btn">Save</button>
                 </div>

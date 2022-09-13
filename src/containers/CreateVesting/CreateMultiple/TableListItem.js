@@ -181,9 +181,7 @@ function TableListItem({
                       <input
                         type="date"
                         className="formfeilds"
-                        value={dateToDTLocal(
-                          data?.["Cliff End Date(DD-MM-YYYY)"]
-                        )}
+                        value={dateToDTLocal(data?.["Cliff End Date"])}
                       />
                     </div>
                     <div className="form-item">
@@ -261,9 +259,7 @@ function TableListItem({
                       <input
                         type="date"
                         className="formfeilds"
-                        value={dateToDTLocal(
-                          data?.["Cliff End Date(DD-MM-YYYY)"]
-                        )}
+                        value={dateToDTLocal(data?.["Cliff End Date"])}
                       />
                     </div>
                   </div>

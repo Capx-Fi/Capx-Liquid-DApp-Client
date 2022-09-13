@@ -130,13 +130,6 @@ const CreateMultiple = () => {
     console.log(value);
     let currentArray = contractDetails.vestingArray;
 
-    // if (key === "Start Date(DD-MM-YYYY)") {
-    //   let date = value.toString();
-    //   let dd = date.split("-")[0];
-    //   let mm = date.split("-")[1];
-    //   let yyyy = date.split("-")[2];
-    //   currentArray[index][key] = dd + "-" + mm + "-" + yyyy;
-    // } else
     currentArray[index][key] = value;
 
     setContractDetails({

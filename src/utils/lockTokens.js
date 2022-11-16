@@ -120,13 +120,16 @@ export const lockTokens = async (
     );
 
     //await fetch
-    const gasPriceResponse = await fetchGasPrice();
-    console.log({
-      chainID,
-      from: metamaskAccount,
-      gasPrice: gasPriceResponse.gasPrice,
-      gas: gasPriceResponse.gasLimit,
-    });
+    let gasPriceResponse;
+    if(chainID === 595) {
+      gasPriceResponse = await fetchGasPrice();
+      console.log({
+        chainID,
+        from: metamaskAccount,
+        gasPrice: gasPriceResponse.gasPrice,
+        gas: gasPriceResponse.gasLimit,
+      });
+    }
     buyResult = await capxContract?.methods
       .createBulkDerivative(
         contractDetails.projectTitle,

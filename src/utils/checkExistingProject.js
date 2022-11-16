@@ -46,7 +46,7 @@ export const checkExistingProject = async (
 
     if (projectExistingData?.projects) {
       const res = await fetch(
-        `https://capx-liquid.mypinata.cloud/ipfs/${projectExistingData.projects[0].projectDocHash}`
+        `https://capx-test-liquid.mypinata.cloud/ipfs/${projectExistingData.projects[0].projectDocHash}`
       );
       const desc = await res.json();
       description = desc.description;

@@ -29,7 +29,7 @@ function Header({
     account,
     library,
     connector,
-    activate,
+    connect,
     deactivate,
     chainId,
     switchNetwork,
@@ -63,9 +63,9 @@ function Header({
     setSortBy(chainId && getSortBy(chainId));
   }, [chainId]);
 
-  async function connect() {
+  async function connectWallet() {
     try {
-      await activate(injected);
+      await connect(injected);
     } catch (ex) {
       if (ex instanceof UnsupportedChainIdError) {
         enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
@@ -159,7 +159,7 @@ function Header({
               </>
             ) : (
               <div className="header_navbar_button">
-                <div onClick={connect} className="header_navbar_button_text">
+                <div onClick={connectWallet} className="header_navbar_button_text">
                   Connect Wallet
                 </div>
               </div>

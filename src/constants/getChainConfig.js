@@ -130,7 +130,7 @@ export const getSortBy = (chainId) => {
       : chainId?.toString() === ARBITRUM_CHAIN_ID?.toString()
       ? "Arbitrum"
       : chainId?.toString() === MANDALA_CHAIN_ID?.toString()
-      ? "Acala"
+      ? "Karura"
       : "Ethereum";
   return sortBy;
 };

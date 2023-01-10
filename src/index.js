@@ -12,15 +12,15 @@ import { Web3ReactProvider } from "@web3-react/core";
 import Web3 from "web3";
 import { WagmiConfig, createClient, configureChains } from "wagmi";
 
-import { polygonMumbai, goerli } from "wagmi/chains";
+import { polygon, mainnet } from "wagmi/chains";
 
 import { publicProvider } from "wagmi/providers/public";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
-import { avalancheChain, bscTestnet } from "./chainObjects";
+import { avalancheChain, bscChain, fantomChain, karuraChain } from "./chainObjects";
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [avalancheChain, bscTestnet, goerli, polygonMumbai],
+  [avalancheChain, bscChain, fantomChain, karuraChain, polygon, mainnet],
   [publicProvider()]
 );
 

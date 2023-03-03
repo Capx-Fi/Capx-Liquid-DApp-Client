@@ -79,6 +79,7 @@ export const fetchAcalaProjectDashboard = async (account, GRAPHAPIURL) => {
       query: gql(query),
       fetchPolicy: "network-only",
     });
+
     allProjects = await Promise.all(projectDQL.data.projects.nodes.map(async (project) => {
       // Check if the account is the project owner.
       if(project.projectOwnerAddress.toLowerCase() === account.toLowerCase()){
@@ -86,6 +87,7 @@ export const fetchAcalaProjectDashboard = async (account, GRAPHAPIURL) => {
       }
       // Fetch all derivative IDs 
       let derivatives = await Promise.all(project.derivative.nodes.map(async (derivative) => {
+
         return derivative.id;
       }));
       let _id = project.id;
@@ -210,19 +212,23 @@ export const fetchAcalaProjectDashboard = async (account, GRAPHAPIURL) => {
     let data2 = [];
     let data3 = [];
     for (let i = 0; i < validProjectIDs.length; i++) {
+
       if (projectOwnerData[i]?.id != undefined) {
         data1.push(projectOwnerData[i]);
         for (let j = 0; j < wrappedProjectDetails.length; j++) {
           if (wrappedProjectDetails[j].id === projectOwnerData[i].id) {
+
             data2.push(wrappedProjectDetails[j]);
             break;
           }
         }
+
         for (let k = 0; k < vestedProjectDetails.length; k++) {
           if (vestedProjectDetails[k].id === projectOwnerData[i].id) {
             data3.push(vestedProjectDetails[k]);
             break;
           } else {
+
             data3.push({});
           }
         }

@@ -22,6 +22,7 @@ import { withdrawVestedTokens } from "../../utils/withdrawVestedTokens";
 import InvestorLoading from "./InvestorLoading";
 import { Tooltip, withStyles } from "@material-ui/core";
 import { fetchAcalaInvestorDashboard } from "../../utils/acalaEVM/fetchInvestorDashboard";
+
 import {
   getContractAddress,
   getContractAddressController,
@@ -138,6 +139,7 @@ function InvestorDashboardScreen() {
     }, 6000);
   };
 
+
   console.log(ownedProjectsData);
 
   return (
@@ -244,7 +246,6 @@ function InvestorDashboardScreen() {
                                       }`
                                     : ""}
                                 </div>
-
                                 <img
                                   className="investordashboardscreen_maincontainer_innercontainer_projectcontainer_button_icon"
                                   src={Redirect}

@@ -123,8 +123,8 @@ function TokensReleasedGraphContainer({
 						.map((project) =>
 							project?.derivatives
 								.map((derivative, _index) =>
-									derivative.holders.map((holder, index) => {
-										const unixTime = derivative.unlockTime;
+									derivative?.holders.map((holder, index) => {
+										const unixTime = derivative?.unlockTime;
 										const date = new Date(unixTime * 1000);
 										let unlockDate = date.toLocaleDateString("en-US");
 										let unlockDay = date.toLocaleDateString("en-US", {
@@ -139,24 +139,24 @@ function TokensReleasedGraphContainer({
 										let displayGraphDate = `${unlockDay} ${unlockMonth}, ${unlockYear}`;
 										let numOfTokens = new BigNumber(holder?.tokenAmount)
 											.dividedBy(
-												Math.pow(10, currentProjectDetails.projectTokenDecimal)
+												Math.pow(10, currentProjectDetails?.projectTokenDecimal)
 											)
 											.toNumber();
 
 										return {
-											address: holder.address,
+											address: holder?.address,
 											date: unlockDate,
 											unixDate: date,
 											numOfTokens,
 											amount: numOfTokens
 												.toString()
 												.concat(" ")
-												.concat(currentProjectDetails.projectTokenTicker),
+												.concat(currentProjectDetails?.projectTokenTicker),
 											projectTokenTicker:
-												currentProjectDetails.projectTokenTicker,
-											totalSupply: derivative.totalSupply,
+												currentProjectDetails?.projectTokenTicker,
+											totalSupply: derivative?.totalSupply,
 											displayGraphDate,
-											decimal: currentProjectDetails.projectTokenDecimal,
+											decimal: currentProjectDetails?.projectTokenDecimal,
 										};
 									})
 								)
@@ -171,8 +171,8 @@ function TokensReleasedGraphContainer({
 						.map((project) =>
 							project?.derivatives
 								.map((derivative, _index) =>
-									derivative.holders.map((holder, index) => {
-										const unixTime = holder.unlockTime;
+									derivative?.holders.map((holder, index) => {
+										const unixTime = holder?.unlockTime;
 										const date = new Date(unixTime * 1000);
 										let unlockDate = date.toLocaleDateString("en-US");
 										let unlockDay = date.toLocaleDateString("en-US", {
@@ -187,24 +187,24 @@ function TokensReleasedGraphContainer({
 										let displayGraphDate = `${unlockDay} ${unlockMonth}, ${unlockYear}`;
 										let numOfTokens = new BigNumber(holder?.tokenAmount)
 											.dividedBy(
-												Math.pow(10, currentProjectDetails.projectTokenDecimal)
+												Math.pow(10, currentProjectDetails?.projectTokenDecimal)
 											)
 											.toNumber();
 
 										return {
-											address: holder.address,
+											address: holder?.address,
 											date: unlockDate,
 											unixDate: date,
 											numOfTokens,
 											amount: numOfTokens
 												.toString()
 												.concat(" ")
-												.concat(currentProjectDetails.projectTokenTicker),
+												.concat(currentProjectDetails?.projectTokenTicker),
 											projectTokenTicker:
-												currentProjectDetails.projectTokenTicker,
-											totalSupply: derivative.totalLockedSupply,
+												currentProjectDetails?.projectTokenTicker,
+											totalSupply: derivative?.totalLockedSupply,
 											displayGraphDate,
-											decimal: currentProjectDetails.projectTokenDecimal,
+											decimal: currentProjectDetails?.projectTokenDecimal,
 										};
 									})
 								)
@@ -248,7 +248,7 @@ function TokensReleasedGraphContainer({
 			var holder = {};
 
 			currentProject.forEach(function (d) {
-				if (holder.hasOwnProperty(d.displayGraphDate)) {
+				if (holder?.hasOwnProperty(d.displayGraphDate)) {
 					holder[d.displayGraphDate] =
 						holder[d.displayGraphDate] + d.numOfTokens;
 				} else {

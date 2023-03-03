@@ -2,19 +2,26 @@ import "./ProjectOwnerDashboardScreen.scss";
 
 import { useEffect, useState } from "react";
 import ProjectDetailsLoading from "./ProjectDetailsLoading";
+
+
+
 import Web3 from "web3";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import CopyIcon from "../../assets/copy-icon.svg";
 import { Tooltip } from "@material-ui/core";
 import useWindowSize from "../../utils/windowSize";
+
 import useWagmi from "../../useWagmi";
+
 
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
 const web3 = new Web3(Web3.givenProvider);
 
 function getCheckSumAddress(_address) {
+
   return web3.utils.toChecksumAddress(_address);
+
 }
 function ProjectDetailsContainer({ projectOverviewData, projectDisplayID }) {
   useEffect(() => {

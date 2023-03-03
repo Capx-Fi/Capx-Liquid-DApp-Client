@@ -2,11 +2,12 @@ import React from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import DownloadIcon from "../../assets/download.png";
-import NextIcon from "../../assets/next-black.svg";
+import NextIcon from "../../assets/next.svg";
 
 import "./VestingSteps.scss";
 
 const VestingSteps = ({ setShowSteps }) => {
+
 	return (
 		<div className="vesting_steps h-screen flex bg-dark-400">
 			<Header hiddenNav />
@@ -27,6 +28,7 @@ const VestingSteps = ({ setShowSteps }) => {
 						</div>
 					</div>
 				</div>
+
 
 				{/* For Breakpoint and above */}
 				<div className="side-container bg-opacity-70 text-darkText relative phone:mb-10 screen:mb-0 phone:w-90v desktop:w-40v screen:w-40v twok:w-30v flex flex-col justify-between">
@@ -73,6 +75,7 @@ const VestingSteps = ({ setShowSteps }) => {
 						</a>
 					</div>
 
+
 					<div
 						className="side-button justify-self-end rounded-2xl phone:mb-10 screen:mb-0 justify-center items-center flex px-1 py-3 w-full cursor-pointer"
 						onClick={() => setShowSteps(false)}
@@ -91,6 +94,7 @@ const VestingSteps = ({ setShowSteps }) => {
 			<Footer />
 		</div>
 	);
+
 };
 
 export default VestingSteps;

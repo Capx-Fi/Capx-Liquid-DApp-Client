@@ -9,15 +9,17 @@ import fantomLogo from "../../assets/fantom-logo.svg";
 import acalaLogo from "../../assets/acala-logo.svg";
 import karuraLogo from "../../assets/karura-logo.svg";
 
+
 import {
   SUPPORTED_CHAIN_IDS,
   SUPPORTED_CHAIN_NAMES,
 } from "../../constants/config";
 
+
 function DropDown({ sortBy, chainChange, setShowMenu }) {
-  const [open, setOpen] = useState(false);
-  const web3 = new Web3(Web3.givenProvider);
-  window.w3 = web3;
+	const [open, setOpen] = useState(false);
+	const web3 = new Web3(Web3.givenProvider);
+	window.w3 = web3;
 
   return (
     <div className="relative z-50">

@@ -4,7 +4,7 @@ import LogoutIcon from "../../assets/logout.svg";
 import { useSnackbar } from "notistack";
 import Web3 from "web3";
 import { useMetamask } from "../../metamaskReactHook/index";
-import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
+import { UnsupportedChainIdError } from "@web3-react/core";
 import { injected, walletconnect } from "../../utils/connector";
 import ChooseDashboardModal from "../Modal/ChooseDashboardModal/ChooseDashboardModal";
 import DropDown from "../DropDown/DropDown";
@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { CHAIN_NAMES } from "../../constants/config";
 
 import { getSortBy } from "../../constants/getChainConfig";
+import useWagmi from "../../useWagmi";
 
 function Header({
 	vesting,
@@ -22,18 +23,25 @@ function Header({
 	hiddenSwitch,
 	isWalletConnect,
 }) {
-	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-	const { active, account, library, connector, activate, deactivate, chainId } =
-		useWeb3React();
-	const { metaState, getChain } = useMetamask();
-	const desiredChainId = "4";
-	const currentChainId = metaState.chain.id?.toString();
-	const [dashboardModal, setDashboardModal] = useState(false);
-	const [sortBy, setSortBy] = useState("Ethereum");
-	const [web3, setWeb3] = useState(null);
-	const handleCloseSelectDashboard = () => {
-		setDashboardModal(false);
-	};
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const {
+    active,
+    account,
+    library,
+    connector,
+    activate,
+    deactivate,
+    chainId,
+    switchNetwork,
+    provider,
+  } = useWagmi();
+
+  const [dashboardModal, setDashboardModal] = useState(false);
+  const [sortBy, setSortBy] = useState("Ethereum");
+  const [web3, setWeb3] = useState(null);
+  const handleCloseSelectDashboard = () => {
+    setDashboardModal(false);
+  };
 
 	const setupProvider = async () => {
 		let result = await connector?.getProvider().then((res) => {
@@ -42,11 +50,14 @@ function Header({
 		return result;
 	};
 
-	useEffect(() => {
-		setupProvider().then((res) => {
-			setWeb3(new Web3(res));
-		});
-	}, [active, chainId]);
+
+  useEffect(() => {
+    active &&
+      provider.then((res) => {
+        setWeb3(new Web3(res));
+      });
+  }, [active, chainId]);
+
 
 	// web3 && console.log(web3);
 
@@ -66,163 +77,11 @@ function Header({
 		}
 	}
 
-	const chainChange = async (chainName) => {
-		if (chainName === "Ethereum") {
-			try {
-				await web3.givenProvider.request({
-					method: "wallet_switchEthereumChain",
-					params: [{ chainId: "0x1" }],
-				});
-			} catch (error) {}
-		} else if (chainName === "Matic") {
-			try {
-				await web3.givenProvider.request({
-					method: "wallet_addEthereumChain",
-					params: [
-						{
-							chainId: "0x89",
-							chainName: "Polygon Matic",
-							nativeCurrency: {
-								name: "MATIC",
-								symbol: "MATIC",
-								decimals: 18,
-							},
-							rpcUrls: ["https://polygon-rpc.com/"],
-							blockExplorerUrls: ["https://polygonscan.com/"],
-						},
-					],
-				});
-			} catch (error) {
-				console.error(error);
-			}
-		} else if (chainName === "BSC") {
-			try {
-				await web3.givenProvider.request({
-					method: "wallet_addEthereumChain",
-					params: [
-						{
-							chainId: "0x38",
-							chainName: "Binance Smart Chain",
-							nativeCurrency: {
-								name: "BNB",
-								symbol: "BNB",
-								decimals: 18,
-							},
-							rpcUrls: ["https://bsc-dataseed.binance.org/"],
-							blockExplorerUrls: ["https://bscscan.com/"],
-						},
-					],
-				});
-			} catch (error) {
-				console.error(error);
-			}
-		} else if (chainName === "Avalanche") {
-			try {
-				await web3.givenProvider.request({
-					method: "wallet_addEthereumChain",
-					params: [
-						{
-							chainId: "0xA86A",
-							chainName: "Avalanche Fuji",
-							nativeCurrency: {
-								name: "AVAX",
-								symbol: "AVAX",
-								decimals: 18,
-							},
-							rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
-							blockExplorerUrls: ["https://snowtrace.io/"],
-						},
-					],
-				});
-			} catch (error) {
-				console.error(error);
-			}
-		} else if (chainName === "Fantom") {
-			try {
-				await web3.givenProvider.request({
-					method: "wallet_addEthereumChain",
-					params: [
-						{
-							chainId: "0xFA",
-							chainName: "Fantom",
-							nativeCurrency: {
-								name: "FTM",
-								symbol: "FTM",
-								decimals: 18,
-							},
-							rpcUrls: ["https://rpc.ftm.tools/"],
-							blockExplorerUrls: ["https://ftmscan.com/"],
-						},
-					],
-				});
-			} catch (error) {
-				console.error(error);
-			}
-		} else if (chainName === "Moonbeam") {
-			try {
-				await web3.givenProvider.request({
-					method: "wallet_addEthereumChain",
-					params: [
-						{
-							chainId: "0x504",
-							chainName: "Moonbeam",
-							nativeCurrency: {
-								name: "GLMR",
-								symbol: "GLMR",
-								decimals: 18,
-							},
-							rpcUrls: ["https://rpc.api.moonbeam.network"],
-							blockExplorerUrls: ["https://moonscan.io/"],
-						},
-					],
-				});
-			} catch (error) {
-				console.error(error);
-			}
-		} else if (chainName === "Arbitrum") {
-			try {
-				await web3.givenProvider.request({
-					method: "wallet_addEthereumChain",
-					params: [
-						{
-							chainId: "0xA4B1",
-							chainName: "Arbitrum",
-							nativeCurrency: {
-								name: "ETH",
-								symbol: "ETH",
-								decimals: 18,
-							},
-							rpcUrls: ["https://rpc.ankr.com/arbitrum"],
-							blockExplorerUrls: ["https://testnet.arbiscan.io/"],
-						},
-					],
-				});
-			} catch (error) {
-				console.error(error);
-			}
-		} else if (chainName === "Karura") {
-			try {
-				await web3.currentProvider.request({
-					method: "wallet_addEthereumChain",
-					params: [
-						{
-							chainId: "0x2AE",
-							chainName: "Karura",
-							nativeCurrency: {
-								name: "KAR",
-								symbol: "KAR",
-								decimals: 18,
-							},
-							rpcUrls: ["https://eth-rpc-karura.aca-api.network/"],
-							blockExplorerUrls: ["https://blockscout.karura.network/"],
-						},
-					],
-				});
-			} catch (error) {
-				console.error(error);
-			}
-		}
-	};
+
+  const chainChange = async (chainId) => {
+    await switchNetwork(chainId);
+  };
+
 
 	async function disconnect() {
 		try {

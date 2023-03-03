@@ -13,7 +13,6 @@ import Review from "../../containers/VestingScreen/Review";
 import Errors from "../../containers/VestingScreen/Errors";
 
 import SuccessModal from "../../components/Modal/SuccessModal/SuccessModal";
-import { useWeb3React } from "@web3-react/core";
 
 import VestingSteps from "../../components/VestingSteps/VestingSteps";
 import ProjectDetails2 from "../../components/VestingForm/ProjectDetails/ProjectDetails";
@@ -21,9 +20,10 @@ import WalletModal from "../../components/Modal/WalletModal/WalletModal";
 import Web3 from "web3";
 
 import { useHistory } from "react-router";
+import useWagmi from "../../useWagmi";
 
 function VestingScreen() {
-  const { active, account, chainId, connector } = useWeb3React();
+  const { active, account, chainId, connector, provider } = useWagmi();
   const [step, setStep] = useState(1);
   const [modalMode, setModalMode] = useState(0);
   const [showSteps, setShowSteps] = useState(true);
@@ -45,9 +45,10 @@ function VestingScreen() {
   };
 
   useEffect(() => {
-    setupProvider().then((res) => {
-      setWeb3(new Web3(res));
-    });
+    active &&
+      provider.then((res) => {
+        setWeb3(new Web3(res));
+      });
   }, [active, chainId]);
 
   // web3 && console.log(web3);

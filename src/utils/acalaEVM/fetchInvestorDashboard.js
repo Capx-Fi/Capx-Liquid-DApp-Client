@@ -15,7 +15,7 @@ BigNumber.config({
   EXPONENTIAL_AT: [-18, 36],
 });
 
-export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
+export const fetchAcalaInvestorDashboard = async (account, GRAPHAPIURL) => {
   //TODO: Get chain based config from env variable
   const URL = ACALA_URL;
   const currentDate = new Date();
@@ -31,7 +31,6 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
   });
 
   let allProjects = [];
-  let allDerivatives = [];
 
   const query = `query {
         projects {
@@ -73,15 +72,15 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
     let vestedHoldings = [];
 
     // Get All Projects
-    allProjects = projectDQL.data.projects.nodes.map(async (project) => {
-      wrappedHoldings = project.derivative.nodes.map(async (derivative) => {
+    allProjects = await Promise.all(projectDQL.data.projects.nodes.map(async (project) => {
+      wrappedHoldings = await Promise.all(project.derivative.nodes.map(async (derivative) => {
         let _derivative = web3.utils.toChecksumAddress(derivative.id);
         let _account = web3.utils.toChecksumAddress(account);
         const query =
           GET_BALANCE_PART_1 + _derivative + GET_BALANCE_PART_2 + _account;
         let response = await axios.get(query);
         let _tokenAmount = new BigNumber(response.data.result);
-        if (!_tokenAmount.eq(0, 10)) {
+        if (_tokenAmount.gt(0,10)) {
           const unixTime = derivative.unlockTime;
           const date = new Date(unixTime * 1000);
           let unlockDate = date.toLocaleDateString("en-US");
@@ -116,8 +115,8 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
             displayDate: displayDate,
           };
         }
-      });
-      vestedHoldings = project.lock.nodes.map(async (lock) => {
+      }));
+      vestedHoldings = await Promise.all(project.lock.nodes.map(async (lock) => {
         if (lock.address.toLowerCase() === account.toLowerCase()) {
           const unixTime = lock.unlockTime;
           const date = new Date(unixTime * 1000);
@@ -153,9 +152,7 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
             displayDate: displayDate,
           };
         }
-      });
-      wrappedHoldings = await Promise.all(wrappedHoldings);
-      vestedHoldings = await Promise.all(vestedHoldings);
+      }));
       let combined = [];
       for (let i = 0; i < wrappedHoldings.length; i++) {
         if (wrappedHoldings[i] != undefined) {
@@ -168,8 +165,7 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
         }
       }
       return combined;
-    });
-    allProjects = await Promise.all(allProjects);
+    }));
     let combined = [];
     for (let i = 0; i < allProjects.length; i++) {
       combined = combined.concat(allProjects[i]);

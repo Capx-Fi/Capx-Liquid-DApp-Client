@@ -5,41 +5,23 @@ import { Link } from "react-router-dom";
 import FirefoxIllustration from "../../../assets/FirefoxIllustration.png";
 import NextIcon from "../../../assets/NextGreen.svg";
 import { injected, walletconnect } from "../../../utils/connector";
-import { useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
+import { UnsupportedChainIdError } from "@web3-react/core";
 import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
 import "../../../translations/i18n";
 import { CHAIN_NAMES } from "../../../constants/config";
 import React, { useState } from "react";
+import useWagmi from "../../../useWagmi";
 
 function MetamaskModal({ setModalMode }) {
-	const { t } = useTranslation();
-	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-	const isMetamask = window.ethereum && window.ethereum.isMetaMask;
-	const { active, account, library, connector, activate } = useWeb3React();
-	const { error } = useWeb3React();
-	const unsupportedChainIdError =
-		error && error instanceof UnsupportedChainIdError;
+  const { t } = useTranslation();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const isMetamask = window.ethereum && window.ethereum.isMetaMask;
+  const { active, account, library, connector, connect, error } = useWagmi();
+  const unsupportedChainIdError =
+    error && error instanceof UnsupportedChainIdError;
 
-	async function connect() {
-		try {
-			await activate(injected);
-			if (unsupportedChainIdError) {
-				enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-					variant: "error",
-				});
-			}
-		} catch (ex) {
-			if (error instanceof UnsupportedChainIdError) {
-				enqueueSnackbar(`Please connect to the ${CHAIN_NAMES} Mainnet Chain.`, {
-					variant: "error",
-				});
-			}
-			alert(ex);
-		}
-	}
-
-	return (
+  return (
     <article className="metamaskmodalscreen">
       <Header hiddenNav />
       <section className="metamaskmodalscreen_maincontainer">

@@ -3,11 +3,11 @@ import Level3CTA from "../../components/CTA/Level3CTA";
 import InputField from "../../components/InputField";
 import { validateContractAddress } from "../../utils/validateContractAddress";
 import { checkExistingProject } from "../../utils/checkExistingProject";
-import { useWeb3React } from "@web3-react/core";
 import { useTranslation } from "react-i18next";
 import "../../translations/i18n";
 
 import "./VestingScreen.scss";
+import useWagmi from "../../useWagmi";
 
 function ContractAddress({
   contractAddress,
@@ -23,7 +23,7 @@ function ContractAddress({
     validContractAddress(contractAddress);
   }, [contractAddress]);
   const { t } = useTranslation();
-  const { active, account, chainId } = useWeb3React();
+  const { active, account, chainId } = useWagmi();
   const [detailsFetched, setDetailsFetched] = useState(false);
   const validContractAddress = async (address) => {
     if (projectExists.exists === true) {

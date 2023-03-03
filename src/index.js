@@ -10,35 +10,54 @@ import { I18nextProvider } from "react-i18next";
 import i18next from "i18next";
 import { Web3ReactProvider } from "@web3-react/core";
 import Web3 from "web3";
-import { injected, walletconnect } from "./utils/connector";
-import { InjectedConnector } from "@web3-react/injected-connector";
-import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
+import { WagmiConfig, createClient, configureChains } from "wagmi";
 
-function getLibrary(provider) {
-	return new Web3(provider);
-}
-i18next.init({
-	interpolation: { escapeValue: false }, // React already does escaping
+import { polygon, mainnet } from "wagmi/chains";
+
+import { publicProvider } from "wagmi/providers/public";
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
+import { avalancheChain, bscChain, fantomChain, karuraChain } from "./chainObjects";
+
+const { chains, provider, webSocketProvider } = configureChains(
+  [avalancheChain, bscChain, fantomChain, karuraChain, polygon, mainnet],
+  [publicProvider()]
+);
+
+const client = createClient({
+  autoConnect: false,
+  connectors: [
+    new MetaMaskConnector({ chains }),
+    new WalletConnectConnector({
+      chains,
+      options: {
+        qrcode: true,
+      },
+    }),
+  ],
+  provider,
+  webSocketProvider,
 });
+
+i18next.init({
+  interpolation: { escapeValue: false }, // React already does escaping
+});
+
 ReactDOM.render(
-	<I18nextProvider i18n={i18next}>
-		<Web3ReactProvider getLibrary={getLibrary}>
-			<MetamaskStateProvider>
-				<SnackbarProvider
-					anchorOrigin={{
-						vertical: "top",
-						horizontal: "right",
-					}}
-					maxSnack={3}
-				>
-					<App />
-					{/* <MetamaskModal /> */}
-					{/* <VestingOverview/> */}
-				</SnackbarProvider>
-			</MetamaskStateProvider>
-		</Web3ReactProvider>
-	</I18nextProvider>,
-	document.getElementById("root")
+  <I18nextProvider i18n={i18next}>
+    <WagmiConfig client={client}>
+      <SnackbarProvider
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        maxSnack={3}
+      >
+        <App />
+      </SnackbarProvider>
+    </WagmiConfig>
+  </I18nextProvider>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

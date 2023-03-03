@@ -17,9 +17,9 @@ import { useTranslation } from "react-i18next";
 import "../../translations/i18n";
 
 import "./VestingScreen.scss";
-import { useWeb3React } from "@web3-react/core";
 import BigNumber from "bignumber.js";
 import { getContractAddress } from "../../constants/getChainConfig";
+import useWagmi from "../../useWagmi";
 
 function LockAndApprove({
   setStep,
@@ -38,7 +38,7 @@ function LockAndApprove({
   tokenTicker,
   setApproveMessage,
 }) {
-  const { active, chainId, connector } = useWeb3React();
+  const { active, chainId, connector, provider } = useWagmi();
   const [web3, setWeb3] = useState(null);
 
   const setupProvider = async () => {
@@ -49,9 +49,10 @@ function LockAndApprove({
   };
 
   useEffect(() => {
-    setupProvider().then((res) => {
-      setWeb3(new Web3(res));
-    });
+    active &&
+      provider.then((res) => {
+        setWeb3(new Web3(res));
+      });
   }, [active, chainId]);
 
   // web3 && console.log(web3);

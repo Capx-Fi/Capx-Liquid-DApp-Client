@@ -51,6 +51,7 @@
 		"rsuite-table": "^5.0.1",
 		"sass": "^1.50.1",
 		"styled-components": "^5.3.3",
+		"wagmi": "^0.5.5",
 		"web-vitals": "^1.0.1",
 		"web3": "^1.6.0",
 		"xlsx": "^0.17.3"

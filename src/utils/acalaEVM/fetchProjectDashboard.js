@@ -19,7 +19,7 @@ BigNumber.config({
 });
 
 //TODO: Review this function
-export const fetchProjectDashboard = async (account, GRAPHAPIURL) => {
+export const fetchAcalaProjectDashboard = async (account, GRAPHAPIURL) => {
   // TODO : Below 6 and RPC to be configured as chain specific env variable
   const URL = ACALA_URL;
 
@@ -79,15 +79,21 @@ export const fetchProjectDashboard = async (account, GRAPHAPIURL) => {
       query: gql(query),
       fetchPolicy: "network-only",
     });
-    allProjects = projectDQL.data.projects.nodes.map(async (project) => {
-      let derivatives = project.derivative.nodes.map(async (derivative) => {
+
+    allProjects = await Promise.all(projectDQL.data.projects.nodes.map(async (project) => {
+      // Check if the account is the project owner.
+      if(project.projectOwnerAddress.toLowerCase() === account.toLowerCase()){
+        validProjectIDs.push(project.id);
+      }
+      // Fetch all derivative IDs 
+      let derivatives = await Promise.all(project.derivative.nodes.map(async (derivative) => {
+
         return derivative.id;
-      });
-      derivatives = await Promise.all(derivatives);
+      }));
       let _id = project.id;
       allDerivatives.push({ projectID: _id, derivatives: derivatives });
       let _totalLocked = new BigNumber(0);
-      let xdata = project.lock.nodes.map(async (lock) => {
+      let xdata = await Promise.all(project.lock.nodes.map(async (lock) => {
         _totalLocked = _totalLocked.plus(new BigNumber(lock.tokenAmount));
         let _data = {
           address: lock.address,
@@ -96,10 +102,8 @@ export const fetchProjectDashboard = async (account, GRAPHAPIURL) => {
           vestID: lock.vestID,
         };
         return _data;
-      });
-      xdata = await Promise.all(xdata);
+      }));
       xdata = xdata.filter((lock) => {
-        validProjectIDs.push(project.id);
         return lock;
       });
       if (xdata.length > 0 && !_totalLocked.isZero()) {
@@ -126,34 +130,34 @@ export const fetchProjectDashboard = async (account, GRAPHAPIURL) => {
         locks: project.lock.nodes,
       };
       return data;
-    });
-    allProjects = await Promise.all(allProjects);
-    allDerivatives = await Promise.all(allDerivatives);
+    }));
 
     // 2. Fetch the IDs of the project where the user is investor.
-    allDerivatives.map(async (project) => {
-      if (!validProjectIDs.includes(project.projectID)) {
+    await Promise.all(allDerivatives.map(async(project) => {
+      if(!validProjectIDs.includes(project.projectID)){
         // Where the user is not a participant in vested locks format.
         // Check if the user holds any derivative corresponding to this project.
-        let valid = project.derivatives.filter(async (derivative) => {
+        await Promise.all(project.derivatives.map(async (derivative) => {
           let _derivative = web3.utils.toChecksumAddress(derivative);
           let _account = web3.utils.toChecksumAddress(account);
           const query =
             GET_BALANCE_PART_1 + _derivative + GET_BALANCE_PART_2 + _account;
           let response = await axios.get(query);
-          if (!new BigNumber(response.data.result).eq(0, 10)) {
-            return true;
-          }
-        });
-        return valid ? validProjectIDs.push(project.projectID) : "";
+          if(new BigNumber(response.data.result).gt(0,10)){
+            validProjectIDs.push(project.projectID);
+          } 
+        }
+      ));
       }
-    });
+      }
+    ));
+    validProjectIDs = validProjectIDs.filter((item, i, ar) => ar.indexOf(item) === i);
 
     // 3. Get All Holders for the project.
-    wrappedProjectDetails = allProjects.map(async (project) => {
+    await Promise.all(allProjects.map(async (project) => {
       if (validProjectIDs.includes(project.id)) {
         // Get all derivatives corresponding to the project.
-        let _derivatives = project.derivatives.map(async (derivative) => {
+        let _derivatives = await Promise.all(project.derivatives.map(async (derivative) => {
           let _id = web3.utils.toChecksumAddress(derivative.id);
           let _page = 1;
           let _holders = [];
@@ -169,16 +173,15 @@ export const fetchProjectDashboard = async (account, GRAPHAPIURL) => {
               break;
             }
             // Process the Holders.
-            _holders = response.data.result.map(async (holder) => {
+            _holders = await Promise.all(response.data.result.map(async (holder) => {
               let data = {
                 address: holder.address,
                 tokenAmount: holder.value,
               };
               return data;
-            });
+            }));
             _page += 1;
           }
-          _holders = await Promise.all(_holders);
           let _derivativeObject = {
             id: derivative.id,
             totalSupply: derivative.totalSupply,
@@ -187,8 +190,7 @@ export const fetchProjectDashboard = async (account, GRAPHAPIURL) => {
             holders: _holders,
           };
           return _derivativeObject;
-        });
-        _derivatives = await Promise.all(_derivatives);
+        }));
         let _projectData = {
           id: project.id,
           projectDocHash: project.projectDocHash,
@@ -203,29 +205,30 @@ export const fetchProjectDashboard = async (account, GRAPHAPIURL) => {
           id: project.id,
           derivatives: _derivatives,
         };
-        return _project;
+        wrappedProjectDetails.push(_project);
       }
-    });
-    projectOwnerData = await Promise.all(projectOwnerData);
-    wrappedProjectDetails = await Promise.all(wrappedProjectDetails);
-    vestedProjectDetails = await Promise.all(vestedProjectDetails);
+    }));
     let data1 = [];
     let data2 = [];
     let data3 = [];
     for (let i = 0; i < validProjectIDs.length; i++) {
-      if(projectOwnerData[i]?.id != undefined) {
+
+      if (projectOwnerData[i]?.id != undefined) {
         data1.push(projectOwnerData[i]);
-        for(let j=0; j < wrappedProjectDetails.length; j++) {
-          if(wrappedProjectDetails[j].id === projectOwnerData[i].id){
+        for (let j = 0; j < wrappedProjectDetails.length; j++) {
+          if (wrappedProjectDetails[j].id === projectOwnerData[i].id) {
+
             data2.push(wrappedProjectDetails[j]);
             break;
           }
         }
-        for(let k=0; k < vestedProjectDetails.length; k++) {
-          if(vestedProjectDetails[k].id === projectOwnerData[i].id){
+
+        for (let k = 0; k < vestedProjectDetails.length; k++) {
+          if (vestedProjectDetails[k].id === projectOwnerData[i].id) {
             data3.push(vestedProjectDetails[k]);
             break;
-          }else{
+          } else {
+
             data3.push({});
           }
         }

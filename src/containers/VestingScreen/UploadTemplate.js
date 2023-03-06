@@ -49,7 +49,7 @@ function UploadTemplate({
           );
 
           if (errors.length === 0) {
-            res = res.map((v) => ({ ...v, isSellable: true, isWrapped: true }));
+            res = res.map((v) => ({ ...v, isSellable: false, isWrapped: false }));
 
             setVestingData(res, file);
           } else setUploadErrors(errors, file);

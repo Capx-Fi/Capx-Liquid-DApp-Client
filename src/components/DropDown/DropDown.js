@@ -7,15 +7,19 @@ import avalancheLogo from "../../assets/avalanche-logo.svg";
 import ethLogo from "../../assets/ethereum-logo.svg";
 import fantomLogo from "../../assets/fantom-logo.svg";
 import acalaLogo from "../../assets/acala-logo.svg";
+import karuraLogo from "../../assets/karura-logo.svg";
+
+
 import {
   SUPPORTED_CHAIN_IDS,
   SUPPORTED_CHAIN_NAMES,
 } from "../../constants/config";
 
+
 function DropDown({ sortBy, chainChange, setShowMenu }) {
-  const [open, setOpen] = useState(false);
-  const web3 = new Web3(Web3.givenProvider);
-  window.w3 = web3;
+	const [open, setOpen] = useState(false);
+	const web3 = new Web3(Web3.givenProvider);
+	window.w3 = web3;
 
   return (
     <div className="relative z-50">
@@ -37,7 +41,7 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
               ? avalancheLogo
               : sortBy === "Fantom"
               ? fantomLogo
-              : acalaLogo
+              : karuraLogo
           }
           alt="chain-logo"
           className={`${
@@ -75,15 +79,15 @@ function DropDown({ sortBy, chainChange, setShowMenu }) {
               >
                 <img
                   src={
-                    chain.trim() === "80001"
+                    chain.trim() === "137"
                       ? maticLogo
-                      : chain.trim() === "97"
+                      : chain.trim() === "56"
                       ? bscLogo
-                      : chain.trim() === "4"
+                      : chain.trim() === "1"
                       ? ethLogo
-                      : chain.trim() === "595"
-                      ? acalaLogo
-                      : chain.trim() === "4002"
+                      : chain.trim() === "686"
+                      ? karuraLogo
+                      : chain.trim() === "250"
                       ? fantomLogo
                       : avalancheLogo
                   }

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import BigNumber from "bignumber.js";
 import { convertToInternationalCurrencySystem } from "../../utils/convertToInternationalCurrencySystem";
 import Web3 from "web3";
+
 import { getExplorer } from "../../constants/getChainConfig";
 import useWagmi from "../../useWagmi";
 
@@ -13,8 +14,10 @@ const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
 const web3 = new Web3(Web3.givenProvider);
 
+
 function getCheckSumAddress(_address) {
   return web3.utils.toChecksumAddress(_address);
+
 }
 
 function AllocationTableContainer({
@@ -42,6 +45,7 @@ function AllocationTableContainer({
       let currentVestedProject = vestedProjectData[projectDisplayID];
 
       // alert(convertToInternationalCurrencySystem(6800000)); // this outputs 6.8M
+
 
       if (currentProjectDetails) {
         if (currentWrappedProject)
@@ -191,7 +195,6 @@ function AllocationTableContainer({
         //   return [];
         // });
         // currentProject = currentProject.flat();
-
         // if(Object.keys(currentVestedProject).length > 0 && Object.keys(currentWrappedProject).length > 0){
         //   currentProject = [...currentVestedProject, ...currentWrappedProject];
         // }else{

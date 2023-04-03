@@ -1,17 +1,18 @@
 .projectdetailscontainer {
 	@apply xl:w-2/5 mb-4 xl:mb-0 p-6 rounded-2xl border rounded-2xl border-greyborder bg-white;
-
+	background:#241347;
+	border-color: #FF8A00;
 	&_title {
-		@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-4 font-semibold text-black;
+		@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-4 font-semibold text-white;
 	}
 	&_innercontainer {
 		&_detailbox {
 			@apply py-3;
 			&_key {
-				@apply text-grayText pb-1 text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 font-medium;
+				@apply text-white pb-1 text-caption-4 leading-caption-4 tablet:text-caption-3 tablet:leading-caption-3 desktop:text-caption-2 desktop:leading-caption-2 font-medium;
 			}
 			&_value {
-				@apply text-darkText opacity-90 break-words font-medium text-caption-4 leading-caption-4 tablet:text-caption-2 tablet:leading-caption-2 desktop:text-caption-1 desktop:leading-caption-1;
+				@apply text-white opacity-90 break-words font-medium text-caption-4 leading-caption-4 tablet:text-caption-2 tablet:leading-caption-2 desktop:text-caption-1 desktop:leading-caption-1;
 				&_loading {
 					@apply h-4 w-auto animate-pulse bg-dark-25;
 				}
@@ -29,7 +30,8 @@
 
 .tokensreleasedgraphcontainer {
 	@apply p-6 rounded-2xl mb-2 xl:mb-0 bg-white border border-greyborder;
-
+	background:#241347;
+	border-color: #FF8A00;
 	@media only screen and (min-width: 1280px) {
 		width: calc(theme("width.3/5") - 15px) !important;
 	}
@@ -37,12 +39,12 @@
 	&_titlecontainer {
 		@apply flex flex-col pb-4;
 		&_title {
-			@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-darkText opacity-50;
+			@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 font-semibold text-white;
 		}
 		&_tokensreleased {
 			@apply flex items-center w-fit-content;
 			&_value {
-				@apply text-darkText font-semibold text-paragraph-1 leading-paragraph-1;
+				@apply text-white font-semibold text-paragraph-1 leading-paragraph-1;
 				&_loading {
 					@apply h-6 w-44 animate-pulse bg-dark-25;
 				}
@@ -65,8 +67,10 @@
 
 .allocationtablecontainer {
 	@apply my-4 phone:mb-0 screen:mb-4 rounded-lg bg-white border border-greyborder;
+	background:#241347;
+	border-color: #FF8A00;
 	&_title {
-		@apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 text-black font-bold border-b-2 border-dark-25;
+		@apply mb-2 p-4 text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 desktop:text-caption-1 desktop:leading-caption-1 pb-2 text-white font-bold border-b-2 border-dark-25;
 	}
 	&_innercontainer {
 		@apply px-5 py-2.5;
@@ -94,7 +98,7 @@
 		@apply rounded-md bg-scrollTrack;
 	}
 	.rc-table-cell {
-		@apply text-darkText text-xs tablet:text-sm xl:text-base font-light tablet:font-medium xl:font-semibold;
+		@apply text-white text-xs tablet:text-sm xl:text-base font-light tablet:font-medium xl:font-semibold;
 	}
 	.rc-table-placeholder {
 		.rc-table-cell {
@@ -103,7 +107,8 @@
 	}
 	.rc-table-thead {
 		th {
-			@apply text-black font-bold bg-transparent border-b border-dark-25;
+			@apply text-white font-bold bg-transparent border-b border-dark-25;
+			border-color: #FF8A00;
 			padding: 6px;
 			font-weight: medium;
 			&.text-green {
@@ -113,10 +118,11 @@
 	.rc-table-tbody {
 		tr {
 			td {
-				@apply text-black font-bold bg-transparent border-b border-dark-25;
+				@apply text-white font-bold bg-transparent border-b border-dark-25;
+				border-color: #FF8A00;
 				padding: 10px 6px;
 				&.text-green {
-					@apply text-black font-semibold;
+					@apply text-white font-semibold;
 				}
 			}
 			&:hover {

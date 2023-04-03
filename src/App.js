@@ -22,16 +22,16 @@ function App() {
       ) : (
         <Router>
           <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/vesting" component={VestingScreen} />
+            <Route exact path="/" component={InvestorDashboardScreen} />
+            {/* <Route exact path="/vesting" component={VestingScreen} /> */}
             <Route exact path="/investor" component={InvestorDashboardScreen} />
             <Route
               exact
               path="/projectoverview"
               component={ProjectOwnerDashboardScreen}
             />
-            <Route exact path="/1" component={ChooseWalletModal} />
-            <Route path="*" component={PageNotFound} />
+            <Route exact path="/137" component={ChooseWalletModal} />
+            <Route path="*" component={InvestorDashboardScreen} />
           </Switch>
         </Router>
       )}

@@ -15,6 +15,7 @@ import WithdrawModal from "../../components/Modal/VestAndApproveModal/WithdrawMo
 import { CONTRACT_ABI_ERC20 } from "../../contracts/SampleERC20";
 import { withdrawWrappedTokens } from "../../utils/withdrawWrappedTokens";
 import { CONTRACT_ABI_CAPX } from "../../contracts/CapxController";
+import { CAPX_VESTING_ABI } from "../../contracts/CapxVesting";
 import Web3 from "web3";
 
 import NothingHereInvestorDashboard from "../NothingHere/NothingHereInvestorDashboard";
@@ -32,11 +33,13 @@ import {
 import { ACALA_CHAIN_ID } from "../../constants/config";
 import useWagmi from "../../useWagmi";
 import { fetchInvestorDashboard } from "../../utils/graphFetch/fetchInvestorDashboard";
+import BigNumber from "bignumber.js";
 const currentDate = new Date();
 let datetime = currentDate.toLocaleString("en-US");
 
 function InvestorDashboardScreen() {
   const [modalMode, setModalMode] = useState(0);
+  const [userSatinBalance,setUserSatinBalance] = useState(0);
   const [ownedProjectsData, setOwnedProjectsData] = useState(null);
   const { active, account, chainId, connector, library, provider } = useWagmi();
   const [withdrawModalOpen, setWithdrawModalOpen] = useState(false);
@@ -44,11 +47,13 @@ function InvestorDashboardScreen() {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [withdrawModalStatus, setWithdrawModalStatus] = useState("");
   const [web3, setWeb3] = useState(null);
-
+  const [fetchWeb3, setFetchWeb3] = useState(null);
   useEffect(() => {
     active &&
       provider.then((res) => {
+        console.log(res);
         setWeb3(new Web3(res));
+        setFetchWeb3(new Web3("https://polygon-mainnet.g.alchemy.com/v2/Q28MI2cz8x7Vt6SM-uF0O7oDPWX4bfvp"))
       });
   }, [active, chainId]);
 
@@ -85,13 +90,27 @@ function InvestorDashboardScreen() {
   const graphURL = chainId && getGraphURL(chainId);
   const loadProjectData = async () => {
     setOwnedProjectsData(null);
+    let userbalance = 0;
     if (account) {
       if (chainId === parseInt(ACALA_CHAIN_ID)) {
         let projects = await fetchAcalaInvestorDashboard(account, graphURL);
+        projects = projects.sort((a,b)=>new Date(a.date).getTime() - new Date(b.date).getTime())
         setOwnedProjectsData(projects);
       } else {
         let projects = await fetchInvestorDashboard(account, graphURL);
+        projects = projects.sort((a,b)=>new Date(a.date).getTime() - new Date(b.date).getTime())
         setOwnedProjectsData(projects);
+        if(projects.length>0){
+          let contract = fetchWeb3 && new fetchWeb3.eth.Contract(CAPX_VESTING_ABI,"0x5d985753aE3691a0A94d38eC2F12793006097416");
+          console.log(contract);
+          userbalance = await contract?.methods.lockedTokenBalance('0x9FC3104f6fC188fee65C85Bbc4b94a48282aE76D',account).call();
+          userbalance = new BigNumber(userbalance).dividedBy(Math.pow(10,18)).toNumber();
+          console.log(userbalance)
+          if(userbalance>0){
+            setUserSatinBalance(userbalance);
+          }
+         
+        }
       }
     }
   };
@@ -175,6 +194,9 @@ function InvestorDashboardScreen() {
             <div className="investordashboardscreen_maincontainer_title">
               INVESTOR DASHBOARD
             </div>
+           {userSatinBalance>0 ? <div className="investordashboardscreen_maincontainer_balance">
+              LOCKED SATIN BALANCE : {convertToInternationalCurrencySystem(userSatinBalance)}
+            </div>:<></>}
             <div className="investordashboardscreen_maincontainer_innercontainer">
               <WithdrawModal
                 open={withdrawModalOpen}
@@ -286,7 +308,6 @@ function InvestorDashboardScreen() {
                                         3600000
                                     )} hours to unlock`
                                   : "Unlocked!"}
-                                {console.log(project.date)}
                               </span>
                             </React.Fragment>
                           }

@@ -16,7 +16,7 @@ function TokensReleasedGraphLoading() {
 			</div>
 
 			<div className="tokensreleasedgraphcontainer_innercontainer_loading"></div>
-			<hr className="border-dark-200 -mx-6 mt-1 h-2"></hr>
+			<hr className="border-orangeborder -mx-6 mt-1 h-2"></hr>
 		</section>
 	);
 }

@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import closeIcon from "../../../assets/cross.svg";
+import closeIcon from "../../../assets/close-icon.svg";
 import investorIllustration from "../../../assets/investor.png";
 import ownerIllustration from "../../../assets/owner.png";
 import { useState } from "react";
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	paper: {
 		width: "600px",
-		background: "white",
+		background: "#241347",
 		boxShadow: "0px 4px 140px rgba(0, 0, 0, 0.5)",
 		borderRadius: "10px",
 		padding: theme.spacing(2),

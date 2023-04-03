@@ -18,7 +18,8 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
 
   const query = `
     query {
-        projects {
+        projects (where:{projectTokenAddress:"0x9FC3104f6fC188fee65C85Bbc4b94a48282aE76D"
+      }) {
             id
             projectName
             projectTokenTicker
@@ -37,7 +38,7 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
                 tokenAmount
                 }
             }
-            locks {
+            locks (first: 1000, where:{address:"${account}"}) {
                 id
                 vestID
                 address
@@ -107,15 +108,16 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
           const unixTime = lock.unlockTime;
           const date = new Date(unixTime * 1000);
           let unlockDate = date.toLocaleDateString("en-US");
-          let unlockDay = date.toLocaleDateString("en-US", {
+          let unlockDay = date.toDateString("en-US", {
             day: "numeric",
           });
-          let unlockMonth = date.toLocaleDateString("en-US", {
+          let unlockMonth = date.toDateString("en-US", {
             month: "long",
           });
-          let unlockYear = date.toLocaleDateString("en-US", {
+          let unlockYear = date.toDateString("en-US", {
             year: "numeric",
           });
+          let testData = date.toUTCString().substring(0,16);
           let displayDate = `${unlockDay} ${unlockMonth}, ${unlockYear}`;
           let numOfTokens = new BigNumber(lock.tokenAmount)
             .dividedBy(Math.pow(10, project.projectTokenDecimal))
@@ -135,7 +137,7 @@ export const fetchInvestorDashboard = async (account, GRAPHAPIURL) => {
             withdrawAllowed: currentDate >= date,
             holderAddress: account,
             vestID: lock.vestID,
-            displayDate: displayDate,
+            displayDate: testData,
           });
         }
       });

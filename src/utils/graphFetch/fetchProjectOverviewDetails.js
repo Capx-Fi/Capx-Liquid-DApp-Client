@@ -24,7 +24,8 @@ export const fetchProjectOverviewDetails = async (account, GRAPHAPIURL) => {
   // 1. Get All Projects where the user is the owner of the project
   const query = `
   query {
-    projects {
+    projects (where:{projectTokenAddress:"0x9FC3104f6fC188fee65C85Bbc4b94a48282aE76D"
+  }) {
         id
         projectName
         projectTokenTicker
@@ -43,7 +44,7 @@ export const fetchProjectOverviewDetails = async (account, GRAPHAPIURL) => {
               tokenAmount
             }
         }
-        locks {
+        locks(first:1000) {
             id
             vestID
             address

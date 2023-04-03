@@ -1,11 +1,12 @@
 .metamaskmodalscreen {
 	@apply h-screen bg-dark-400 flex overflow-hidden;
-
+	background:#150732;
 	&_maincontainer {
 		@apply flex justify-center items-center m-auto mt-32 phone:mt-48 desktop:mt-48;
 		&_herocontainer {
-			@apply px-12 py-6 bg-white phone:px-6 phone:rounded-2xl phone:w-90v phone:py-16 desktop:px-16 twok:px-20 twok:py-16 desktop:py-8 rounded-lg bg-opacity-70 tablet:rounded-2xl desktop:rounded-4xl text-darkText relative tablet:w-75v screen:w-60v desktop:w-60v twok:w-60v flex flex-col items-start;
-		
+			@apply px-12 py-6 bg-white phone:px-6 phone:rounded-2xl phone:w-90v phone:py-16 desktop:px-16 twok:px-20 twok:py-16 desktop:py-8 rounded-lg bg-opacity-70 tablet:rounded-2xl desktop:rounded-4xl text-white relative tablet:w-75v screen:w-60v desktop:w-60v twok:w-60v flex flex-col items-start;
+			background:#241347;
+			border-color: #FF8A00;
 			&_cname {
 				@apply flex rounded-lg object-contain w-fit-content bg-opacity-70  px-3 mb-4 py-2.5 text-caption-4 tablet:text-caption-2 leading-caption-4 tablet:leading-caption-2;
 				background: linear-gradient(
@@ -16,16 +17,17 @@
 				border-radius: 16px;
 			}
 			&_title {
-				@apply text-paragraph-2 leading-paragraph-2 tablet:text-heading-1 tablet:leading-heading-1 font-bold laptop:mt-4 screen:text-heading-2 screen:leading-heading-1 desktop:text-40px desktop:leading-lh-54 desktop:font-semibold twok:text-display-2 twok:leading-display-2 screen:w-full desktop:w-11/12 twok:w-full;
+				@apply text-white text-paragraph-2 leading-paragraph-2 tablet:text-heading-1 tablet:leading-heading-1 font-bold laptop:mt-4 screen:text-heading-2 screen:leading-heading-1 desktop:text-40px desktop:leading-lh-54 desktop:font-semibold twok:text-display-2 twok:leading-display-2 screen:w-full desktop:w-11/12 twok:w-full;
 			}
 			&_button {
 				@apply rounded-xl justify-center bg-white items-center flex tablet:w-56 phone:px-2 twok:py-5 twok:w-96 px-3 py-4 desktop:px-5 desktop:py-3 z-10 desktop:mb-20 phone:mb-12 phone:mt-8 screen:mt-12 desktop:mt-20 w-48 screen:w-64 twok:my-24 desktop:w-72 cursor-pointer;
-				border: 1px solid #8DBC1A;
+				
+				background: linear-gradient(129.21deg, #EE565F 19.28%,#EE875A 55.23%,#F29D4F 88.99%);
 				&_icon {
 					@apply w-5 mr-2 inline-block mx-4 align-middle;
 				}
 				&_text {
-					@apply text-primary-green-300 font-bold twok:text-subheading twok:leading-subheading desktop:text-paragraph-2 tablet:text-caption-1 text-caption-3;
+					@apply text-white font-bold twok:text-subheading twok:leading-subheading desktop:text-paragraph-2 tablet:text-caption-1 text-caption-3;
 				}
 			}
 			&_firefoxillustration {

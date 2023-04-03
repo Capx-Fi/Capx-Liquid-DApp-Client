@@ -37,11 +37,6 @@ function NothingHereProjectOwner() {
           <div className="nothinghere_maincontainer_herocontainer_subtitle">
             {t("nothing_here")}
           </div>
-          <Level3CTA
-            onClick={() => history.push("/vesting")}
-            text="Start Vesting Here"
-            icon={true}
-          />
         </div>
       </section>
       <Footer />

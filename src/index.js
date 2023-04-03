@@ -17,10 +17,10 @@ import { polygon, mainnet } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
-import { avalancheChain, bscChain, fantomChain, karuraChain } from "./chainObjects";
+
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [avalancheChain, bscChain, fantomChain, karuraChain, polygon, mainnet],
+  [polygon],
   [publicProvider()]
 );
 

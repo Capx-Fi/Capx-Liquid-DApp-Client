@@ -1,12 +1,12 @@
 .projectownerdashboardscreen {
 	@apply h-screen bg-dark-400 flex overflow-y-hidden;
-
+	background:#150732;
 	&_maincontainer {
 		@apply flex flex-col my-28 w-80v laptop:w-75v mx-auto overflow-y-auto;
 		&_titlecontainer {
 			@apply flex justify-between items-center pb-4;
 			&_title {
-				@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 phone:ml-0 screen:ml-4 desktop:ml-0 text-black opacity-75 font-semibold;
+				@apply text-caption-3 leading-caption-3 tablet:text-paragraph-1 tablet:leading-paragraph-1 phone:ml-0 screen:ml-4 desktop:ml-0 text-white font-semibold;
 			}
 			&_projectsdropdown {
 				@apply bg-dark-400 border border-greyborder rounded-lg p-3 twok:px-4 phone:w-24 tablet:w-32 screen:w-48 text-caption-3 leading-caption-3 text-darkText	 outline-none mr-5 tablet:mr-9;

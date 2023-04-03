@@ -7,7 +7,7 @@ import ProjectDetailsLoading from "./ProjectDetailsLoading";
 
 import Web3 from "web3";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import CopyIcon from "../../assets/copy-icon.svg";
+import CopyIcon from "../../assets/clone-white.svg";
 import { Tooltip } from "@material-ui/core";
 import useWindowSize from "../../utils/windowSize";
 
@@ -81,7 +81,7 @@ function ProjectDetailsContainer({ projectOverviewData, projectDisplayID }) {
   return project ? (
     <section className="projectdetailscontainer">
       <div className="projectdetailscontainer_title">DETAILS</div>
-      <hr className="border-greyborder opacity-50 -mx-6 h-2"></hr>
+      <hr className="border-orangeborder opacity-50 -mx-6 h-2"></hr>
       <div className="projectdetailscontainer_innercontainer">
         <div className="flex justify-between">
           <div className="projectdetailscontainer_innercontainer_detailbox">
@@ -180,7 +180,7 @@ function ProjectDetailsContainer({ projectOverviewData, projectDisplayID }) {
             dangerouslySetInnerHTML={{ __html: project?.projectDescription }}
           ></div>
         </div>
-        <hr className="border-greyborder opacity-50 -mx-6 mt-7 h-2"></hr>
+        <hr className="border-orangeborder opacity-50 -mx-6 mt-7 h-2"></hr>
       </div>
     </section>
   ) : (

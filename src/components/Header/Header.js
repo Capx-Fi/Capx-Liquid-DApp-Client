@@ -1,5 +1,5 @@
 import "./Header.scss";
-import CapxLogo from "../../assets/capxliquid-logo.svg";
+import CapxLogo from "../../assets/logo.png";
 import LogoutIcon from "../../assets/logout.svg";
 import { useSnackbar } from "notistack";
 import Web3 from "web3";
